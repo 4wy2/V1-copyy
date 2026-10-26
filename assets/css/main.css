@@ -272,3 +272,46 @@ html[dir="rtl"] .sidebar { transform: translateX(-105%); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
+
+/* Homepage refinement: compact, structured, responsive */
+:root { --page-margin: clamp(1rem, 4.25vw, 4rem); --section-space: clamp(3.25rem, 6vw, 6rem); --radius: 10px; }
+.page-width { width: min(calc(100% - 2 * var(--page-margin)), 1200px); }
+.site-header { border-bottom: 1px solid var(--line); }
+.header-inner { min-height: 76px; gap: 1rem; }
+.header-nav, .header-controls { gap: clamp(0.5rem, 1.5vw, 1.5rem); }
+.hero { width: min(calc(100% - 2 * var(--page-margin)), 1200px); margin: 0 auto; padding-block: clamp(3rem, 7vw, 6.25rem); border-bottom: 1px solid var(--line); }
+.hero-upper { min-height: 0; padding: 0; align-items: center; }
+.hero-title { max-width: 100%; font-size: clamp(2.6rem, 5.8vw, 5.5rem); line-height: 1.2; letter-spacing: -0.015em; font-weight: 800; }
+.hero-lower { min-height: 0; display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; margin-top: 1.3rem; gap: 1.5rem; padding: 0; background: transparent; }
+.hero-lead { max-width: 52ch; color: var(--muted); font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.8; }
+.primary-link, .secondary-button { border-radius: 8px; }
+.section-intro { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; gap: 1.5rem; }
+.section-intro h2, .share-section h2 { font-size: clamp(1.7rem, 3vw, 2.8rem); line-height: 1.35; }
+.service-list { gap: 0 1.5rem; }
+.service-list li { border-bottom: 1px solid var(--line); }
+.service-list a { min-height: 74px; padding: 1rem .35rem; gap: 1.25rem; }
+.service-list a:focus-visible { border-radius: 4px; }
+.service-kind { text-align: end; }
+.share-section { border-block: 1px solid var(--line); }
+.share-inner { min-height: 0; padding-block: clamp(2.25rem, 4vw, 3.5rem); }
+.resources-section { padding-bottom: var(--section-space); }
+.resource-list li { border-bottom: 1px solid var(--line); }
+.join-section { padding-top: 0; }
+.join-list { gap: 1.25rem; }
+.join-item { min-height: 200px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 10px; }
+.site-footer { border-top: 1px solid var(--line); }
+@media (max-width: 900px) { .section-intro { grid-template-columns: 1fr; } .hero { padding-block: 3rem; } }
+@media (max-width: 600px) {
+  :root { --page-margin: 1rem; --section-space: 3.4rem; }
+  .wordmark-copy strong { font-size: .86rem; }
+  .hero { padding-block: 2.75rem; }
+  .hero-title { max-width: 100%; font-size: clamp(2.1rem, 9vw, 3.15rem); line-height: 1.3; }
+  .hero-lower { align-items: stretch; gap: 1.25rem; }
+  .hero-lead { font-size: 1rem; }
+  .primary-link { width: 100%; }
+  .section-intro h2 { font-size: 1.85rem; }
+  .service-list, .resource-list, .join-list { grid-template-columns: 1fr; }
+  .join-item { min-height: 0; gap: 1.5rem; }
+  .header-inner { gap: .25rem; }
+  .wordmark-copy span { display: none; }
+}
