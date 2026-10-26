@@ -315,3 +315,59 @@ html[dir="rtl"] .sidebar { transform: translateX(-105%); }
   .header-inner { gap: .25rem; }
   .wordmark-copy span { display: none; }
 }
+
+/* Homepage editorial polish v2 - primary academic portal */
+:root { --accent: #68b5d0; --section-space: clamp(2.75rem, 4.6vw, 4.5rem); }
+html[data-theme="light"] { --accent: #176b88; }
+.site-header { background: var(--bg); position: sticky; top: 0; z-index: 8; }
+.header-inner { min-height: 72px; }
+.header-nav a { position: relative; padding: .6rem .2rem; font-weight: 600; }
+.header-nav a:hover { color: var(--accent); }
+.header-start .wordmark { min-width: 0; }
+.wordmark-copy strong { letter-spacing: 0; }
+.menu-button { border: 1px solid var(--line); }
+.preference-button { min-width: 47px; min-height: 40px; border: 1px solid var(--line); font-weight: 700; }
+.hero { padding-block: clamp(3rem, 6vw, 5.25rem); }
+.hero-upper { flex-direction: column; align-items: flex-start; gap: .75rem; }
+.hero-eyebrow { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .025em; }
+.hero-title { font-size: clamp(2.4rem, 5vw, 4.65rem); line-height: 1.28; max-width: 100%; font-weight: 800; }
+.hero-lower { align-items: end; margin-top: .9rem; }
+.hero-lead { font-size: clamp(.97rem, 1.2vw, 1.12rem); max-width: 55ch; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; }
+.primary-link { padding: .85rem 1.25rem; min-height: 48px; gap: .8rem; box-shadow: none; }
+.primary-link i, .hero-secondary-link i { font-size: .8rem; }
+.hero-secondary-link { display: inline-flex; align-items: center; justify-content: center; gap: .7rem; min-height: 48px; padding: .8rem 1.05rem; border: 1px solid var(--line); border-radius: 8px; font-weight: 700; color: var(--ink); }
+.hero-secondary-link:hover { border-color: var(--accent); color: var(--accent); }
+.academic-section { padding-top: clamp(2.5rem, 4.8vw, 4.25rem); }
+.section-intro { margin-bottom: 1.6rem; }
+.section-intro h2 { font-size: clamp(1.65rem, 2.7vw, 2.35rem); }
+.section-intro p { font-size: .98rem; }
+.service-list { gap: .85rem; }
+.service-list li { border: 0; }
+.service-list a { display: flex; align-items: center; gap: 1.05rem; min-height: 96px; padding: 1rem 1.05rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; transition: border-color .16s ease, background .16s ease, transform .16s ease; }
+.service-list a:hover { border-color: var(--accent); background: var(--surface-raised); transform: translateY(-1px); }
+.service-icon { display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 40px; border-radius: 9px; background: var(--bg); color: var(--accent); font-size: 1rem; }
+.service-copy { display: grid; align-content: center; gap: .18rem; min-width: 0; flex: 1; }
+.service-copy strong { font-size: 1.02rem; font-weight: 750; line-height: 1.5; }
+.service-copy small { font-size: .78rem; font-weight: 500; color: var(--muted); }
+.service-arrow { flex: 0 0 auto; font-size: .8rem; color: var(--muted); transition: color .16s ease; }
+.service-list a:hover .service-arrow { color: var(--accent); }
+html[dir="ltr"] .service-arrow i, html[dir="ltr"] .primary-link i, html[dir="ltr"] .hero-secondary-link i, html[dir="ltr"] .text-link i { transform: scaleX(-1); }
+.share-inner { gap: 2.5rem; }
+.share-inner .secondary-button { background: var(--accent); color: var(--accent-ink); padding-inline: 1.5rem; }
+.resource-status { display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; padding: .45rem .7rem; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+.resource-status::before { content: ""; width: 6px; height: 6px; background: var(--positive); border-radius: 50%; }
+.join-item { background: var(--surface); }
+@media (max-width: 900px) { .site-header { position: relative; } }
+@media (max-width: 600px) {
+  .hero { padding-block: 2.25rem 2.75rem; }
+  .hero-title { font-size: clamp(2.15rem, 9vw, 3rem); }
+  .hero-actions { width: 100%; display: grid; grid-template-columns: 1fr; }
+  .hero-secondary-link, .primary-link { width: 100%; }
+  .service-list { gap: .65rem; }
+  .service-list a { min-height: 83px; padding: .8rem; gap: .7rem; }
+  .service-icon { width: 36px; height: 36px; flex-basis: 36px; }
+  .service-copy strong { font-size: .94rem; }
+  .resource-status { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { .service-list a { transition: none; } }
