@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-theme="dark" data-homepage-fix="2026-10">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0c121b" />
-  <meta property="og:title" content="EE Study Plan | Electrical Engineering Club" />
-  <meta property="og:description" content="Student-built academic tools and the electrical engineering degree roadmap." />
+  <meta property="og:title" content="بوابة اللجنة العلمية | نادي الهندسة الكهربائية" />
+  <meta property="og:description" content="بوابة اللجنة العلمية: الخطط الدراسية، الجداول، هيئة التدريس ومشاركة المصادر التعليمية لطلاب قسم الهندسة الكهربائية." />
   <meta property="og:image" content="https://engineer-ee.com/images/preview-image.png" />
   <meta property="og:url" content="https://engineer-ee.com" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <title>الخطة الدراسية للهندسة الكهربائية</title>
+  <title>بوابة اللجنة العلمية | نادي الهندسة الكهربائية</title>
 </head>
 <body>
   <div id="overlay" class="overlay" aria-hidden="true"></div>
@@ -48,7 +48,7 @@
       <a href="majors.html"><span data-i18n="navMajors">التخصصات والخطط الدراسية</span></a>
       <a href="faculty.html"><span data-i18n="navFaculty">بحث هيئة التدريس</span></a>
       <a href="EEflowchart.html"><span data-i18n="navEE">خطة الهندسة الكهربائية</span></a>
-      <span class="nav-disabled"><span data-i18n="navExams">جدول الاختبارات</span><span data-i18n="comingSoon">قريباً</span></span>
+      <a href="Exams.html"><span data-i18n="navExams">جدول الاختبارات</span></a>
       <a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span data-i18n="blackboard">البلاك بورد</span></a>
       <a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span data-i18n="edugate">بوابة الطالب</span></a>
     </nav>
@@ -86,26 +86,27 @@
   <main>
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-upper">
-        <h1 id="heroTitle" class="hero-title" data-i18n="heroTitle">خطة الهندسة الكهربائية</h1>
+        <p class="hero-eyebrow" data-i18n="heroEyebrow">مبادرة طلابية · نادي الهندسة الكهربائية</p>
+        <h1 id="heroTitle" class="hero-title" data-i18n="heroTitle">بوابة اللجنة العلمية</h1><p class="hero-under-title" data-i18n="heroSubtitle">خدمات أكاديمية صنعها الطلاب، للطلاب.</p>
       </div>
       <div class="hero-lower">
-        <p class="hero-lead" data-i18n="heroLead">مسار المقررات والعلاقات الأكاديمية لطلاب الهندسة الكهربائية.</p>
-        <a class="primary-link" href="EEflowchart.html"><span data-i18n="openPlan">افتح الخطة الدراسية</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+        <p class="hero-lead" data-i18n="heroLead">خطط التخصصات والجداول والمراجع الأكاديمية في مكان واحد.</p>
+        <div class="hero-actions"><a class="primary-link" href="#plans"><span data-i18n="exploreServices">استعرض الخدمات</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a><a class="hero-secondary-link" href="flowcharts.html"><span data-i18n="browseAllPlans">خطط التخصصات</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a></div>
       </div>
     </section>
 
     <section id="plans" class="section academic-section page-width" aria-labelledby="academicTitle">
       <div class="section-intro">
         <h2 id="academicTitle" data-i18n="academicTitle">الخدمات الأكاديمية</h2>
-        <p data-i18n="academicIntro">أدوات ومصادر يستخدمها طلاب القسم في تخطيط دراستهم.</p>
+        <p data-i18n="academicIntro">كل الأدوات المهمة في مكان واحد. اختر الخدمة وابدأ مباشرة.</p>
       </div>
       <ul class="service-list">
-        <li><a href="flowcharts.html"><span data-i18n="flowcharts">فلوشارت التخصصات</span><span class="service-kind" data-i18n="viewPlans">عرض الخطط</span></a></li>
-        <li><a href="schedule.html"><span data-i18n="schedule">إنشاء جدول دراسي</span><span class="service-kind" data-i18n="buildSchedule">بناء الجدول</span></a></li>
-        <li><a href="faculty.html"><span data-i18n="facultySearch">بحث هيئة التدريس</span><span class="service-kind" data-i18n="searchFaculty">البحث</span></a></li>
-        <li><a href="majors.html"><span data-i18n="majors">التخصصات والخطط الدراسية</span><span class="service-kind" data-i18n="browseMajors">استعراض التخصصات</span></a></li>
-        <li><a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span data-i18n="blackboard">البلاك بورد</span><span class="service-kind" data-i18n="externalService">خدمة خارجية</span></a></li>
-        <li><a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span data-i18n="edugate">بوابة الطالب</span><span class="service-kind" data-i18n="externalService">خدمة خارجية</span></a></li>
+        <li><a href="flowcharts.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span><span class="service-copy"><strong data-i18n="flowcharts">فلوشارت التخصصات</strong><small data-i18n="viewPlans">عرض الخطط</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="schedule.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span><span class="service-copy"><strong data-i18n="schedule">إنشاء جدول دراسي</strong><small data-i18n="buildSchedule">بناء الجدول</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="faculty.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span><span class="service-copy"><strong data-i18n="facultySearch">بحث هيئة التدريس</strong><small data-i18n="searchFaculty">البحث</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="majors.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><span class="service-copy"><strong data-i18n="majors">التخصصات والخطط الدراسية</strong><small data-i18n="browseMajors">استعراض التخصصات</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span><span class="service-copy"><strong data-i18n="blackboard">البلاك بورد</strong><small data-i18n="externalService">خدمة خارجية</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-building-columns"></i></span><span class="service-copy"><strong data-i18n="edugate">بوابة الطالب</strong><small data-i18n="externalService">خدمة خارجية</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
       </ul>
     </section>
 
@@ -125,7 +126,7 @@
           <h2 id="resourcesTitle" data-i18n="resourcesTitle">ملفات ومراجع</h2>
           <p data-i18n="resourcesDescription">مواد يشاركها طلاب القسم وتُراجع قبل إتاحتها.</p>
         </div>
-        <span class="resource-status" data-i18n="updatedRegularly">تحديث مستمر</span>
+        <span class="resource-status" data-i18n="resourceReview">تُراجع المشاركات قبل النشر</span>
       </div>
       <ul class="resource-list">
         <li><span data-i18n="courseLibrary">مكتبة المواد</span><span data-i18n="comingSoon">قريباً</span></li>
@@ -208,17 +209,17 @@
   <script>
     const copy = {
       ar: {
-        title: 'الخطة الدراسية للهندسة الكهربائية', brand: 'اللجنة العلمية', club: 'نادي الهندسة الكهربائية',
+        title: 'بوابة اللجنة العلمية | نادي الهندسة الكهربائية', brand: 'اللجنة العلمية', club: 'نادي الهندسة الكهربائية',
         closeMenu: 'إغلاق القائمة', mainNavigation: 'التنقل الرئيسي', pageNavigation: 'روابط الصفحة', pagePreferences: 'إعدادات الصفحة',
         navHome: 'الرئيسية', navMajors: 'التخصصات والخطط الدراسية', navFaculty: 'بحث هيئة التدريس', navEE: 'خطة الهندسة الكهربائية',
         navExams: 'جدول الاختبارات', comingSoon: 'قريباً', blackboard: 'البلاك بورد', edugate: 'بوابة الطالب', developerCredit: 'تطوير', menu: 'القائمة',
-        navTools: 'الخدمات الأكاديمية', navResources: 'المراجع', navJoin: 'الانضمام', themeLight: 'فاتح', themeDark: 'داكن',
-        heroTitle: 'خطة الهندسة الكهربائية', heroLead: 'مسار المقررات والعلاقات الأكاديمية لطلاب الهندسة الكهربائية.', openPlan: 'افتح الخطة الدراسية',
-        academicTitle: 'الخدمات الأكاديمية', academicIntro: 'أدوات ومصادر يستخدمها طلاب القسم في تخطيط دراستهم.',
+        heroSubtitle: 'خدمات أكاديمية صنعها الطلاب، للطلاب.', heroEyebrow: 'مبادرة طلابية · نادي الهندسة الكهربائية', exploreServices: 'استعرض الخدمات', browseAllPlans: 'خطط التخصصات', navTools: 'الخدمات الأكاديمية', navResources: 'المراجع', navJoin: 'الانضمام', themeLight: 'فاتح', themeDark: 'داكن',
+        heroTitle: 'بوابة اللجنة العلمية', heroLead: 'خطط التخصصات، إنشاء الجدول، البحث عن أعضاء هيئة التدريس، ومشاركة المراجع. خدمات عملية تسهّل يومك الدراسي.', openPlan: 'افتح الخطة الدراسية',
+        academicTitle: 'الخدمات الأكاديمية', academicIntro: 'كل الأدوات المهمة في مكان واحد. اختر الخدمة وابدأ مباشرة.',
         flowcharts: 'فلوشارت التخصصات', viewPlans: 'عرض الخطط', schedule: 'إنشاء جدول دراسي', buildSchedule: 'بناء الجدول',
         facultySearch: 'بحث هيئة التدريس', searchFaculty: 'البحث', majors: 'التخصصات والخطط الدراسية', browseMajors: 'استعراض التخصصات', externalService: 'خدمة خارجية',
         shareTitle: 'شارك مصدراً دراسياً', shareDescription: 'أضف ملفات ومراجع ليستفيد منها طلاب الهندسة الكهربائية.', addSource: 'إضافة مصدر',
-        resourcesTitle: 'ملفات ومراجع', resourcesDescription: 'مواد يشاركها طلاب القسم وتُراجع قبل إتاحتها.', updatedRegularly: 'تحديث مستمر',
+        resourcesTitle: 'ملفات ومراجع', resourcesDescription: 'مواد يشاركها طلاب القسم وتُراجع قبل إتاحتها.', updatedRegularly: 'تحديث مستمر', resourceReview: 'تُراجع المشاركات قبل النشر',
         courseLibrary: 'مكتبة المواد', summaries: 'ملخصات', exams: 'اختبارات', labs: 'تجارب ومختبرات',
         resourceNote: 'تعتمد هذه الأقسام على مساهماتكم. شاركوا ما لديكم لفتحها للجميع.', joinTitle: 'انضم إلى الفريق',
         joinDescription: 'ساهم في إعداد المحتوى الأكاديمي أو أنشطة نادي الهندسة الكهربائية.', scientificCommittee: 'اللجنة العلمية',
@@ -229,20 +230,20 @@
         uploadSuccess: 'تم الإرسال', uploadSuccessDescription: 'شكراً لك. ستتم مراجعة الملفات قبل إضافتها إلى المكتبة.', close: 'إغلاق',
         disclaimer: 'هذا الموقع مبادرة طلابية مساعدة وليس جهة رسمية.', designedBy: 'تصميم وتطوير', languageAction: 'Switch language to English',
         themeActionLight: 'التبديل إلى الوضع الفاتح', themeActionDark: 'التبديل إلى الوضع الداكن', chooseFilesLabel: 'اختيار الملفات',
-        requiredCourse: 'يرجى كتابة اسم المادة أولاً.', uploadError: 'حدث خطأ أثناء الرفع:'
+        filesSelected: 'ملف/ملفات محددة', requiredCourse: 'يرجى كتابة اسم المادة أولاً.', uploadError: 'حدث خطأ أثناء الرفع:'
       },
       en: {
-        title: 'Electrical Engineering Study Plan', brand: 'Scientific Committee', club: 'Electrical Engineering Club',
+        title: 'Scientific Committee | Electrical Engineering Club', brand: 'Scientific Committee', club: 'Electrical Engineering Club',
         closeMenu: 'Close menu', mainNavigation: 'Main navigation', pageNavigation: 'Page links', pagePreferences: 'Page preferences',
         navHome: 'Home', navMajors: 'Majors and study plans', navFaculty: 'Faculty search', navEE: 'EE study plan',
         navExams: 'Exam schedule', comingSoon: 'Coming soon', blackboard: 'Blackboard', edugate: 'Student portal', developerCredit: 'Developed by', menu: 'Menu',
-        navTools: 'Academic tools', navResources: 'Resources', navJoin: 'Join', themeLight: 'Light', themeDark: 'Dark',
-        heroTitle: 'EE Study Plan', heroLead: 'Course sequence and academic relationships for electrical engineering students.', openPlan: 'Open study plan',
-        academicTitle: 'Academic tools', academicIntro: 'Tools and resources for planning your studies in the department.',
+        heroSubtitle: 'Academic tools, built by students for students.', heroEyebrow: 'Student initiative · Electrical Engineering Club', exploreServices: 'Explore services', browseAllPlans: 'Degree plans', navTools: 'Academic tools', navResources: 'Resources', navJoin: 'Join', themeLight: 'Light', themeDark: 'Dark',
+        heroTitle: 'Scientific Committee Portal', heroLead: 'Explore degree plans, build schedules, find faculty and share resources. Practical tools for your academic journey.', openPlan: 'Open study plan',
+        academicTitle: 'Academic tools', academicIntro: 'Your academic essentials, in one place. Choose a service to get started.',
         flowcharts: 'Major flowcharts', viewPlans: 'View plans', schedule: 'Build a class schedule', buildSchedule: 'Create schedule',
         facultySearch: 'Faculty search', searchFaculty: 'Search faculty', majors: 'Majors and study plans', browseMajors: 'Browse majors', externalService: 'External service',
         shareTitle: 'Share a study resource', shareDescription: 'Add files and references for electrical engineering students.', addSource: 'Add a resource',
-        resourcesTitle: 'Files and references', resourcesDescription: 'Student-contributed materials are reviewed before they are shared.', updatedRegularly: 'Updated regularly',
+        resourcesTitle: 'Files and references', resourcesDescription: 'Student-contributed materials are reviewed before they are shared.', updatedRegularly: 'Updated regularly', resourceReview: 'Submissions reviewed before publication',
         courseLibrary: 'Course library', summaries: 'Study summaries', exams: 'Past exams', labs: 'Labs and experiments',
         resourceNote: 'These sections depend on student contributions. Share a resource to help open them to everyone.', joinTitle: 'Join the team',
         joinDescription: 'Contribute to academic content or Electrical Engineering Club activities.', scientificCommittee: 'Scientific Committee',
@@ -253,9 +254,12 @@
         uploadSuccess: 'Submitted', uploadSuccessDescription: 'Thank you. Files will be reviewed before they are added to the library.', close: 'Close',
         disclaimer: 'This is a student-led support initiative, not an official institution website.', designedBy: 'Designed and developed by',
         languageAction: 'التبديل إلى اللغة العربية', themeActionLight: 'Switch to light theme', themeActionDark: 'Switch to dark theme', chooseFilesLabel: 'Choose files',
-        requiredCourse: 'Enter a course name first.', uploadError: 'Upload error:'
+        filesSelected: 'file(s) selected', requiredCourse: 'Enter a course name first.', uploadError: 'Upload error:'
       }
     };
+
+    // Shared UI strings for the upload module (assets/js/app.js).
+    window.eeHomepageCopy = copy;
 
     const languageToggle = document.getElementById('languageToggle');
     const themeToggle = document.getElementById('themeToggle');
