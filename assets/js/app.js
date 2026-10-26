@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById("fileInput");
     const subjectInput = document.getElementById("subjectInput");
     const progressContainer = document.getElementById("progressContainer");
-    const pageCopy = () => window.eeHomepageCopy?.[document.documentElement.lang] || window.eeHomepageCopy?.ar;
+    const pageCopy = () => window.eeHomepageCopy?.[document.documentElement.lang] || window.eeHomepageCopy?.ar || { requiredCourse: 'الرجاء إدخال اسم المادة', uploading: 'جارٍ الرفع', filesSelected: 'ملفات محددة' };
     let uploading = false;
     const retryButton = document.createElement('button');
     retryButton.type = 'button';
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function uploadFiles(files, subject, noteValue) {
         if (uploading) return;
         uploading = true;
-        fileInput.disabled = true;
+        if (fileInput) fileInput.disabled = true;
         if (subjectInput) subjectInput.disabled = true;
         const noteField = document.getElementById("noteInput");
         if (noteField) noteField.disabled = true;
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         retryButton.classList.add('hidden');
         document.getElementById("dropZone")?.classList.add("hidden");
         progressContainer?.classList.remove("hidden");
-        document.getElementById("fileCountText").textContent = `${files.length} ${strings.filesSelected}`;
+        document.getElementById("fileCountText").textContent = `${files.length} ${strings.filesSelected || (arabic ? "ملفات محددة" : "files selected")}`;
         document.getElementById("progressText").textContent = strings.uploading;
         document.getElementById("progressBar").style.width = '0%';
         document.getElementById("progressPercent").textContent = '0%';
@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } finally {
             uploading = false;
-            fileInput.disabled = false;
-            fileInput.value = '';
+            if (fileInput) fileInput.disabled = false;
+            if (fileInput) fileInput.value = '';
             if (subjectInput) subjectInput.disabled = false;
             if (noteField) noteField.disabled = false;
             closeButtons.forEach(button => { button.disabled = false; });
