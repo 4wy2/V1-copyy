@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-theme="dark" data-homepage-fix="2026-10">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0d1822" />
-  <meta property="og:title" content="EE Study Plan | Electrical Engineering Club" />
-  <meta property="og:description" content="Student-built academic tools and the electrical engineering degree roadmap." />
+  <meta name="theme-color" content="#0c121b" />
+  <meta property="og:title" content="بوابة اللجنة العلمية | نادي الهندسة الكهربائية" />
+  <meta property="og:description" content="بوابة اللجنة العلمية: الخطط الدراسية، الجداول، هيئة التدريس ومشاركة المصادر التعليمية لطلاب قسم الهندسة الكهربائية." />
   <meta property="og:image" content="https://engineer-ee.com/images/preview-image.png" />
   <meta property="og:url" content="https://engineer-ee.com" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -18,34 +18,28 @@
       document.documentElement.dataset.theme = savedTheme === 'light' ? 'light' : 'dark';
     } catch {}
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <title>الخطة الدراسية للهندسة الكهربائية</title>
+  <title>بوابة اللجنة العلمية | نادي الهندسة الكهربائية</title>
 </head>
 <body>
-  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
-    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></symbol>
-    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
-    <symbol id="icon-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></symbol>
-    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
-    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-12h-8z"/></symbol>
-  </defs></svg>
-  <a class="skip-link" href="#main" data-i18n="skipContent">انتقل إلى المحتوى</a>
   <div id="overlay" class="overlay" aria-hidden="true"></div>
 
   <aside id="sidebar" class="sidebar" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="sidebarTitle" inert>
     <div class="sidebar-head">
       <a class="brand" href="#home">
-        <span class="brand-mark" aria-hidden="true"><svg class="icon icon-bolt" aria-hidden="true"><use href="#icon-bolt"/></svg></span>
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
         <span class="brand-copy">
           <strong id="sidebarTitle" data-i18n="brand">اللجنة العلمية</strong>
           <span data-i18n="club">نادي الهندسة الكهربائية</span>
         </span>
       </a>
       <button id="closeSidebar" class="icon-button" type="button" data-i18n-aria="closeMenu" aria-label="إغلاق القائمة">
-        <svg class="icon icon-close" aria-hidden="true"><use href="#icon-close"/></svg>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
     </div>
 
@@ -54,7 +48,7 @@
       <a href="majors.html"><span data-i18n="navMajors">التخصصات والخطط الدراسية</span></a>
       <a href="faculty.html"><span data-i18n="navFaculty">بحث هيئة التدريس</span></a>
       <a href="EEflowchart.html"><span data-i18n="navEE">خطة الهندسة الكهربائية</span></a>
-      <span class="nav-disabled" aria-disabled="true"><span data-i18n="navExams">جدول الاختبارات</span><span data-i18n="comingSoon">قريباً</span></span>
+      <a href="Exams.html"><span data-i18n="navExams">جدول الاختبارات</span></a>
       <a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span data-i18n="blackboard">البلاك بورد</span></a>
       <a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span data-i18n="edugate">بوابة الطالب</span></a>
     </nav>
@@ -70,7 +64,7 @@
       <div class="header-start">
         <button id="openSidebar" class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false" data-i18n="menu">القائمة</button>
         <a class="wordmark" href="#home" aria-label="Electrical Engineering Club">
-          <span class="brand-mark" aria-hidden="true"><svg class="icon icon-bolt" aria-hidden="true"><use href="#icon-bolt"/></svg></span>
+          <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
           <span class="wordmark-copy">
             <strong data-i18n="brand">اللجنة العلمية</strong>
             <span data-i18n="club">نادي الهندسة الكهربائية</span>
@@ -89,43 +83,30 @@
     </div>
   </header>
 
-  <main id="main" tabindex="-1">
+  <main>
     <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-inner page-width">
-        <h1 id="heroTitle" class="hero-title" data-i18n="heroTitle">خطة الهندسة الكهربائية</h1>
-        <div class="hero-bottom">
-          <p class="hero-lead" data-i18n="heroLead">مسار المقررات والعلاقات الأكاديمية لطلاب الهندسة الكهربائية.</p>
-          <a class="primary-link" href="EEflowchart.html"><span data-i18n="openPlan">افتح الخطة الدراسية</span><svg class="icon icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
-        </div>
+      <div class="hero-upper">
+        <p class="hero-eyebrow" data-i18n="heroEyebrow">مبادرة طلابية · نادي الهندسة الكهربائية</p>
+        <h1 id="heroTitle" class="hero-title" data-i18n="heroTitle">بوابة اللجنة العلمية</h1><p class="hero-under-title" data-i18n="heroSubtitle">خدمات أكاديمية صنعها الطلاب، للطلاب.</p>
+      </div>
+      <div class="hero-lower">
+        <p class="hero-lead" data-i18n="heroLead">خطط التخصصات والجداول والمراجع الأكاديمية في مكان واحد.</p>
+        <div class="hero-actions"><a class="primary-link" href="#plans"><span data-i18n="exploreServices">استعرض الخدمات</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a><a class="hero-secondary-link" href="flowcharts.html"><span data-i18n="browseAllPlans">خطط التخصصات</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a></div>
       </div>
     </section>
 
     <section id="plans" class="section academic-section page-width" aria-labelledby="academicTitle">
       <div class="section-intro">
         <h2 id="academicTitle" data-i18n="academicTitle">الخدمات الأكاديمية</h2>
-        <p data-i18n="academicIntro">أدوات ومصادر يستخدمها طلاب القسم في تخطيط دراستهم.</p>
-      </div>
-      <div class="plan-picker" data-ui>
-        <label for="planSelect" data-i18n="choosePlan">اختر خطتك الدراسية</label>
-        <div class="plan-picker-controls">
-          <select id="planSelect" aria-describedby="planHint">
-            <option value="EEflowchart.html" data-i18n="planEE">الهندسة الكهربائية</option>
-            <option value="EPTflowchart.html" data-i18n="planEPT">تقنية القوى الكهربائية</option>
-            <option value="ECTflowchart.html" data-i18n="planECT">تقنية الإلكترونيات والاتصالات</option>
-            <option value="ICTflowchart.html" data-i18n="planICT">تقنية الآلات الدقيقة والتحكم</option>
-            <option value="MechT.html" data-i18n="planMech">التقنية الميكانيكية</option>
-          </select>
-          <a id="selectedPlanLink" class="text-link" href="EEflowchart.html" data-i18n="viewPlans">عرض الخطط</a>
-        </div>
-        <p id="planHint" data-i18n="planHint">اختر التخصص لفتح خطته، أو استعرض جميع الخطط أدناه.</p>
+        <p data-i18n="academicIntro">كل الأدوات المهمة في مكان واحد. اختر الخدمة وابدأ مباشرة.</p>
       </div>
       <ul class="service-list">
-        <li><a href="flowcharts.html"><span data-i18n="flowcharts">فلوشارت التخصصات</span><span class="service-kind" data-i18n="viewPlans">عرض الخطط</span></a></li>
-        <li><a href="schedule.html"><span data-i18n="schedule">إنشاء جدول دراسي</span><span class="service-kind" data-i18n="buildSchedule">بناء الجدول</span></a></li>
-        <li><a href="faculty.html"><span data-i18n="facultySearch">بحث هيئة التدريس</span><span class="service-kind" data-i18n="searchFaculty">البحث</span></a></li>
-        <li><a href="majors.html"><span data-i18n="majors">التخصصات والخطط الدراسية</span><span class="service-kind" data-i18n="browseMajors">استعراض التخصصات</span></a></li>
-        <li><a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span data-i18n="blackboard">البلاك بورد</span><span class="service-kind" data-i18n="externalService">خدمة خارجية</span></a></li>
-        <li><a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span data-i18n="edugate">بوابة الطالب</span><span class="service-kind" data-i18n="externalService">خدمة خارجية</span></a></li>
+        <li><a href="flowcharts.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span><span class="service-copy"><strong data-i18n="flowcharts">فلوشارت التخصصات</strong><small data-i18n="viewPlans">عرض الخطط</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="schedule.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span><span class="service-copy"><strong data-i18n="schedule">إنشاء جدول دراسي</strong><small data-i18n="buildSchedule">بناء الجدول</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="faculty.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span><span class="service-copy"><strong data-i18n="facultySearch">بحث هيئة التدريس</strong><small data-i18n="searchFaculty">البحث</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="majors.html"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><span class="service-copy"><strong data-i18n="majors">التخصصات والخطط الدراسية</strong><small data-i18n="browseMajors">استعراض التخصصات</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span><span class="service-copy"><strong data-i18n="blackboard">البلاك بورد</strong><small data-i18n="externalService">خدمة خارجية</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
+        <li><a href="https://edugate.rcjy.edu.sa/jyup/init" target="_blank" rel="noopener noreferrer"><span class="service-icon" aria-hidden="true"><i class="fa-solid fa-building-columns"></i></span><span class="service-copy"><strong data-i18n="edugate">بوابة الطالب</strong><small data-i18n="externalService">خدمة خارجية</small></span><span class="service-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></span></a></li>
       </ul>
     </section>
 
@@ -135,7 +116,7 @@
           <h2 id="shareTitle" data-i18n="shareTitle">شارك مصدراً دراسياً</h2>
           <p data-i18n="shareDescription">أضف ملفات ومراجع ليستفيد منها طلاب الهندسة الكهربائية.</p>
         </div>
-        <button id="openUploadBtn" class="secondary-button" type="button"><svg class="icon icon-upload" aria-hidden="true"><use href="#icon-upload"/></svg><span data-i18n="addSource">إضافة مصدر</span></button>
+        <button id="openUploadBtn" class="secondary-button" type="button"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i><span data-i18n="addSource">إضافة مصدر</span></button>
       </div>
     </section>
 
@@ -145,7 +126,7 @@
           <h2 id="resourcesTitle" data-i18n="resourcesTitle">ملفات ومراجع</h2>
           <p data-i18n="resourcesDescription">مواد يشاركها طلاب القسم وتُراجع قبل إتاحتها.</p>
         </div>
-        <span class="resource-status" data-i18n="updatedRegularly">تحديث مستمر</span>
+        <span class="resource-status" data-i18n="resourceReview">تُراجع المشاركات قبل النشر</span>
       </div>
       <ul class="resource-list">
         <li><span data-i18n="courseLibrary">مكتبة المواد</span><span data-i18n="comingSoon">قريباً</span></li>
@@ -168,14 +149,14 @@
             <h3 data-i18n="scientificCommittee">اللجنة العلمية</h3>
             <p data-i18n="scientificDescription">نبحث عن طلاب يساهمون في المحتوى الأكاديمي والملخصات وتطوير الأدوات التعليمية.</p>
           </div>
-          <a href="join.html" class="text-link"><span data-i18n="apply">تقديم طلب انضمام</span><svg class="icon icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          <a href="join.html" class="text-link"><span data-i18n="apply">تقديم طلب انضمام</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
         </article>
         <article class="join-item">
           <div>
             <h3 data-i18n="eeClub">نادي الهندسة الكهربائية</h3>
             <p data-i18n="clubDescription">شارك في فرق التنظيم والإعلام والعلاقات العامة وأنشطة النادي.</p>
           </div>
-          <a href="https://forms.gle/A8hirHTVXpXzA2Rz9" class="text-link" target="_blank" rel="noopener noreferrer"><span data-i18n="joinClub">كن عضواً في النادي</span><svg class="icon icon-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          <a href="https://forms.gle/A8hirHTVXpXzA2Rz9" class="text-link" target="_blank" rel="noopener noreferrer"><span data-i18n="joinClub">كن عضواً في النادي</span><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
         </article>
       </div>
     </section>
@@ -183,13 +164,13 @@
 
   <div id="uploadModal" class="upload-modal hidden" role="dialog" aria-modal="true" aria-labelledby="uploadTitle" aria-hidden="true" inert>
     <div class="upload-dialog">
-      <button id="closeUploadBtn" data-i18n-aria="close" type="button" class="icon-button modal-close" aria-label="إغلاق"><svg class="icon icon-close" aria-hidden="true"><use href="#icon-close"/></svg></button>
+      <button id="closeUploadBtn" type="button" class="icon-button modal-close" aria-label="إغلاق"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       <div id="formContent">
         <div class="form-heading">
           <h2 id="uploadTitle" data-i18n="uploadTitle">مشاركة مصدر</h2>
           <p data-i18n="uploadDescription">نادي الهندسة الكهربائية</p>
         </div>
-        <form id="eeSourceForm" class="upload-form" aria-describedby="uploadInstructions">
+        <form id="eeSourceForm" class="upload-form">
           <label for="subjectInput" data-i18n="subjectLabel">اسم المادة</label>
           <input type="text" id="subjectInput" name="subject" required data-placeholder-en="Course name (for example, EE 201)" data-placeholder-ar="اسم المادة (مثلاً: EE 201)" placeholder="اسم المادة (مثلاً: EE 201)" />
           <label for="noteInput" data-i18n="noteLabel">ملاحظة اختيارية</label>
@@ -197,21 +178,21 @@
           <div id="dropZone" class="drop-zone">
             <input type="file" id="fileInput" name="file" multiple accept="*/*" aria-label="Choose files" data-i18n-aria="chooseFilesLabel" />
             <div class="drop-copy" aria-hidden="true">
-              <svg class="icon icon-upload" aria-hidden="true"><use href="#icon-upload"/></svg>
+              <i class="fa-solid fa-file-arrow-up"></i>
               <strong data-i18n="chooseFiles">اختر ملفات للمشاركة</strong>
-              <span id="uploadInstructions" data-i18n="uploadStarts">سيبدأ الرفع بعد الاختيار</span>
+              <span data-i18n="uploadStarts">سيبدأ الرفع بعد الاختيار</span>
             </div>
           </div>
           <div id="progressContainer" class="upload-progress hidden" aria-live="polite">
-            <div class="progress-copy"><span id="progressText">جارٍ الرفع</span><span id="fileCountText">0</span></div>
+            <div class="progress-copy"><span id="progressText" data-i18n="uploading">جارٍ الرفع</span><span id="fileCountText">0</span></div>
             <span id="progressPercent">0%</span>
-            <div id="uploadProgress" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria="uploading" aria-label="جارٍ الرفع"><div id="progressBar" class="progress-bar"></div></div>
+            <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
           </div>
         </form>
       </div>
       <div id="successUi" class="success-state hidden" aria-live="polite">
-        <span class="success-mark" aria-hidden="true"><svg class="icon icon-check" aria-hidden="true"><use href="#icon-check"/></svg></span>
-        <h2 id="uploadSuccessTitle" tabindex="-1" data-i18n="uploadSuccess">تم الإرسال</h2>
+        <span class="success-mark" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+        <h2 data-i18n="uploadSuccess">تم الإرسال</h2>
         <p data-i18n="uploadSuccessDescription">شكراً لك. ستتم مراجعة الملفات قبل إضافتها إلى المكتبة.</p>
         <button id="closeSuccessBtn" type="button" class="secondary-button" data-i18n="close">إغلاق</button>
       </div>
@@ -219,15 +200,147 @@
   </div>
 
   <footer class="site-footer">
-    <div class="footer-wordmark page-width" aria-hidden="true">EE Study Plan</div>
     <div class="footer-inner page-width">
       <p class="disclaimer" data-i18n="disclaimer">هذا الموقع مبادرة طلابية مساعدة وليس جهة رسمية.</p>
       <a class="footer-credit" href="about.html"><span data-i18n="designedBy">تصميم وتطوير</span> <strong>AL-RASSASI</strong><span>© 2026</span></a>
     </div>
   </footer>
 
+  <script>
+    const copy = {
+      ar: {
+        title: 'بوابة اللجنة العلمية | نادي الهندسة الكهربائية', brand: 'اللجنة العلمية', club: 'نادي الهندسة الكهربائية',
+        closeMenu: 'إغلاق القائمة', mainNavigation: 'التنقل الرئيسي', pageNavigation: 'روابط الصفحة', pagePreferences: 'إعدادات الصفحة',
+        navHome: 'الرئيسية', navMajors: 'التخصصات والخطط الدراسية', navFaculty: 'بحث هيئة التدريس', navEE: 'خطة الهندسة الكهربائية',
+        navExams: 'جدول الاختبارات', comingSoon: 'قريباً', blackboard: 'البلاك بورد', edugate: 'بوابة الطالب', developerCredit: 'تطوير', menu: 'القائمة',
+        heroSubtitle: 'خدمات أكاديمية صنعها الطلاب، للطلاب.', heroEyebrow: 'مبادرة طلابية · نادي الهندسة الكهربائية', exploreServices: 'استعرض الخدمات', browseAllPlans: 'خطط التخصصات', navTools: 'الخدمات الأكاديمية', navResources: 'المراجع', navJoin: 'الانضمام', themeLight: 'فاتح', themeDark: 'داكن',
+        heroTitle: 'بوابة اللجنة العلمية', heroLead: 'خطط التخصصات، إنشاء الجدول، البحث عن أعضاء هيئة التدريس، ومشاركة المراجع. خدمات عملية تسهّل يومك الدراسي.', openPlan: 'افتح الخطة الدراسية',
+        academicTitle: 'الخدمات الأكاديمية', academicIntro: 'كل الأدوات المهمة في مكان واحد. اختر الخدمة وابدأ مباشرة.',
+        flowcharts: 'فلوشارت التخصصات', viewPlans: 'عرض الخطط', schedule: 'إنشاء جدول دراسي', buildSchedule: 'بناء الجدول',
+        facultySearch: 'بحث هيئة التدريس', searchFaculty: 'البحث', majors: 'التخصصات والخطط الدراسية', browseMajors: 'استعراض التخصصات', externalService: 'خدمة خارجية',
+        shareTitle: 'شارك مصدراً دراسياً', shareDescription: 'أضف ملفات ومراجع ليستفيد منها طلاب الهندسة الكهربائية.', addSource: 'إضافة مصدر',
+        resourcesTitle: 'ملفات ومراجع', resourcesDescription: 'مواد يشاركها طلاب القسم وتُراجع قبل إتاحتها.', updatedRegularly: 'تحديث مستمر', resourceReview: 'تُراجع المشاركات قبل النشر',
+        courseLibrary: 'مكتبة المواد', summaries: 'ملخصات', exams: 'اختبارات', labs: 'تجارب ومختبرات',
+        resourceNote: 'تعتمد هذه الأقسام على مساهماتكم. شاركوا ما لديكم لفتحها للجميع.', joinTitle: 'انضم إلى الفريق',
+        joinDescription: 'ساهم في إعداد المحتوى الأكاديمي أو أنشطة نادي الهندسة الكهربائية.', scientificCommittee: 'اللجنة العلمية',
+        scientificDescription: 'نبحث عن طلاب يساهمون في المحتوى الأكاديمي والملخصات وتطوير الأدوات التعليمية.', apply: 'تقديم طلب انضمام',
+        eeClub: 'نادي الهندسة الكهربائية', clubDescription: 'شارك في فرق التنظيم والإعلام والعلاقات العامة وأنشطة النادي.', joinClub: 'كن عضواً في النادي',
+        uploadTitle: 'مشاركة مصدر', uploadDescription: 'نادي الهندسة الكهربائية', subjectLabel: 'اسم المادة', noteLabel: 'ملاحظة اختيارية',
+        chooseFiles: 'اختر ملفات للمشاركة', uploadStarts: 'سيبدأ الرفع بعد الاختيار', uploading: 'جارٍ الرفع',
+        uploadSuccess: 'تم الإرسال', uploadSuccessDescription: 'شكراً لك. ستتم مراجعة الملفات قبل إضافتها إلى المكتبة.', close: 'إغلاق',
+        disclaimer: 'هذا الموقع مبادرة طلابية مساعدة وليس جهة رسمية.', designedBy: 'تصميم وتطوير', languageAction: 'Switch language to English',
+        themeActionLight: 'التبديل إلى الوضع الفاتح', themeActionDark: 'التبديل إلى الوضع الداكن', chooseFilesLabel: 'اختيار الملفات',
+        filesSelected: 'ملف/ملفات محددة', requiredCourse: 'يرجى كتابة اسم المادة أولاً.', uploadError: 'حدث خطأ أثناء الرفع:'
+      },
+      en: {
+        title: 'Scientific Committee | Electrical Engineering Club', brand: 'Scientific Committee', club: 'Electrical Engineering Club',
+        closeMenu: 'Close menu', mainNavigation: 'Main navigation', pageNavigation: 'Page links', pagePreferences: 'Page preferences',
+        navHome: 'Home', navMajors: 'Majors and study plans', navFaculty: 'Faculty search', navEE: 'EE study plan',
+        navExams: 'Exam schedule', comingSoon: 'Coming soon', blackboard: 'Blackboard', edugate: 'Student portal', developerCredit: 'Developed by', menu: 'Menu',
+        heroSubtitle: 'Academic tools, built by students for students.', heroEyebrow: 'Student initiative · Electrical Engineering Club', exploreServices: 'Explore services', browseAllPlans: 'Degree plans', navTools: 'Academic tools', navResources: 'Resources', navJoin: 'Join', themeLight: 'Light', themeDark: 'Dark',
+        heroTitle: 'Scientific Committee Portal', heroLead: 'Explore degree plans, build schedules, find faculty and share resources. Practical tools for your academic journey.', openPlan: 'Open study plan',
+        academicTitle: 'Academic tools', academicIntro: 'Your academic essentials, in one place. Choose a service to get started.',
+        flowcharts: 'Major flowcharts', viewPlans: 'View plans', schedule: 'Build a class schedule', buildSchedule: 'Create schedule',
+        facultySearch: 'Faculty search', searchFaculty: 'Search faculty', majors: 'Majors and study plans', browseMajors: 'Browse majors', externalService: 'External service',
+        shareTitle: 'Share a study resource', shareDescription: 'Add files and references for electrical engineering students.', addSource: 'Add a resource',
+        resourcesTitle: 'Files and references', resourcesDescription: 'Student-contributed materials are reviewed before they are shared.', updatedRegularly: 'Updated regularly', resourceReview: 'Submissions reviewed before publication',
+        courseLibrary: 'Course library', summaries: 'Study summaries', exams: 'Past exams', labs: 'Labs and experiments',
+        resourceNote: 'These sections depend on student contributions. Share a resource to help open them to everyone.', joinTitle: 'Join the team',
+        joinDescription: 'Contribute to academic content or Electrical Engineering Club activities.', scientificCommittee: 'Scientific Committee',
+        scientificDescription: 'Help create academic content, study summaries, and educational tools for students.', apply: 'Apply to join',
+        eeClub: 'Electrical Engineering Club', clubDescription: 'Join the events, media, or public relations teams and help with club activities.', joinClub: 'Join the club',
+        uploadTitle: 'Share a resource', uploadDescription: 'Electrical Engineering Club', subjectLabel: 'Course name', noteLabel: 'Note (optional)',
+        chooseFiles: 'Choose files to share', uploadStarts: 'Upload starts after selection', uploading: 'Uploading',
+        uploadSuccess: 'Submitted', uploadSuccessDescription: 'Thank you. Files will be reviewed before they are added to the library.', close: 'Close',
+        disclaimer: 'This is a student-led support initiative, not an official institution website.', designedBy: 'Designed and developed by',
+        languageAction: 'التبديل إلى اللغة العربية', themeActionLight: 'Switch to light theme', themeActionDark: 'Switch to dark theme', chooseFilesLabel: 'Choose files',
+        filesSelected: 'file(s) selected', requiredCourse: 'Enter a course name first.', uploadError: 'Upload error:'
+      }
+    };
 
-  <script defer src="assets/js/homepage.js"></script>
-  <script defer src="assets/js/app.js"></script>
+    // Shared UI strings for the upload module (assets/js/app.js).
+    window.eeHomepageCopy = copy;
+
+    const languageToggle = document.getElementById('languageToggle');
+    const themeToggle = document.getElementById('themeToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const openSidebarButton = document.getElementById('openSidebar');
+    const closeSidebarButton = document.getElementById('closeSidebar');
+    let language = document.documentElement.lang === 'en' ? 'en' : 'ar';
+    let theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+
+    function applyLanguage() {
+      const strings = copy[language];
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        element.textContent = strings[element.dataset.i18n];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach((element) => {
+        element.setAttribute('aria-label', strings[element.dataset.i18nAria]);
+      });
+      document.querySelectorAll('[data-placeholder-en]').forEach((element) => {
+        element.placeholder = language === 'ar' ? element.dataset.placeholderAr : element.dataset.placeholderEn;
+      });
+      languageToggle.textContent = language === 'ar' ? 'EN' : 'عربي';
+      languageToggle.setAttribute('aria-label', strings.languageAction);
+      themeToggle.textContent = theme === 'dark' ? strings.themeLight : strings.themeDark;
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? strings.themeActionLight : strings.themeActionDark);
+      document.title = strings.title;
+    }
+
+    languageToggle.addEventListener('click', () => {
+      language = language === 'ar' ? 'en' : 'ar';
+      try { localStorage.setItem('ee_language', language); } catch {}
+      applyLanguage();
+    });
+
+    themeToggle.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0c121b' : '#f2f5f6';
+      try { localStorage.setItem('ee_theme', theme); } catch {}
+      applyLanguage();
+    });
+
+    function closeSidebar(returnFocus = true) {
+      sidebar.classList.remove('is-open');
+      sidebar.setAttribute('aria-hidden', 'true');
+      sidebar.inert = true;
+      overlay.classList.remove('is-visible');
+      overlay.setAttribute('aria-hidden', 'true');
+      openSidebarButton.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      if (returnFocus) openSidebarButton.focus();
+    }
+
+    openSidebarButton.addEventListener('click', () => {
+      sidebar.classList.add('is-open');
+      sidebar.setAttribute('aria-hidden', 'false');
+      sidebar.inert = false;
+      overlay.classList.add('is-visible');
+      overlay.setAttribute('aria-hidden', 'false');
+      openSidebarButton.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+      closeSidebarButton.focus();
+    });
+    closeSidebarButton.addEventListener('click', () => closeSidebar());
+    overlay.addEventListener('click', () => closeSidebar(false));
+    sidebar.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeSidebar(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && sidebar.classList.contains('is-open')) closeSidebar();
+      if (event.key === 'Tab' && sidebar.classList.contains('is-open')) {
+        const controls = [...sidebar.querySelectorAll('a[href], button:not([disabled])')];
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+
+    applyLanguage();
+  </script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
