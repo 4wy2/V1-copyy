@@ -100,7 +100,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
    ===================================================================== */
 const CONFIG = {
   MODE: 'live',
-  API_URL: 'https://script.google.com/macros/s/AKfycbzG7li4LSknw4fayEBGeEre9_N_iQyg3Ufs1vXRNp2bPsBSnn4Hmc-LO8aB96R7QvrW/exec',
+  API_URL: 'https://script.google.com/macros/s/AKfycbz6Y6lzqPUKFgkYrwhSp2ydwLPmAEvKQ4z55Vdeuf3SjU3M0hNOiPPgwf7u5_ABqr1F/exec',
   REQUEST_TIMEOUT_MS: 25000,
   PREVIEW_FALLBACK_MS: 12000,
   ROOTS: [
@@ -268,25 +268,48 @@ function ingest(index){
   store.generated = index.generated || new Date().toISOString();
   store.demo = !!index.demo;
 }
+let jsonpCounter = 0;
+let lastConnectionDetail = '';
+
+function getPublicIndexJsonp(url){
+  return new Promise((resolve, reject) => {
+    const cb = 'yicLibraryCb_' + Date.now() + '_' + (++jsonpCounter);
+    const sc = document.createElement('script');
+    let done = false;
+    let timeout;
+    function cleanup(){
+      if (done) return;
+      done = true;
+      clearTimeout(timeout);
+      sc.remove();
+      try { delete window[cb]; } catch (_) { window[cb] = undefined; }
+    }
+    window[cb] = (data) => { if (!done) { cleanup(); resolve(data); } };
+    sc.onerror = () => { if (!done) { lastConnectionDetail = 'تعذّر تحميل JSONP script. قد يمنع المتصفح أو محرر HTML تحميل السكربت الخارجي (CSP)، أو يرجع Google صفحة غير صالحة.'; cleanup(); reject(Object.assign(new Error('jsonp script blocked'), {code:'network'})); } };
+    sc.onload = () => { if (!done) { lastConnectionDetail = 'تم تحميل الاستجابة لكنها لم تستدعِ دالة JSONP. تحقق من callback في النسخة المنشورة ومحتوى الاستجابة.'; cleanup(); reject(Object.assign(new Error('jsonp callback missing'), {code:'bad'})); } };
+    timeout = setTimeout(() => { if (!done) { lastConnectionDetail = 'انتهت المهلة دون استلام JSONP callback. قد تكون الاستجابة بطيئة أو يمنع المستعرض تنفيذها.'; cleanup(); reject(Object.assign(new Error('jsonp timeout'), {code:'network'})); } }, CONFIG.REQUEST_TIMEOUT_MS);
+    sc.src = url + '&callback=' + encodeURIComponent(cb);
+    sc.async = true;
+    document.head.appendChild(sc);
+  });
+}
+
 async function load(refresh){
+  lastConnectionDetail = '';
   store.status = 'loading'; store.error = null; render();
   try {
     if (CONFIG.MODE === 'demo') { await new Promise((r) => setTimeout(r, 350)); ingest(buildDemoIndex()); }
     else {
       if (!CONFIG.API_URL) throw Object.assign(new Error('config'), {code:'config'});
       const url = CONFIG.API_URL + (CONFIG.API_URL.includes('?') ? '&' : '?') + 'action=index' + (refresh ? '&refresh=1' : '');
-      const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), CONFIG.REQUEST_TIMEOUT_MS);
-      let res;
-      try { res = await fetch(url, {signal:ctrl.signal, credentials:'omit', redirect:'follow'}); }
-      catch (e) { throw Object.assign(new Error('network'), {code:'network'}); }
-      finally { clearTimeout(timer); }
-      if (!res.ok) throw Object.assign(new Error('http'), {code: res.status === 403 || res.status === 401 ? 'denied' : 'network'});
-      let data; try { data = await res.json(); } catch (e) { throw Object.assign(new Error('bad'), {code:'bad'}); }
-      if (data && data.ok === false) throw Object.assign(new Error(data.error || 'bad'), {code: data.error === 'access' ? 'denied' : 'bad'});
+       // Google Apps Script ContentService does not provide CORS headers.
+       // JSONP fetches ONLY the public, server-filtered metadata via script injection.
+       const data = await getPublicIndexJsonp(url);
+       if (data && data.ok === false) throw Object.assign(new Error(data.error || 'bad'), {code:data.error === 'access' ? 'denied' : 'bad'});
       ingest(data);
     }
     store.status = 'ready';
-  } catch (e) { store.status = 'error'; store.error = e.code || 'network'; }
+  } catch (e) { store.status = 'error'; store.error = e.code || 'network'; if (!lastConnectionDetail) lastConnectionDetail = (e && e.message) || 'unknown'; console.error('YIC Library connection error:', e); }
   route();
 }
 
@@ -368,7 +391,10 @@ function render(){
   if (store.status === 'error') {
     $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
     const map = {network:['bad','⚠︎',t('net_t'),t('net_p'),retry], denied:['bad','🔒',t('denied_t'),t('denied_p'),null], config:['bad','⚙︎',t('cfg_t'),t('cfg_p'),null], bad:['bad','⚠︎',t('bad_t'),t('bad_p'),retry]};
-    return showState(...(map[store.error] || map.network));
+    const picked = map[store.error] || map.network;
+    const detail = (picked[3] || '') + (lastConnectionDetail ? ' | التفاصيل التقنية: ' + lastConnectionDetail : '');
+    const actions = el('span', {style:'display:flex;gap:8px;flex-wrap:wrap;justify-content:center'}, retry, el('a', {class:'btn', target:'_blank', rel:'noopener noreferrer', href:CONFIG.API_URL+'?action=index&callback=yicLibraryCb_test123'}, 'فحص JSONP ↗'));
+    return showState(picked[0], picked[1], picked[2], detail, actions);
   }
 
   // Search across everything published
