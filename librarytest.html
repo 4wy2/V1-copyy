@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | اللجنة العلمية</title>
+<script>(function(){try{var th=localStorage.getItem('ee_library_theme'),lg=localStorage.getItem('ee_library_lang'),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
+<style>
+/* ===== Original design (unchanged tokens and components) ===== */
+:root{color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#69727d;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.75 system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}.top{border-bottom:1px solid var(--line);background:var(--panel)}.topin{display:flex;align-items:center;gap:16px;min-height:72px}.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:900}.brand{display:flex;gap:12px;align-items:center}.brand strong{font-size:15px;display:block}.brand small{color:var(--muted)}.topright{margin-inline-start:auto;display:flex;gap:8px}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn:hover{border-color:var(--accent)}.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:750}:root[data-theme="light"] .btn.primary{color:white}.hero{padding:52px 0 34px}.eyebrow{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.03em}.hero h1{font-size:clamp(30px,4vw,49px);line-height:1.25;letter-spacing:-1px;margin:8px 0 13px}.hero p{color:var(--muted);max-width:660px;margin:0;font-size:15px}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:24px 0 14px}.search{position:relative;flex:1;min-width:220px}.search input{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 17px;color:var(--text);width:100%;outline-offset:2px;-webkit-appearance:none;appearance:none}.search input::placeholder{color:var(--muted)}.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:14px 0 25px;color:var(--muted);font-size:13px}.crumbs button{background:none;border:0;color:var(--accent);cursor:pointer;padding:4px}.crumbs button:last-child{color:var(--text);font-weight:700}.crumbs .slash{opacity:.5}.sectionline{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px}.sectionline h2{font-size:19px;margin:0}.count{font-size:12px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.folder{display:flex;text-align:start;gap:13px;align-items:center;min-height:96px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s}.folder:hover{border-color:var(--accent);transform:translateY(-1px)}.folder .ico{background:var(--sub);border-radius:9px;width:42px;height:42px;flex:none;display:grid;place-items:center;color:var(--accent);font-size:22px}.folder .copy{flex:1;min-width:0}.folder strong{display:block;white-space:normal;line-height:1.45;font-size:14px}.folder small{display:block;color:var(--muted);margin-top:4px}.arr{color:var(--muted)}.empty{padding:38px 20px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}.viewer{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.viewerbar{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.viewerbar strong{font-size:14px}.viewerbar p{color:var(--muted);margin:2px 0 0;font-size:12px}.view-actions{display:flex;gap:8px;flex-wrap:wrap}.frame-wrap{position:relative;background:white}.frame-wrap iframe{width:100%;height:min(660px,70vh);min-height:400px;display:block;border:0;background:#fff}.warning{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:14px 17px;border-radius:10px;margin-top:14px;font-size:13px}.warning strong{color:var(--text)}.details{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin:15px 0 55px;color:var(--muted);font-size:12px}.details b{color:var(--green)}footer{border-top:1px solid var(--line);padding:19px 0;color:var(--muted);font-size:12px}.hidden{display:none!important}.badge{font-size:11px;padding:3px 8px;border-radius:5px;background:var(--sub);color:var(--accent)}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{width:min(100% - 24px,1160px)}.hero{padding:34px 0 22px}.cards{grid-template-columns:1fr}.folder{min-height:80px}.viewerbar{align-items:flex-start}.topin{min-height:64px}.brand small{font-size:10px}.topright .btn{padding:8px 11px}.frame-wrap iframe{min-height:480px}.hero h1{letter-spacing:0}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.folder{transition:none}.folder:hover{transform:none}}
+
+/* ===== Additions: file list, states, preview dialog, mode banner ===== */
+[dir="ltr"] .arr{transform:scaleX(-1)}
+.modebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:10px;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--muted);margin-top:-6px}
+.modebar b{color:var(--text)}
+.modebar.demo{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));background:color-mix(in srgb,var(--warn) 9%,var(--card))}
+.modebar.demo .dot{background:var(--warn)}
+.modebar .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:none}
+.modebar.off .dot{background:var(--bad)}
+.modebar .grow{flex:1;min-width:160px}
+.btn.sm{min-height:34px;padding:5px 11px;font-size:13px}
+.files{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:12px;background:var(--panel)}
+.file .name,.folder strong,.crumbs button,#sectionTitle,#pvTitle{unicode-bidi:plaintext}
+.files h3{margin:0;padding:11px 16px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);font-weight:600}
+.file{display:flex;align-items:center;gap:13px;padding:12px 16px;border-top:1px solid var(--line);min-width:0}
+.files h3+.file{border-top:0}
+.file .fico{flex:none;width:42px;height:42px;border-radius:9px;display:grid;place-items:center;font:800 10.5px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em;background:var(--sub);color:var(--accent);text-transform:uppercase}
+.fico.pdf{color:#e58a7d;background:color-mix(in srgb,#e58a7d 15%,var(--panel))}
+.fico.doc{color:#7fa8e8;background:color-mix(in srgb,#7fa8e8 15%,var(--panel))}
+.fico.ppt{color:#e5a35f;background:color-mix(in srgb,#e5a35f 15%,var(--panel))}
+.fico.xls{color:#6fbf8e;background:color-mix(in srgb,#6fbf8e 15%,var(--panel))}
+.fico.img{color:#b79be6;background:color-mix(in srgb,#b79be6 15%,var(--panel))}
+.file .copy{flex:1;min-width:0}
+.file .name{display:block;font-weight:650;line-height:1.45;overflow-wrap:anywhere;text-align:start}
+.file .meta{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--muted);font-size:12px;margin-top:2px}
+.file .meta .path{color:var(--accent)}
+.file .acts{display:flex;gap:6px;flex:none}
+.file button.name{background:none;border:0;padding:0;color:var(--text);cursor:pointer}
+.file button.name:hover{color:var(--accent)}
+.badge.demo{background:color-mix(in srgb,var(--warn) 18%,var(--panel));color:var(--warn)}
+.badge.lock{background:color-mix(in srgb,var(--bad) 15%,var(--panel));color:var(--bad)}
+.state{padding:38px 20px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted);display:grid;justify-items:center;gap:8px}
+.state .big{font-size:30px;line-height:1}
+.state strong{color:var(--text);font-size:15px}
+.state p{margin:0;max-width:520px}
+.state.bad{border-style:solid;border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.skel{min-height:96px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(90deg,var(--panel) 25%,var(--card) 50%,var(--panel) 75%);background-size:300% 100%;animation:sk 1.3s ease-in-out infinite}
+@keyframes sk{from{background-position:100% 0}to{background-position:0 0}}
+.results-note{color:var(--muted);font-size:13px;margin:-4px 0 12px}
+footer .wrap{display:flex;gap:10px;flex-wrap:wrap}
+footer .dev{margin-inline-start:auto}
+dialog.preview{padding:0;border:0;background:transparent;width:min(1100px,94vw);max-width:none;max-height:none;height:min(92dvh,900px);color:var(--text)}
+dialog.preview::backdrop{background:#03070cc4}
+dialog.preview .viewer{height:100%;display:flex;flex-direction:column;box-shadow:0 20px 60px var(--shadow)}
+dialog.preview .viewerbar{flex:none}
+dialog.preview .viewerbar>div:first-child{min-width:0;flex:1}
+dialog.preview .viewerbar strong{display:block;overflow-wrap:anywhere}
+dialog.preview .frame-wrap{flex:1;min-height:0;background:var(--card)}
+dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
+.frame-note{position:absolute;inset:auto 12px 12px 12px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:13px;color:var(--muted);box-shadow:0 8px 24px var(--shadow)}
+.frame-state{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:var(--card)}
+@media(max-width:600px){
+  dialog.preview{width:100vw;height:100dvh;max-height:100dvh;margin:0}
+  dialog.preview .viewer{border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom)}
+  .file{flex-wrap:wrap;padding:12px}
+  .file .acts{width:100%;padding-inline-start:55px}
+  .file .acts .btn{flex:1}
+  .search input{font-size:16px}
+  .topright{gap:6px}.topright .btn{white-space:nowrap;padding:8px 10px}.topright .lbl{display:none}
+}
+@media(prefers-reduced-motion:reduce){.skel{animation:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap topin"><a class="brand" href="index.html" data-t-title="home_title" title="العودة للرئيسية"><span class="mark">EE</span><span><strong data-t="committee">اللجنة العلمية</strong><small data-t="club">نادي الهندسة الكهربائية</small></span></a><div class="topright"><button id="lang" class="btn" type="button">EN</button><button id="theme" class="btn" type="button" data-t-title="theme_title" title="تبديل المظهر">☀︎ فاتح</button><a class="btn" href="index.html" data-t="home">الرئيسية ↗</a></div></div></header>
+<main class="wrap"><section class="hero"><span class="eyebrow">YIC ACADEMIC LIBRARY</span><h1 data-t="h1">المكتبة الأكاديمية</h1><p data-t="lead">اختر تخصصك، ثم المقرر ونوع المصدر. الملفات تُجلب من Google Drive وتُعرض وتُعاين هنا داخل المكتبة.</p></section>
+<div id="modebar" class="modebar" role="status"></div>
+<section data-t-aria="browse_aria" aria-label="تصفح المكتبة"><div class="toolbar"><label class="search"><input id="search" autocomplete="off" type="search" data-t-ph="search_ph" placeholder="ابحث برمز المقرر أو اسمه أو اسم الملف..." data-t-aria="search_aria" aria-label="بحث في المكتبة"></label><button type="button" class="btn" id="goBack" data-t="back">↩ رجوع</button></div><nav class="crumbs" id="crumbs" data-t-aria="crumbs_aria" aria-label="مسار المجلدات"></nav><div class="sectionline"><h2 id="sectionTitle" dir="auto">التخصصات</h2><span class="count" id="count"></span></div><p id="resultsNote" class="results-note hidden"></p><div id="cards" class="cards"></div><div id="files" class="files hidden"></div><div id="state" class="hidden"></div></section>
+<div class="warning" id="howto"></div><div class="details" id="details"></div>
+</main><footer><div class="wrap"><span data-t="footer">بوابة اللجنة العلمية · نادي الهندسة الكهربائية</span><span class="dev">Developed by AL-RASSASI</span></div></footer>
+
+<dialog id="preview" class="preview" aria-labelledby="pvTitle"><section class="viewer"><div class="viewerbar"><div><strong id="pvTitle"></strong><p id="pvMeta"></p></div><div class="view-actions"><a id="pvOpen" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="open_drive">فتح في Drive ↗</a><a id="pvDownload" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="download">تنزيل ↓</a><button id="pvClose" class="btn sm primary" type="button" data-t="close">إغلاق ✕</button></div></div><div class="frame-wrap" id="pvBody"></div></section></dialog>
+
+<script>
+'use strict';
+/* =====================================================================
+   CONFIGURATION — the only part you normally edit
+   ---------------------------------------------------------------------
+   MODE     'demo' : sample data built into this file (for previewing the
+                     interface). Nothing is fetched from Google.
+            'live' : real folders and files, read through your Google Apps
+                     Script web app (see apps-script/Code.gs + SETUP guide).
+   API_URL  The Apps Script web-app URL (ends with /exec). It is a public
+            endpoint, NOT a secret: no API keys or OAuth tokens live here.
+   ROOTS    The five department folders. Keep these IDs identical to
+            ROOT_FOLDERS in Code.gs — the backend refuses anything else.
+   BLOCKED  Folder/file names that are never shown, even if the backend
+            returned them (second line of defence; Code.gs filters first).
+   ===================================================================== */
+const CONFIG = {
+  MODE: 'live',
+  API_URL: 'https://script.google.com/macros/s/AKfycbzG7li4LSknw4fayEBGeEre9_N_iQyg3Ufs1vXRNp2bPsBSnn4Hmc-LO8aB96R7QvrW/exec',
+  REQUEST_TIMEOUT_MS: 25000,
+  PREVIEW_FALLBACK_MS: 12000,
+  ROOTS: [
+    {id:'1tTYloDY7RScDAApOMlxT_qdwFbMs5Az8', ar:'الهندسة الكهربائية',             en:'Electrical Engineering',        sub:'EE · Electrical Engineering'},
+    {id:'1fvnC8RDQKNupmP3cKimyTPQvIcL-51nm', ar:'تقنية القوى الكهربائية',          en:'Electrical Power Technology',   sub:'EPT · Electrical Power Technology'},
+    {id:'1ekjjn7udol0HOc_8TPhUgzwCxSpGC9uL', ar:'تقنية الإلكترونيات والاتصالات',   en:'Electronics & Communication',   sub:'ECT · Electronics & Communication'},
+    {id:'1HuKz2Ps1qxkd9wGey2pZEq89zDCPjaa_', ar:'تقنية الآلات الدقيقة والتحكم',    en:'Instrumentation & Control',     sub:'ICT · Instrumentation & Control'},
+    {id:'1LadMkd2tw3SYTmDJcDJnETwk99vf4rc0', ar:'تقنية الميكاترونيكس',             en:'Mechatronics',                  sub:'MCT · Mechatronics'}
+  ],
+  BLOCKED: [/^\s*00(\s|[-–_.]|$)/, /pending\s*review/i, /^[_.~]/, /\bprivate\b/i, /قيد\s*المراجعة/, /خاص/]
+};
+
+/* ===== Demo data =====================================================
+   Folder IDs below are the real ones from the original page (departments,
+   EE courses and their four categories). Every FILE is invented sample
+   data, marked demo:true and labelled "[DEMO]" — none of it exists on
+   Google Drive. A "00 – Pending Review" folder is included on purpose to
+   show that it is filtered out.                                        */
+const DEMO_COURSES = [
+  ['1IVp3Hx3WmhrofMMCNm8ulqE984H9Tbe7','EE202 – Electronics I',['1DdqhfU4_-T6h4kitX_4Dh9y-uMkJtadj','1dJl9JODlhgnomQ_DuZeZbh_mEx8bqU-p','1zwOaxKQE7_eL-2Y3fyhb_rcA7wsy5C2T','1MHzmhElMqbtkC0vCZVFTkmmvSw93d8xN']],
+  ['1KFNKlVwVH7ainF0lPLDa0tV219bC0Fz2','EE204 – Signals and Systems',['1ihr2X6e1wKd5YUwTuuPStJbnqQyxw_qt','1T2MtgyyEeuLPzgypbRTrL4TcPutGL7cT','1VulPnbGaqI5nXVQAzlTfT_f5O13pV_Ew','1SoxdUVzvxyrP07zz6I7iOs6alYPTY8Av']],
+  ['1BcaW2pWwJopTQydS6DPhe9bpk2otz2Ub','EE302 – Electrical Energy Engineering',['15EGGdlMB6-1gj_jnDqCloD65isgtqLfI','1gnkbyRT2_Cnj13nHqTkDJdo65_7zYNcM','1PjkSkZtupJnqfHTgorU4-ofOWGHc1I5l','18ejLI-0gHxkaiDX7jkkYhSOUp7IDsS7-']],
+  ['10PmMkBI9fASDneHCu30gopDd2d1y8RDy','EE304 – Control Systems',['1UT-7XWKcY2kymcDVmUcaLaF8gqOanuUM','13ARqkXaFNcYerlAfIjW3R-mQxaLK6zy5','1hHwuwAnyFhsbQ9j2iNqSUG-JGFeF2Itr','1eOjsEXPDhRIIf2GZ6-3cVN7yHtvTaGMa']]
+];
+const DEMO_CATS = ['01 – Lectures','02 – Summaries','03 – Assignments','04 – Quizzes & Exams'];
+function buildDemoIndex(){
+  const nodes = [], ee = CONFIG.ROOTS[0].id;
+  const day = (n) => new Date(Date.UTC(2026, 8, 1 + n, 9, 30)).toISOString();
+  let n = 0;
+  const file = (parent, name, mime, size, extra) => nodes.push(Object.assign({id:'demo-file-' + (++n), parent, kind:'file', name, mime, size, modified:day(n % 40), public:true, demo:true}, extra || {}));
+  DEMO_COURSES.forEach(([cid, cname, cats], ci) => {
+    const code = cname.split(' ')[0];
+    nodes.push({id:cid, parent:ee, kind:'folder', name:cname, modified:day(ci)});
+    cats.forEach((id, k) => nodes.push({id, parent:cid, kind:'folder', name:DEMO_CATS[k], modified:day(ci + k)}));
+    file(cats[0], `[DEMO] ${code} Lecture 01 - Introduction.pdf`, 'application/pdf', 1840000);
+    file(cats[0], `[DEMO] ${code} Lecture 02.pdf`, 'application/pdf', 2310000);
+    file(cats[0], `[DEMO] ${code} Lecture slides.pptx`, 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 5400000);
+    file(cats[1], `[DEMO] ${code} Summary sheet.pdf`, 'application/pdf', 640000);
+    file(cats[1], `[DEMO] ${code} Notes.docx`, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 220000);
+    if (ci !== 3) file(cats[2], `[DEMO] ${code} Assignment 1.pdf`, 'application/pdf', 410000);
+    if (ci === 1) {
+      file(cats[3], '[DEMO] EE204 Midterm Spring 26 (solution).pdf', 'application/pdf', 980000);
+      file(cats[3], '[DEMO] EE204 Formula sheet.png', 'image/png', 350000);
+      file(cats[3], '[DEMO] EE204 Restricted file (not shared).pdf', 'application/pdf', 300000, {public:false});
+    }
+  });
+  // Must never appear: filtered by isBlocked()
+  nodes.push({id:'demo-pending', parent:ee, kind:'folder', name:'00 – Pending Review', modified:day(3)});
+  file('demo-pending', '[DEMO] Unreviewed upload.pdf', 'application/pdf', 100000);
+  return {ok:true, demo:true, generated:new Date().toISOString(), nodes, errors:[]};
+}
+
+/* ===== Text ===== */
+const T = {
+  ar:{committee:'اللجنة العلمية',club:'نادي الهندسة الكهربائية',home:'الرئيسية ↗',home_title:'العودة للرئيسية',theme_title:'تبديل المظهر',light:'☀︎ فاتح',dark:'☾ داكن',lang:'EN',h1:'المكتبة الأكاديمية',
+    lead:'اختر تخصصك، ثم المقرر ونوع المصدر. الملفات تُجلب من Google Drive وتُعرض وتُعاين هنا داخل المكتبة.',
+    browse_aria:'تصفح المكتبة',search_ph:'ابحث برمز المقرر أو اسمه أو اسم الملف...',search_aria:'بحث في المكتبة',crumbs_aria:'مسار المجلدات',back:'↩ رجوع',
+    root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':`${n} مجلدات`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':`${n} ملفات`,
+    browse:'تصفح المجلدات',open_folder:'عرض المحتويات',files_h:'الملفات',
+    preview:'معاينة',open:'فتح ↗',open_drive:'فتح في Drive ↗',download:'تنزيل ↓',close:'إغلاق ✕',
+    results:(q,a,b)=>`نتائج البحث عن «${q}»: ${a} · ${b}`,search_h:'نتائج البحث',
+    demo_bar:'<b>وضع تجريبي:</b> الملفات المعروضة أمثلة وهمية للتجربة فقط وليست من Google Drive. المجلدات الرئيسية ومعرّفاتها حقيقية.',
+    live_bar:(t)=>`<b>متصل بـ Google Drive</b> · آخر تحديث للفهرس ${t}`,off_bar:'<b>غير متصل</b> · لم يتم تحميل بيانات Google Drive',
+    refresh:'↻ تحديث',
+    loading:'جارٍ تحميل المكتبة…',
+    empty_t:'المجلد فارغ',empty_p:'لا توجد ملفات منشورة هنا بعد. ستظهر تلقائيًا عند رفعها إلى Google Drive.',
+    nores_t:'لا توجد نتائج',nores_p:'جرّب رمز المقرر (مثل EE204) أو جزءًا من اسم الملف.',
+    net_t:'تعذّر الاتصال بالمكتبة',net_p:'تحقق من الاتصال بالإنترنت ثم أعد المحاولة.',
+    denied_t:'لا توجد صلاحية للوصول',denied_p:'هذا المحتوى غير متاح في المكتبة العامة.',
+    cfg_t:'ربط Google Drive غير مُعدّ',cfg_p:'الصفحة في الوضع المباشر لكن عنوان الخادم (API_URL) فارغ. راجع دليل الإعداد.',
+    bad_t:'استجابة غير متوقعة من الخادم',bad_p:'الخادم ردّ ببيانات غير صالحة. تأكد من نشر Code.gs كتطبيق ويب.',
+    retry:'إعادة المحاولة',home_btn:'العودة للتخصصات',
+    dept_unavailable:'غير متاح حاليًا',
+    restricted:'غير منشور',restricted_t:'هذا الملف غير منشور للعامة',restricted_p:'لا يمكن معاينته داخل المكتبة لأن مشاركته مقيّدة على Google Drive.',
+    demo_badge:'تجريبي',
+    pv_demo_note:'معاينة تجريبية مولّدة داخل الصفحة — ليست ملفًا حقيقيًا.',
+    pv_slow:'إذا لم تظهر المعاينة، قد تكون Google منعت العرض المدمج لهذا الملف.',
+    pv_noprev_t:'المعاينة غير متاحة لهذا النوع في الوضع التجريبي',pv_noprev_p:'في الوضع المباشر تُعرض ملفات PDF والصور ومستندات Office عبر معاينة Google.',
+    howto:'<strong>كيف تعمل المكتبة:</strong> تُقرأ المجلدات والملفات من Google Drive عبر خادم وسيط آمن (Google Apps Script)، وتُعرض هنا مباشرة دون الانتقال إلى Drive. المعاينة تتطلب أن يكون الملف مشاركًا «لأي شخص لديه الرابط». المجلدات الخاصة مثل «00 – Pending Review» لا تظهر في المكتبة العامة.',
+    footer:'بوابة اللجنة العلمية · نادي الهندسة الكهربائية',
+    d_demo:'بيانات تجريبية',d_live:'بيانات مباشرة من Google Drive',d_off:'غير متصل',
+    kb:'ك.ب',mb:'م.ب'},
+  en:{committee:'Scientific Committee',club:'Electrical Engineering Club',home:'Home ↗',home_title:'Back to home',theme_title:'Toggle theme',light:'☀︎ Light',dark:'☾ Dark',lang:'عربي',h1:'Academic Library',
+    lead:'Pick your department, then the course and resource type. Files are fetched from Google Drive and browsed and previewed right here in the library.',
+    browse_aria:'Browse the library',search_ph:'Search by course code, course name, or file name…',search_aria:'Search the library',crumbs_aria:'Folder path',back:'↩ Back',
+    root:'Academic Library',depts:'Departments',folders:n=>`${n} folder${n===1?'':'s'}`,filesN:n=>`${n} file${n===1?'':'s'}`,
+    browse:'Browse folders',open_folder:'View contents',files_h:'Files',
+    preview:'Preview',open:'Open ↗',open_drive:'Open in Drive ↗',download:'Download ↓',close:'Close ✕',
+    results:(q,a,b)=>`Results for “${q}”: ${a} · ${b}`,search_h:'Search results',
+    demo_bar:'<b>Demo mode:</b> the files shown are invented samples for trying the interface — they are not from Google Drive. Top-level folders and their IDs are real.',
+    live_bar:(t)=>`<b>Connected to Google Drive</b> · index updated ${t}`,off_bar:'<b>Offline</b> · Google Drive data not loaded',
+    refresh:'↻ Refresh',
+    loading:'Loading the library…',
+    empty_t:'This folder is empty',empty_p:'Nothing has been published here yet. Files appear automatically once uploaded to Google Drive.',
+    nores_t:'No results',nores_p:'Try a course code (e.g. EE204) or part of a file name.',
+    net_t:'Couldn’t reach the library',net_p:'Check your internet connection and try again.',
+    denied_t:'Access denied',denied_p:'This content isn’t available in the public library.',
+    cfg_t:'Google Drive connection not configured',cfg_p:'The page is in live mode but API_URL is empty. See the setup guide.',
+    bad_t:'Unexpected server response',bad_p:'The server returned invalid data. Make sure Code.gs is deployed as a web app.',
+    retry:'Try again',home_btn:'Back to departments',
+    dept_unavailable:'Currently unavailable',
+    restricted:'Not published',restricted_t:'This file isn’t shared publicly',restricted_p:'It can’t be previewed in the library because its Google Drive sharing is restricted.',
+    demo_badge:'Demo',
+    pv_demo_note:'Demo preview generated in the page — not a real file.',
+    pv_slow:'If the preview doesn’t appear, Google may have blocked embedding for this file.',
+    pv_noprev_t:'Preview isn’t available for this type in demo mode',pv_noprev_p:'In live mode PDFs, images and Office files are shown through Google’s viewer.',
+    howto:'<strong>How it works:</strong> folders and files are read from Google Drive through a secure proxy (Google Apps Script) and shown here directly, without sending you to Drive. Previews require the file to be shared “Anyone with the link”. Private folders such as “00 – Pending Review” never appear in the public library.',
+    footer:'Scientific Committee Portal · Electrical Engineering Club',
+    d_demo:'Demo data',d_live:'Live data from Google Drive',d_off:'Offline',
+    kb:'KB',mb:'MB'}
+};
+
+/* ===== State ===== */
+const $ = (id) => document.getElementById(id);
+let lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
+const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
+const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map() };
+let currentId = 'root', previewTimer = null, previewUrl = null;
+
+/* ===== Helpers ===== */
+const norm = (s) => String(s || '').toLowerCase().replace(/[\s\-–—_·.()[\]]/g, '');
+const isBlocked = (name) => CONFIG.BLOCKED.some((r) => r.test(String(name || '')));
+const ROOT_IDS = new Set(CONFIG.ROOTS.map((r) => r.id));
+function el(tag, attrs, ...children){
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  for (const c of children) if (c != null) e.append(c);
+  return e;
+}
+function ext(n){ const m = /\.([a-z0-9]{1,5})$/i.exec(n.name || ''); if (m) return m[1].toLowerCase();
+  const map = {'application/pdf':'pdf','application/vnd.google-apps.document':'gdoc','application/vnd.google-apps.presentation':'gslides','application/vnd.google-apps.spreadsheet':'gsheet'}; return map[n.mime] || 'file'; }
+function kindClass(x){ if (x === 'pdf') return 'pdf'; if (/^(docx?|gdoc|odt|rtf|txt)$/.test(x)) return 'doc'; if (/^(pptx?|gslides|key|odp)$/.test(x)) return 'ppt'; if (/^(xlsx?|csv|gsheet|ods)$/.test(x)) return 'xls'; if (/^(png|jpe?g|gif|webp|svg|heic)$/.test(x)) return 'img'; return ''; }
+function fmtSize(b){ if (!b) return ''; return b < 1e6 ? Math.max(1, Math.round(b / 1e3)) + ' ' + t('kb') : (b / 1e6).toFixed(1) + ' ' + t('mb'); }
+function fmtDate(iso){ if (!iso) return ''; try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-ca-gregory-nu-latn' : 'en-GB', {year:'numeric', month:'short', day:'numeric'}).format(new Date(iso)); } catch (e) { return iso.slice(0, 10); } }
+function fmtTime(iso){ try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-ca-gregory-nu-latn' : 'en-GB', {hour:'2-digit', minute:'2-digit', day:'numeric', month:'short'}).format(new Date(iso)); } catch (e) { return ''; } }
+const deptOf = (id) => CONFIG.ROOTS.find((r) => r.id === id);
+function titleOf(id){ if (id === 'root') return t('root'); const d = deptOf(id); if (d) return d[lang]; const n = store.byId.get(id); return n ? n.name : ''; }
+function pathTo(id){ const out = []; let cur = id, guard = 0; while (cur && cur !== 'root' && guard++ < 30) { out.unshift(cur); if (ROOT_IDS.has(cur)) break; const n = store.byId.get(cur); cur = n && n.parent; } return ['root', ...out]; }
+const driveFileUrl = (id) => 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/view';
+const drivePreviewUrl = (id) => 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/preview';
+const driveDownloadUrl = (id) => 'https://drive.google.com/uc?export=download&id=' + encodeURIComponent(id);
+
+/* ===== Data loading ===== */
+function ingest(index){
+  if (!index || index.ok !== true || !Array.isArray(index.nodes)) throw Object.assign(new Error('bad'), {code:'bad'});
+  store.byId.clear(); store.kids.clear(); store.rootErrors.clear();
+  const accepted = new Map();
+  for (const n of index.nodes) {
+    if (!n || typeof n.id !== 'string' || typeof n.parent !== 'string' || (n.kind !== 'file' && n.kind !== 'folder')) continue;
+    if (isBlocked(n.name)) continue;
+    accepted.set(n.id, n);
+  }
+  // Keep only nodes whose whole ancestry leads to a configured root through accepted folders
+  const ok = (n, guard = 0) => guard < 30 && (ROOT_IDS.has(n.parent) || (accepted.has(n.parent) && accepted.get(n.parent).kind === 'folder' && ok(accepted.get(n.parent), guard + 1)));
+  for (const n of accepted.values()) if (!ROOT_IDS.has(n.id) && ok(n)) {
+    store.byId.set(n.id, n);
+    if (!store.kids.has(n.parent)) store.kids.set(n.parent, []);
+    store.kids.get(n.parent).push(n);
+  }
+  for (const list of store.kids.values()) list.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'folder' ? -1 : 1) || a.name.localeCompare(b.name, undefined, {numeric:true}));
+  for (const e of index.errors || []) if (e && ROOT_IDS.has(e.root)) store.rootErrors.set(e.root, e.error || 'access');
+  store.generated = index.generated || new Date().toISOString();
+  store.demo = !!index.demo;
+}
+async function load(refresh){
+  store.status = 'loading'; store.error = null; render();
+  try {
+    if (CONFIG.MODE === 'demo') { await new Promise((r) => setTimeout(r, 350)); ingest(buildDemoIndex()); }
+    else {
+      if (!CONFIG.API_URL) throw Object.assign(new Error('config'), {code:'config'});
+      const url = CONFIG.API_URL + (CONFIG.API_URL.includes('?') ? '&' : '?') + 'action=index' + (refresh ? '&refresh=1' : '');
+      const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), CONFIG.REQUEST_TIMEOUT_MS);
+      let res;
+      try { res = await fetch(url, {signal:ctrl.signal, credentials:'omit', redirect:'follow'}); }
+      catch (e) { throw Object.assign(new Error('network'), {code:'network'}); }
+      finally { clearTimeout(timer); }
+      if (!res.ok) throw Object.assign(new Error('http'), {code: res.status === 403 || res.status === 401 ? 'denied' : 'network'});
+      let data; try { data = await res.json(); } catch (e) { throw Object.assign(new Error('bad'), {code:'bad'}); }
+      if (data && data.ok === false) throw Object.assign(new Error(data.error || 'bad'), {code: data.error === 'access' ? 'denied' : 'bad'});
+      ingest(data);
+    }
+    store.status = 'ready';
+  } catch (e) { store.status = 'error'; store.error = e.code || 'network'; }
+  route();
+}
+
+/* ===== Routing (hash keeps the phone's back button working) ===== */
+function route(){
+  const m = /^#\/f\/([\w-]{1,100})$/.exec(location.hash);
+  currentId = m ? m[1] : 'root';
+  render();
+}
+function go(id){ const h = id === 'root' ? '#/' : '#/f/' + id; if (location.hash !== h) location.hash = h; else route(); }
+window.addEventListener('hashchange', () => { $('search').value = ''; route(); });
+
+/* ===== Rendering ===== */
+function folderCard(id, name, sub, extra){
+  return el('button', {type:'button', class:'folder', onclick:() => { go(id); $('sectionTitle').scrollIntoView({block:'start', behavior:'smooth'}); }},
+    el('span', {class:'ico', 'aria-hidden':'true', text:'▱'}),
+    el('span', {class:'copy'}, el('strong', {text:name, dir:'auto'}), el('small', {text:sub, dir:'auto'}), extra || null),
+    el('span', {class:'arr', 'aria-hidden':'true', text:'‹'}));
+}
+function fileRow(n, withPath){
+  const x = ext(n), meta = el('span', {class:'meta'});
+  if (withPath) { const p = pathTo(n.parent).slice(1).map(titleOf).join(' › '); meta.append(el('span', {class:'path', text:p, dir:'auto'})); }
+  meta.append(el('span', {text:x.toUpperCase()}));
+  if (n.size) meta.append(el('span', {text:fmtSize(n.size)}));
+  if (n.modified) meta.append(el('span', {text:fmtDate(n.modified)}));
+  if (n.demo) meta.append(el('span', {class:'badge demo', text:t('demo_badge')}));
+  if (n.public === false) meta.append(el('span', {class:'badge lock', text:t('restricted')}));
+  const acts = el('span', {class:'acts'},
+    el('button', {type:'button', class:'btn sm', onclick:() => openPreview(n)}, t('preview')),
+    n.demo ? null : el('a', {class:'btn sm', href:driveFileUrl(n.id), target:'_blank', rel:'noopener noreferrer', 'aria-label':t('open_drive') + ' ' + n.name}, t('open')));
+  return el('div', {class:'file'},
+    el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
+    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta),
+    acts);
+}
+function stateBox(kind, icon, title, text, actions){
+  return el('div', {class:'state' + (kind === 'bad' ? ' bad' : ''), role: kind === 'bad' ? 'alert' : 'status'},
+    el('span', {class:'big', 'aria-hidden':'true', text:icon}), el('strong', {text:title}), el('p', {text:text}), actions || null);
+}
+function renderModebar(){
+  const mb = $('modebar'); mb.replaceChildren();
+  let cls = 'modebar', html;
+  if (CONFIG.MODE === 'demo') { cls += ' demo'; html = t('demo_bar'); }
+  else if (store.status === 'ready') html = t('live_bar', fmtTime(store.generated));
+  else { cls += ' off'; html = t('off_bar'); }
+  mb.className = cls;
+  const txt = el('span', {class:'grow'}); txt.innerHTML = html; // fixed strings only, no Drive data
+  mb.append(el('span', {class:'dot', 'aria-hidden':'true'}), txt);
+  if (CONFIG.MODE === 'live' && store.status !== 'loading') mb.append(el('button', {type:'button', class:'btn sm', id:'refresh', onclick:() => load(true)}, t('refresh')));
+  const d = $('details'); d.replaceChildren(
+    el('span', {}, el('b', {text:'●'}), ' ', CONFIG.MODE === 'demo' ? t('d_demo') : store.status === 'ready' ? t('d_live') : t('d_off')),
+    el('span', {text:'AL-RASSASI · Academic Tools'}));
+}
+function render(){
+  renderModebar();
+  $('howto').innerHTML = t('howto'); // fixed string
+  const cards = $('cards'), files = $('files'), state = $('state'), note = $('resultsNote');
+  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren();
+  cards.classList.remove('hidden'); files.classList.add('hidden'); state.classList.add('hidden'); note.classList.add('hidden');
+  const q = $('search').value.trim();
+
+  // Breadcrumbs
+  const crumbs = $('crumbs'); crumbs.replaceChildren();
+  const trail = store.status === 'ready' && (currentId === 'root' || store.byId.has(currentId) || ROOT_IDS.has(currentId)) ? pathTo(currentId) : ['root'];
+  trail.forEach((id, i) => {
+    if (i) crumbs.append(el('span', {class:'slash', text:'/'}));
+    crumbs.append(el('button', {type:'button', dir:'auto', 'aria-current': i === trail.length - 1 ? 'page' : 'false', onclick:() => go(id)}, titleOf(id)));
+  });
+
+  const showState = (...a) => { cards.classList.add('hidden'); state.classList.remove('hidden'); state.append(stateBox(...a)); };
+  const retry = el('button', {type:'button', class:'btn primary', onclick:() => load(true)}, t('retry'));
+
+  if (store.status === 'loading') {
+    $('sectionTitle').textContent = t('loading'); $('count').textContent = '';
+    for (let i = 0; i < 6; i++) cards.append(el('div', {class:'skel', 'aria-hidden':'true'}));
+    cards.setAttribute('aria-busy', 'true'); return;
+  }
+  cards.removeAttribute('aria-busy');
+  if (store.status === 'error') {
+    $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
+    const map = {network:['bad','⚠︎',t('net_t'),t('net_p'),retry], denied:['bad','🔒',t('denied_t'),t('denied_p'),null], config:['bad','⚙︎',t('cfg_t'),t('cfg_p'),null], bad:['bad','⚠︎',t('bad_t'),t('bad_p'),retry]};
+    return showState(...(map[store.error] || map.network));
+  }
+
+  // Search across everything published
+  if (q) {
+    const nq = norm(q);
+    const hit = (n) => norm(n.name).includes(nq) || (n.kind === 'file' && norm(pathTo(n.parent).map(titleOf).join(' ')).includes(nq));
+    const all = [...store.byId.values()];
+    const fol = all.filter((n) => n.kind === 'folder' && norm(n.name).includes(nq));
+    const fil = all.filter((n) => n.kind === 'file' && hit(n));
+    const deps = CONFIG.ROOTS.filter((r) => norm(r.ar + r.en + r.sub).includes(nq));
+    $('sectionTitle').textContent = t('search_h');
+    $('count').textContent = t('folders', fol.length + deps.length) + ' · ' + t('filesN', fil.length);
+    deps.forEach((r) => cards.append(folderCard(r.id, r[lang], r.sub)));
+    fol.slice(0, 60).forEach((n) => cards.append(folderCard(n.id, n.name, pathTo(n.parent).slice(1).map(titleOf).join(' › '))));
+    if (fil.length) { files.classList.remove('hidden'); fil.slice(0, 200).forEach((n) => files.append(fileRow(n, true))); }
+    if (!fol.length && !fil.length && !deps.length) showState('', '⌕', t('nores_t'), t('nores_p'));
+    return;
+  }
+
+  // Root: departments
+  if (currentId === 'root') {
+    $('sectionTitle').textContent = t('depts'); $('count').textContent = t('folders', CONFIG.ROOTS.length);
+    CONFIG.ROOTS.forEach((r) => {
+      const err = store.rootErrors.get(r.id);
+      cards.append(folderCard(r.id, r[lang], r.sub, err ? el('span', {class:'badge lock', text:t('dept_unavailable')}) : null));
+    });
+    return;
+  }
+
+  // Unknown or filtered folder: never reveal whether it exists
+  if (!ROOT_IDS.has(currentId) && !(store.byId.has(currentId) && store.byId.get(currentId).kind === 'folder')) {
+    $('sectionTitle').textContent = t('denied_t'); $('count').textContent = '';
+    return showState('bad', '🔒', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
+  }
+  if (ROOT_IDS.has(currentId) && store.rootErrors.has(currentId)) {
+    $('sectionTitle').textContent = titleOf(currentId); $('count').textContent = '';
+    return showState('bad', '🔒', t('denied_t'), t('dept_unavailable'), retry);
+  }
+
+  const kids = store.kids.get(currentId) || [];
+  const fol = kids.filter((n) => n.kind === 'folder'), fil = kids.filter((n) => n.kind === 'file');
+  $('sectionTitle').textContent = titleOf(currentId);
+  $('count').textContent = [fol.length ? t('folders', fol.length) : '', fil.length ? t('filesN', fil.length) : ''].filter(Boolean).join(' · ');
+  fol.forEach((n) => { const sub = (store.kids.get(n.id) || []); const nf = sub.filter((x) => x.kind === 'folder').length, nfi = sub.length - nf;
+    cards.append(folderCard(n.id, n.name, nf ? t('folders', nf) + (nfi ? ' · ' + t('filesN', nfi) : '') : nfi ? t('filesN', nfi) : t('open_folder'))); });
+  if (!fol.length) cards.classList.add('hidden');
+  if (fil.length) { files.classList.remove('hidden'); files.append(el('h3', {text:t('files_h')})); fil.forEach((n) => files.append(fileRow(n, false))); }
+  if (!kids.length) showState('', '📂', t('empty_t'), t('empty_p'));
+}
+
+/* ===== Preview ===== */
+function demoDoc(n){
+  // Demo preview is a small HTML page (works on every browser, unlike PDF-in-iframe on Android).
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ar = lang === 'ar';
+  return '<!doctype html><html lang="' + lang + '" dir="' + (ar ? 'rtl' : 'ltr') + '"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<style>body{margin:0;background:#e9e8e5;font:15px/1.7 system-ui,sans-serif;color:#292e34;padding:24px}.page{max-width:720px;margin:auto;background:#fff;border-radius:6px;padding:40px 36px;box-shadow:0 2px 12px #0002}' +
+    '.tag{display:inline-block;background:#f4e7cf;color:#7a5414;font-weight:700;font-size:12px;padding:3px 10px;border-radius:5px}h1{font-size:22px;margin:16px 0 6px;unicode-bidi:plaintext}p{color:#55606b}.bar{height:10px;background:#eceae5;border-radius:4px;margin:14px 0}.bar.s{width:70%}.bar.m{width:85%}</style>' +
+    '<div class="page"><span class="tag">' + (ar ? 'معاينة تجريبية' : 'DEMO PREVIEW') + '</span><h1>' + esc(n.name) + '</h1><p>' +
+    (ar ? 'هذا محتوى تجريبي مولّد داخل الصفحة وليس ملفًا حقيقيًا من Google Drive. في الوضع المباشر يظهر الملف الحقيقي هنا عبر عارض Google.' : 'This is generated sample content, not a real Google Drive file. In live mode the real file appears here through Google’s viewer.') +
+    '</p><div class="bar"></div><div class="bar m"></div><div class="bar s"></div><div class="bar"></div><div class="bar m"></div></div></html>';
+}
+function openPreview(n){
+  const dlg = $('preview'), body = $('pvBody'), x = ext(n);
+  clearTimeout(previewTimer); if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
+  body.replaceChildren();
+  $('pvTitle').textContent = n.name; $('pvTitle').dir = 'auto';
+  $('pvMeta').textContent = [x.toUpperCase(), fmtSize(n.size), fmtDate(n.modified), n.demo ? t('pv_demo_note') : ''].filter(Boolean).join(' · ');
+  const open = $('pvOpen'), dl = $('pvDownload');
+  open.classList.toggle('hidden', !!n.demo); dl.classList.toggle('hidden', !!n.demo || /^g(doc|slides|sheet)$/.test(x) || n.public === false);
+  open.href = n.demo ? '#' : driveFileUrl(n.id); dl.href = n.demo ? '#' : driveDownloadUrl(n.id);
+  const center = (icon, title, text) => el('div', {class:'frame-state'}, stateBox('', icon, title, text));
+  if (n.public === false) body.append(center('🔒', t('restricted_t'), t('restricted_p')));
+  else if (n.demo) body.append(el('iframe', {srcdoc:demoDoc(n), title:n.name, sandbox:''}));
+  else {
+    const frame = el('iframe', {src:drivePreviewUrl(n.id), title:n.name, allow:'autoplay', referrerpolicy:'strict-origin-when-cross-origin'});
+    const slow = el('div', {class:'frame-note hidden', role:'status'}, el('span', {text:t('pv_slow')}), el('a', {class:'btn sm primary', href:driveFileUrl(n.id), target:'_blank', rel:'noopener noreferrer'}, t('open_drive')));
+    frame.addEventListener('load', () => clearTimeout(previewTimer));
+    previewTimer = setTimeout(() => slow.classList.remove('hidden'), CONFIG.PREVIEW_FALLBACK_MS);
+    body.append(frame, slow);
+  }
+  if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
+}
+function closePreview(){ const dlg = $('preview'); clearTimeout(previewTimer); $('pvBody').replaceChildren(); if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; } if (dlg.open) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); } }
+$('pvClose').addEventListener('click', closePreview);
+$('preview').addEventListener('close', () => { clearTimeout(previewTimer); $('pvBody').replaceChildren(); });
+$('preview').addEventListener('click', (e) => { if (e.target === e.currentTarget) closePreview(); });
+
+/* ===== Language & theme ===== */
+function applyLang(){
+  const h = document.documentElement; h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.title = lang === 'ar' ? 'المكتبة الأكاديمية | اللجنة العلمية' : 'Academic Library | Scientific Committee';
+  document.querySelectorAll('[data-t]').forEach((e) => (e.textContent = t(e.dataset.t)));
+  document.querySelectorAll('[data-t-ph]').forEach((e) => (e.placeholder = t(e.dataset.tPh)));
+  document.querySelectorAll('[data-t-aria]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.tAria)));
+  document.querySelectorAll('[data-t-title]').forEach((e) => (e.title = t(e.dataset.tTitle)));
+  $('lang').textContent = t('lang'); $('lang').setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
+  setTheme(document.documentElement.dataset.theme, true);
+}
+function setTheme(v, quiet){
+  document.documentElement.dataset.theme = v;
+  const lb = v === 'dark' ? t('light') : t('dark'); $('theme').replaceChildren(el('span', {'aria-hidden':'true', text:lb.slice(0, 2)}), el('span', {class:'lbl', text:lb.slice(2).trim()})); $('theme').setAttribute('aria-label', lb.slice(2).trim());
+  const mc = document.querySelector('meta[name=theme-color]'); if (mc) mc.content = v === 'dark' ? '#0b0e13' : '#e9e8e5';
+  if (!quiet) try { localStorage.setItem('ee_library_theme', v); } catch (e) {}
+}
+$('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+$('lang').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; try { localStorage.setItem('ee_library_lang', lang); } catch (e) {} applyLang(); render(); };
+$('goBack').onclick = () => { if ($('search').value) { $('search').value = ''; render(); return; } const tr = pathTo(currentId); if (currentId !== 'root' && tr.length > 1) go(tr[tr.length - 2]); else location.href = 'index.html'; };
+let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(render, 120); });
+document.addEventListener('keydown', (e) => { if (e.key === '/' && document.activeElement !== $('search') && !$('preview').open) { e.preventDefault(); $('search').focus(); } });
+
+applyLang();
+load(false);
+</script></body></html>
