@@ -611,6 +611,7 @@
 
 
 
+<script src="assets/js/progress.js"></script>
 <script>
 
 const wrapper = document.getElementById('main-wrapper');
@@ -1021,35 +1022,11 @@ function drawConnections() {
 // دالة حفظ الإنجاز في ذاكرة المتصفح
 
 function saveProgress() {
-
-  const completedIds = Array.from(document.querySelectorAll('.card.completed')).map(c => c.id);
-
-  localStorage.setItem('ee_completed_courses', JSON.stringify(completedIds));
-
+  EEProgress.save('ect', document.querySelectorAll('.card'));
 }
 
-
-
-// دالة تحميل الإنجاز المحفوظ
-
 function loadProgress() {
-
-  const saved = localStorage.getItem('ee_completed_courses');
-
-  if (saved) {
-
-    const ids = JSON.parse(saved);
-
-    ids.forEach(id => {
-
-      const card = document.getElementById(id);
-
-      if (card) card.classList.add('completed');
-
-    });
-
-  }
-
+  EEProgress.load('ect', document.querySelectorAll('.card'));
 }
 
 

@@ -3,6 +3,17 @@ const SUPABASE_URL = "https://zakzkcxyxntvlsvywmii.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpha3prY3h5eG50dmxzdnl3bWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwODY1NDIsImV4cCI6MjA4NDY2MjU0Mn0.hApvnHyFsm5SBPUWdJ0AHrjMmxYrihXhEq9P_Knp-vY";
 const supa = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Escape text and quoted attributes before inserting database values into markup.
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+})[char]);
+const safeResourceUrl = value => {
+    try {
+        const url = new URL(value);
+        return ['https:', 'http:'].includes(url.protocol) ? url.href : '#';
+    } catch { return '#'; }
+};
+
 let allRows = [];
 let currentFilter = "pending";
 let currentUser = { id: "", name: "", isSuper: false };
@@ -84,7 +95,7 @@ async function checkUser() {
 
     document.getElementById("whoami").innerHTML = `
         <p class="text-blue-400 text-[9px] font-black uppercase tracking-widest">${currentUser.isSuper ? '👑 Head Admin' : '🛡️ Reviewer'}</p>
-        <p class="text-white font-black text-xl leading-none mt-1">${currentUser.name}</p>`;
+        <p class="text-white font-black text-xl leading-none mt-1">${escapeHtml(currentUser.name)}</p>`;
     
     loadData();
 }
@@ -105,7 +116,7 @@ window.showTeamWork = () => {
             row.status === 'approved' ? acc[row.processed_by_name].done++ : acc[row.processed_by_name].working++;
         }
         return acc;
-    }, {});
+    }, Object.create(null));
 
     let html = `
         <div class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[600] p-4 flex items-center justify-center animate-in fade-in duration-300">
@@ -116,7 +127,7 @@ window.showTeamWork = () => {
     for (const name in summary) {
         html += `
             <div class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/5">
-                <div class="font-bold text-white">${name}</div>
+                <div class="font-bold text-white">${escapeHtml(name)}</div>
                 <div class="flex gap-4 text-center text-xs">
                     <div><p class="text-emerald-400 font-black mb-1">تم</p><p class="text-xl font-black text-white">${summary[name].done}</p></div>
                     <div><p class="text-amber-400 font-black mb-1">حجز</p><p class="text-xl font-black text-white">${summary[name].working}</p></div>
@@ -131,13 +142,23 @@ window.showTeamWork = () => {
 // 6. ميزة الحذف (المراجع يطلب والمدير ينفذ)
 window.requestDelete = async (id) => {
     if (!confirm("هل تريد إرسال طلب حذف للمدير؟")) return;
-    await supa.from("resources").update({ status: 'delete_requested' }).eq("id", id);
+    const { data, error } = await supa.from("resources").update({ status: 'delete_requested' }).eq("id", id).select('id');
+    if (error || !data?.length) return notify("تعذر إرسال طلب الحذف", "error");
     notify("تم إرسال الطلب للمدير", "info"); loadData();
 };
 
 window.confirmFinalDelete = async (id) => {
     if (!confirm("⚠️ سيتم حذف الملف نهائياً، هل أنت متأكد؟")) return;
-    await supa.from("resources").delete().eq("id", id);
+    if (!currentUser.isSuper) return notify("هذه العملية متاحة للمدير فقط", "error");
+    const row = allRows.find(item => String(item.id) === String(id));
+    if (!row) return notify("لم يتم العثور على الملف", "error");
+    // Keep the record available for retry if storage removal fails.
+    if (row.file_path) {
+        const { error } = await supa.storage.from("ee-resources").remove([row.file_path]);
+        if (error) return notify("تعذر حذف الملف. يمكنك المحاولة مجدداً", "error");
+    }
+    const { data, error } = await supa.from("resources").delete().eq("id", id).select('id');
+    if (error || !data?.length) return notify("تعذر حذف السجل. أعد المحاولة لإكمال الحذف", "error");
     notify("تم الحذف بنجاح", "success"); loadData();
 };
 
@@ -148,10 +169,14 @@ window.updateRowStatus = async (id, type) => {
     else if (type === 'release') updates = { status: 'pending', processed_by_user_id: null, processed_by_name: null };
     else if (type === 'approved') updates = { status: 'approved' };
     const { error } = await supa.from("resources").update(updates).eq("id", id);
-    if (!error) { notify("تم التحديث بنجاح", "success"); loadData(); }
+    if (error) return notify("تعذر تحديث الحالة", "error");
+    notify("تم التحديث بنجاح", "success"); loadData();
 };
 
-window.updateNote = async (id, note) => { await supa.from("resources").update({ admin_note: note }).eq("id", id); };
+window.updateNote = async (id, note) => {
+    const { error } = await supa.from("resources").update({ admin_note: note }).eq("id", id);
+    if (error) notify("تعذر حفظ الملاحظة", "error");
+};
 
 // 8. الرندرة والتنسيق (تعديل منطق الفلترة ليظهر لك طلب الحذف)
 function render() {
@@ -171,12 +196,15 @@ function render() {
     
     document.getElementById("totalCount").textContent = filtered.length;
 
-    const items = filtered.map(row => {
-        const canManage = (row.processed_by_user_id === currentUser.id) || currentUser.isSuper;
-        const rId = `'${row.id}'`;
+    const items = filtered.map(source => {
+        const row = Object.fromEntries(Object.entries(source).map(([key, value]) =>
+            [key, typeof value === 'string' ? escapeHtml(value) : value]));
+        row.file_url = escapeHtml(safeResourceUrl(source.file_url));
+        const canManage = (source.processed_by_user_id === currentUser.id) || currentUser.isSuper;
+        const rId = escapeHtml(JSON.stringify(String(source.id)));
         const typeStyle = { pdf: 'bg-rose-500/10 text-rose-500 border-rose-500/20', png: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' }[row.file_type?.toLowerCase()] || 'bg-slate-500/10 text-slate-400 border-slate-500/20';
 
-        let btns = `<a href="${row.file_url}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl text-[10px] font-black transition-all text-center">فتح</a>`;
+        let btns = `<a href="${row.file_url}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl text-[10px] font-black transition-all text-center">فتح</a>`;
         
         // منطق أزرار الحذف
         if (row.status === 'delete_requested' && currentUser.isSuper) {

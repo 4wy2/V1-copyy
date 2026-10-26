@@ -169,7 +169,7 @@ function addCategory() {
     const name = catName.value.trim();
     const weight = Number(catWeight.value);
 
-    if (!name || weight <= 0) return alert("بيانات غير صحيحة");
+    if (!name || !Number.isFinite(weight) || weight <= 0) return alert("بيانات غير صحيحة");
 
     const course = db[currentSemester].courses[currentCourse];
     const used = course.categories.reduce((a,c)=>a+c.weight,0);
@@ -229,10 +229,18 @@ function renderCourse() {
 /* ================== ITEMS ================== */
 function addItem(i) {
     const name = prompt("اسم المهمة");
-    const score = Number(prompt("درجتك"));
-    const max = Number(prompt("من كم"));
+    if (!name?.trim()) return;
+    const scoreInput = prompt("درجتك");
+    if (scoreInput === null || !scoreInput.trim()) return;
+    const maxInput = prompt("من كم");
+    if (maxInput === null || !maxInput.trim()) return;
+    const score = Number(scoreInput);
+    const max = Number(maxInput);
 
-    if (!name || isNaN(score) || isNaN(max)) return;
+    if (!Number.isFinite(score) || !Number.isFinite(max) || max <= 0 || score < 0 || score > max) {
+        alert("أدخل درجة بين صفر والدرجة القصوى، ويجب أن تكون الدرجة القصوى أكبر من صفر");
+        return;
+    }
 
     db[currentSemester].courses[currentCourse]
       .categories[i].items.push({ name, score, max });

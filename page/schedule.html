@@ -285,7 +285,7 @@
     location.reload();
   }
 
-  function resetAll() { if(confirm("مسح الكل؟")) { localStorage.clear(); location.reload(); } }
+  function resetAll() { if(confirm("مسح الكل؟")) { localStorage.removeItem("ev_v10"); localStorage.removeItem("ramadan_active"); location.reload(); } }
   
   updateRamadanUI();
   renderTable();
@@ -301,7 +301,7 @@
             </div>
 
             <p class="text-[9px] text-slate-400 font-bold mb-1">
-                <a href="about.html" class="text-blue-800 underline decoration-dotted">الرصاصي</a>
+                <a href="../about.html" class="text-blue-800 underline decoration-dotted">الرصاصي</a>
             </p>
             <p class="text-[8px] text-slate-300 uppercase tracking-widest">
                 &copy; 2026 Engineering Vision | All Rights Reserved

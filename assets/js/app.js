@@ -11,27 +11,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById("fileInput");
     const subjectInput = document.getElementById("subjectInput");
     const progressContainer = document.getElementById("progressContainer");
-    // 1. في بداية الدالة، اجلب قيمة الملاحظة من الحقل (تأكد أن ID الحقل في الـ HTML هو noteInput)
-const noteInput = document.getElementById("noteInput");
-const noteValue = noteInput ? noteInput.value.trim() : "";
-
-// ... (بقية الكود الخاص بالرفع) ...
-
-// 2. في جزء الـ insert، أضف عمود الـ note
-
+    const pageCopy = () => window.eeHomepageCopy?.[document.documentElement.lang] || window.eeHomepageCopy?.ar;
+    let uploading = false;
+    const retryButton = document.createElement('button');
+    retryButton.type = 'button';
+    retryButton.className = 'secondary-button hidden';
+    progressContainer?.appendChild(retryButton);
 
     if (openBtn) {
         openBtn.addEventListener("click", () => {
             modal.classList.replace("hidden", "flex");
+            modal.setAttribute("aria-hidden", "false");
+            modal.inert = false;
             document.body.style.overflow = "hidden";
+            subjectInput?.focus();
         });
     }
     
     
     // دالة موحدة لإغلاق المودال وإعادة ضبطه
     const closeModal = () => {
+        if (uploading) return;
+        retryButton.classList.add('hidden');
         modal.classList.replace("flex", "hidden");
+        modal.setAttribute("aria-hidden", "true");
+        modal.inert = true;
         document.body.style.overflow = "";
+        openBtn?.focus();
         
         // إعادة تهيئة النموذج ليكون جاهزاً للرفع القادم
         setTimeout(() => {
@@ -48,80 +54,113 @@ const noteValue = noteInput ? noteInput.value.trim() : "";
         btn.addEventListener("click", closeModal);
     });
 
-    if (fileInput) {
-    fileInput.addEventListener("change", async () => {
-        const files = Array.from(fileInput.files);
-        const subject = subjectInput?.value.trim();
-        
-        // --- الخطوة المفقودة: تعريف المتغير وجلب القيمة من الحقل ---
-        const noteField = document.getElementById("noteInput");
-        const noteValue = noteField ? noteField.value.trim() : ""; 
+    modal?.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+    });
 
-        if (!subject) {
-            alert("⚠️ فضلاً اكتب اسم المادة أولاً.");
-            fileInput.value = ""; 
-            subjectInput.focus();
+    modal?.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeModal();
             return;
         }
-
-        if (files.length === 0) return;
-
-        document.getElementById("dropZone")?.classList.add("hidden");
-        progressContainer?.classList.remove("hidden");
-
-        const totalSize = files.reduce((acc, f) => acc + f.size, 0);
-        let uploadedSoFar = 0;
-
-        const tasks = files.map(async (file) => {
-            try {
-                const fileExt = file.name.split('.').pop();
-                const safeName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-                const path = `pending/${safeName}`;
-
-                // 1. رفع الملف
-                const { error: upErr } = await supa.storage.from(BUCKET).upload(path, file);
-                if (upErr) throw new Error(`Storage: ${upErr.message}`);
-
-                // 2. الرابط
-                const { data: pub } = supa.storage.from(BUCKET).getPublicUrl(path);
-
-                // 3. الإضافة للجدول (الآن noteValue معرفة وستعمل)
-                const { error: insErr } = await supa.from("resources").insert([{
-                    subject: subject,
-                    file_url: pub.publicUrl,
-                    file_path: path,
-                    file_type: fileExt,
-                    status: "pending",
-                    note: noteValue // تم الربط بنجاح
-                }]);
-                
-                if (insErr) throw new Error(`Database: ${insErr.message}`);
-
-                uploadedSoFar += file.size;
-                const percent = Math.round((uploadedSoFar / totalSize) * 100);
-                document.getElementById("progressBar").style.width = `${percent}%`;
-                document.getElementById("progressPercent").textContent = `${percent}%`;
-
-            } catch (err) {
-                console.error("Critical Error:", err.message);
-                throw err; 
-            }
-        });
-
-        try {
-            await Promise.all(tasks);
-            setTimeout(() => {
-                document.getElementById("formContent").classList.add("hidden");
-                document.getElementById("successUi").classList.remove("hidden");
-                // تفريغ الحقول بعد النجاح
-                if (noteField) noteField.value = "";
-                if (subjectInput) subjectInput.value = "";
-            }, 500);
-        } catch (err) {
-            alert(`حدث خطأ: ${err.message}`);
-            location.reload();
+        if (event.key !== "Tab") return;
+        const controls = Array.from(modal.querySelectorAll("button:not([disabled]), input:not([disabled])"))
+            .filter(control => !control.closest(".hidden"));
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
         }
     });
-}
-    
+
+    async function uploadFiles(files, subject, noteValue) {
+        if (uploading) return;
+        uploading = true;
+        fileInput.disabled = true;
+        if (subjectInput) subjectInput.disabled = true;
+        const noteField = document.getElementById("noteInput");
+        if (noteField) noteField.disabled = true;
+        const closeButtons = document.querySelectorAll('#closeUploadBtn, #closeSuccessBtn');
+        closeButtons.forEach(button => { button.disabled = true; });
+        const strings = pageCopy();
+        const arabic = document.documentElement.lang === 'ar';
+        retryButton.classList.add('hidden');
+        document.getElementById("dropZone")?.classList.add("hidden");
+        progressContainer?.classList.remove("hidden");
+        document.getElementById("fileCountText").textContent = `${files.length} ${strings.filesSelected}`;
+        document.getElementById("progressText").textContent = strings.uploading;
+        document.getElementById("progressBar").style.width = '0%';
+        document.getElementById("progressPercent").textContent = '0%';
+        let finished = 0;
+        const failed = [];
+        try {
+            // One request sequence at a time bounds memory and avoids runaway uploads.
+            for (const file of files) {
+                try {
+                    const fileExt = file.name.includes('.') ? file.name.split('.').pop() : '';
+                    const safeName = `${crypto.randomUUID()}${fileExt ? '.' + fileExt.replace(/[^a-zA-Z0-9]/g, '') : ''}`;
+                    const path = `pending/${safeName}`;
+                    const { error: upErr } = await supa.storage.from(BUCKET).upload(path, file);
+                    if (upErr) throw upErr;
+                    const { data: pub } = supa.storage.from(BUCKET).getPublicUrl(path);
+                    const { error: insErr } = await supa.from("resources").insert([{
+                        subject, file_url: pub.publicUrl, file_path: path,
+                        file_type: fileExt, status: "pending", note: noteValue
+                    }]);
+                    if (insErr) {
+                        const { error: cleanupError } = await supa.storage.from(BUCKET).remove([path]);
+                        if (cleanupError) console.warn('Upload cleanup failed.', cleanupError);
+                        throw insErr;
+                    }
+                } catch (error) {
+                    failed.push(file);
+                    console.warn('Resource upload failed.', error);
+                }
+                finished++;
+                const percent = Math.round(finished / files.length * 100);
+                document.getElementById("progressBar").style.width = `${percent}%`;
+                document.getElementById("progressPercent").textContent = `${percent}%`;
+            }
+            if (failed.length) {
+                document.getElementById("progressText").textContent = arabic
+                    ? `تم رفع ${files.length - failed.length} من ${files.length}. تعذر رفع: ${failed.map(file => file.name).join('، ')}`
+                    : `Uploaded ${files.length - failed.length} of ${files.length}. Failed: ${failed.map(file => file.name).join(', ')}`;
+                retryButton.textContent = arabic ? 'إعادة محاولة الملفات المتعثرة' : 'Retry failed files';
+                retryButton.classList.remove('hidden');
+                retryButton.onclick = () => uploadFiles(failed, subject, noteValue);
+            } else {
+                document.getElementById("formContent").classList.add("hidden");
+                document.getElementById("successUi").classList.remove("hidden");
+                if (noteField) noteField.value = "";
+                if (subjectInput) subjectInput.value = "";
+
+            }
+        } finally {
+            uploading = false;
+            fileInput.disabled = false;
+            fileInput.value = '';
+            if (subjectInput) subjectInput.disabled = false;
+            if (noteField) noteField.disabled = false;
+            closeButtons.forEach(button => { button.disabled = false; });
+            if (!failed.length) document.getElementById('closeSuccessBtn')?.focus();
+        }
+    }
+
+    fileInput?.addEventListener("change", () => {
+        const files = Array.from(fileInput.files);
+        if (!files.length || uploading) return;
+        const subject = subjectInput?.value.trim();
+        if (!subject) {
+            alert(pageCopy().requiredCourse);
+            fileInput.value = '';
+            subjectInput?.focus();
+            return;
+        }
+        const note = document.getElementById('noteInput')?.value.trim() || '';
+        uploadFiles(files, subject, note);
+    });
 });
