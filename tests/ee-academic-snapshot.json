@@ -1,0 +1,837 @@
+{
+  "courses": [
+    {
+      "id": "ARB101",
+      "code": "ARB 101",
+      "name": "Practical Grammar",
+      "sem": 1
+    },
+    {
+      "id": "CHEM101",
+      "code": "CHEM 101",
+      "name": "General Chemistry I",
+      "sem": 1
+    },
+    {
+      "id": "MA101",
+      "code": "MA 101",
+      "name": "Calculus I",
+      "sem": 1
+    },
+    {
+      "id": "PHY101",
+      "code": "PHY 101",
+      "name": "General Physics I",
+      "sem": 1
+    },
+    {
+      "id": "ESP101",
+      "code": "ESP 101",
+      "name": "Intro to Academic Discourse",
+      "sem": 1
+    },
+    {
+      "id": "HPE101",
+      "code": "PE 101",
+      "name": "Health & Physical Ed",
+      "sem": 1
+    },
+    {
+      "id": "ARB102",
+      "code": "ARB 102",
+      "name": "Objective Writing",
+      "sem": 2
+    },
+    {
+      "id": "CSE101",
+      "code": "CSE 101",
+      "name": "Intro to Programming",
+      "sem": 2
+    },
+    {
+      "id": "MA102",
+      "code": "MA 102",
+      "name": "Calculus II",
+      "sem": 2
+    },
+    {
+      "id": "PHY102",
+      "code": "PHY 102",
+      "name": "General Physics II",
+      "sem": 2
+    },
+    {
+      "id": "ESP102",
+      "code": "ESP 102",
+      "name": "Intro to Report Writing",
+      "sem": 2
+    },
+    {
+      "id": "ISL101",
+      "code": "ISL 101",
+      "name": "Belief & Consequences",
+      "sem": 2
+    },
+    {
+      "id": "CSE221",
+      "code": "CSE 221",
+      "name": "Digital Logical Design",
+      "sem": 3
+    },
+    {
+      "id": "EE201",
+      "code": "EE 201",
+      "name": "Electrical Circuits I",
+      "sem": 3
+    },
+    {
+      "id": "ESP201",
+      "code": "ESP 201",
+      "name": "Academic Communication",
+      "sem": 3
+    },
+    {
+      "id": "ISL201",
+      "code": "ISL 201",
+      "name": "Professional Ethics",
+      "sem": 3
+    },
+    {
+      "id": "MA201",
+      "code": "MA 201",
+      "name": "Calculus III",
+      "sem": 3
+    },
+    {
+      "id": "MA202",
+      "code": "MA 202",
+      "name": "Prob & Stats",
+      "sem": 3
+    },
+    {
+      "id": "ARB201",
+      "code": "ARB 201",
+      "name": "Literary Styles",
+      "sem": 4
+    },
+    {
+      "id": "CSE201",
+      "code": "CSE 201",
+      "name": "Intro to Data Science",
+      "sem": 4
+    },
+    {
+      "id": "EE202",
+      "code": "EE 202",
+      "name": "Electronics I",
+      "sem": 4
+    },
+    {
+      "id": "EE203",
+      "code": "EE 203",
+      "name": "Electronics I Lab",
+      "sem": 4
+    },
+    {
+      "id": "EE204",
+      "code": "EE 204",
+      "name": "Signals and Systems",
+      "sem": 4
+    },
+    {
+      "id": "EE205",
+      "code": "EE 205",
+      "name": "Electric Circuits II",
+      "sem": 4
+    },
+    {
+      "id": "EE206",
+      "code": "EE 206",
+      "name": "Elec Circuits II Lab",
+      "sem": 4
+    },
+    {
+      "id": "MA203",
+      "code": "MA 203",
+      "name": "Differential Equations",
+      "sem": 4
+    },
+    {
+      "id": "CSE301",
+      "code": "CSE 301",
+      "name": "Intro to AI",
+      "sem": 5
+    },
+    {
+      "id": "EE301",
+      "code": "EE 301",
+      "name": "Electronics II",
+      "sem": 5
+    },
+    {
+      "id": "EE302",
+      "code": "EE 302",
+      "name": "Elec Energy Engineering",
+      "sem": 5
+    },
+    {
+      "id": "EE303",
+      "code": "EE 303",
+      "name": "Elec Energy Lab",
+      "sem": 5
+    },
+    {
+      "id": "EE304",
+      "code": "EE 304",
+      "name": "Control Engineering",
+      "sem": 5
+    },
+    {
+      "id": "EE305",
+      "code": "EE 305",
+      "name": "Control Eng Lab",
+      "sem": 5
+    },
+    {
+      "id": "ISL301",
+      "code": "ISL 301",
+      "name": "Human Rights",
+      "sem": 5
+    },
+    {
+      "id": "PHY321",
+      "code": "PHY 321",
+      "name": "Electricity & Mag",
+      "sem": 5
+    },
+    {
+      "id": "EE300",
+      "code": "EE 300",
+      "name": "Design Project I",
+      "sem": 6
+    },
+    {
+      "id": "EE306",
+      "code": "EE 306",
+      "name": "Fundamentals of EE Des",
+      "sem": 6
+    },
+    {
+      "id": "EE307",
+      "code": "EE 307",
+      "name": "Comm Engineering",
+      "sem": 6
+    },
+    {
+      "id": "EE308",
+      "code": "EE 308",
+      "name": "Comm Eng Lab",
+      "sem": 6
+    },
+    {
+      "id": "EE309",
+      "code": "EE 309",
+      "name": "Digital Systems Eng",
+      "sem": 6
+    },
+    {
+      "id": "EE310",
+      "code": "EE 310",
+      "name": "Digital Systems Lab",
+      "sem": 6
+    },
+    {
+      "id": "MA301",
+      "code": "MA 301",
+      "name": "Numerical Methods",
+      "sem": 6
+    },
+    {
+      "id": "MS301",
+      "code": "MS 301",
+      "name": "Business & Entrepreneur",
+      "sem": 6
+    },
+    {
+      "id": "EE400",
+      "code": "EE 400",
+      "name": "Design Project II",
+      "sem": 7
+    },
+    {
+      "id": "EE401",
+      "code": "EE 401",
+      "name": "EM Waves & App",
+      "sem": 7
+    },
+    {
+      "id": "EE402",
+      "code": "EE 402",
+      "name": "EM Waves Lab",
+      "sem": 7
+    },
+    {
+      "id": "EE4xx_1",
+      "code": "EE 4XX",
+      "name": "Elective I",
+      "sem": 7
+    },
+    {
+      "id": "EE4xx_2",
+      "code": "EE 4XX",
+      "name": "Elective II",
+      "sem": 7
+    },
+    {
+      "id": "EE4xx_3",
+      "code": "EE 4XX",
+      "name": "Elective III",
+      "sem": 7
+    },
+    {
+      "id": "EE490",
+      "code": "EE 490",
+      "name": "Internship (Co-op)",
+      "sem": 8
+    }
+  ],
+  "connections": [
+    {
+      "from": "MA101",
+      "to": "PHY101",
+      "type": "co"
+    },
+    {
+      "from": "MA101",
+      "to": "MA102",
+      "type": "pre"
+    },
+    {
+      "from": "PHY101",
+      "to": "PHY102",
+      "type": "pre"
+    },
+    {
+      "from": "MA102",
+      "to": "PHY102",
+      "type": "co"
+    },
+    {
+      "from": "ESP101",
+      "to": "ESP102",
+      "type": "pre"
+    },
+    {
+      "from": "ARB101",
+      "to": "ARB102",
+      "type": "pre"
+    },
+    {
+      "from": "MA102",
+      "to": "MA201",
+      "type": "pre"
+    },
+    {
+      "from": "MA102",
+      "to": "MA202",
+      "type": "pre"
+    },
+    {
+      "from": "ESP102",
+      "to": "ESP201",
+      "type": "pre"
+    },
+    {
+      "from": "ISL101",
+      "to": "ISL201",
+      "type": "pre"
+    },
+    {
+      "from": "PHY102",
+      "to": "CSE221",
+      "type": "pre"
+    },
+    {
+      "from": "PHY102",
+      "to": "EE201",
+      "type": "pre"
+    },
+    {
+      "from": "MA102",
+      "to": "EE201",
+      "type": "pre"
+    },
+    {
+      "from": "MA102",
+      "to": "MA203",
+      "type": "pre"
+    },
+    {
+      "from": "CSE101",
+      "to": "CSE201",
+      "type": "pre"
+    },
+    {
+      "from": "MA202",
+      "to": "CSE201",
+      "type": "pre"
+    },
+    {
+      "from": "ARB102",
+      "to": "ARB201",
+      "type": "pre"
+    },
+    {
+      "from": "EE201",
+      "to": "EE202",
+      "type": "pre"
+    },
+    {
+      "from": "CSE221",
+      "to": "EE202",
+      "type": "pre"
+    },
+    {
+      "from": "EE202",
+      "to": "EE203",
+      "type": "co"
+    },
+    {
+      "from": "EE201",
+      "to": "EE204",
+      "type": "pre"
+    },
+    {
+      "from": "EE201",
+      "to": "EE205",
+      "type": "pre"
+    },
+    {
+      "from": "EE205",
+      "to": "EE206",
+      "type": "co"
+    },
+    {
+      "from": "CSE201",
+      "to": "CSE301",
+      "type": "pre"
+    },
+    {
+      "from": "ISL201",
+      "to": "ISL301",
+      "type": "pre"
+    },
+    {
+      "from": "MA201",
+      "to": "PHY321",
+      "type": "pre"
+    },
+    {
+      "from": "MA203",
+      "to": "PHY321",
+      "type": "pre"
+    },
+    {
+      "from": "PHY102",
+      "to": "PHY321",
+      "type": "pre"
+    },
+    {
+      "from": "EE202",
+      "to": "EE301",
+      "type": "pre"
+    },
+    {
+      "from": "EE205",
+      "to": "EE302",
+      "type": "pre"
+    },
+    {
+      "from": "EE302",
+      "to": "EE303",
+      "type": "co"
+    },
+    {
+      "from": "EE204",
+      "to": "EE304",
+      "type": "pre"
+    },
+    {
+      "from": "EE304",
+      "to": "EE305",
+      "type": "co"
+    },
+    {
+      "from": "CSE101",
+      "to": "MA301",
+      "type": "pre"
+    },
+    {
+      "from": "MA201",
+      "to": "MA301",
+      "type": "pre"
+    },
+    {
+      "from": "ESP201",
+      "to": "MS301",
+      "type": "pre"
+    },
+    {
+      "from": "EE202",
+      "to": "EE306",
+      "type": "pre"
+    },
+    {
+      "from": "EE202",
+      "to": "EE307",
+      "type": "pre"
+    },
+    {
+      "from": "EE307",
+      "to": "EE308",
+      "type": "co"
+    },
+    {
+      "from": "CSE101",
+      "to": "EE309",
+      "type": "pre"
+    },
+    {
+      "from": "CSE221",
+      "to": "EE309",
+      "type": "pre"
+    },
+    {
+      "from": "EE309",
+      "to": "EE310",
+      "type": "co"
+    },
+    {
+      "from": "ESP201",
+      "to": "EE300",
+      "type": "pre"
+    },
+    {
+      "from": "EE301",
+      "to": "EE300",
+      "type": "pre"
+    },
+    {
+      "from": "EE302",
+      "to": "EE300",
+      "type": "pre"
+    },
+    {
+      "from": "EE304",
+      "to": "EE300",
+      "type": "pre"
+    },
+    {
+      "from": "PHY321",
+      "to": "EE401",
+      "type": "pre"
+    },
+    {
+      "from": "EE401",
+      "to": "EE402",
+      "type": "co"
+    },
+    {
+      "from": "EE300",
+      "to": "EE4xx_1",
+      "type": "pre"
+    },
+    {
+      "from": "EE300",
+      "to": "EE4xx_2",
+      "type": "pre"
+    },
+    {
+      "from": "EE300",
+      "to": "EE4xx_3",
+      "type": "pre"
+    },
+    {
+      "from": "MS301",
+      "to": "EE400",
+      "type": "pre"
+    },
+    {
+      "from": "EE306",
+      "to": "EE400",
+      "type": "pre"
+    },
+    {
+      "from": "EE300",
+      "to": "EE400",
+      "type": "pre"
+    }
+  ],
+  "CH": {
+    "ARB101": 2,
+    "CHEM101": 4,
+    "MA101": 4,
+    "PHY101": 4,
+    "ESP101": 3,
+    "HPE101": 1,
+    "ARB102": 2,
+    "CSE101": 2,
+    "MA102": 4,
+    "PHY102": 4,
+    "ESP102": 3,
+    "ISL101": 2,
+    "CSE221": 3,
+    "EE201": 3,
+    "ESP201": 3,
+    "ISL201": 2,
+    "MA201": 3,
+    "MA202": 3,
+    "ARB201": 2,
+    "CSE201": 3,
+    "EE202": 3,
+    "EE203": 1,
+    "EE204": 3,
+    "EE205": 2,
+    "EE206": 1,
+    "MA203": 3,
+    "CSE301": 3,
+    "EE301": 3,
+    "EE302": 3,
+    "EE303": 1,
+    "EE304": 3,
+    "EE305": 1,
+    "ISL301": 2,
+    "PHY321": 3,
+    "EE300": 2,
+    "EE306": 3,
+    "EE307": 3,
+    "EE308": 1,
+    "EE309": 3,
+    "EE310": 1,
+    "MA301": 3,
+    "MS301": 2,
+    "EE400": 2,
+    "EE401": 3,
+    "EE402": 1,
+    "EE4xx_1": 3,
+    "EE4xx_2": 3,
+    "EE4xx_3": 3,
+    "EE490": 6
+  },
+  "ELECT": [
+    [
+      "EE 403",
+      "Digital Image Processing"
+    ],
+    [
+      "EE 404",
+      "Introduction to Nanotechnology"
+    ],
+    [
+      "EE 405",
+      "System-on-Chip (SoC) Design"
+    ],
+    [
+      "EE 406",
+      "Distributed Control System and SCADA"
+    ],
+    [
+      "EE 407",
+      "Industrial Communication Systems"
+    ],
+    [
+      "EE 408",
+      "Power System Analysis"
+    ],
+    [
+      "EE 409",
+      "Modeling of Electric Machines"
+    ],
+    [
+      "EE 410",
+      "Power Electronics"
+    ],
+    [
+      "EE 411",
+      "Power System Planning and Operation"
+    ],
+    [
+      "EE 412",
+      "Renewable Energy"
+    ]
+  ],
+  "T": {
+    "ar": {
+      "prog_aria": "نسبة الساعات المعتمدة المجتازة",
+      "search_ph": "رمز المادة أو اسمها",
+      "search_aria": "ابحث عن مادة",
+      "filter_aria": "تصفية المواد",
+      "f_all": "كل المواد",
+      "f_completed": "المجتازة",
+      "f_current": "قيد الدراسة",
+      "f_available": "متطلباتها مكتملة",
+      "f_remaining": "المتبقية",
+      "view_list": "عرض كقائمة",
+      "view_map": "عرض الخريطة",
+      "v_map": "الخريطة",
+      "v_list": "قائمة",
+      "view_aria": "طريقة العرض",
+      "bulk": "تحديد متعدد",
+      "plan": "اقتراح مواد",
+      "bulk_aria": "تعديل المواد المحددة",
+      "bulk_hint": "اختر المواد من الخريطة أو القائمة",
+      "bulk_n": "(n) => (n === 1 ? \"مادة واحدة محددة\" : n === 2 ? \"مادتان محددتان\" : `${n} مواد محددة`)",
+      "b_completed": "✓ مجتازة",
+      "b_current": "◷ قيد الدراسة",
+      "b_none": "لم تبدأ",
+      "b_end": "إنهاء التحديد",
+      "assume": "افترض اجتياز المواد قيد الدراسة",
+      "rec_end": "عرض كل المواد",
+      "rec_note": "المواد المقترحة محددة بالأزرق؛ الرقم يوضح الأولوية. اضغط المادة لمعرفة السبب. الترتيب يفضل المواد التي تفتح مواد أخرى مباشرة، ثم أطول سلاسل المتطلبات. لا يشمل توفر الشعب أو الحد الأقصى للساعات.",
+      "rec_count": "(n) => `${n} مادة مقترحة`",
+      "rec_none": "لا توجد مواد مقترحة وفق الحالات الحالية",
+      "rec_reason": "(k, n, co) => `أولوية ${k} · ${n ? `ترتبط بـ ${n} مادة لاحقة.` : \"لا تتفرع منها مواد أخرى.\"}${co ? ` يلزم تسجيلها مع: ${co}` : \"\"}`",
+      "l_pre": "متطلب سابق",
+      "l_co": "متطلب متزامن",
+      "l_done": "✓ مجتازة",
+      "l_cur": "◷ قيد الدراسة",
+      "zoom_out": "تصغير الخريطة",
+      "zoom_in": "تكبير الخريطة",
+      "fit": "ملاءمة العرض",
+      "vp_aria": "خريطة الخطة الدراسية؛ استخدم التمرير للتنقل",
+      "empty": "لا توجد مواد تطابق بحثك.",
+      "hint": "اضغط المادة لعرض متطلباتها وتغيير حالتها. على الجوال تفتح القائمة أولًا، والخريطة متاحة من زر «الخريطة».",
+      "save_ok": "التقدم محفوظ على هذا المتصفح • نسبة الإنجاز بالساعات المعتمدة",
+      "save_fail": "الحفظ غير متاح في هذا المتصفح؛ صدّر نسخة قبل الإغلاق.",
+      "sum": "حفظ واستيراد · مساعدة",
+      "export": "تصدير التقدم",
+      "import": "استيراد التقدم",
+      "help": "طريقة الاستخدام",
+      "close": "إغلاق",
+      "close_panel": "إغلاق اللوحة",
+      "h1": "١. اختر المادة ثم حدّد: مجتازة، قيد الدراسة، أو لم تبدأ.",
+      "h2": "٢. الأزرق يوضح المتطلبات السابقة، والأصفر المتطلبات المتزامنة.",
+      "h3": "٣. افتح «اقتراح مواد» لإبراز المواد المقترحة على الخريطة.",
+      "h4": "٤. صدّر تقدمك لنقله إلى جهاز آخر. الاستيراد يستبدل تقدم هذا المتصفح بعد تأكيدك.",
+      "h_note": "الخطة تضم 49 مادة (128 ساعة معتمدة) كما وردت في خطة 2023-24 المرفقة. توفر مادة دون متطلبات مسجلة لا يثبت أهلية التسجيل الرسمية. لكل طالب تقدمه الخاص على متصفحه.",
+      "prog": "(cr, n, total) => `${cr} / 128 ساعة معتمدة · ${n} / ${total} مادة`",
+      "cur_n": "(n) => `${n} قيد الدراسة`",
+      "avail": "متطلباتها مكتملة",
+      "prio": "(n) => `أولوية ${n}`",
+      "hours": "(n) => (n === 1 ? \"ساعة معتمدة\" : n === 2 ? \"ساعتان معتمدتان\" : `${n} ساعات معتمدة`)",
+      "s_none": "لم تبدأ",
+      "s_current": "قيد الدراسة",
+      "s_completed": "مجتازة",
+      "h_pre": "المتطلبات السابقة",
+      "h_co": "المتطلبات المتزامنة",
+      "h_next": "المواد التالية المرتبطة بها مباشرة",
+      "chip_empty": "لا يوجد في الخطة المرفقة",
+      "elec": "الاختياريات المتاحة (تختار ٣)",
+      "hint_490": "يشترط إتمام 122 ساعة معتمدة (كل مواد الفصول 1–7)؛ راجع الكلية لتأكيد الأهلية.",
+      "hint_gen": "المتطلب السابق يُجتاز أولًا، والمتزامن يمكن دراسته معها أو اجتيازه قبلها، وفق ضوابط الكلية.",
+      "n_state": "تم تحديث حالة المادة",
+      "n_bulk": "(n) => (n === 1 ? \"تم تحديث مادة واحدة\" : n === 2 ? \"تم تحديث مادتين\" : `تم تحديث ${n} مواد`)",
+      "n_export": "تم تصدير التقدم",
+      "n_import": "تم استيراد التقدم",
+      "n_bad": "الملف غير صالح. استخدم ملف تقدم مُصدّر من هذا الموقع.",
+      "n_read": "تعذر قراءة الحفظ السابق؛ يمكنك استيراد نسخة احتياطية.",
+      "confirm": "استبدال التقدم الحالي بالتقدم الموجود في الملف؟",
+      "t_light": "التبديل إلى الوضع الفاتح",
+      "t_dark": "التبديل إلى الوضع الداكن",
+      "lang_aria": "Switch to English",
+      "rel": [
+        "يحتاج",
+        "مع",
+        "يفتح"
+      ],
+      "brand_name": "الرصاصي",
+      "rel_none": "لا ترتبط بمواد أخرى في الخطة"
+    },
+    "en": {
+      "prog_aria": "Completed credit hours percentage",
+      "search_ph": "Course code or name",
+      "search_aria": "Search courses",
+      "filter_aria": "Filter courses",
+      "f_all": "All courses",
+      "f_completed": "Completed",
+      "f_current": "In progress",
+      "f_available": "Prerequisites met",
+      "f_remaining": "Remaining",
+      "view_list": "List view",
+      "view_map": "Map view",
+      "v_map": "Map",
+      "v_list": "List",
+      "view_aria": "View mode",
+      "bulk": "Multi-select",
+      "plan": "Suggest courses",
+      "bulk_aria": "Edit selected courses",
+      "bulk_hint": "Select courses from the map or list",
+      "bulk_n": "(n) => `${n} selected`",
+      "b_completed": "✓ Completed",
+      "b_current": "◷ In progress",
+      "b_none": "Not started",
+      "b_end": "Done",
+      "assume": "Assume in-progress courses are passed",
+      "rec_end": "Show all courses",
+      "rec_note": "Suggested courses are outlined in blue; the number shows priority. Tap a course to see why. Priority favors courses unlocking others directly, then longer prerequisite chains. Section availability and credit-hour limits are not included.",
+      "rec_count": "(n) => `${n} suggested`",
+      "rec_none": "No suggestions for the current statuses",
+      "rec_reason": "(k, n, co) =>\n      `Priority ${k} · ${n ? `Leads to ${n} later course${n > 1 ? \"s\" : \"\"}.` : \"No later courses depend on it.\"}${co ? ` Must be taken together with: ${co}` : \"\"}`",
+      "l_pre": "Prerequisite",
+      "l_co": "Co-requisite",
+      "l_done": "✓ Completed",
+      "l_cur": "◷ In progress",
+      "zoom_out": "Zoom out",
+      "zoom_in": "Zoom in",
+      "fit": "Fit to width",
+      "vp_aria": "Study plan map; scroll to navigate",
+      "empty": "No courses match your search.",
+      "hint": "Tap a course to see its requirements and change its status. Phones open in list view; the map is one tap away.",
+      "save_ok": "Progress is saved in this browser • Percentage is by credit hours",
+      "save_fail": "Saving is unavailable in this browser; export a backup before closing.",
+      "sum": "Save, import & help",
+      "export": "Export progress",
+      "import": "Import progress",
+      "help": "How to use",
+      "close": "Close",
+      "close_panel": "Close panel",
+      "h1": "1. Select a course, then choose: Completed, In progress, or Not started.",
+      "h2": "2. Blue marks prerequisites; yellow marks co-requisites.",
+      "h3": "3. Open \"Suggest courses\" to highlight suggested courses on the map.",
+      "h4": "4. Export your progress to move it to another device. Importing replaces this browser's progress after you confirm.",
+      "h_note": "The plan has 49 courses (128 credit hours), as listed in the attached 2023-24 study plan. A course being unlocked here does not prove official registration eligibility. Each student's progress is stored in their own browser.",
+      "prog": "(cr, n, total) => `${cr} / 128 credit hours · ${n} / ${total} courses`",
+      "cur_n": "(n) => `${n} in progress`",
+      "avail": "Prerequisites met",
+      "prio": "(n) => `Priority ${n}`",
+      "hours": "(n) => `${n} credit hour${n > 1 ? \"s\" : \"\"}`",
+      "s_none": "Not started",
+      "s_current": "In progress",
+      "s_completed": "Completed",
+      "h_pre": "Prerequisites",
+      "h_co": "Co-requisites",
+      "h_next": "Courses it leads to directly",
+      "chip_empty": "None in this plan",
+      "elec": "Available electives (choose 3)",
+      "hint_490": "Requires 122 completed credit hours (all of semesters 1–7). Check with the college to confirm eligibility.",
+      "hint_gen": "A prerequisite must be passed first; a co-requisite can be taken together with the course or passed before it, subject to college rules.",
+      "n_state": "Course status updated",
+      "n_bulk": "(n) => `${n} course${n > 1 ? \"s\" : \"\"} updated`",
+      "n_export": "Progress exported",
+      "n_import": "Progress imported",
+      "n_bad": "Invalid file. Use a progress file exported from this site.",
+      "n_read": "Couldn't read the saved progress; you can import a backup.",
+      "confirm": "Replace the current progress with the progress in this file?",
+      "t_light": "Switch to light mode",
+      "t_dark": "Switch to dark mode",
+      "lang_aria": "التبديل إلى العربية",
+      "rel": [
+        "Needs",
+        "With",
+        "Unlocks"
+      ],
+      "brand_name": "Al-Rasasi",
+      "rel_none": "Not linked to other courses in the plan"
+    }
+  }
+}

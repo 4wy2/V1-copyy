@@ -497,6 +497,11 @@ body.has-dock { padding-inline-start: min(340px, 100%); }
   #bulkToggle, #plan, .seg button { padding: 0 6px; font-size: 12px; }
 }
 
+@media (pointer: coarse) {
+  button:not(.card), select, .upload, .search input, #detail .states button { min-height: 44px; }
+  button.icon, .zoom-control, #detailClose { min-width: 44px; min-height: 44px; }
+  .recommend-bar input { min-width: 24px; min-height: 24px; }
+}
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
@@ -902,7 +907,13 @@ const bulkIds = new Set();
 let recommendMode = false,
   recommended = [];
 const valid = new Set(courses.map((c) => c.id));
-const incoming = (id, type) => connections.filter((c) => c.to === id && (!type || c.type === type)).map((c) => c.from);
+// Index the immutable academic graph once; keep its original edge order.
+const courseById = new Map(courses.map(c => [c.id, c]));
+const incomingEdges = new Map(courses.map(c => [c.id, connections.filter(edge => edge.to === c.id)]));
+const outgoingEdges = new Map(courses.map(c => [c.id, connections.filter(edge => edge.from === c.id)]));
+const incoming = (id, type) => incomingEdges.get(id).filter(edge => !type || edge.type === type).map(edge => edge.from);
+const totalCredits = courses.reduce((sum, course) => sum + CH[course.id], 0);
+let stateRevision = 0;
 function notify(s) {
   $("#toast").textContent = s;
   clearTimeout(toastTimer);
@@ -928,6 +939,7 @@ try {
   notify(t("n_read"));
 }
 function save() {
+  stateRevision++;
   try {
     localStorage.setItem(key, JSON.stringify(state));
     $("#saveNote").textContent = t("save_ok");
@@ -939,12 +951,11 @@ function eligible(id, done) {
   if (id === "EE490") return courses.reduce((s, c) => s + (c.id !== "EE490" && done.has(c.id) ? CH[c.id] : 0), 0) >= 122;
   return incoming(id, "pre").every((x) => done.has(x));
 }
-function available(id) {
-  const done = new Set(courses.filter((c) => state[c.id] === "completed").map((c) => c.id));
+function available(id, done = new Set(courses.filter(c => state[c.id] === "completed").map(c => c.id))) {
   return eligible(id, done) && incoming(id, "co").every((x) => done.has(x) || eligible(x, done));
 }
 function descendants(id, seen = new Set()) {
-  for (const c of connections.filter((c) => c.from === id)) {
+  for (const c of outgoingEdges.get(id)) {
     if (!seen.has(c.to)) {
       seen.add(c.to);
       descendants(c.to, seen);
@@ -970,6 +981,19 @@ $("#years").innerHTML = labels
         .join("")}</div></section>`,
   )
   .join("");
+const cardNodes = new Map(courses.map(c => {
+  const node = document.getElementById(c.id);
+  return [c.id, { node, badge: node.querySelector(".badge") }];
+}));
+function textIfChanged(node, text) {
+  if (node.textContent !== String(text)) node.textContent = text;
+}
+function toggleIfChanged(node, name, value) {
+  if (node.classList.contains(name) !== !!value) node.classList.toggle(name, !!value);
+}
+function attributeIfChanged(node, name, value) {
+  if (node.getAttribute(name) !== String(value)) node.setAttribute(name, value);
+}
 function refresh() {
   if (recommendMode) recommendations();
   let count = 0,
@@ -979,40 +1003,41 @@ function refresh() {
   const q = $("#search").value.toLowerCase().replace(/\s/g, ""),
     filter = $("#filter").value,
     rel = selected ? relOf(selected) : null;
+  const done = new Set(courses.filter(c => state[c.id] === "completed").map(c => c.id));
+  const ranks = new Map(recommended.map((course, index) => [course.id, index + 1]));
   for (const c of courses) {
-    const el = document.getElementById(c.id),
+    const el = cardNodes.get(c.id).node,
       st = state[c.id];
     count += st === "completed";
     if (st === "completed") cr += CH[c.id];
     cur += st === "current";
-    el.classList.toggle("completed", st === "completed");
-    el.classList.toggle("current", st === "current");
-    el.classList.toggle("selected", selected === c.id);
-    el.classList.toggle("rel-pre", !!rel && rel.pre.has(c.id));
-    el.classList.toggle("rel-co", !!rel && rel.co.has(c.id));
-    el.classList.toggle("rel-next", !!rel && rel.next.has(c.id));
-    el.classList.toggle("fade", !!rel && c.id !== selected && !rel.pre.has(c.id) && !rel.co.has(c.id) && !rel.next.has(c.id));
-    el.classList.toggle("bulk-selected", bulkIds.has(c.id));
-    if (bulkMode) el.setAttribute("aria-pressed", bulkIds.has(c.id));
-    else el.removeAttribute("aria-pressed");
+    toggleIfChanged(el, "completed", st === "completed");
+    toggleIfChanged(el, "current", st === "current");
+    toggleIfChanged(el, "selected", selected === c.id);
+    toggleIfChanged(el, "rel-pre", !!rel && rel.pre.has(c.id));
+    toggleIfChanged(el, "rel-co", !!rel && rel.co.has(c.id));
+    toggleIfChanged(el, "rel-next", !!rel && rel.next.has(c.id));
+    toggleIfChanged(el, "fade", !!rel && c.id !== selected && !rel.pre.has(c.id) && !rel.co.has(c.id) && !rel.next.has(c.id));
+    toggleIfChanged(el, "bulk-selected", bulkIds.has(c.id));
+    if (bulkMode) attributeIfChanged(el, "aria-pressed", bulkIds.has(c.id));
+    else if (el.hasAttribute("aria-pressed")) el.removeAttribute("aria-pressed");
     const match =
       (c.code + c.name).toLowerCase().replace(/\s/g, "").includes(q) &&
-      (filter === "all" || filter === st || (filter === "remaining" && st !== "completed") || (filter === "available" && !st && available(c.id)));
+      (filter === "all" || filter === st || (filter === "remaining" && st !== "completed") || (filter === "available" && !st && available(c.id, done)));
     matches += match;
-    const rec = recommendMode ? recommended.find((x) => x.id === c.id) : null;
-    el.classList.toggle("recommended", !!rec);
-    el.classList.toggle("dimmed", !match || (recommendMode && !rec));
-    el.querySelector(".badge").textContent = st === "completed" ? t("l_done") : st === "current" ? t("l_cur") : available(c.id) ? t("avail") : "";
-    if (rec) el.querySelector(".badge").textContent = t("prio", recommended.indexOf(rec) + 1);
+    const rec = recommendMode ? ranks.get(c.id) : null;
+    toggleIfChanged(el, "recommended", !!rec);
+    toggleIfChanged(el, "dimmed", !match || (recommendMode && !rec));
+    textIfChanged(cardNodes.get(c.id).badge, rec ? t("prio", rec) : st === "completed" ? t("l_done") : st === "current" ? t("l_cur") : available(c.id, done) ? t("avail") : "");
   }
   $("#empty").hidden = matches > 0;
-  $("#progressText").textContent = t("prog", cr, count, courses.length);
-  const p = Math.round((cr / 128) * 100);
-  $("#percent").textContent = p + "%";
-  $(".fill").style.width = p + "%";
-  $(".track").setAttribute("aria-valuenow", p);
-  $("#currentCount").textContent = cur ? t("cur_n", cur) : "";
-  requestAnimationFrame(draw);
+  textIfChanged($("#progressText"), t("prog", cr, count, courses.length));
+  const p = Math.round((cr / totalCredits) * 100);
+  textIfChanged($("#percent"), p + "%");
+  if ($(".fill").style.width !== p + "%") $(".fill").style.width = p + "%";
+  attributeIfChanged($(".track"), "aria-valuenow", p);
+  textIfChanged($("#currentCount"), cur ? t("cur_n", cur) : "");
+  scheduleDraw();
 }
 const MAX_SCALE = 2.2;
 const isPhone = () => matchMedia("(max-width:600px)").matches;
@@ -1023,113 +1048,158 @@ let autoFit = true;
 function fitScale() {
   return Math.max(minScale(), Math.min(1, ($("#viewport").clientWidth - 8) / MW));
 }
+let cameraFrame = 0, pendingCamera = null, mapHeight = 0;
 function updateZoomLabel() {
-  $("#zoomValue").textContent = Math.round(scale * 100) + "%";
+  textIfChanged($("#zoomValue"), Math.round(scale * 100) + "%");
+}
+function cameraPosition() {
+  return pendingCamera || { left: $("#viewport").scrollLeft, top: $("#viewport").scrollTop };
+}
+function queueCamera(left, top) {
+  pendingCamera = { left, top };
+  if (!cameraFrame) cameraFrame = requestAnimationFrame(flushCamera);
+}
+function flushCamera() {
+  if (cameraFrame) cancelAnimationFrame(cameraFrame);
+  cameraFrame = 0;
+  if (document.body.classList.contains("list")) { pendingCamera = null; return; }
+  const view = $("#viewport"), map = $("#map"), space = $(".space");
+  if (!mapHeight) mapHeight = map.offsetHeight;
+  const width = MW * scale + "px", height = mapHeight * scale + "px", transform = `scale(${scale})`;
+  if (space.style.width !== width) space.style.width = width;
+  if (space.style.height !== height) space.style.height = height;
+  if (map.style.transform !== transform) map.style.transform = transform;
+  if (pendingCamera) {
+    view.scrollLeft = pendingCamera.left;
+    view.scrollTop = pendingCamera.top;
+    pendingCamera = null;
+  }
+  updateZoomLabel();
 }
 function setZoom(next, clientX, clientY) {
   if (document.body.classList.contains("list")) return;
-  const vp = $("#viewport"),
-    old = scale;
+  const view = $("#viewport"), old = scale;
   next = Math.max(minScale(), Math.min(MAX_SCALE, next));
   if (Math.abs(next - old) < 0.0001) return;
-  const rect = vp.getBoundingClientRect();
-  const px = clientX == null ? vp.clientWidth / 2 : clientX - rect.left;
-  const py = clientY == null ? vp.clientHeight / 2 : clientY - rect.top;
-  const ux = (vp.scrollLeft + px) / old,
-    uy = (vp.scrollTop + py) / old;
+  const rect = view.getBoundingClientRect(), position = cameraPosition();
+  const px = clientX == null ? view.clientWidth / 2 : clientX - rect.left;
+  const py = clientY == null ? view.clientHeight / 2 : clientY - rect.top;
   scale = next;
   autoFit = false;
-  applyScale();
-  vp.scrollLeft = ux * next - px;
-  vp.scrollTop = uy * next - py;
+  queueCamera((position.left + px) * next / old - px, (position.top + py) * next / old - py);
 }
 function applyScale() {
   if (document.body.classList.contains("list")) return;
-  const m = $("#map");
-  $(".space").style.width = MW * scale + "px";
-  $(".space").style.height = m.offsetHeight * scale + "px";
-  m.style.transform = `scale(${scale})`;
-  updateZoomLabel();
-  requestAnimationFrame(draw);
+  const position = cameraPosition();
+  queueCamera(position.left, position.top);
 }
+let resizeFrame = 0;
 function resize() {
-  if (document.body.classList.contains("list")) return;
-  if (autoFit) scale = fitScale();
-  applyScale();
+  if (resizeFrame) return;
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0;
+    if (document.body.classList.contains("list")) return;
+    if (autoFit) scale = fitScale();
+    applyScale();
+    scheduleDraw();
+  });
+}
+// Connections live in map coordinates: zoom/pan never changes their geometry.
+let drawFrame = 0, geometryDirty = true;
+const edgeNodes = new Map();
+function scheduleDraw() {
+  if (!drawFrame) drawFrame = requestAnimationFrame(() => { drawFrame = 0; draw(); });
 }
 function draw() {
   if (document.body.classList.contains("list")) return;
-  const m = $("#map"),
-    r = m.getBoundingClientRect(),
-    cs = getComputedStyle(document.documentElement),
-    col = { pre: cs.getPropertyValue("--c-pre").trim(), co: cs.getPropertyValue("--c-co").trim() },
-    lo = parseFloat(cs.getPropertyValue("--lo")) || 0.22;
-  // Card boxes in unscaled map coordinates.
-  const box = {};
-  for (const c of courses) {
-    const b = document.getElementById(c.id).getBoundingClientRect();
-    box[c.id] = { l: (b.left - r.left) / scale, r: (b.right - r.left) / scale, t: (b.top - r.top) / scale, b: (b.bottom - r.top) / scale };
-  }
-  const colOf = {},
-    row = {};
-  for (let sem = 1; sem <= 8; sem++) {
-    const ids = courses.filter((c) => c.sem === sem).map((c) => c.id);
-    ids.forEach((id, i) => (colOf[id] = i));
-    row[sem] = { t: box[ids[0]].t, b: box[ids[0]].b };
-  }
-  const s1 = courses.filter((c) => c.sem === 1),
-    gap = box[s1[1].id].l - box[s1[0].id].r,
-    semOf = (id) => courses.find((c) => c.id === id).sem,
-    // Horizontal lanes inside the channel between two rows keep parallel lines apart.
-    lane = (top, bottom, k) => Math.min(bottom - 14, top + 12 + (k % 6) * 7),
-    f = (n) => Math.round(n * 10) / 10;
-  const paths = connections.map((c) => {
-    const a = box[c.from],
-      b = box[c.to];
-    let d;
-    if (c.type === "co") {
-      const x1 = a.r,
-        y1 = (a.t + a.b) / 2,
-        x2 = b.l,
-        y2 = (b.t + b.b) / 2;
-      d = `M${f(x1)} ${f(y1)}H${f(x1 + 18)}V${f(y2)}H${f(x2 - 6)}`;
-    } else {
-      const sa = semOf(c.from),
-        sb = semOf(c.to),
-        x1 = (a.l + a.r) / 2,
-        x2 = (b.l + b.r) / 2,
-        yA = lane(row[sa].b, row[sa + 1].t, colOf[c.from]);
-      if (sb === sa + 1) d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(x2)}V${f(b.t - 5)}`;
-      else {
-        // Skip rows: drop down the gutter beside the target column, never across a card.
-        const right = colOf[c.to] < colOf[c.from],
-          gx = (right ? b.r + gap / 2 : b.l - gap / 2) + ((colOf[c.from] % 3) - 1) * 6,
-          yB = lane(row[sb - 1].b, row[sb].t, colOf[c.to] + 3);
-        d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(gx)}V${f(yB)}H${f(x2)}V${f(b.t - 5)}`;
-      }
+  if (geometryDirty) {
+    flushCamera();
+    const m = $("#map"),
+      r = m.getBoundingClientRect(),
+      cs = getComputedStyle(document.documentElement),
+      col = { pre: "var(--c-pre)", co: "var(--c-co)" },
+      lo = parseFloat(cs.getPropertyValue("--lo")) || 0.22;
+    // Card boxes in unscaled map coordinates.
+    const box = {};
+    for (const c of courses) {
+      const b = document.getElementById(c.id).getBoundingClientRect();
+      box[c.id] = { l: (b.left - r.left) / scale, r: (b.right - r.left) / scale, t: (b.top - r.top) / scale, b: (b.bottom - r.top) / scale };
     }
-    const active = selected === c.from || selected === c.to;
-    return { active, svg: `<path d="${d}" fill="none" stroke="${col[c.type]}" stroke-width="${active ? 2.5 : 1.5}" stroke-linejoin="round" opacity="${active ? 0.95 : selected ? 0.08 : lo}" marker-end="url(#arrow-${c.type})"/>` };
-  });
-  $("#lines").setAttribute("width", MW);
-  $("#lines").setAttribute("height", m.offsetHeight);
-  $("#lines").innerHTML =
-    "<defs>" +
-    ["pre", "co"]
-      .map(
-        (t) =>
-          `<marker id="arrow-${t}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${col[t]}"/></marker>`,
-      )
-      .join("") +
-    "</defs>" +
-    // Highlighted lines last so they sit on top.
-    paths.filter((p) => !p.active).map((p) => p.svg).join("") +
-    paths.filter((p) => p.active).map((p) => p.svg).join("");
+    const colOf = {},
+      row = {};
+    for (let sem = 1; sem <= 8; sem++) {
+      const ids = courses.filter((c) => c.sem === sem).map((c) => c.id);
+      ids.forEach((id, i) => (colOf[id] = i));
+      row[sem] = { t: box[ids[0]].t, b: box[ids[0]].b };
+    }
+    const s1 = courses.filter((c) => c.sem === 1),
+      gap = box[s1[1].id].l - box[s1[0].id].r,
+      semOf = (id) => courseById.get(id).sem,
+      // Horizontal lanes inside the channel between two rows keep parallel lines apart.
+      lane = (top, bottom, k) => Math.min(bottom - 14, top + 12 + (k % 6) * 7),
+      f = (n) => Math.round(n * 10) / 10;
+    const paths = connections.map((c) => {
+      const a = box[c.from],
+        b = box[c.to];
+      let d;
+      if (c.type === "co") {
+        const x1 = a.r,
+          y1 = (a.t + a.b) / 2,
+          x2 = b.l,
+          y2 = (b.t + b.b) / 2;
+        d = `M${f(x1)} ${f(y1)}H${f(x1 + 18)}V${f(y2)}H${f(x2 - 6)}`;
+      } else {
+        const sa = semOf(c.from),
+          sb = semOf(c.to),
+          x1 = (a.l + a.r) / 2,
+          x2 = (b.l + b.r) / 2,
+          yA = lane(row[sa].b, row[sa + 1].t, colOf[c.from]);
+        if (sb === sa + 1) d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(x2)}V${f(b.t - 5)}`;
+        else {
+          // Skip rows: drop down the gutter beside the target column, never across a card.
+          const right = colOf[c.to] < colOf[c.from],
+            gx = (right ? b.r + gap / 2 : b.l - gap / 2) + ((colOf[c.from] % 3) - 1) * 6,
+            yB = lane(row[sb - 1].b, row[sb].t, colOf[c.to] + 3);
+          d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(gx)}V${f(yB)}H${f(x2)}V${f(b.t - 5)}`;
+        }
+      }
+      const active = selected === c.from || selected === c.to;
+      return { active, svg: `<path d="${d}" fill="none" stroke="${col[c.type]}" stroke-width="${active ? 2.5 : 1.5}" stroke-linejoin="round" opacity="${active ? 0.95 : selected ? 0.08 : lo}" data-edge="${connections.indexOf(c)}" marker-end="url(#arrow-${c.type})"/>` };
+    });
+    $("#lines").setAttribute("width", MW);
+    $("#lines").setAttribute("height", m.offsetHeight);
+    $("#lines").innerHTML =
+      "<defs>" +
+      ["pre", "co"]
+        .map(
+          (t) =>
+            `<marker id="arrow-${t}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${col[t]}"/></marker>`,
+        )
+        .join("") +
+      "</defs>" +
+      // Highlighted lines last so they sit on top.
+      paths.filter((p) => !p.active).map((p) => p.svg).join("") +
+      paths.filter((p) => p.active).map((p) => p.svg).join("");
+    edgeNodes.clear();
+    $("#lines").querySelectorAll("path[data-edge]").forEach(node => edgeNodes.set(connections[Number(node.dataset.edge)], node));
+    geometryDirty = false;
+  }
+  const lo = getComputedStyle(document.documentElement).getPropertyValue("--lo").trim();
+  for (const edge of connections) {
+    const node = edgeNodes.get(edge);
+    const active = selected === edge.from || selected === edge.to;
+    attributeIfChanged(node, "opacity", active ? .95 : selected ? .08 : lo);
+    attributeIfChanged(node, "stroke-width", active ? 2.5 : 1.5);
+    // Move only newly active paths; keep them above the quiet lines.
+    if (active && node.dataset.active !== "true") $("#lines").append(node);
+    attributeIfChanged(node, "data-active", active);
+  }
+
 }
 function chip(ids) {
   return ids.length
     ? ids
-        .map((id) => `<button data-course="${id}">${courses.find((c) => c.id === id).code} ${state[id] === "completed" ? "✓" : ""}</button>`)
+        .map((id) => `<button data-course="${id}">${courseById.get(id).code} ${state[id] === "completed" ? "✓" : ""}</button>`)
         .join("")
     : `<span class="muted">${t("chip_empty")}</span>`;
 }
@@ -1139,27 +1209,32 @@ const relOf = (id) => ({
   next: new Set(connections.filter((x) => x.from === id).map((x) => x.to)),
 });
 function relLine(id) {
-  const codes = (ids) => ids.map((x) => courses.find((c) => c.id === x).code).join(lang === "ar" ? "، " : ", ");
+  const codes = (ids) => ids.map((x) => courseById.get(x).code).join(lang === "ar" ? "، " : ", ");
   const groups = [incoming(id, "pre"), incoming(id, "co"), connections.filter((x) => x.from === id).map((x) => x.to)];
   const parts = groups.map((ids, i) => (ids.length ? `<span class="${"pcn"[i]}">${t("rel")[i]}: <b>${codes(ids)}</b></span>` : "")).join("");
   return `<div class="rel-line">${parts || `<span>${t("rel_none")}</span>`}</div>`;
 }
 const dock = $("#detail");
 function closeDetail() {
+  clearTimeout(revealTimer);
   selected = null;
   dock.hidden = true;
   document.body.classList.remove("has-dock");
   refresh();
 }
+let revealTimer;
+const scrollMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 function reveal(id) {
-  setTimeout(() => {
+  clearTimeout(revealTimer);
+  revealTimer = setTimeout(() => {
+    if (selected !== id) return;
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    if (el) el.scrollIntoView({ block: "nearest", inline: "nearest", behavior: scrollMotion() });
   }, 90);
 }
 function showCourse(id) {
   selected = id;
-  const c = courses.find((c) => c.id === id),
+  const c = courseById.get(id),
     cur = state[id] || "none",
     sep = lang === "ar" ? "، " : ", ";
   $("#detailCode").textContent = c.code;
@@ -1167,7 +1242,7 @@ function showCourse(id) {
   $("#detailMeta").textContent = t("hours", CH[id]);
   const rec = recommendMode ? recommended.find((x) => x.id === id) : null;
   $("#detailBody").innerHTML =
-    `${rec ? `<div class="rec-reason">${t("rec_reason", recommended.indexOf(rec) + 1, rec.score, rec.co.map((x) => courses.find((c) => c.id === x).code).join(sep))}</div>` : ""}${relLine(id)}<div class="states">${["none", "current", "completed"].map((s) => `<button data-state="${s}" class="${cur === s ? "active" : ""}" aria-pressed="${cur === s}">${t("s_" + s)}</button>`).join("")}</div><h3 class="k-pre">${t("h_pre")}</h3><div class="chips">${chip(incoming(id, "pre"))}</div><h3 class="k-co">${t("h_co")}</h3><div class="chips">${chip(incoming(id, "co"))}</div><h3>${t("h_next")}</h3><div class="chips">${chip(connections.filter((x) => x.from === id).map((x) => x.to))}</div>${id.startsWith("EE4xx") ? `<details><summary>${t("elec")}</summary><ul>${ELECT.map((e) => `<li><span dir="ltr">${e[0]}</span> ${e[1]}</li>`).join("")}</ul></details>` : ""}<p class="hint">${t(id === "EE490" ? "hint_490" : "hint_gen")}</p>`;
+    `${rec ? `<div class="rec-reason">${t("rec_reason", recommended.indexOf(rec) + 1, rec.score, rec.co.map((x) => courseById.get(x).code).join(sep))}</div>` : ""}${relLine(id)}<div class="states">${["none", "current", "completed"].map((s) => `<button data-state="${s}" class="${cur === s ? "active" : ""}" aria-pressed="${cur === s}">${t("s_" + s)}</button>`).join("")}</div><h3 class="k-pre">${t("h_pre")}</h3><div class="chips">${chip(incoming(id, "pre"))}</div><h3 class="k-co">${t("h_co")}</h3><div class="chips">${chip(incoming(id, "co"))}</div><h3>${t("h_next")}</h3><div class="chips">${chip(connections.filter((x) => x.from === id).map((x) => x.to))}</div>${id.startsWith("EE4xx") ? `<details><summary>${t("elec")}</summary><ul>${ELECT.map((e) => `<li><span dir="ltr">${e[0]}</span> ${e[1]}</li>`).join("")}</ul></details>` : ""}<p class="hint">${t(id === "EE490" ? "hint_490" : "hint_gen")}</p>`;
   dock.hidden = false;
   document.body.classList.add("has-dock");
   refresh();
@@ -1243,7 +1318,14 @@ $("#detailBody").addEventListener("click", (e) => {
   }
   if (c) showCourse(c.dataset.course);
 });
+let recommendationCache = null;
 function recommendations() {
+  const cacheKey = `${stateRevision}:${$("#assume").checked}`;
+  if (recommendationCache?.key === cacheKey) {
+    recommended = recommendationCache.value;
+    textIfChanged($("#recommendCount"), recommended.length ? t("rec_count", recommended.length) : t("rec_none"));
+    return;
+  }
   const done = new Set(courses.filter((c) => state[c.id] === "completed" || ($("#assume").checked && state[c.id] === "current")).map((c) => c.id));
   // Bundle co-requisites; a co-requisite's own pre-requisites must be met.
   function bundle(id, seen = new Set()) {
@@ -1285,6 +1367,7 @@ function recommendations() {
     .sort(
       (a, b) => b.unlocked - a.unlocked || b.critical - a.critical || b.downstream - a.downstream || a.sem - b.sem || a.code.localeCompare(b.code),
     );
+  recommendationCache = { key: cacheKey, value: recommended };
   $("#recommendCount").textContent = recommended.length ? t("rec_count", recommended.length) : t("rec_none");
 }
 function endRecommendations() {
@@ -1309,7 +1392,7 @@ $("#plan").onclick = () => {
   refresh();
   resize();
   requestAnimationFrame(() => {
-    if (recommended.length) document.getElementById(recommended[0].id).scrollIntoView({ block: "center", behavior: "smooth" });
+    if (recommended.length) document.getElementById(recommended[0].id).scrollIntoView({ block: "center", behavior: scrollMotion() });
   });
 };
 $("#endRecommendations").onclick = endRecommendations;
@@ -1338,6 +1421,10 @@ $("#filter").onchange = () => {
   else refresh();
 };
 function setView(list, remember) {
+  resetGestures();
+  flushCamera();
+  geometryDirty = true;
+  mapHeight = 0;
   if (remember)
     try {
       localStorage.setItem("ee_view", list ? "list" : "map");
@@ -1361,89 +1448,97 @@ $("#viewList").onclick = () => {
   refresh();
   resize();
 };
-// Unified pointer gestures: one finger/mouse drag pans, two fingers pinch to zoom.
-const vp = $("#viewport"),
-  pointers = new Map();
-let pinch = null,
-  gestureMoved = false,
-  suppressClickUntil = 0;
-vp.addEventListener("pointerdown", (e) => {
-  if (document.body.classList.contains("list")) return;
-  if (e.pointerType === "mouse" && e.button !== 0) return;
-  if (e.pointerType === "mouse" && e.target.closest("button")) return;
-  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-  if (pointers.size === 1) {
-    pinch = null;
-    gestureMoved = false;
+// One gesture owner for mouse/touch; preserve native wheel scrolling and list behavior.
+const vp = $("#viewport"), pointers = new Map();
+let pinch = null, drag = null, gestureMoved = false, suppressGestureClick = false;
+function resetGestures() {
+  for (const [id, point] of pointers) {
+    if (point.target.hasPointerCapture(id)) point.target.releasePointerCapture(id);
   }
-  if (pointers.size === 2) {
-    const [a, b] = [...pointers.values()];
-    pinch = { distance: Math.hypot(a.x - b.x, a.y - b.y), scale };
-  }
-  vp.setPointerCapture(e.pointerId);
-});
-vp.addEventListener("pointermove", (e) => {
-  if (!pointers.has(e.pointerId) || document.body.classList.contains("list")) return;
-  const prev = pointers.get(e.pointerId);
-  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-  if (pointers.size >= 2) {
-    const [a, b] = [...pointers.values()];
-    const dist = Math.hypot(a.x - b.x, a.y - b.y);
-    if (pinch && pinch.distance > 0) {
-      setZoom((pinch.scale * dist) / pinch.distance, (a.x + b.x) / 2, (a.y + b.y) / 2);
-      pinch = { distance: dist, scale };
-    }
+  pointers.clear();
+  pinch = drag = null;
+  gestureMoved = suppressGestureClick = false;
+}
+function beginGesture() {
+  const points = [...pointers.values()], position = cameraPosition();
+  if (points.length >= 2) {
+    const [a, b] = points, rect = vp.getBoundingClientRect();
+    const x = (a.x + b.x) / 2 - rect.left, y = (a.y + b.y) / 2 - rect.top;
+    pinch = { distance: Math.hypot(a.x - b.x, a.y - b.y), scale,
+      worldX: (position.left + x) / scale, worldY: (position.top + y) / scale, rect };
     gestureMoved = true;
-  } else {
-    const dx = e.clientX - prev.x,
-      dy = e.clientY - prev.y;
-    if (Math.abs(dx) + Math.abs(dy) > 0) {
-      const top = vp.scrollTop;
-      vp.scrollLeft -= dx;
-      vp.scrollTop -= dy;
-      if (e.pointerType !== "mouse") {
-        const rest = -dy - (vp.scrollTop - top);
-        if (Math.abs(rest) > 0.5) window.scrollBy(0, rest);
-      }
-      if (Math.abs(dx) + Math.abs(dy) > 3) gestureMoved = true;
+  } else if (points.length) {
+    drag = { ...points[0], left: position.left, top: position.top };
+    pinch = null;
+  }
+}
+vp.addEventListener("pointerdown", e => {
+  if (document.body.classList.contains("list") || e.button !== 0) return;
+  if (!pointers.size) {
+    clearTimeout(revealTimer);
+    flushCamera();
+    vp.scrollTo({ left: vp.scrollLeft, top: vp.scrollTop, behavior: "instant" });
+    gestureMoved = suppressGestureClick = false;
+  }
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, target: e.target });
+  // Capture on the pressed element: a tap must still click its course button.
+  e.target.setPointerCapture(e.pointerId);
+  beginGesture();
+});
+vp.addEventListener("pointermove", e => {
+  const previous = pointers.get(e.pointerId);
+  if (!previous) return;
+  pointers.set(e.pointerId, { ...previous, x: e.clientX, y: e.clientY });
+  if (pointers.size >= 2 && pinch?.distance > 0) {
+    const [a, b] = [...pointers.values()];
+    scale = Math.max(minScale(), Math.min(MAX_SCALE, pinch.scale * Math.hypot(a.x - b.x, a.y - b.y) / pinch.distance));
+    autoFit = false;
+    queueCamera(pinch.worldX * scale - ((a.x + b.x) / 2 - pinch.rect.left),
+      pinch.worldY * scale - ((a.y + b.y) / 2 - pinch.rect.top));
+  } else if (drag) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.hypot(dx, dy) > 6) gestureMoved = true;
+    if (!gestureMoved) return;
+    const left = drag.left - dx, top = drag.top - dy;
+    const maxTop = Math.max(0, mapHeight * scale - vp.clientHeight);
+    // Retain page scrolling when a touch drag reaches the map's vertical edge.
+    if (e.pointerType !== "mouse") {
+      const remainder = top - Math.max(0, Math.min(maxTop, top));
+      const previousRemainder = drag.remainder || 0;
+      if (Math.abs(remainder - previousRemainder) > .5) window.scrollBy(0, remainder - previousRemainder);
+      drag.remainder = remainder;
     }
+    queueCamera(left, top);
   }
 });
 function stopPointer(e) {
-  if (!pointers.has(e.pointerId)) return;
-  pointers.delete(e.pointerId);
-  if (gestureMoved) suppressClickUntil = Date.now() + 300;
-  if (pointers.size < 2) pinch = null;
+  if (!pointers.delete(e.pointerId)) return;
+  flushCamera();
+  if (gestureMoved) suppressGestureClick = true;
+  if (pointers.size) beginGesture();
+  else pinch = drag = null;
 }
-for (const ev of ["pointerup", "pointercancel", "lostpointercapture"]) vp.addEventListener(ev, stopPointer);
-vp.addEventListener(
-  "click",
-  (e) => {
-    if (Date.now() < suppressClickUntil) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  },
-  true,
-);
-vp.addEventListener(
-  "wheel",
-  (e) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      setZoom(scale * (e.deltaY < 0 ? 1.08 : 1 / 1.08), e.clientX, e.clientY);
-    }
-  },
-  { passive: false },
-);
+for (const event of ["pointerup", "pointercancel", "lostpointercapture"]) vp.addEventListener(event, stopPointer);
+window.addEventListener("blur", resetGestures);
+vp.addEventListener("click", e => {
+  if (suppressGestureClick && e.detail !== 0) {
+    suppressGestureClick = false;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }
+}, true);
+vp.addEventListener("wheel", e => {
+  if (document.body.classList.contains("list") || !(e.ctrlKey || e.metaKey)) return;
+  e.preventDefault();
+  const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? vp.clientHeight : 1);
+  setZoom(scale * Math.exp(-Math.max(-100, Math.min(100, delta)) * .002), e.clientX, e.clientY);
+}, { passive: false });
 $("#zoomIn").onclick = () => setZoom(scale * 1.2);
 $("#zoomOut").onclick = () => setZoom(scale / 1.2);
 $("#zoomFit").onclick = () => {
   autoFit = true;
   scale = fitScale();
-  applyScale();
-  vp.scrollLeft = 0;
-  vp.scrollTop = 0;
+  queueCamera(0, 0);
 };
 
 $("#export").onclick = () => {
@@ -1517,6 +1612,15 @@ applyLang();
   } catch {}
   setView(v === "list" || (v !== "map" && isPhone()));
 }
+new ResizeObserver(() => {
+  const height = $("#map").offsetHeight;
+  if (height !== mapHeight) {
+    mapHeight = height;
+    geometryDirty = true;
+    resize();
+  }
+}).observe($("#map"));
+new ResizeObserver(resize).observe(vp);
 window.addEventListener("resize", resize);
 refresh();
 resize();
