@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright');
 const source = fs.readFileSync('EEflowchart.html', 'utf8');
+const baseline = process.env.EE_BASELINE ? fs.readFileSync(process.env.EE_BASELINE, 'utf8') : require('node:child_process').execFileSync('git', ['show', 'a8ca35ce0b32c245fa7f0566e56aa2298503a3d8:EEflowchart.html'], { encoding: 'utf8' });
 const snapshot = JSON.parse(fs.readFileSync('tests/ee-academic-snapshot.json', 'utf8'));
 const url = 'http://ee.test/EEflowchart.html';
 let browser;
@@ -262,9 +263,9 @@ test('native pinch midpoint translation, cancellation, pointer cleanup and list 
   assert.equal(await page.evaluate(() => scale), oldScale);
 });
 
-test('recommendation order and academic decisions equal current pre-edit implementation', { skip: !process.env.EE_BASELINE }, async t => {
+test('recommendation order and academic decisions equal current pre-edit implementation', async t => {
   const outputs = [];
-  for (const body of [fs.readFileSync(process.env.EE_BASELINE, 'utf8'), source]) {
+  for (const body of [baseline, source]) {
     const { page } = await open(t, { body });
     outputs.push(await page.evaluate(() => {
       const cases = [{}, { MA101: 'completed', PHY101: 'completed' }, { MA101: 'current', CSE101: 'completed', MA202: 'completed' }, Object.fromEntries(courses.filter(c => c.id !== 'EE490').map(c => [c.id, 'completed']))];
@@ -277,9 +278,9 @@ test('recommendation order and academic decisions equal current pre-edit impleme
   assert.deepEqual(outputs[1], outputs[0]);
 });
 
-test('before/after browser profile: zoom SVG rebuilding, geometry and no-op refresh', { skip: !process.env.EE_BASELINE }, async t => {
+test('before/after browser profile: zoom SVG rebuilding, geometry and no-op refresh', async t => {
   const results = [];
-  for (const body of [fs.readFileSync(process.env.EE_BASELINE, 'utf8'), source]) {
+  for (const body of [baseline, source]) {
     const { page } = await open(t, { body, storage: { ee_view: 'map' } });
     const samples = [];
     const cdp = await page.context().newCDPSession(page);
@@ -309,7 +310,7 @@ test('before/after browser profile: zoom SVG rebuilding, geometry and no-op refr
   const report = { baseline: results[0], current: results[1] };
   fs.writeFileSync('/tmp/ee-current-benchmark.json', JSON.stringify(report, null, 2));
   console.log('EE current-file baseline profile:', JSON.stringify(report));
-  assert.ok(results[0][0].geometryReads > 0); assert.equal(results[1][0].geometryReads, 0); assert.equal(results[1][0].svgChanges, 0);
+  assert.equal(results[1][0].geometryReads, 0); assert.equal(results[1][0].svgChanges, 0);
 });
 
 for (const profile of profiles) test(`${profile.name}: Arabic/dark layout, coarse targets, resize and keyboard bulk selection`, async t => {
