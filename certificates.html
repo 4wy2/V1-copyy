@@ -1,225 +1,331 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>بوابة الشهادات الرقمية | نادي الهندسة الكهربائية </title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#11141c" />
+  <title>شهادات النادي | نادي الهندسة الكهربائية</title>
+  <script>
+    try {
+      var l = localStorage.getItem('ee_language'), t = localStorage.getItem('ee_theme');
+      document.documentElement.lang = l === 'en' ? 'en' : 'ar';
+      document.documentElement.dir = l === 'en' ? 'ltr' : 'rtl';
+      document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
-      --bg-deep: #05070f;
-      --accent: #0070ff;
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      color-scheme: dark;
+      --bg: #11141c; --card: #181c27; --card-2: #1f2432; --line: #2a3040;
+      --text: #e9ebf0; --muted: #9aa1b2; --accent: #6d72e8; --accent-hover: #5b60d6;
+      --icon: #8fa0ff; --bolt: #4fc3d9; --ok: #5fbf86; --bad: #e07a7a;
     }
-
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f3f3f6; --card: #ffffff; --card-2: #f6f6fa; --line: #e1e2ea;
+      --text: #1c1f2a; --muted: #5f6577; --accent: #4f52c9; --accent-hover: #4245b0;
+      --icon: #4f52c9; --bolt: #0f8aa3; --ok: #23784a; --bad: #b23b3b;
+    }
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Cairo', sans-serif;
-      background: var(--bg-deep);
-      background-image: 
-        radial-gradient(circle at 0% 0%, rgba(0, 112, 255, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(0, 200, 83, 0.05) 0%, transparent 40%);
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+      background: var(--bg); color: var(--text);
+      font-family: "Cairo", system-ui, sans-serif; font-size: 15px; line-height: 1.65;
+      transition: background-color .2s, color .2s;
     }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; color: inherit; }
+    h1, h2, h3, p { margin: 0; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .wrap { width: min(100% - 2rem, 480px); margin-inline: auto; }
 
-    .glass-card {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
+    .topbar { padding-block: 1rem .25rem; }
+    .topbar-inner { display: flex; align-items: center; gap: .6rem; }
+    .brand { display: flex; align-items: center; gap: .65rem; min-width: 0; }
+    .brand strong { display: block; font-size: .95rem; font-weight: 800; line-height: 1.35; }
+    .brand small { display: block; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+    .brand-mark, .icon-btn {
+      flex: none; height: 38px; min-width: 38px; padding: 0 .65rem; display: grid; place-items: center;
+      background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+      font-size: .82rem; font-weight: 700; cursor: pointer; transition: border-color .15s;
     }
+    .brand-mark { width: 38px; padding: 0; color: var(--bolt); cursor: default; }
+    .icon-btn:hover { border-color: var(--muted); }
+    .prefs { display: flex; gap: .4rem; margin-inline-start: auto; }
 
-    .cert-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 1.5rem;
-      padding: 1.25rem;
-      transition: all 0.3s ease;
+    main { flex: 1; padding-block: .75rem 2rem; display: grid; gap: .75rem; align-content: start; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.1rem; }
+    .lookup { text-align: center; }
+    .lookup h1 { font-size: 1.2rem; font-weight: 800; }
+    .lookup > p { margin-top: .25rem; color: var(--muted); font-size: .84rem; }
+    form { display: grid; gap: .6rem; margin-top: 1rem; }
+    input {
+      width: 100%; min-height: 48px; padding: .5rem .9rem; text-align: center;
+      background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+      font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; direction: ltr;
     }
+    input::placeholder { color: var(--muted); font-size: .9rem; font-weight: 600; letter-spacing: 0; }
+    input:focus { outline: none; border-color: var(--accent); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      min-height: 44px; padding: .5rem 1rem; border: 0; border-radius: 10px; cursor: pointer;
+      background: var(--accent); color: #fff; font-size: .88rem; font-weight: 700; transition: background-color .15s;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .btn:disabled { opacity: .6; cursor: default; }
+    .btn-outline { background: var(--card-2); color: var(--text); border: 1px solid var(--line); }
+    .btn-outline:hover { background: var(--card-2); border-color: var(--accent); }
+    .btn-outline i { color: var(--icon); }
 
-    .designer-badge {
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      padding: 8px 16px;
-      border-radius: 100px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .results { display: grid; gap: .6rem; }
+    .results:empty { display: none; }
+    .count { color: var(--muted); font-size: .8rem; text-align: center; }
+    .cert { display: grid; gap: .75rem; padding: 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+    .cert-head { display: flex; align-items: center; gap: .7rem; }
+    .cert-icon { flex: none; width: 38px; height: 38px; display: grid; place-items: center; background: var(--card-2); border-radius: 10px; color: var(--icon); }
+    .cert h2 { font-size: .92rem; font-weight: 700; line-height: 1.5; unicode-bidi: plaintext; text-align: start; }
+    .cert .btn { width: 100%; }
+    .cert .note { font-size: .76rem; color: var(--muted); text-align: center; }
+    .msg { padding: 1rem; border-radius: 12px; border: 1px solid var(--line); background: var(--card); text-align: center; font-size: .86rem; color: var(--muted); }
+    .msg.bad { color: var(--bad); }
+    .msg i { display: block; margin-bottom: .3rem; font-size: 1.1rem; }
 
-    .rasasi-text {
-      background: linear-gradient(to right, #fff 20%, #3b82f6 50%, #fff 80%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 3s linear infinite;
-      font-weight: 800;
-    }
-
-    @keyframes shine { to { background-position: 200% center; } }
-    
-    /* أنيميشن التحميل */
-    .download-loading {
-      pointer-events: none;
-      opacity: 0.6;
-    }
+    .footer { border-top: 1px solid var(--line); padding-block: 1.2rem 1.6rem; text-align: center; }
+    .footer p { color: var(--muted); font-size: .76rem; }
+    .credit { display: inline-block; margin-top: .3rem; color: var(--muted); font-size: .76rem; font-weight: 700; }
+    .credit:hover { color: var(--text); }
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; } }
   </style>
 </head>
-
-<body class="p-4">
-
-  <header class="max-w-md mx-auto w-full pt-4 pb-8 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 glass-card rounded-xl flex items-center justify-center border-blue-500/20">
-        <i class="fa-solid fa-graduation-cap text-blue-500 text-xl"></i>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="icon-btn" href="index.html" data-i18n-aria="home" aria-label="الرئيسية"><i class="fa-solid fa-house" aria-hidden="true"></i></a>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-award"></i></span>
+        <div>
+          <strong data-i18n="brand">شهادات النادي</strong>
+          <small data-i18n="club">نادي الهندسة الكهربائية</small>
+        </div>
       </div>
-      <div>
-        <h1 class="text-lg font-black leading-none">بوابة الشهادات</h1>
-        <p class="text-[8px] text-white/30 uppercase tracking-widest mt-1">Scientific Committee Portal</p>
+      <div class="prefs">
+        <button id="languageToggle" class="icon-btn" type="button">EN</button>
+        <button id="themeToggle" class="icon-btn" type="button"><i class="fa-solid fa-sun" aria-hidden="true"></i></button>
       </div>
     </div>
-    <a href="index.html" class="w-9 h-9 glass-card rounded-lg flex items-center justify-center">
-      <i class="fa-solid fa-house-user text-xs text-white/40"></i>
-    </a>
   </header>
 
-  <main class="max-w-md mx-auto w-full flex-grow">
-    
-    <section class="glass-card w-full rounded-[2.5rem] p-6 sm:p-8 relative overflow-hidden mb-8">
-      <div class="relative z-10 text-center">
-        <h2 class="text-xl font-bold mb-2">استعلام السجلات</h2>
-        <p class="text-white/40 text-[10px] mb-8">أدخل الرقم الأكاديمي لاستعراض شهاداتك</p>
-
-        <div class="space-y-4">
-          <input type="text" id="studentId" placeholder="الرقم الأكاديمي" 
-            class="bg-black/40 border border-white/10 w-full py-4 rounded-xl text-center font-bold text-xl outline-none text-white focus:border-blue-500 transition-all">
-          
-          <button id="searchBtn" onclick="handleSearch()" 
-            class="bg-blue-600 hover:bg-blue-500 w-full py-4 rounded-xl font-bold text-md flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95">
-            <i class="fa-solid fa-magnifying-glass text-xs"></i>
-            تحقق من الشهادات
-          </button>
-        </div>
-
-        <div id="resultArea" class="mt-8 space-y-4 text-right"></div>
-      </div>
+  <main class="wrap">
+    <section class="card lookup">
+      <h1 data-i18n="title">استعلام الشهادات</h1>
+      <p data-i18n="intro">اكتب رقمك الأكاديمي لعرض شهادات الدورات والفعاليات اللي حضرتها مع النادي.</p>
+      <form id="lookupForm" novalidate>
+        <input id="studentId" name="id" type="text" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="الرقم الأكاديمي" aria-label="الرقم الأكاديمي" data-i18n-ph="idLabel" data-i18n-aria="idLabel" />
+        <button id="searchBtn" class="btn" type="submit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span data-i18n="search">عرض الشهادات</span></button>
+      </form>
     </section>
 
-    <div class="text-center pb-6">
-      <a href="about.html" class="designer-badge inline-flex">
-        <div class="flex flex-col items-end leading-tight">
-          <span class="text-[10px] rasasi-text">الرصاصي</span>
-          <span class="text-[6px] text-white/20 uppercase tracking-tighter">Creative Developer</span>
-        </div>
-        <div class="w-px h-5 bg-white/10"></div>
-        <i class="fa-solid fa-code text-blue-500/50 text-[10px]"></i>
-      </a>
-    </div>
+    <section id="results" class="results" aria-live="polite"></section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap">
+      <p data-i18n="disclaimer">هذا الموقع مبادرة طلابية مساعدة وليس جهة رسمية.</p>
+      <a class="credit" href="about.html"><span data-i18n="creditName">الرصاصي</span> · 2026</a>
+    </div>
+  </footer>
+
   <script>
-    const cloudflareBaseUrl = "https://square-lab-a7a0.mohammed-rasasi.workers.dev/";
+  (() => {
+    // رابط الـ Worker في Cloudflare اللي يرجّع شهادات الرقم الأكاديمي
+    const API_BASE = 'https://square-lab-a7a0.mohammed-rasasi.workers.dev/';
 
-    async function handleSearch() {
-      const idInput = document.getElementById('studentId');
-      const resultArea = document.getElementById('resultArea');
-      const btn = document.getElementById('searchBtn');
-      const id = idInput.value.trim();
+    const copy = {
+      ar: {
+        pageTitle: 'شهادات النادي | نادي الهندسة الكهربائية', home: 'الرئيسية',
+        brand: 'شهادات النادي', club: 'نادي الهندسة الكهربائية',
+        title: 'استعلام الشهادات', intro: 'اكتب رقمك الأكاديمي لعرض شهادات الدورات والفعاليات اللي حضرتها مع النادي.',
+        idLabel: 'الرقم الأكاديمي', search: 'عرض الشهادات', searching: 'جارٍ البحث…',
+        empty: 'اكتب رقمك الأكاديمي أولاً.', invalid: 'الرقم الأكاديمي يكون أرقام فقط.',
+        notFound: 'ما لقينا شهادات لهذا الرقم. تأكد من الرقم، وإذا حضرت فعالية حديثاً فممكن ما انضافت شهادتها بعد.',
+        netError: 'تعذّر الاتصال. تأكد من الإنترنت وحاول مرة ثانية.',
+        found: (n) => n === 1 ? 'شهادة واحدة' : n === 2 ? 'شهادتان' : n + ' شهادات',
+        download: 'تحميل الشهادة (PDF)', preparing: 'جارٍ تجهيز الملف…', saved: 'تم التحميل',
+        openInstead: 'تعذّر التحميل المباشر، فتحنا الشهادة في صفحة جديدة.', open: 'فتح الشهادة',
+        disclaimer: 'هذا الموقع مبادرة طلابية مساعدة وليس جهة رسمية.', creditName: 'الرصاصي',
+        langLabel: 'Switch to English', toLight: 'الوضع الفاتح', toDark: 'الوضع الداكن'
+      },
+      en: {
+        pageTitle: 'Club certificates | Electrical Engineering Club', home: 'Home',
+        brand: 'Club certificates', club: 'Electrical Engineering Club',
+        title: 'Find your certificates', intro: 'Enter your academic ID to see certificates for the courses and events you attended with the club.',
+        idLabel: 'Academic ID', search: 'Show certificates', searching: 'Searching…',
+        empty: 'Enter your academic ID first.', invalid: 'The academic ID should contain digits only.',
+        notFound: 'No certificates found for this ID. Check the number; if the event was recent, its certificate may not be added yet.',
+        netError: 'Could not connect. Check your internet and try again.',
+        found: (n) => n === 1 ? '1 certificate' : n + ' certificates',
+        download: 'Download certificate (PDF)', preparing: 'Preparing file…', saved: 'Downloaded',
+        openInstead: 'Direct download failed, so the certificate opened in a new tab.', open: 'Open certificate',
+        disclaimer: 'This is a student-led initiative, not an official institution website.', creditName: 'Al-Rasasi',
+        langLabel: 'التبديل إلى العربية', toLight: 'Light mode', toDark: 'Dark mode'
+      }
+    };
 
-      if (!id) return;
+    const root = document.documentElement;
+    const form = document.getElementById('lookupForm');
+    const input = document.getElementById('studentId');
+    const searchBtn = document.getElementById('searchBtn');
+    const results = document.getElementById('results');
+    const langBtn = document.getElementById('languageToggle');
+    const themeBtn = document.getElementById('themeToggle');
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-      btn.disabled = true;
-      resultArea.innerHTML = `<div class="py-6 text-center animate-pulse text-blue-400 text-xs font-bold">جاري البحث...</div>`;
+    let lang = root.lang === 'en' ? 'en' : 'ar';
+    let theme = root.dataset.theme === 'light' ? 'light' : 'dark';
+    let lastState = null; // يعاد رسمه عند تغيير اللغة
+    let busy = false;
+    const t = (k) => copy[lang][k];
 
-      try {
-        const response = await fetch(`${cloudflareBaseUrl}${id}`);
-        if (response.ok) {
-          const certificates = await response.json();
-          if (!certificates || certificates.length === 0) { showNotFound(); return; }
+    function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
-          resultArea.innerHTML = ""; 
-          certificates.forEach((cert, index) => {
-            resultArea.innerHTML += `
-              <div class="cert-card flex flex-col gap-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0 border border-blue-500/20">
-                    <i class="fa-solid fa-award text-lg"></i>
-                  </div>
-                  <div class="overflow-hidden flex-1">
-                    <span class="block text-[7px] text-blue-400 font-bold uppercase mb-0.5 tracking-wider">Verified Certificate</span>
-                    <h4 class="font-bold text-white text-sm leading-snug">${cert.course}</h4>
-                  </div>
-                </div>
-                
-                <button id="dl-btn-${index}" onclick="proxyDownload('${cert.url}', '${cert.course}', 'dl-btn-${index}')"
-                  class="w-full h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-3 shadow-lg active:scale-95 transition-all">
-                  <i class="fa-solid fa-file-pdf"></i>
-                  <span>حفظ الشهادة في الجهاز</span>
-                </button>
-              </div>`;
-          });
-        } else { showNotFound(); }
-      } catch (err) {
-        resultArea.innerHTML = `<div class="p-4 rounded-xl bg-red-500/10 text-red-400 text-[10px] text-center font-bold">⚠️ خطأ في الاتصال</div>`;
-      } finally { btn.disabled = false; }
+    function el(tag, attrs, ...kids) {
+      const n = document.createElement(tag);
+      for (const [k, v] of Object.entries(attrs || {})) {
+        if (k === 'class') n.className = v;
+        else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+        else n.setAttribute(k, v);
+      }
+      kids.flat().forEach((c) => c != null && n.append(c.nodeType ? c : document.createTextNode(c)));
+      return n;
+    }
+    const icon = (name, extra = '') => el('i', { class: 'fa-solid ' + name + ' ' + extra, 'aria-hidden': 'true' });
+
+    function applyLang() {
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      root.dataset.theme = theme;
+      document.querySelectorAll('[data-i18n]').forEach((n) => { n.textContent = t(n.dataset.i18n); });
+      document.querySelectorAll('[data-i18n-aria]').forEach((n) => n.setAttribute('aria-label', t(n.dataset.i18nAria)));
+      document.querySelectorAll('[data-i18n-ph]').forEach((n) => { n.placeholder = t(n.dataset.i18nPh); });
+      langBtn.textContent = lang === 'ar' ? 'EN' : 'ع';
+      langBtn.setAttribute('aria-label', t('langLabel'));
+      themeBtn.replaceChildren(icon(theme === 'dark' ? 'fa-sun' : 'fa-moon'));
+      themeBtn.setAttribute('aria-label', theme === 'dark' ? t('toLight') : t('toDark'));
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#11141c' : '#f3f3f6';
+      document.title = t('pageTitle');
+      if (busy) searchBtn.querySelector('span').textContent = t('searching');
+      if (lastState) show(lastState);
     }
 
-    // الدالة السحرية: تجلب الملف من الكلاود وتحفظه باسم موقعك
-    async function proxyDownload(fileUrl, fileName, btnId) {
-      const btn = document.getElementById(btnId);
-      const originalContent = btn.innerHTML;
-      
-      try {
-        // 1. تغيير شكل الزر لحالة التحميل
-        btn.classList.add('download-loading');
-        btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i> جاري تجهيز الملف...`;
+    function message(key, bad, iconName) {
+      return el('div', { class: 'msg' + (bad ? ' bad' : '') }, icon(iconName), t(key));
+    }
 
-        // 2. جلب الملف كـ Blob
-        const response = await fetch(fileUrl);
-        if (!response.ok) throw new Error();
-        const blob = await response.blob();
-
-        // 3. إنشاء رابط محلي (Proxy Link)
-        const blobUrl = window.URL.createObjectURL(blob);
-        
-        // 4. تنفيذ التحميل التلقائي
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = `${fileName}.pdf`; // سيتم التحميل بهذا الاسم
-        document.body.appendChild(link);
-        link.click();
-        
-        // 5. تنظيف الذاكرة
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-
-        // 6. إعادة الزر لوضعه الطبيعي
-        btn.innerHTML = `<i class="fa-solid fa-check text-green-400"></i> تم التحميل بنجاح`;
-        setTimeout(() => {
-          btn.innerHTML = originalContent;
-          btn.classList.remove('download-loading');
-        }, 2000);
-
-      } catch (error) {
-        btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-yellow-400"></i> فشل التحميل المباشر`;
-        btn.classList.remove('download-loading');
-        // في حال الفشل نفتح الرابط كخيار احتياطي
-        setTimeout(() => { window.open(fileUrl, '_blank'); }, 1000);
+    function show(state) {
+      lastState = state;
+      if (state.type === 'list') {
+        results.replaceChildren(
+          el('p', { class: 'count' }, t('found')(state.items.length)),
+          ...state.items.map(certCard)
+        );
+      } else {
+        const map = { notFound: [false, 'fa-folder-open'], netError: [true, 'fa-wifi'], empty: [true, 'fa-circle-info'], invalid: [true, 'fa-circle-info'] };
+        const [bad, ic] = map[state.type];
+        results.replaceChildren(message(state.type, bad, ic));
       }
     }
 
-    function showNotFound() {
-      resultArea.innerHTML = `<div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-center text-xs font-bold">لم نجد سجلات لهذا الرقم</div>`;
+    function fileNameFor(course) {
+      const safe = String(course || 'certificate').replace(/[\\/:*?"<>|]+/g, ' ').trim().slice(0, 80);
+      return (safe || 'certificate') + '.pdf';
     }
+
+    function certCard(cert) {
+      const note = el('p', { class: 'note', hidden: '' });
+      const label = el('span', {}, t('download'));
+      const btn = el('button', { class: 'btn', type: 'button' }, icon('fa-file-pdf'), label);
+      btn.addEventListener('click', () => download(cert, btn, label, note));
+      return el('article', { class: 'cert' },
+        el('div', { class: 'cert-head' }, el('span', { class: 'cert-icon', 'aria-hidden': 'true' }, icon('fa-award')), el('h2', {}, cert.course)),
+        btn,
+        el('a', { class: 'btn btn-outline', href: cert.url, target: '_blank', rel: 'noopener noreferrer' }, icon('fa-arrow-up-right-from-square'), t('open')),
+        note);
+    }
+
+    async function download(cert, btn, label, note) {
+      // الآيفون يتعامل مع ملفات PDF بفتحها، ومنها يقدر الطالب يحفظها أو يشاركها
+      if (isIOS) { window.open(cert.url, '_blank', 'noopener'); return; }
+      btn.disabled = true;
+      label.textContent = t('preparing');
+      note.hidden = true;
+      try {
+        const res = await fetch(cert.url);
+        if (!res.ok) throw new Error('http ' + res.status);
+        const blob = await res.blob();
+        const href = URL.createObjectURL(blob);
+        const a = el('a', { href, download: fileNameFor(cert.course) });
+        document.body.append(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(href), 4000);
+        label.textContent = t('saved');
+        setTimeout(() => { label.textContent = t('download'); }, 2500);
+      } catch (e) {
+        window.open(cert.url, '_blank', 'noopener');
+        note.textContent = t('openInstead');
+        note.hidden = false;
+        label.textContent = t('download');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function validItems(data) {
+      if (!Array.isArray(data)) return [];
+      return data.filter((c) => c && typeof c.course === 'string' && typeof c.url === 'string' && /^https:\/\//i.test(c.url));
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (busy) return;
+      const id = input.value
+        .replace(/[٠-٩]/g, (ch) => String(ch.charCodeAt(0) - 0x0660))
+        .replace(/[۰-۹]/g, (ch) => String(ch.charCodeAt(0) - 0x06F0))
+        .replace(/\s+/g, '');
+      input.value = id;
+      if (!id) { show({ type: 'empty' }); input.focus(); return; }
+      if (!/^\d{1,20}$/.test(id)) { show({ type: 'invalid' }); input.focus(); return; }
+
+      busy = true;
+      searchBtn.disabled = true;
+      searchBtn.querySelector('span').textContent = t('searching');
+      searchBtn.querySelector('i').className = 'fa-solid fa-circle-notch spin';
+      results.replaceChildren();
+      lastState = null;
+      try {
+        const res = await fetch(API_BASE + encodeURIComponent(id));
+        if (!res.ok) { show({ type: 'notFound' }); return; }
+        const items = validItems(await res.json().catch(() => null));
+        show(items.length ? { type: 'list', items } : { type: 'notFound' });
+      } catch (err) {
+        show({ type: 'netError' });
+      } finally {
+        busy = false;
+        searchBtn.disabled = false;
+        searchBtn.querySelector('span').textContent = t('search');
+        searchBtn.querySelector('i').className = 'fa-solid fa-magnifying-glass';
+      }
+    });
+
+    langBtn.addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; save('ee_language', lang); applyLang(); });
+    themeBtn.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; save('ee_theme', theme); applyLang(); });
+
+    applyLang();
+  })();
   </script>
 </body>
 </html>
