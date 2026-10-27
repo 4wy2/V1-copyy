@@ -1,287 +1,315 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>دليل المنصة - AL-RASSASI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #03040b;
-            --glass: rgba(15, 23, 42, 0.8);
-            --stroke: rgba(255, 255, 255, 0.08);
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg);
-            color: white;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#151a22">
+<script>try{var d=document.documentElement,th=localStorage.getItem("ee_theme_v3"),lg=localStorage.getItem("ee_lang");if(th!=="light"&&th!=="dark")th="dark";d.dataset.theme=th;if(lg==="en"){d.lang="en";d.dir="ltr"}}catch(e){}</script>
+<meta name="description" content="دليل الخطط الدراسية التفاعلية لتخصصات قسم الهندسة الكهربائية.">
+<title>دليل المنصة · AL-RASASI</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ---------- Tokens (same as EE Study Plan: Midnight Ink / Stone) ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #0b0e13; --panel: #151a22; --line: #2b3039;
+  --text: #e8ecf2; --muted: #98a1b0; --name: #d6e0ee;
+  --blue: #67b9e3; --green: #6cba8c; --gold: #d8b662;
+  --edge: #526778; --card: #151a22; --card-bd: #353e4a;
+  --btn: #151a22; --btn-bd: #2b3039;
+  --ok-bd: #4ba27b; --ok-bg: #14261d;
+  --c-pre: #56c5f4; --c-co: #efc76b; --c-next: #8a95a5; --on-blue: #07202e;
+  --demo-bg: #0b0e13; --dots: none;
+  --pad: clamp(12px, 2vw, 24px); --radius: 8px;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #e9e8e5; --panel: #efeeeb; --line: #d9d7d2;
+  --text: #2b2d2f; --muted: #6c6a66; --name: #37393b;
+  --blue: #2a6e6c; --green: #437c55; --gold: #977035;
+  --edge: #9a9b97; --card: #f4f3f1; --card-bd: #cfccc6;
+  --btn: #f3f2ef; --btn-bd: #d2d0ca;
+  --ok-bd: #5c9470; --ok-bg: #e2eae2;
+  --c-pre: #3a8583; --c-co: #b48a48; --c-next: #8e8c86; --on-blue: #f5f7f6;
+  --demo-bg: #ecebe8; --dots: radial-gradient(#d6d4cf 0.8px, transparent 0.8px);
+}
 
-        /* كرات خلفية متحركة */
-        .blob {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(40px);
-            animation: move 15s infinite alternate;
-        }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); color: var(--text); font: 14px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-tap-highlight-color: transparent; }
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.wrap { width: min(100% - 2 * var(--pad), 960px); margin-inline: auto; }
 
-        @keyframes move {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(20%, 20%); }
-        }
+/* Brand name: Aref Ruqaa subset (same as the study plan) */
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
 
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--stroke);
-        }
+/* ---------- Header (same as the plan) ---------- */
+header { padding: 12px var(--pad) 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.mast { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; direction: ltr; max-width: 960px; margin-inline: auto; }
+.academic-heading { min-width: 0; }
+.academic-heading h1 { margin: 0 0 3px; font-size: clamp(15px, 1.5vw, 18px); font-weight: 700; letter-spacing: 1.2px; line-height: 1.3; }
+.subtitle { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+.subtitle span { padding: 0 8px; }
+.mast-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.tools { display: flex; gap: 8px; }
+.icon { display: inline-grid; place-items: center; min-width: 34px; min-height: 34px; padding: 0 10px; border: 1px solid var(--btn-bd); border-radius: var(--radius); background: var(--btn); color: var(--text); font-size: 13px; cursor: pointer; }
+@media (hover: hover) { .icon:hover { border-color: var(--blue); } }
+#themeBtn { overflow: hidden; }
+#themeBtn svg { grid-area: 1 / 1; transition: transform .45s cubic-bezier(.4, 1.6, .5, 1), opacity .3s; }
+#themeBtn .i-moon, :root[data-theme="light"] #themeBtn .i-sun { opacity: 0; transform: rotate(-90deg) scale(.4); }
+:root[data-theme="light"] #themeBtn .i-moon { opacity: 1; transform: none; }
+html.theme-fade, html.theme-fade * { transition: background-color .4s ease, border-color .4s ease, color .4s ease, box-shadow .4s ease !important; }
+.brand-ar { font: 700 30px/1.3 "Rassasi Brand", "Amiri", "Noto Naskh Arabic", serif; color: var(--blue); padding: 0 2px; white-space: nowrap; }
+:root[lang="en"] .brand-ar { font-size: 23px; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .brand-ar, .grad { background: linear-gradient(100deg, var(--blue), var(--c-co)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+}
 
-        /* أنيميشن الظهور التدريجي */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+/* ---------- Page ---------- */
+main { flex: 1; padding-block: 22px 32px; display: grid; gap: 28px; }
+.intro .eyebrow { display: block; margin-bottom: 6px; font: 700 10px var(--mono); letter-spacing: 2.5px; color: var(--blue); }
+.intro h2 { font-size: clamp(26px, 4.4vw, 42px); font-weight: 800; line-height: 1.25; }
+.intro p { margin-top: 8px; max-width: 56ch; color: var(--muted); font-size: 14px; }
+.sec-title { margin-bottom: 14px; padding-inline-start: 10px; border-inline-start: 3px solid var(--blue); font-size: 17px; font-weight: 700; }
 
-        /* تأثير النقر للجوال */
-        .tap-active:active {
-            transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.05);
-        }
-    </style>
+/* Showcase */
+.showcase { display: grid; gap: 22px; align-items: center; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.demo { position: relative; display: grid; place-items: center; min-height: 290px; padding: 14px 8px 10px; background-color: var(--demo-bg); background-image: var(--dots); background-size: 14px 14px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.mini { position: relative; width: 300px; height: 252px; direction: ltr; }
+.mini svg { position: absolute; inset: 0; overflow: visible; }
+.mini path { fill: none; stroke-width: 1.5; stroke-linejoin: round; opacity: .3; transition: opacity .5s, stroke-width .5s; }
+.mini path.pre { stroke: var(--c-pre); } .mini path.co { stroke: var(--c-co); }
+.mini.on path { opacity: .95; stroke-width: 2.5; }
+.mc { position: absolute; width: 100px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 6px; border: 1px solid var(--card-bd); border-radius: var(--radius); background: var(--card); text-align: center; transition: border-color .5s, background-color .5s, box-shadow .5s, opacity .5s; }
+.mc .code { font: 700 12px/1.2 var(--mono); color: var(--blue); transition: color .5s; }
+.mc .name { font-size: 9.5px; line-height: 1.2; color: var(--name); }
+.mc .tick { position: absolute; top: 4px; right: 6px; font-size: 11px; color: var(--green); opacity: 0; transform: scale(.4); transition: opacity .4s, transform .4s; }
+.mini.on .mc { opacity: .35; }
+.mini.on .mc.rel, .mini.on .mc.main { opacity: 1; }
+.mini.on .mc.pre { box-shadow: 0 0 0 2px var(--c-pre); }
+.mini.on .mc.co { box-shadow: 0 0 0 2px var(--c-co); }
+.mini.on .mc.next { box-shadow: 0 0 0 2px var(--c-next); }
+.mini.on .mc.main { outline: 2px solid var(--blue); outline-offset: 2px; }
+.mini.done .mc.main { border-color: var(--ok-bd); background: var(--ok-bg); }
+.mini.done .mc.main .code { color: var(--green); }
+.mini.done .mc.main .tick { opacity: 1; transform: none; }
+.cursor { position: absolute; left: 170px; top: 205px; width: 16px; height: 16px; color: var(--muted); transition: transform 1s cubic-bezier(.4, 0, .2, 1); pointer-events: none; z-index: 3; }
+.mini.aim .cursor { transform: translate(-60px, -66px); }
+.mini .cursor { inset: auto; left: 170px; top: 205px; width: 18px; height: 18px; color: var(--text); }
+.mini .cursor path { fill: currentColor; stroke: var(--bg); stroke-width: 1.2; opacity: 1; }
+.status { position: relative; margin-top: 8px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 99px; background: var(--panel); font: 600 9.5px var(--mono); letter-spacing: 1.6px; color: var(--muted); direction: ltr; text-transform: uppercase; }
+.status b { color: var(--blue); font-weight: 700; }
+.mini.done ~ .status b, .demo.done .status b { color: var(--green); }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.steps li { display: flex; gap: 12px; align-items: flex-start; }
+.num { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: var(--radius); border: 1px solid var(--line); font: 700 13px var(--mono); }
+.n1 { color: var(--blue); } .n2 { color: var(--green); } .n3 { color: var(--gold); }
+.steps h3 { margin-bottom: 2px; font-size: 14px; font-weight: 700; }
+.steps p { color: var(--muted); font-size: 12.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 16px; height: 3px; margin-inline-end: 6px; vertical-align: middle; border-radius: 2px; background: var(--c-pre); }
+.legend i.co { background: var(--c-co); }
+
+/* Majors */
+.majors { display: grid; gap: 10px; }
+.major { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: 13.5px; font-weight: 700; transition: border-color .15s, transform .15s; }
+.major:active { transform: scale(.98); }
+@media (hover: hover) { .major:hover { border-color: var(--blue); } }
+.major .ic { flex: none; width: 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius); border: 1px solid var(--line); font-size: 15px; }
+.major .txt { flex: 1; min-width: 0; line-height: 1.4; }
+.major .code { font: 700 11px var(--mono); color: var(--muted); letter-spacing: .5px; }
+.major .go { color: var(--muted); font-size: 12px; transition: transform .15s; }
+@media (hover: hover) { .major:hover .go { transform: translateX(-4px); } :root[dir="ltr"] .major:hover .go { transform: scaleX(-1) translateX(-4px); } }
+:root[dir="ltr"] .major .go { transform: scaleX(-1); }
+.major.ee { padding: 16px; border-color: var(--blue); }
+.major.ee .ic { width: 42px; height: 42px; background: var(--blue); border-color: var(--blue); color: var(--on-blue); font-size: 17px; }
+.major.ee .txt { font-size: 15.5px; }
+.major.ee .code { color: var(--blue); }
+.major.ee .go { color: var(--blue); }
+.others { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.c-blue { color: var(--c-pre); } .c-green { color: var(--green); } .c-gold { color: var(--gold); } .c-grey { color: var(--c-next); }
+
+footer { padding: 18px var(--pad) 24px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 11.5px; }
+footer .brand-ar { font-size: 22px; }
+:root[lang="en"] footer .brand-ar { font-size: 17px; }
+footer .yr { display: block; font: 600 10px var(--mono); letter-spacing: 1.5px; }
+
+@media (max-width: 559px) {
+  .others { gap: 8px; }
+  .others .major { gap: 9px; padding: 10px; font-size: 12.5px; }
+  .others .major .ic { width: 32px; height: 32px; font-size: 13px; }
+  .others .major .txt { line-height: 1.35; }
+  .others .major .code { display: block; margin-top: 2px; }
+  .others .major .go { display: none; }
+}
+@media (min-width: 860px) { .showcase { grid-template-columns: 1.05fr 1fr; padding: 22px; } .demo { min-height: 320px; } }
+@media (max-width: 520px) {
+  .mast { flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+  .academic-heading { flex: 1 1 auto; }
+  .mast-right { flex-direction: row-reverse; align-items: center; gap: 10px; }
+  .subtitle { font-size: 8.5px; letter-spacing: 1px; }
+  .brand-ar { font-size: 21px; line-height: 1.2; }
+  :root[lang="en"] .brand-ar { font-size: 17px; }
+}
+@media (max-width: 340px) { .mini { transform: scale(.9); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+</style>
 </head>
-<body class="p-4 md:p-12">
+<body>
+<header><div class="mast">
+  <div class="academic-heading" dir="ltr"><h1>ACADEMIC PROGRAMS</h1><div class="subtitle">STUDY PLANS <span> / </span> FLOWCHART GUIDE</div></div>
+  <div class="mast-right">
+    <div class="tools">
+      <a class="icon" href="index.html" data-iaria="home" aria-label="الرئيسية"><i class="fa-solid fa-house" aria-hidden="true"></i></a>
+      <button id="themeBtn" class="icon" type="button"><svg class="i-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button id="langBtn" class="icon" type="button">EN</button>
+    </div>
+    <span class="brand-ar" data-i="brand_name" dir="auto">الرصاصي</span>
+  </div>
+</div></header>
 
-    <div class="blob" style="top: -50px; right: -50px;"></div>
-    <div class="blob" style="bottom: -50px; left: -50px; animation-delay: -7s;"></div>
+<main class="wrap">
+  <section class="intro">
+    <span class="eyebrow"><bdi dir="ltr">ENGINEERED BY AL-RASASI</bdi></span>
+    <h2><span data-i="t1">دليل</span> <span class="grad" data-i="t2">المنصة الذكية</span></h2>
+    <p data-i="lead">نظام تتبع ذكي صُمم لتمكين المهندس من إدارة مسيرته الأكاديمية بوضوح فائق ودقة متناهية.</p>
+  </section>
 
-    <div class="max-w-5xl mx-auto">
-        
-        <nav class="mb-10 reveal">
-            <a href="index.html" class="inline-flex items-center gap-2 text-white/40 font-bold text-xs uppercase tracking-widest hover:text-indigo-400 transition-colors">
-                <i class="fa-solid fa-arrow-right"></i>
-                العودة للرئيسية
-            </a>
-        </nav>
-
-        <header class="mb-16 text-right reveal">
-            <span class="text-indigo-400 font-black tracking-[0.3em] text-[10px] uppercase mb-3 block">Engineered by AL-RASSASI</span>
-            <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight">
-                دليل <span class="text-transparent bg-clip-text bg-gradient-to-l from-indigo-400 to-cyan-400">المنصة الذكية</span>
-            </h1>
-            <p class="text-white/50 text-lg md:text-xl max-w-2xl leading-relaxed">
-                نظام تتبع ذكي صُمم لتمكين المهندس من إدارة مسيرته الأكاديمية بوضوح فائق ودقة متناهية.
-            </p>
-        </header>
-
-        <div class="space-y-6 mb-24">
-            <div class="glass-card p-6 md:p-10 rounded-[2.5rem] reveal active">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                    
-                    <div class="order-first lg:order-last flex items-center justify-center bg-[#050810]/50 rounded-[2rem] border border-white/5 relative overflow-hidden min-h-[300px] md:min-h-[400px]">
-                        <div class="absolute inset-0 bg-radial-at-t from-indigo-500/10 via-transparent to-transparent"></div>
-                        
-                        <div class="relative z-10 flex flex-col items-center scale-[0.85] md:scale-100">
-                            <div class="relative">
-                                <div id="top-arrow" class="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-0 transition-all duration-700">
-                                    <div class="w-1 h-8 bg-indigo-400/50"></div>
-                                    <div class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-indigo-400"></div>
-                                </div>
-                                <div id="side-arrow" class="absolute -right-12 top-1/2 -translate-y-1/2 flex items-center opacity-0 transition-all duration-700">
-                                    <div class="w-8 h-1 bg-amber-400/50"></div>
-                                    <div class="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[8px] border-r-amber-400"></div>
-                                </div>
-
-                                <div id="main-module" class="w-40 h-28 bg-[#161e2d] border-[1.5px] border-white/10 rounded-2xl flex flex-col items-center justify-center relative transition-all duration-1000 shadow-2xl">
-                                    <div id="module-check" class="absolute top-2 right-3 opacity-0 scale-50 transition-all">
-                                        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
-                                    </div>
-                                    <span class="text-[7px] text-white/20 font-bold tracking-widest mb-1 uppercase">Academic Module</span>
-                                    <h4 id="module-code" class="text-xl font-black text-indigo-400 transition-colors">ELET 102</h4>
-                                    <div id="fake-cursor" class="absolute -bottom-4 -right-2 text-white/20 text-lg transition-all duration-1000">
-                                        <i class="fa-solid fa-mouse-pointer"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-8 bg-black/40 border border-white/5 px-4 py-1.5 rounded-full">
-                                <p id="status-display" class="text-[8px] font-mono text-indigo-300/60 uppercase tracking-widest">System Ready</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div class="flex gap-5">
-                            <div class="h-10 w-10 shrink-0 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-400 font-bold">1</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">الاستعلام المرئي</h4>
-                                <p class="text-white/40 text-xs leading-relaxed">نقرة واحدة تضيء المسارات المتصلة لكشف المتطلبات السابقة والقادمة.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="h-10 w-10 shrink-0 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400 font-bold">2</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">تتبع الإنجاز</h4>
-                                <p class="text-white/40 text-xs leading-relaxed">نقرتين سريعة لتحويل المادة للون الأخضر وحفظ تقدمك الدراسي.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="h-10 w-10 shrink-0 bg-amber-500/10 rounded-lg flex items-center justify-center text-amber-400 font-bold">3</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">الملاحة الذكية</h4>
-                                <p class="text-white/40 text-xs leading-relaxed">حرية كاملة في السحب والتكبير لاستكشاف جميع المستويات الدراسية.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <section class="showcase" aria-labelledby="howTitle">
+    <div class="demo" id="demo" aria-hidden="true">
+      <div>
+        <div class="mini" id="mini">
+          <svg width="300" height="252" viewBox="0 0 300 252">
+            <defs>
+              <marker id="ar-pre" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" style="fill:var(--c-pre);stroke:none;opacity:1"/></marker>
+              <marker id="ar-co" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" style="fill:var(--c-co);stroke:none;opacity:1"/></marker>
+            </defs>
+            <path class="pre" d="M90 66 V100" marker-end="url(#ar-pre)"/>
+            <path class="co" d="M140 130 H188" marker-end="url(#ar-co)"/>
+            <path class="pre" d="M90 158 V192" marker-end="url(#ar-pre)"/>
+          </svg>
+          <div class="mc rel pre" style="left:40px;top:10px"><span class="code">EE 205</span><span class="name">Electric Circuits II</span></div>
+          <div class="mc main" style="left:40px;top:102px"><span class="tick">✓</span><span class="code">EE 302</span><span class="name">Elec Energy Engineering</span></div>
+          <div class="mc rel co" style="left:190px;top:102px"><span class="code">EE 303</span><span class="name">Elec Energy Lab</span></div>
+          <div class="mc rel next" style="left:40px;top:194px"><span class="code">EE 300</span><span class="name">Design Project I</span></div>
+          <svg class="cursor" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2l16 9.5-7 1.6-3.4 6.9z"/></svg>
         </div>
-
-        <section class="mb-24 reveal">
-            <h2 class="text-2xl font-black mb-8 border-r-4 border-indigo-500 pr-4">بوابة التخصصات</h2>
-            
-            <div class="space-y-4">
-                <a href="EEflowchart.html" class="tap-active flex items-center justify-between p-6 bg-indigo-600/10 border border-indigo-500/30 rounded-2xl hover:border-indigo-500 transition-all group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-graduation-cap text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg md:text-xl">الهندسة الكهربائية (EE)</h3>
-                            <span class="text-[10px] text-indigo-300/60 font-bold uppercase tracking-widest">Bachelor Program</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-chevron-left text-indigo-500 group-hover:-translate-x-2 transition-transform"></i>
-                </a>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="EPTflowchart.html" class="tap-active flex items-center gap-4 p-5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                        <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <span class="text-sm font-bold">تقنية القوى الكهربائية (EPT)</span>
-                    </a>
-                    <a href="ECTflowchart.html" class="tap-active flex items-center gap-4 p-5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                        <div class="w-10 h-10 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400">
-                            <i class="fa-solid fa-microchip"></i>
-                        </div>
-                        <span class="text-sm font-bold">تقنية الإلكترونيات (ECT)</span>
-                    </a>
-                    <a href="ICTflowchart.html" class="tap-active flex items-center gap-4 p-5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                        <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center text-purple-400">
-                            <i class="fa-solid fa-tower-broadcast"></i>
-                        </div>
-                        <span class="text-sm font-bold">تقنية الآلات والتحكم (ICT)</span>
-                    </a>
-                    <a href="MechT.html" class="tap-active flex items-center gap-4 p-5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                        <div class="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-400">
-                            <i class="fa-solid fa-gears"></i>
-                        </div>
-                        <span class="text-sm font-bold">تقنية الميكاترونيكس (MechT)</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-24 reveal">
-            <h2 class="text-2xl font-black mb-8 border-r-4 border-amber-500 pr-4">آفاق المستقبل</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-8 rounded-[2rem] relative overflow-hidden group hover:border-indigo-500/50 transition-all">
-                    <div class="h-1 w-full bg-indigo-500 absolute top-0 left-0"></div>
-                    <i class="fa-solid fa-sync text-indigo-400 text-xl mb-4 block"></i>
-                    <h5 class="font-bold mb-2">مزامنة البيانات</h5>
-                    <p class="text-[11px] text-white/40 leading-relaxed">تخزين تقدمك الدراسي سحابياً للوصول إليه من أي مكان.</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2rem] relative overflow-hidden group hover:border-cyan-500/50 transition-all">
-                    <div class="h-1 w-full bg-cyan-500 absolute top-0 left-0"></div>
-                    <i class="fa-solid fa-chart-line text-cyan-400 text-xl mb-4 block"></i>
-                    <h5 class="font-bold mb-2">تحليل الإنجاز</h5>
-                    <p class="text-[11px] text-white/40 leading-relaxed">رسوم بيانية ذكية توضح نسبة الإنجاز والزمن المتبقي.</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2rem] relative overflow-hidden group hover:border-purple-500/50 transition-all">
-                    <div class="h-1 w-full bg-purple-500 absolute top-0 left-0"></div>
-                    <i class="fa-solid fa-book text-purple-400 text-xl mb-4 block"></i>
-                    <h5 class="font-bold mb-2">المكتبة الرقمية</h5>
-                    <p class="text-[11px] text-white/40 leading-relaxed">توفير الكتب والمراجع الدراسية لكل مادة بشكل مباشر.</p>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center py-10 opacity-30">
-            <p class="text-[9px] font-black tracking-[0.4em] uppercase">Designed by AL-RASSASI © 2026</p>
-        </footer>
+        <div style="text-align:center"><span class="status" id="status">SYSTEM <b>READY</b></span></div>
+      </div>
     </div>
 
-    <script>
-        // أنيميشن المحاكاة (نفس الأكواد السابقة بدون تعديل)
-        function startShowcase() {
-            const module = document.getElementById('main-module');
-            const check = document.getElementById('module-check');
-            const sideArrow = document.getElementById('side-arrow');
-            const topArrow = document.getElementById('top-arrow');
-            const status = document.getElementById('status-display');
-            const cursor = document.getElementById('fake-cursor');
-            const code = document.getElementById('module-code');
+    <div>
+      <h2 class="sec-title" id="howTitle" data-i="howTitle">كيف تستخدم الخطة</h2>
+      <ol class="steps">
+        <li><span class="num n1">1</span><div><h3 data-i="s1t">الاستعلام المرئي</h3><p data-i="s1p">اضغط المادة تضيء المسارات المتصلة فيها، وتشوف متطلباتها السابقة والمواد اللي تفتحها.</p></div></li>
+        <li><span class="num n2">2</span><div><h3 data-i="s2t">تتبع الإنجاز</h3><p data-i="s2p">حدّد حالة المادة: مجتازة، قيد الدراسة، أو لم تبدأ. ويتحدّث شريط تقدّمك مباشرة.</p></div></li>
+        <li><span class="num n3">3</span><div><h3 data-i="s3t">اقتراح المواد</h3><p data-i="s3p">افتح «اقتراح مواد» لإبراز المواد اللي تقدر تسجّلها على الخريطة.</p></div></li>
+      </ol>
+      <div class="legend"><span><i></i><span data-i="l_pre">متطلب سابق</span></span><span><i class="co"></i><span data-i="l_co">متطلب متزامن</span></span><span style="color:var(--green)" data-i="l_done">✓ مجتازة</span></div>
+    </div>
+  </section>
 
-            if (!module) return;
+  <section aria-labelledby="majorsTitle">
+    <h2 class="sec-title" id="majorsTitle" data-i="majorsTitle">بوابة التخصصات</h2>
+    <div class="majors">
+      <a class="major ee" href="EEflowchart.html">
+        <span class="ic" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span class="txt"><span data-i="ee">الهندسة الكهربائية</span> <span class="code">EE</span></span>
+        <i class="fa-solid fa-chevron-left go" aria-hidden="true"></i>
+      </a>
+      <div class="others">
+        <a class="major" href="EPTflowchart.html"><span class="ic c-green" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span><span class="txt"><span data-i="ept">تقنية القوى الكهربائية</span> <span class="code">EPT</span></span><i class="fa-solid fa-chevron-left go" aria-hidden="true"></i></a>
+        <a class="major" href="ECTflowchart.html"><span class="ic c-blue" aria-hidden="true"><i class="fa-solid fa-microchip"></i></span><span class="txt"><span data-i="ect">تقنية الإلكترونيات</span> <span class="code">ECT</span></span><i class="fa-solid fa-chevron-left go" aria-hidden="true"></i></a>
+        <a class="major" href="ICTflowchart.html"><span class="ic c-grey" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></span><span class="txt"><span data-i="ict">تقنية الآلات والتحكم</span> <span class="code">ICT</span></span><i class="fa-solid fa-chevron-left go" aria-hidden="true"></i></a>
+        <a class="major" href="MechT.html"><span class="ic c-gold" aria-hidden="true"><i class="fa-solid fa-gears"></i></span><span class="txt"><span data-i="mecht">تقنية الميكاترونيكس</span> <span class="code">MechT</span></span><i class="fa-solid fa-chevron-left go" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
+</main>
 
-            const reset = () => {
-                module.style.borderColor = "rgba(255,255,255,0.1)";
-                module.style.backgroundColor = "#161e2d";
-                code.style.color = "#818cf8";
-                check.style.opacity = "0";
-                sideArrow.style.opacity = "0";
-                topArrow.style.opacity = "0";
-                cursor.style.transform = "translate(0, 0)";
-                status.innerText = "System Ready";
-            };
+<footer>
+  <span class="brand-ar" data-i="brand_name" dir="auto">الرصاصي</span>
+  <span class="yr">© 2026</span>
+</footer>
 
-            setTimeout(() => {
-                cursor.style.transform = "translate(-15px, -30px)";
-                status.innerText = "Querying Paths...";
-                sideArrow.style.opacity = "1";
-                topArrow.style.opacity = "1";
-                module.style.borderColor = "#fbbf24";
-            }, 1000);
+<script>
+(() => {
+  const T = {
+    ar: {
+      title: "دليل المنصة · الرصاصي", home: "الرئيسية", brand_name: "الرصاصي",
+      t1: "دليل", t2: "المنصة الذكية",
+      lead: "نظام تتبع ذكي صُمم لتمكين المهندس من إدارة مسيرته الأكاديمية بوضوح فائق ودقة متناهية.",
+      howTitle: "كيف تستخدم الخطة",
+      s1t: "الاستعلام المرئي", s1p: "اضغط المادة تضيء المسارات المتصلة فيها، وتشوف متطلباتها السابقة والمواد اللي تفتحها.",
+      s2t: "تتبع الإنجاز", s2p: "حدّد حالة المادة: مجتازة، قيد الدراسة، أو لم تبدأ. ويتحدّث شريط تقدّمك مباشرة.",
+      s3t: "اقتراح المواد", s3p: "افتح «اقتراح مواد» لإبراز المواد اللي تقدر تسجّلها على الخريطة.",
+      l_pre: "متطلب سابق", l_co: "متطلب متزامن", l_done: "✓ مجتازة",
+      majorsTitle: "بوابة التخصصات", ee: "الهندسة الكهربائية", ept: "تقنية القوى الكهربائية", ect: "تقنية الإلكترونيات", ict: "تقنية الآلات والتحكم", mecht: "تقنية الميكاترونيكس",
+      lang: "Switch to English", toLight: "الوضع الفاتح", toDark: "الوضع الداكن"
+    },
+    en: {
+      title: "Platform guide · Al-Rasasi", home: "Home", brand_name: "Al-Rasasi",
+      t1: "The smart", t2: "platform guide",
+      lead: "A smart tracking system built to help engineering students manage their academic journey with clarity and precision.",
+      howTitle: "How to use the plan",
+      s1t: "Visual lookup", s1p: "Tap a course to light up its connected paths: its prerequisites and the courses it unlocks.",
+      s2t: "Track progress", s2p: "Set each course as Completed, In progress, or Not started. Your progress bar updates instantly.",
+      s3t: "Course suggestions", s3p: "Open “Suggest courses” to highlight the courses you can register next on the map.",
+      l_pre: "Prerequisite", l_co: "Co-requisite", l_done: "✓ Completed",
+      majorsTitle: "Programs", ee: "Electrical Engineering", ept: "Electrical Power Technology", ect: "Electronics Technology", ict: "Instrumentation & Control Technology", mecht: "Mechatronics Technology",
+      lang: "التبديل إلى العربية", toLight: "Light mode", toDark: "Dark mode"
+    }
+  };
+  const root = document.documentElement;
+  const themeBtn = document.getElementById("themeBtn"), langBtn = document.getElementById("langBtn");
+  const save = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  let lang = root.lang === "en" ? "en" : "ar";
 
-            setTimeout(() => {
-                module.style.borderColor = "#10b981";
-                module.style.backgroundColor = "rgba(16, 185, 129, 0.05)";
-                code.style.color = "#10b981";
-                check.style.opacity = "1";
-                check.style.transform = "scale(1)";
-                status.innerText = "Status: Completed";
-            }, 3500);
+  function apply() {
+    const s = T[lang];
+    root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i]").forEach((n) => { n.textContent = s[n.dataset.i]; });
+    document.querySelectorAll("[data-iaria]").forEach((n) => n.setAttribute("aria-label", s[n.dataset.iaria]));
+    langBtn.textContent = lang === "ar" ? "EN" : "ع";
+    langBtn.setAttribute("aria-label", s.lang);
+    const dark = root.dataset.theme !== "light";
+    themeBtn.setAttribute("aria-label", dark ? s.toLight : s.toDark);
+    document.querySelector('meta[name="theme-color"]').content = dark ? "#151a22" : "#efeeeb";
+    document.title = s.title;
+  }
+  themeBtn.addEventListener("click", () => {
+    root.classList.add("theme-fade");
+    root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+    save("ee_theme_v3", root.dataset.theme); apply();
+    setTimeout(() => root.classList.remove("theme-fade"), 450);
+  });
+  langBtn.addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; save("ee_lang", lang); apply(); });
+  apply();
 
-            setTimeout(() => {
-                reset();
-                setTimeout(startShowcase, 1000);
-            }, 7000);
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        window.addEventListener('load', () => {
-            setTimeout(startShowcase, 500);
-        });
-    </script>
+  // ---- Showcase loop: select EE 302 → paths light up → marked completed → reset ----
+  const mini = document.getElementById("mini"), demo = document.getElementById("demo"), status = document.getElementById("status");
+  const setStatus = (a, b) => { status.replaceChildren(a + " ", Object.assign(document.createElement("b"), { textContent: b })); };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { mini.classList.add("on", "aim"); setStatus("QUERYING", "PATHS"); return; }
+  const timers = [];
+  function loop() {
+    mini.className = "mini"; demo.classList.remove("done"); setStatus("SYSTEM", "READY");
+    timers.push(setTimeout(() => { mini.classList.add("aim"); }, 700));
+    timers.push(setTimeout(() => { mini.classList.add("on"); setStatus("QUERYING", "PATHS"); }, 1700));
+    timers.push(setTimeout(() => { mini.classList.add("done"); demo.classList.add("done"); setStatus("STATUS:", "COMPLETED"); }, 4000));
+    timers.push(setTimeout(loop, 7200));
+  }
+  loop();
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { timers.forEach(clearTimeout); timers.length = 0; } else loop(); });
+})();
+</script>
 </body>
 </html>
