@@ -725,7 +725,7 @@ const T = {
     fit: "ملاءمة العرض",
     vp_aria: "خريطة الخطة الدراسية؛ استخدم التمرير للتنقل",
     empty: "لا توجد مواد تطابق بحثك.",
-    hint: "اضغط المادة لعرض متطلباتها وتغيير حالتها. على الجوال تفتح القائمة أولًا، والخريطة متاحة من زر «الخريطة».",
+    hint: "اضغط المادة لعرض متطلباتها وتغيير حالتها. اسحب الخريطة أو قرّبها بإصبعين وتبقى المادة محددة، وتقدر تبدّل للعرض كقائمة من زر «قائمة».",
     save_ok: "التقدم محفوظ على هذا المتصفح • نسبة الإنجاز بالساعات المعتمدة",
     save_fail: "الحفظ غير متاح في هذا المتصفح؛ صدّر نسخة قبل الإغلاق.",
     sum: "حفظ واستيراد · مساعدة",
@@ -810,7 +810,7 @@ const T = {
     fit: "Fit to width",
     vp_aria: "Study plan map; scroll to navigate",
     empty: "No courses match your search.",
-    hint: "Tap a course to see its requirements and change its status. Phones open in list view; the map is one tap away.",
+    hint: "Tap a course to see its requirements and change its status. Drag or pinch the map and the course stays selected; switch to the List view anytime.",
     save_ok: "Progress is saved in this browser • Percentage is by credit hours",
     save_fail: "Saving is unavailable in this browser; export a backup before closing.",
     sum: "Save, import & help",
@@ -1406,6 +1406,9 @@ $("#detailClose").onclick = closeDetail;
 document.addEventListener("pointerdown", (e) => {
   if (dock.hidden || !isCompact()) return;
   if (e.target.closest("#detail, .card, dialog, header, .toolbar, .bulkbar, .recommend-bar, .map-head")) return;
+  // On the map, a press may start a drag or pinch: keep the course selected.
+  // A plain tap on empty map space still closes it (see the viewport click handler).
+  if (!document.body.classList.contains("list") && e.target.closest("#viewport")) return;
   closeDetail();
 });
 document.addEventListener("keydown", (e) => {
@@ -1525,7 +1528,10 @@ vp.addEventListener("click", e => {
     suppressGestureClick = false;
     e.preventDefault();
     e.stopImmediatePropagation();
+    return;
   }
+  // A real tap (no drag/pinch) on empty map space closes the course bar on phones and tablets.
+  if (!dock.hidden && isCompact() && !document.body.classList.contains("list") && !e.target.closest(".card")) closeDetail();
 }, true);
 vp.addEventListener("wheel", e => {
   if (document.body.classList.contains("list") || !(e.ctrlKey || e.metaKey)) return;
@@ -1610,7 +1616,7 @@ applyLang();
   try {
     v = localStorage.getItem("ee_view");
   } catch {}
-  setView(v === "list" || (v !== "map" && isPhone()));
+  setView(v === "list");
 }
 new ResizeObserver(() => {
   const height = $("#map").offsetHeight;
