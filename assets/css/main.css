@@ -147,3 +147,15 @@ html[dir="ltr"] .sidebar { transform: translateX(-100%); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Resources — coming soon */
+.soon-list { list-style: none; margin: 1.2rem auto 0; padding: 0; max-width: 460px; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.soon-list li {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .35rem;
+  min-height: 92px; padding: .8rem .6rem; border: 1px dashed var(--line); border-radius: 12px;
+  color: var(--muted); font-size: .86rem; font-weight: 700;
+}
+.soon-list i { font-size: 1.05rem; opacity: .7; }
+.soon-list small { font-size: .72rem; font-weight: 600; color: var(--icon); }
+.soon-note { margin-top: 1rem; color: var(--muted); font-size: .8rem; }
+@media (min-width: 720px) { .soon-list { grid-template-columns: repeat(4, 1fr); max-width: none; } }
