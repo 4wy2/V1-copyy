@@ -425,7 +425,7 @@ const T = {
     st_depts:'تخصصات',st_courses:'مقرر',st_files:'ملف',courses:n=>n===1?'مقرر واحد':n===2?'مقرران':n===0?'0 مقرر':n<=10?`${n} مقررات`:`${n} مقررًا`,dept_empty:'تُضاف المصادر قريبًا',dl_pdf:'تحميل PDF',
     browse_aria:'تصفح المكتبة',search_ph:'ابحث برمز المقرر أو اسمه أو اسم الملف...',search_aria:'بحث في المكتبة',crumbs_aria:'مسار المجلدات',back:'رجوع',
     root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':n===0?'0 مجلد':n<=10?`${n} مجلدات`:`${n} مجلدًا`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':n===0?'0 ملف':n<=10?`${n} ملفات`:`${n} ملفًا`,
-    open_folder:'عرض المحتويات',files_h:'الملفات',
+    open_folder:'لا توجد ملفات بعد',files_h:'الملفات',
     preview:'معاينة',download:'تحميل ↓',close:'إغلاق ✕',
     search_h:'نتائج البحث',
     demo_bar:'<b>وضع تجريبي:</b> الملفات المعروضة أمثلة وهمية للتجربة فقط وليست من مصادر المكتبة.',
@@ -454,7 +454,7 @@ const T = {
     st_depts:'departments',st_courses:'courses',st_files:'files',courses:n=>`${n} course${n===1?'':'s'}`,dept_empty:'Resources coming soon',dl_pdf:'Download PDF',
     browse_aria:'Browse the library',search_ph:'Search by course code, course name, or file name…',search_aria:'Search the library',crumbs_aria:'Folder path',back:'Back',
     root:'Academic Library',depts:'Departments',folders:n=>`${n} folder${n===1?'':'s'}`,filesN:n=>`${n} file${n===1?'':'s'}`,
-    open_folder:'View contents',files_h:'Files',
+    open_folder:'No files yet',files_h:'Files',
     preview:'Preview',download:'Download ↓',close:'Close ✕',
     search_h:'Search results',
     demo_bar:'<b>Demo mode:</b> the files shown are invented samples for trying the interface, not library resources.',
@@ -630,8 +630,9 @@ async function load(refresh){
     let data = await fetchIndex(refresh, local ? local.generated : '');
     if (seq !== loadSeq) return;
     // "Nothing changed" is only valid if a good copy is loaded; otherwise fetch the full index.
-    if (data.unchanged && (!local || !store.byId.size)) { data = await fetchIndex(false, ''); if (seq !== loadSeq) return; }
-    else { ingest(data); saveLocal(data); }
+    if (data.unchanged && !(local && store.byId.size)) { data = await fetchIndex(false, ''); if (seq !== loadSeq) return; }
+    if (!data.unchanged) { ingest(data); saveLocal(data); }       // new or re-fetched index
+    else if (!(local && store.byId.size)) throw Object.assign(new Error('bad'), {code:'bad'});
     store.status = 'ready'; store.syncing = false;
     rerenderKeepingPlace();
   } catch (e) {
