@@ -91,14 +91,14 @@ a{color:inherit;text-decoration:none}
 .midterm .sched-head small{color:var(--bad)}
 .grid{display:grid;grid-template-columns:minmax(64px,.8fr) repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .grid .h{background:var(--card);font-weight:700;font-size:12.5px;text-align:center;padding:7px 2px}
-.grid .c{background:var(--panel);min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:3px;text-align:center}
+.grid .c{background:var(--panel);min-height:52px;min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:3px;text-align:center}
 .grid .t{background:var(--card);font:500 11.5px/1.35 var(--mono);color:var(--accent);direction:ltr}
 .grid .t small{display:block;font-size:10.5px;color:var(--muted)}
 .midterm .grid .t{color:var(--bad)}
 .grid .band{grid-column:1/-1;background:color-mix(in srgb,var(--bad) 14%,var(--panel));color:var(--bad);font-size:12px;font-weight:600;text-align:center;padding:5px}
-.course{width:100%;height:100%;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 2px}
-.course b{font:600 12px/1.2 var(--mono);word-break:break-word}
-.course span{font-size:10.5px;opacity:.8;margin-top:2px}
+.course{width:100%;height:100%;min-width:0;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 2px}
+.course b{font:600 12px/1.2 var(--mono);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.course span{font:500 10.5px/1.3 var(--mono);opacity:.85;margin-top:3px;max-width:100%;overflow-wrap:anywhere;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .del{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:color-mix(in srgb,var(--panel) 70%,transparent);border:0;cursor:pointer}
 .del i{width:28px;height:28px;border-radius:50%;background:var(--bad);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
 .editing .del{display:flex}
@@ -138,7 +138,7 @@ footer .wrap{display:flex;justify-content:center;align-items:center}
   .grid .t{font-size:10px}
   .grid .t small{font-size:9.5px}
   .course b{font-size:10.5px}
-  .course span{font-size:9.5px}
+  .course span{font-size:9px;letter-spacing:-.02em}
 }
 @media print{.top,.hero,.panel,.sched-actions,footer{display:none!important}body{background:#fff}.layout{display:block}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -253,27 +253,43 @@ footer .wrap{display:flex;justify-content:center;align-items:center}
     return Math.abs(h * 0x5BD1E995) % 360;
   }
   function colorOf(name){
-    const h = hueOf(name), light = document.documentElement.dataset.theme === 'light';
+    const names = [...new Set(scheduleData.map((x) => x.name))].sort((a, b) => hueOf(a) - hueOf(b) || a.localeCompare(b));
+    const k = names.indexOf(name), h = k < 0 ? hueOf(name) : Math.round((hueOf(names[0]) + k * 360 / names.length) % 360), light = document.documentElement.dataset.theme === 'light';
     return light ? { bg: `hsl(${h} 62% 90%)`, text: `hsl(${h} 55% 24%)` } : { bg: `hsl(${h} 38% 24%)`, text: `hsl(${h} 75% 84%)` };
   }
 
   // ---- render the weekly table
+  // "ACXF41,ACXF41,ACXF27" -> "ACXF41 · ACXF27" (rooms repeat once per lecture in the export)
+  const roomText = (r) => [...new Set(String(r || '').split(/[,،\/]+/).map((x) => x.trim()).filter(Boolean))].join('\n');
   function renderTable(){
     const grid = $('grid'), slots = isMidterm ? MIDTERM_SLOTS : TIME_SLOTS;
     let last = 4;
     for (const x of scheduleData) { const i = slots.findIndex((s) => s.id === String(x.slotId)); if (i > last) last = i; }
-    const kids = [el('div', {class:'h', text:'الوقت'}), ...DAYS.map((d) => el('div', {class:'h', text:d}))];
-    for (const slot of slots.slice(0, last + 1)) {
-      if (isMidterm && slot.id === '80') kids.push(el('div', {class:'band', text:'الفترة الأولى للاختبارات: 9:40 – 10:40'}));
-      if (isMidterm && slot.id === '63') kids.push(el('div', {class:'band', text:'الفترة الثانية للاختبارات: 1:20 – 2:20'}));
-      kids.push(el('div', {class:'c t'}, short(slot.s), el('small', {text:short(slot.e)})));
-      for (let d = 0; d < 5; d++) {
-        const x = scheduleData.find((e) => Number(e.day) === d && String(e.slotId) === slot.id);
-        if (!x) { kids.push(el('div', {class:'c'})); continue; }
-        const col = colorOf(x.name);
-        const card = el('div', {class:'course', style:`background:${col.bg};color:${col.text}`}, el('b', {text:x.name}), x.room ? el('span', {text:x.room}) : null);
+    const shown = slots.slice(0, last + 1);
+    const bandBefore = (slot) => isMidterm && (slot.id === '80' || slot.id === '63');
+    const at = (r, c, span) => `grid-row:${r} / span ${span || 1};grid-column:${c}`;
+    const kids = [el('div', {class:'h', style:at(1, 1), text:'الوقت'}), ...DAYS.map((d, i) => el('div', {class:'h', style:at(1, i + 2), text:d}))];
+    // rows: one per period, plus a full-width band before each exam window
+    const rowOf = []; let r = 2;
+    shown.forEach((slot, i) => {
+      if (bandBefore(slot)) kids.push(el('div', {class:'band', style:`grid-row:${r++};grid-column:1 / -1`, text: slot.id === '80' ? 'الفترة الأولى للاختبارات: 9:40 – 10:40' : 'الفترة الثانية للاختبارات: 1:20 – 2:20'}));
+      rowOf[i] = r;
+      kids.push(el('div', {class:'c t', style:at(r, 1)}, short(slot.s), el('small', {text:short(slot.e)})));
+      r++;
+    });
+    const entryAt = (d, i) => scheduleData.find((e) => Number(e.day) === d && String(e.slotId) === shown[i].id);
+    for (let d = 0; d < 5; d++) {
+      for (let i = 0; i < shown.length; i++) {
+        const x = entryAt(d, i);
+        if (!x) { kids.push(el('div', {class:'c', style:at(rowOf[i], d + 2)})); continue; }
+        // back-to-back periods of the same course become one block (never across an exam band)
+        let n = 1;
+        while (i + n < shown.length && !bandBefore(shown[i + n])) { const y = entryAt(d, i + n); if (!y || y.name !== x.name || roomText(y.room) !== roomText(x.room)) break; n++; }
+        const col = colorOf(x.name), room = roomText(x.room);
+        const card = el('div', {class:'course', style:`background:${col.bg};color:${col.text}`, title: room ? x.name + ' · ' + room.replace(/\n/g, ' · ') : x.name}, el('b', {text:x.name}), room ? el('span', {text:room}) : null);
         const del = el('button', {type:'button', class:'del', 'aria-label':'حذف ' + x.name, onclick:() => deleteCourse(x.name)}, el('i', {'aria-hidden':'true', text:'×'}));
-        kids.push(el('div', {class:'c'}, card, del));
+        kids.push(el('div', {class:'c', style:at(rowOf[i], d + 2, n)}, card, del));
+        i += n - 1;
       }
     }
     grid.replaceChildren(...kids);
