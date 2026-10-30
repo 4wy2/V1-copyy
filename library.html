@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | اللجنة العلمية</title>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='#243747'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='27' fill='#70b9df'%3EEE%3C/text%3E%3C/svg%3E"><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | اللجنة العلمية</title>
 <link rel="preconnect" href="https://script.google.com" crossorigin><link rel="preconnect" href="https://script.googleusercontent.com" crossorigin><link rel="dns-prefetch" href="https://drive.google.com"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_library_theme','ee_theme','ee_theme_v3']),lg=g(['ee_library_lang','ee_language','ee_lang']),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
 <style>
 /* =====================================================================
    YIC Academic Library —
+   ===================================================================== */
 
-/* ---------- 1. ---------- */
+/* ---------- 1.---------- */
 :root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
-:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#69727d;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
 @font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
   src: url(data:font/woff2;base64,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) format("woff2"); }
 @font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
@@ -64,7 +65,7 @@ a{color:inherit;text-decoration:none}
 .modebar.demo{padding:10px 14px;border-radius:10px;border:1px solid color-mix(in srgb,var(--warn) 55%,var(--line));background:color-mix(in srgb,var(--warn) 9%,var(--card))}
 .modebar.demo .dot{background:var(--warn)}
 .modebar .grow{min-width:0}
-.modebar .btn.sm{min-height:28px;padding:2px 10px;font-size:12px;border-radius:7px}
+.modebar .btn.sm{min-height:28px;padding:2px 10px;font-size:12px;border-radius:9px}
 .modebar .sync{font-size:12px;color:var(--muted)}
 
 /* ---------- 5. Search & path ---------- */
@@ -95,7 +96,7 @@ a{color:inherit;text-decoration:none}
 .cards.depts{grid-template-columns:repeat(2,minmax(0,1fr))}
 .dept{display:flex;align-items:center;gap:16px;text-align:start;padding:18px 20px;min-height:108px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;font:inherit;transition:border-color .15s,transform .15s,background-color .15s}
 .dept:hover{border-color:var(--accent);transform:translateY(-1px)}
-.dept .code{flex:none;min-width:60px;height:60px;padding:0 8px;display:grid;place-items:center;border-radius:12px;background:var(--sub);color:var(--accent);font:700 14px/1 var(--sans);letter-spacing:.05em}
+.dept .code{flex:none;min-width:60px;height:60px;padding:0 8px;display:grid;place-items:center;border-radius:10px;background:var(--sub);color:var(--accent);font:700 14px/1 var(--sans);letter-spacing:.05em}
 .dept .copy{flex:1;min-width:0;display:grid;gap:3px}
 .dept strong{font-size:15.5px;line-height:1.45;font-weight:600}
 .dept small{color:var(--muted);font-size:12px;line-height:1.4}
@@ -108,7 +109,7 @@ a{color:inherit;text-decoration:none}
 .dept.featured .stats{font-size:13px}
 .folder{display:flex;text-align:start;gap:13px;align-items:center;min-height:88px;border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s}
 .folder:hover{border-color:var(--accent);transform:translateY(-1px)}
-.folder .ico{background:var(--sub);border-radius:9px;width:auto;min-width:48px;padding:0 9px;height:42px;flex:none;display:grid;place-items:center;color:var(--accent);font:700 11.5px/1 var(--sans);letter-spacing:.05em}
+.folder .ico{background:var(--sub);border-radius:10px;width:auto;min-width:48px;padding:0 9px;height:42px;flex:none;display:grid;place-items:center;color:var(--accent);font:700 11.5px/1 var(--sans);letter-spacing:.05em}
 .folder .ico.empty{font-size:20px}
 .folder .ico.icon{min-width:46px;height:46px}
 .folder .ico svg{width:22px;height:22px}
@@ -127,7 +128,7 @@ a{color:inherit;text-decoration:none}
 .sortbar button[aria-pressed="true"]{background:var(--sub);color:var(--accent);font-weight:700}
 .file{display:flex;align-items:center;gap:13px;padding:13px 16px;border-top:1px solid var(--line);min-width:0}
 .files h3+.file{border-top:0}
-.file .fico{flex:none;width:42px;height:42px;border-radius:9px;display:grid;place-items:center;font:600 10.5px/1 var(--mono);letter-spacing:.02em;background:var(--sub);color:var(--accent);text-transform:uppercase}
+.file .fico{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font:600 10.5px/1 var(--mono);letter-spacing:.02em;background:var(--sub);color:var(--accent);text-transform:uppercase}
 .fico.pdf{color:#e58a7d;background:color-mix(in srgb,#e58a7d 15%,var(--panel))}
 .fico.doc{color:#7fa8e8;background:color-mix(in srgb,#7fa8e8 15%,var(--panel))}
 .fico.ppt{color:#e5a35f;background:color-mix(in srgb,#e5a35f 15%,var(--panel))}
@@ -145,17 +146,19 @@ a{color:inherit;text-decoration:none}
 .more-wrap{display:flex;justify-content:center;margin-top:14px}
 
 /* ---------- 8. States ---------- */
-.state{padding:38px 20px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted);display:grid;justify-items:center;gap:8px}
-.state .big{font-size:30px;line-height:1}
+.state{padding:38px 20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted);display:grid;justify-items:center;gap:8px}
+.state .big{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--sub);color:var(--accent)}
+.state .big svg{width:26px;height:26px}
+.state.bad .big{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
 .state strong{color:var(--text);font-size:15px}
 .state p{margin:0;max-width:520px}
 .state.bad{border-style:solid;border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
-.skel{min-height:96px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(90deg,var(--panel) 25%,var(--card) 50%,var(--panel) 75%);background-size:300% 100%;animation:sk 1.3s ease-in-out infinite}
+.skel{min-height:96px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(90deg,var(--panel) 25%,var(--card) 50%,var(--panel) 75%);background-size:300% 100%;animation:sk 1.3s ease-in-out infinite}
 @keyframes sk{from{background-position:100% 0}to{background-position:0 0}}
 
 /* ---------- 9. Share & footer ---------- */
 .share{display:flex;align-items:center;gap:18px;margin-top:22px;padding:20px 22px;border:1px dashed color-mix(in srgb,var(--accent) 55%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--accent) 5%,var(--panel))}
-.share .plus{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:12px;background:var(--sub);color:var(--accent);font:700 28px/1 system-ui,sans-serif}
+.share .plus{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:10px;background:var(--sub);color:var(--accent);font:700 28px/1 system-ui,sans-serif}
 .share .copy{flex:1;min-width:0}
 .share strong{display:block;font-size:16px;line-height:1.45;font-weight:700}
 .share p{margin:3px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
@@ -238,7 +241,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .cards.depts{grid-template-columns:1fr 1fr;gap:10px}
   .dept{flex-direction:column;align-items:flex-start;gap:8px;padding:14px;min-height:0;border-radius:12px}
   .dept .arr,.dept small{display:none}
-  .dept .code{min-width:40px;height:40px;font-size:12px;border-radius:10px}
+  .dept .code{min-width:40px;height:40px;font-size:12px;border-radius:9px}
   .dept strong{font-size:14px}
   .dept .stats{font-size:12px}
   .dept.featured{flex-direction:row;align-items:center;gap:12px;padding:16px;min-height:0}
@@ -247,7 +250,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .dept.featured small{display:block;font-size:12px}
   .dept.featured .stats{font-size:12.5px}
   .folder{min-height:0;padding:14px;gap:12px;border-radius:12px}
-  .folder .ico,.folder .ico.icon{min-width:40px;height:40px;border-radius:10px;font-size:11px}
+  .folder .ico,.folder .ico.icon{min-width:40px;height:40px;border-radius:9px;font-size:11px}
   .folder .ico svg{width:20px;height:20px}
   .folder strong{font-size:14px}
   .folder small{font-size:12px;margin-top:2px}
@@ -258,7 +261,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .sortbar button{position:relative;min-height:38px;padding:4px 12px;font-size:12.5px;border-radius:8px}
   .sortbar button::after{content:"";position:absolute;inset:-3px 0}
   .files .file{padding:12px 14px;gap:12px}
-  .files .file .fico{width:36px;height:36px;font-size:9.5px;border-radius:8px}
+  .files .file .fico{width:36px;height:36px;font-size:9.5px;border-radius:9px}
   .file .name{font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .file .meta{font-size:12px;gap:2px 10px}
   .files .file .acts{gap:6px;align-self:center}
@@ -270,9 +273,10 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .files .file .acts .btn.dl .dlico{display:inline}
   .recent{margin-top:22px}
   .more-wrap .btn{min-height:44px}
+  .state,.skel{border-radius:12px}
   /* share & footer */
   .share{flex-wrap:wrap;margin-top:14px;padding:14px;gap:12px;border-radius:12px}
-  .share .plus{width:38px;height:38px;font-size:21px;border-radius:10px}
+  .share .plus{width:38px;height:38px;font-size:21px;border-radius:9px}
   .share strong{font-size:14.5px}
   .share p{font-size:12.5px;line-height:1.7}
   .share .btn{width:100%;min-height:44px;font-size:14px}
@@ -438,7 +442,7 @@ const T = {
     dept_unavailable:'غير متاح حاليًا',
     restricted:'غير منشور',restricted_t:'هذا الملف غير منشور للعامة',restricted_p:'هذا الملف غير متاح للعرض في المكتبة.',
     demo_badge:'تجريبي',
-    pv_demo_note:'معاينة تجريبية — ليست ملفًا حقيقيًا.',
+    pv_demo_note:'معاينة تجريبية، وليست ملفًا حقيقيًا.',
             howto:'جميع المصادر تُنشر بعد مراجعتها من اللجنة العلمية.',
     recent_h:'أحدث الملفات',show_more:'عرض المزيد',
     share_t:'عندك ملف يفيد زملاءك؟',share_p:'ملخص، شرح مرتب، حل واجب أو أسئلة مراجعة… شاركه وساعد غيرك يذاكر أسهل. نراجعه ثم ننشره في المكتبة.',share_tc:(c)=>`عندك مصدر لـ ${c}؟`,share_pc:'شاركه وساعد زميلك. نراجعه ثم ننشره هنا.',share_btn:'شارك مصدرًا',sort_name:'الاسم',sort_new:'الأحدث',sort_aria:'ترتيب الملفات',
@@ -467,7 +471,7 @@ const T = {
     dept_unavailable:'Currently unavailable',
     restricted:'Not published',restricted_t:'This file isn’t shared publicly',restricted_p:'This file isn’t available to view in the library.',
     demo_badge:'Demo',
-    pv_demo_note:'Demo preview generated in the page — not a real file.',
+    pv_demo_note:'Demo preview generated in the page, not a real file.',
             howto:'All resources are published after review by the Scientific Committee.',
     recent_h:'Recently added',show_more:'Show more',
     share_t:'Have a file that could help others?',share_p:'A summary, clear notes, a solved assignment or review questions… share it and help a classmate study. We review it, then publish it in the library.',share_tc:(c)=>`Have a resource for ${c}?`,share_pc:'Share it and help a classmate. We review it, then publish it here.',share_btn:'Share a resource',sort_name:'Name',sort_new:'Newest',sort_aria:'Sort files',
@@ -697,18 +701,25 @@ const ICONS = {
   assign:'<path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>',
   exam:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 6l1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/>',
   lab:'<path d="M9 3h6M10 3v6l-5.2 9.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9V3"/><path d="M7.5 15h9"/>',
-  book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>'
+  book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>',
+  // state icons (empty folder, locked, warning, settings)
+  empty:'<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/>',
+  alert:'<path d="M12 4 21 19.5H3z"/><path d="M12 10v4.5M12 17.2v.1"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>'
 };
-function iconFor(name){
-  const s = String(name || '');
-  const k = /lectur|محاضر|slides|شرائح/i.test(s) ? 'lecture' : /summar|ملخص|notes|مذكر/i.test(s) ? 'summary' : /assign|homework|واجب|تكليف/i.test(s) ? 'assign'
-    : /review|مراجع|quiz|exam|midterm|final|اختبار|كويز|امتحان/i.test(s) ? 'exam' : /lab|معمل|مختبر|تجارب/i.test(s) ? 'lab' : /book|text|كتاب|مرجع|reference/i.test(s) ? 'book' : '';
-  if (!k) return null;
+function svgIcon(k){
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
   svg.setAttribute('stroke-width', '1.7'); svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round');
   svg.innerHTML = ICONS[k]; // fixed markup above, never Drive data
   return svg;
+}
+function iconFor(name){
+  const s = String(name || '');
+  const k = /lectur|محاضر|slides|شرائح/i.test(s) ? 'lecture' : /summar|ملخص|notes|مذكر/i.test(s) ? 'summary' : /assign|homework|واجب|تكليف/i.test(s) ? 'assign'
+    : /review|مراجع|quiz|exam|midterm|final|اختبار|كويز|امتحان/i.test(s) ? 'exam' : /lab|معمل|مختبر|تجارب/i.test(s) ? 'lab' : /book|text|كتاب|مرجع|reference/i.test(s) ? 'book' : '';
+  return k ? svgIcon(k) : null;
 }
 function deptCard(r, featured){
   const err = store.rootErrors.get(r.id), code = r.sub.split('·')[0].trim();
@@ -753,7 +764,7 @@ function fileRow(n, withPath){
 }
 function stateBox(kind, icon, title, text, actions){
   return el('div', {class:'state' + (kind === 'bad' ? ' bad' : ''), role: kind === 'bad' ? 'alert' : 'status'},
-    el('span', {class:'big', 'aria-hidden':'true', text:icon}), el('strong', {text:title}), el('p', {text:text}), actions || null);
+    el('span', {class:'big', 'aria-hidden':'true'}, ICONS[icon] ? svgIcon(icon) : icon), el('strong', {text:title}), el('p', {text:text}), actions || null);
 }
 function renderModebar(){
   const mb = $('modebar'); mb.replaceChildren();
@@ -801,7 +812,7 @@ function render(){
   cards.removeAttribute('aria-busy');
   if (store.status === 'error') {
     $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
-    const map = {network:['bad','⚠︎',t('net_t'),t('net_p'),retry], denied:['bad','🔒',t('denied_t'),t('denied_p'),null], config:['bad','⚙︎',t('cfg_t'),t('cfg_p'),null], bad:['bad','⚠︎',t('bad_t'),t('bad_p'),retry]};
+    const map = {network:['bad','alert',t('net_t'),t('net_p'),retry], denied:['bad','lock',t('denied_t'),t('denied_p'),null], config:['bad','gear',t('cfg_t'),t('cfg_p'),null], bad:['bad','alert',t('bad_t'),t('bad_p'),retry]};
     const picked = map[store.error] || map.network;
     return showState(picked[0], picked[1], picked[2], picked[3], picked[4]);
   }
@@ -844,11 +855,11 @@ function render(){
   // Unknown or filtered folder: never reveal whether it exists
   if (!ROOT_IDS.has(currentId) && !(store.byId.has(currentId) && store.byId.get(currentId).kind === 'folder')) {
     $('sectionTitle').textContent = t('denied_t'); $('count').textContent = '';
-    return showState('bad', '🔒', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
+    return showState('bad', 'lock', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
   }
   if (ROOT_IDS.has(currentId) && store.rootErrors.has(currentId)) {
     $('sectionTitle').textContent = titleOf(currentId); $('count').textContent = '';
-    return showState('bad', '🔒', t('denied_t'), t('dept_unavailable'), retry);
+    return showState('bad', 'lock', t('denied_t'), t('dept_unavailable'), retry);
   }
 
   const kids = store.kids.get(currentId) || [];
@@ -865,7 +876,7 @@ function render(){
     files.append(el('h3', {}, el('span', {text:t('files_h')}), fil.length > 1 ? el('span', {class:'sortbar', role:'group', 'aria-label':t('sort_aria')}, sb('name', t('sort_name')), sb('new', t('sort_new'))) : null));
     sorted.forEach((n) => files.append(fileRow(n, false)));
   }
-  if (!kids.length) showState('', '📂', t('empty_t'), t('empty_p'));
+  if (!kids.length) showState('', 'empty', t('empty_t'), t('empty_p'));
   // Invite students to contribute, labelled with the course they are in.
   const course = pathTo(currentId).slice(1).map((id) => ROOT_IDS.has(id) ? '' : splitName(titleOf(id)).badge).filter((b) => b && !/^\d+$/.test(b))[0];
   const sc = shareCard(course || titleOf(currentId)); if (sc) $('shareBottom').append(sc);
@@ -894,7 +905,7 @@ function openPreview(n){
   dl.href = n.demo ? '#' : downloadUrl(n);
   dl.textContent = isGoogleType(n) ? t('dl_pdf') : t('download');
   const center = (icon, title, text) => el('div', {class:'frame-state'}, stateBox('', icon, title, text));
-  if (n.public === false) body.append(center('🔒', t('restricted_t'), t('restricted_p')));
+  if (n.public === false) body.append(center('lock', t('restricted_t'), t('restricted_p')));
   else if (n.demo) body.append(el('iframe', {srcdoc:demoDoc(n), title:n.name, sandbox:''}));
   else {
     const frame = el('iframe', {src:drivePreviewUrl(n.id), title:n.name, allow:'autoplay', referrerpolicy:'strict-origin-when-cross-origin'});
