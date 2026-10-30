@@ -205,6 +205,76 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .files .file .fico{width:38px;height:38px}
 }
 @media(max-width:360px){.topin{gap:8px}.brand{gap:8px}.mark{width:34px;height:34px}.brand small{display:none}.brand strong{white-space:nowrap;font-size:13.5px}.topright{gap:5px}.topright .btn{padding:6px 8px;min-height:38px}}
+
+/* ===== Phones: calmer, denser layout (measured on iPhone 13 / Pixel 7 emulation) ===== */
+@media(max-width:600px){
+  body{font-size:14px;line-height:1.7}
+  .wrap{width:calc(100% - 28px)}
+  .topin{min-height:54px;gap:10px}
+  .mark{width:32px;height:32px;border-radius:9px;font-size:12px}
+  .brand strong{font-size:13.5px}
+  .brand small{display:none}
+  .topright{gap:6px}
+  .topright .btn{min-height:34px;padding:4px 10px;font-size:12.5px;border-radius:8px}
+  .hero{padding:18px 0 8px;gap:8px}
+  .eyebrow{display:none}
+  .hero h1{font-size:23px;margin:0 0 4px}
+  .hero p{font-size:13px;line-height:1.75;margin:0}
+  .hero-stats{display:flex;gap:14px;border:0;background:none;border-radius:0;padding:0}
+  .hero-stats div{padding:0;display:flex;align-items:baseline;gap:4px}
+  .hero-stats div+div{border:0}
+  .hero-stats b{font-size:13.5px;color:var(--text)}
+  .hero-stats span{font-size:12px}
+  .modebar{font-size:11.5px;margin:0 0 2px;gap:6px}
+  .modebar .btn.sm{min-height:24px;padding:0 8px;font-size:11.5px}
+  .toolbar{margin:8px 0 2px}
+  .search input{min-height:44px;font-size:14px;border-radius:11px;padding-top:9px;padding-bottom:9px}
+  .search::before{width:13px;height:13px}
+  .search::after{inset-inline-start:27px;top:calc(50% + 5px);width:6px}
+  .navrow{margin:10px 0 10px;gap:8px}
+  .navrow .back{min-width:30px;min-height:30px;font-size:13px}
+  .crumbs{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;font-size:12px;gap:4px;scrollbar-width:none}
+  .crumbs::-webkit-scrollbar{display:none}
+  .crumbs button{padding:2px}
+  .sectionline{padding-bottom:7px;margin-bottom:10px}
+  .sectionline h2{font-size:16px}
+  .cards,.cards.depts{gap:8px}
+  .dept{padding:11px 12px;gap:7px;border-radius:12px}
+  .dept .code{min-width:38px;height:38px;font-size:11.5px;border-radius:9px}
+  .dept strong{font-size:13.5px;line-height:1.45}
+  .dept .stats{font-size:11px}
+  .dept.featured{padding:13px 14px;gap:12px;min-height:0}
+  .dept.featured .code{min-width:46px;height:46px;font-size:13.5px}
+  .dept.featured strong{font-size:15.5px}
+  .dept.featured small{font-size:11px}
+  .dept.featured .stats{font-size:11.5px}
+  .folder{min-height:0;padding:11px 12px;gap:10px;border-radius:12px}
+  .folder .ico,.folder .ico.icon{min-width:38px;height:38px;border-radius:9px;font-size:10.5px}
+  .folder .ico svg{width:19px;height:19px}
+  .folder strong{font-size:13.5px}
+  .folder small{font-size:11.5px;margin-top:1px}
+  .share{margin-top:12px;padding:12px 13px;gap:10px;border-radius:12px}
+  .share .plus{width:34px;height:34px;font-size:19px;border-radius:9px}
+  .share strong{font-size:13.5px}
+  .share p{font-size:12px;line-height:1.65}
+  .share .btn{min-height:38px;font-size:13px}
+  .files{border-radius:12px;margin-top:10px}
+  .files h3{padding:9px 12px;font-size:12.5px}
+  .sortbar button{min-height:28px;padding:3px 9px;font-size:11.5px}
+  .files .file{padding:10px 12px;gap:10px}
+  .files .file .fico{width:34px;height:34px;font-size:9.5px;border-radius:8px}
+  .file .name{font-size:13px;line-height:1.5}
+  .file .meta{font-size:11px;gap:2px 9px}
+  .files .file .acts .btn{min-height:30px;padding:2px 11px;font-size:12px}
+  .files .file .acts .btn.dl{min-height:26px;font-size:11px}
+  .recent{margin-top:18px}
+  .howto-line{margin:22px 0 26px;font-size:11.5px}
+  footer{padding:14px 0}
+  .sig{font-size:21px}
+  /* inside a department/course: the page title is no longer needed */
+  body.inside .hero,body.inside #modebar{display:none}
+  body.inside .toolbar{margin-top:12px}
+}
 </style>
 </head>
 <body>
@@ -627,6 +697,9 @@ function render(){
   // Breadcrumbs
   const crumbs = $('crumbs'); crumbs.replaceChildren();
   $('navrow').classList.toggle('root', currentId === 'root' && !q);
+  document.body.classList.toggle('inside', currentId !== 'root' || !!q);
+  // On narrow screens the path scrolls sideways: keep the current folder in view.
+  requestAnimationFrame(() => { const c = $('crumbs'); c.scrollLeft = document.documentElement.dir === 'rtl' ? -c.scrollWidth : c.scrollWidth; });
   const trail = store.status === 'ready' && (currentId === 'root' || store.byId.has(currentId) || ROOT_IDS.has(currentId)) ? pathTo(currentId) : ['root'];
   trail.forEach((id, i) => {
     if (i) crumbs.append(el('span', {class:'slash', text:'/'}));
