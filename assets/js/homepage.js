@@ -65,7 +65,7 @@
     langBtn.setAttribute('aria-label', s.langLabel);
     themeBtn.innerHTML = theme === 'dark' ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>' : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
     themeBtn.setAttribute('aria-label', theme === 'dark' ? s.toLight : s.toDark);
-    document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#11141c' : '#f3f3f6';
+    document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#151a22' : '#f3f2ef';
     document.title = s.title;
   }
 
