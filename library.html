@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='#243747'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='27' fill='#70b9df'%3EEE%3C/text%3E%3C/svg%3E"><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | اللجنة العلمية</title>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='#243747'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='27' fill='#70b9df'%3EEE%3C/text%3E%3C/svg%3E"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | اللجنة العلمية</title>
 <link rel="preconnect" href="https://script.google.com" crossorigin><link rel="preconnect" href="https://script.googleusercontent.com" crossorigin><link rel="dns-prefetch" href="https://drive.google.com"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_library_theme','ee_theme','ee_theme_v3']),lg=g(['ee_library_lang','ee_language','ee_lang']),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
 <style>
 /* =====================================================================
-   YIC Academic Library —
+   YIC Academic Library — otion
    ===================================================================== */
 
-/* ---------- 1.---------- */
+/* ---------- 1. ---------- */
 :root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
 :root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
 @font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
@@ -147,9 +147,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- 8. States ---------- */
 .state{padding:38px 20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted);display:grid;justify-items:center;gap:8px}
-.state .big{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--sub);color:var(--accent)}
-.state .big svg{width:26px;height:26px}
-.state.bad .big{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.state .big{font-size:30px;line-height:1}
 .state strong{color:var(--text);font-size:15px}
 .state p{margin:0;max-width:520px}
 .state.bad{border-style:solid;border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
@@ -701,12 +699,7 @@ const ICONS = {
   assign:'<path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>',
   exam:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 6l1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/>',
   lab:'<path d="M9 3h6M10 3v6l-5.2 9.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9V3"/><path d="M7.5 15h9"/>',
-  book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>',
-  // state icons (empty folder, locked, warning, settings)
-  empty:'<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>',
-  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/>',
-  alert:'<path d="M12 4 21 19.5H3z"/><path d="M12 10v4.5M12 17.2v.1"/>',
-  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>'
+  book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>'
 };
 function svgIcon(k){
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -764,7 +757,7 @@ function fileRow(n, withPath){
 }
 function stateBox(kind, icon, title, text, actions){
   return el('div', {class:'state' + (kind === 'bad' ? ' bad' : ''), role: kind === 'bad' ? 'alert' : 'status'},
-    el('span', {class:'big', 'aria-hidden':'true'}, ICONS[icon] ? svgIcon(icon) : icon), el('strong', {text:title}), el('p', {text:text}), actions || null);
+    el('span', {class:'big', 'aria-hidden':'true', text:icon}), el('strong', {text:title}), el('p', {text:text}), actions || null);
 }
 function renderModebar(){
   const mb = $('modebar'); mb.replaceChildren();
@@ -812,7 +805,7 @@ function render(){
   cards.removeAttribute('aria-busy');
   if (store.status === 'error') {
     $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
-    const map = {network:['bad','alert',t('net_t'),t('net_p'),retry], denied:['bad','lock',t('denied_t'),t('denied_p'),null], config:['bad','gear',t('cfg_t'),t('cfg_p'),null], bad:['bad','alert',t('bad_t'),t('bad_p'),retry]};
+    const map = {network:['bad','⚠︎',t('net_t'),t('net_p'),retry], denied:['bad','🔒',t('denied_t'),t('denied_p'),null], config:['bad','⚙︎',t('cfg_t'),t('cfg_p'),null], bad:['bad','⚠︎',t('bad_t'),t('bad_p'),retry]};
     const picked = map[store.error] || map.network;
     return showState(picked[0], picked[1], picked[2], picked[3], picked[4]);
   }
@@ -855,11 +848,11 @@ function render(){
   // Unknown or filtered folder: never reveal whether it exists
   if (!ROOT_IDS.has(currentId) && !(store.byId.has(currentId) && store.byId.get(currentId).kind === 'folder')) {
     $('sectionTitle').textContent = t('denied_t'); $('count').textContent = '';
-    return showState('bad', 'lock', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
+    return showState('bad', '🔒', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
   }
   if (ROOT_IDS.has(currentId) && store.rootErrors.has(currentId)) {
     $('sectionTitle').textContent = titleOf(currentId); $('count').textContent = '';
-    return showState('bad', 'lock', t('denied_t'), t('dept_unavailable'), retry);
+    return showState('bad', '🔒', t('denied_t'), t('dept_unavailable'), retry);
   }
 
   const kids = store.kids.get(currentId) || [];
@@ -876,7 +869,7 @@ function render(){
     files.append(el('h3', {}, el('span', {text:t('files_h')}), fil.length > 1 ? el('span', {class:'sortbar', role:'group', 'aria-label':t('sort_aria')}, sb('name', t('sort_name')), sb('new', t('sort_new'))) : null));
     sorted.forEach((n) => files.append(fileRow(n, false)));
   }
-  if (!kids.length) showState('', 'empty', t('empty_t'), t('empty_p'));
+  if (!kids.length) showState('', '📂', t('empty_t'), t('empty_p'));
   // Invite students to contribute, labelled with the course they are in.
   const course = pathTo(currentId).slice(1).map((id) => ROOT_IDS.has(id) ? '' : splitName(titleOf(id)).badge).filter((b) => b && !/^\d+$/.test(b))[0];
   const sc = shareCard(course || titleOf(currentId)); if (sc) $('shareBottom').append(sc);
@@ -905,7 +898,7 @@ function openPreview(n){
   dl.href = n.demo ? '#' : downloadUrl(n);
   dl.textContent = isGoogleType(n) ? t('dl_pdf') : t('download');
   const center = (icon, title, text) => el('div', {class:'frame-state'}, stateBox('', icon, title, text));
-  if (n.public === false) body.append(center('lock', t('restricted_t'), t('restricted_p')));
+  if (n.public === false) body.append(center('🔒', t('restricted_t'), t('restricted_p')));
   else if (n.demo) body.append(el('iframe', {srcdoc:demoDoc(n), title:n.name, sandbox:''}));
   else {
     const frame = el('iframe', {src:drivePreviewUrl(n.id), title:n.name, allow:'autoplay', referrerpolicy:'strict-origin-when-cross-origin'});
