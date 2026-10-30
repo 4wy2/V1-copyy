@@ -6,10 +6,13 @@
 <script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_library_theme','ee_theme','ee_theme_v3']),lg=g(['ee_library_lang','ee_language','ee_lang']),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
 <style>
 /* =====================================================================
-   YIC Academic Library — otion
+   YIC Academic Library — stylesheet
+   1. Tokens   2. Base   3. Header   4. Hero & status   5. Search & path
+   6. Sections & cards   7. Files   8. States   9. Share & footer
+   10. Preview   11. Tablet   12. Phone   13. Very small   14. Reduced motion
    ===================================================================== */
 
-/* ---------- 1. ---------- */
+/* ---------- 1. Tokens ---------- */
 :root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
 :root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
 @font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
@@ -129,11 +132,10 @@ a{color:inherit;text-decoration:none}
 .file{display:flex;align-items:center;gap:13px;padding:13px 16px;border-top:1px solid var(--line);min-width:0}
 .files h3+.file{border-top:0}
 .file .fico{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font:600 10.5px/1 var(--mono);letter-spacing:.02em;background:var(--sub);color:var(--accent);text-transform:uppercase}
-.fico.pdf{color:#e58a7d;background:color-mix(in srgb,#e58a7d 15%,var(--panel))}
-.fico.doc{color:#7fa8e8;background:color-mix(in srgb,#7fa8e8 15%,var(--panel))}
-.fico.ppt{color:#e5a35f;background:color-mix(in srgb,#e5a35f 15%,var(--panel))}
-.fico.xls{color:#6fbf8e;background:color-mix(in srgb,#6fbf8e 15%,var(--panel))}
-.fico.img{color:#b79be6;background:color-mix(in srgb,#b79be6 15%,var(--panel))}
+.fico.pdf{--k:#ec8f82}.fico.doc{--k:#86aef0}.fico.ppt{--k:#eba862}.fico.xls{--k:#74c794}.fico.img{--k:#bda2ec}
+:root[data-theme="light"] .fico.pdf{--k:#b4473a}:root[data-theme="light"] .fico.doc{--k:#2f5fae}:root[data-theme="light"] .fico.ppt{--k:#a85f12}:root[data-theme="light"] .fico.xls{--k:#257a48}:root[data-theme="light"] .fico.img{--k:#6c4bb0}
+.fico.pdf,.fico.doc,.fico.ppt,.fico.xls,.fico.img{color:var(--k);background:color-mix(in srgb,var(--k) 22%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k) 30%,transparent)}
+:root[data-theme="light"] :is(.fico.pdf,.fico.doc,.fico.ppt,.fico.xls,.fico.img){background:color-mix(in srgb,var(--k) 12%,var(--panel))}
 .file .copy{flex:1;min-width:0}
 .file .name{display:block;font-weight:600;line-height:1.45;overflow-wrap:anywhere;text-align:start}
 .file button.name{width:100%;background:none;border:0;padding:0;color:var(--text);cursor:pointer}
@@ -204,7 +206,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .mark{width:34px;height:34px;border-radius:9px;font-size:12px}
   .brand{gap:9px}
   .brand strong{font-size:14px;white-space:nowrap}
-  .brand small{display:none}
+  .brand small{display:block;font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .topright{gap:6px}
   .topright .btn{position:relative;min-height:38px;padding:4px 11px;font-size:13px;border-radius:9px;white-space:nowrap}
   .topright .lbl{display:none}
