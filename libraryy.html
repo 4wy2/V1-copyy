@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23243747'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='27' fill='%2370b9df'%3EEE%3C/text%3E%3C/svg%3E"><link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACT0lEQVR4nOyXS2gTURSG/3MztY+QagpVEq0PGikKgRbUVlBQUYPuXIgrq6g7QXThXly6cetC3LkRxY2Pmii4UFpa0aBto9KYQJvRxMdEW2sSk1zvrSZkzNCmdDrTRb9N7j1n4P+4mQdHQQUbO/esUurqL4B4Dyd0Emg1TICDp4gjDE4D+d/Zq/Hw03SpR6VF+7aDh8iB66LkxaLCVV7AmeiL4MOygG/H/gDI0QcL4QV+WErQev8ud12jc4QIHlgKVzOM/IrS5DwhjsHicAl5VxTRywi8BzYhsxXxY5uAzFbE8W+ATchsBTazLLD0BbqOnsZa/3bD3siDW0i+H8a+85cN+9mpSYSuXMSCBEok3gxhOv1NV9MS8fL613cNE68Hdf1CLoO5qFlg4lU/Po+NVtWbWv5+MDNC4F3oLuZLzQLNnraqWqpCSKlvQKtvq67/U/uC6a8pmCKw5cCRqtr9S2fLa9caL7p7z+n60WchRIJ3YIpARBzvj4/julqxWCivJ5MqRh/d1vXlCcxFzQIy/P97gCrW+WzG8B4xTWBd1060bOrQ1aZSKrTx2My6YaUbHQZ/U6z/MXLicVywgNG74FMkXBZoFAKbdweqrlHFozmbAPm6Axw2svwtsF2AiaEhCZuQ2Yw4hWETMpuJ95ltAjKb5ZnjGuc8DYuRmTKbxQf64mJ7ChZDRCdltkNutMSHt25P+yAx7BUtFxaVmeH0WHQoeE/uHKWypkbHmlvbbjCm5MRFWTGeu8R47oQJ/BvPn4vx/GY+lzsee/lkuNT7AwAA//9JPT9WAAAABklEQVQDAGzo2tnku+UoAAAAAElFTkSuQmCC"><link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACoUlEQVR4nOzdPcuOcRiA8T8RBkJZGTxs5mdhMFl8D5PBZlbK4AMwWC0GZZFMXqJQigze8pZJPV5SCOWZpDgGurvdN7/feE3XcHRedXbWtWphcd+AX1k1IIiDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEizFcfmbQtbdu4a07X09MGrh/d+fr52w8Zti3vHdH18u/TsxqUxG2Yrjk1bt+/Ys29M1+MVK38dx/qN03+Z1y+eiIM5IA6SOEjiIImDJA7SnMXx8MqFMWnLe47xR17cvv7x/bsxUct7jjEz5imOz58+3L94dsyM5YXEm5dPx7/LZ4UkDpI4SOIgiYMkDpI4SOIgiYMkDpI4SPMUx+o16/YfOTEm5865089vXR5/aveBw2NyXt69efvMqTFLTA6SOEjiIImDJA6SOEjiIM3ZDemFo4fGzLh68pgbUv5T4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQO0n99YPzd1y+fzx85OH7TZA+Mf3Tt1PGlZ4/G32ZykMRBEgdJHCRxkMRBEgdpxcLitP83w7wwOUjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA7SNwAAAP//YfLmYwAAAAZJREFUAwAfYlK3KMMqEAAAAABJRU5ErkJggg=="><meta name="theme-color" content="#0b0e13"><title>المكتبة الأكاديمية | طلاب الهندسة الكهربائية</title>
+<link rel="preconnect" href="https://script.google.com" crossorigin><link rel="preconnect" href="https://script.googleusercontent.com" crossorigin><link rel="dns-prefetch" href="https://drive.google.com"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_library_theme','ee_theme','ee_theme_v3']),lg=g(['ee_library_lang','ee_language','ee_lang']),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
+<style>
+/* =====================================================================
+   YIC Academic Library — stylesheet
+   1. Tokens   2. Base   3. Header   4. Hero & status   5. Search & path
+   6. Sections & cards   7. Files   8. States   9. Share & footer
+   10. Preview   11. Tablet   12. Phone   13. Very small   14. Reduced motion
+   ===================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
+
+/* ---------- 2. Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:14.5px/1.8 var(--sans);-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}
+button,a{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+.hidden{display:none!important}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:750}
+:root[data-theme="light"] .btn.primary{color:white}
+.btn.sm{min-height:34px;padding:5px 11px;font-size:13px}
+.badge{font-size:11px;padding:3px 8px;border-radius:5px;background:var(--sub);color:var(--accent)}
+.badge.demo{background:color-mix(in srgb,var(--warn) 18%,var(--panel));color:var(--warn)}
+.badge.lock{background:color-mix(in srgb,var(--bad) 15%,var(--panel));color:var(--bad)}
+.arr{color:var(--muted)}
+[dir="ltr"] .arr{transform:scaleX(-1)}
+
+/* ---------- 3. Header ---------- */
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
+.topin{display:flex;align-items:center;gap:16px;min-height:72px}
+.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-family:var(--sans);font-weight:700;font-size:13px}
+.brand{display:flex;gap:12px;align-items:center}
+.brand strong{font-size:14.5px;display:block;font-weight:700}
+.brand small{color:var(--muted)}
+.topright{margin-inline-start:auto;display:flex;gap:8px}
+
+/* ---------- 4. Hero & status ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px 40px;padding:52px 0 30px}
+.eyebrow{color:var(--accent);font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.18em}
+.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.3;font-weight:700;margin:6px 0 10px}
+.hero p{color:var(--muted);max-width:560px;margin:0;font-size:15.5px;line-height:1.9}
+.hero-stats{margin:0;display:grid;grid-template-columns:repeat(3,auto);gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.hero-stats:empty{display:none}
+.hero-stats div{display:grid;gap:0;padding:14px 22px;min-width:96px;text-align:center}
+.hero-stats div+div{border-inline-start:1px solid var(--line)}
+.hero-stats b{font:700 28px/1.2 var(--sans);font-variant-numeric:tabular-nums;color:var(--text)}
+.hero-stats span{font-size:12px;color:var(--muted)}
+.modebar{display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:0 0 6px}
+.modebar b{color:var(--text)}
+.modebar .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:none}
+.modebar.off .dot{background:var(--bad)}
+.modebar.demo{padding:10px 14px;border-radius:10px;border:1px solid color-mix(in srgb,var(--warn) 55%,var(--line));background:color-mix(in srgb,var(--warn) 9%,var(--card))}
+.modebar.demo .dot{background:var(--warn)}
+.modebar .grow{min-width:0}
+.modebar .btn.sm{min-height:28px;padding:2px 10px;font-size:12px;border-radius:9px}
+.modebar .sync{font-size:12px;color:var(--muted)}
+
+/* ---------- 5. Search & path ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:14px 0 4px}
+.search{position:relative;flex:1;min-width:220px}
+.search input{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 17px;padding-inline-start:44px;color:var(--text);width:100%;outline-offset:2px;-webkit-appearance:none;appearance:none;font-size:15px;min-height:54px;box-shadow:0 1px 0 var(--shadow)}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.search::before{content:"";position:absolute;inset-inline-start:16px;top:50%;width:15px;height:15px;transform:translateY(-58%);border:2px solid var(--muted);border-radius:50%;pointer-events:none}
+.search::after{content:"";position:absolute;inset-inline-start:30px;top:calc(50% + 6px);width:7px;height:2px;background:var(--muted);transform:rotate(45deg);border-radius:2px;pointer-events:none}
+[dir="rtl"] .search::after{transform:rotate(-45deg)}
+.navrow{display:flex;align-items:center;gap:10px;margin:14px 0 18px;min-height:34px}
+.navrow.root{display:none}
+.navrow .back{min-width:34px;padding:0;border-radius:9px;font-size:15px}
+[dir="ltr"] .navrow .back span{display:inline-block;transform:scaleX(-1)}
+.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0;color:var(--muted);font-size:13px}
+.crumbs button{background:none;border:0;color:var(--accent);cursor:pointer;padding:4px;font-weight:500}
+.crumbs button:last-child{color:var(--text);font-weight:700}
+.crumbs .slash{opacity:.5}
+.file .name,.folder strong,.crumbs button,#sectionTitle,#pvTitle{unicode-bidi:plaintext}
+
+/* ---------- 6. Sections & cards ---------- */
+.sectionline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sectionline h2{font-size:19px;font-weight:700;margin:0}
+#sectionTitle{scroll-margin-top:88px}
+.count{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cards.depts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dept{display:flex;align-items:center;gap:16px;text-align:start;padding:18px 20px;min-height:108px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;font:inherit;transition:border-color .15s,transform .15s,background-color .15s}
+.dept:hover{border-color:var(--accent);transform:translateY(-1px)}
+.dept .code{flex:none;min-width:60px;height:60px;padding:0 8px;display:grid;place-items:center;border-radius:10px;background:var(--sub);color:var(--accent);font:700 14px/1 var(--sans);letter-spacing:.05em}
+.dept .copy{flex:1;min-width:0;display:grid;gap:3px}
+.dept strong{font-size:15.5px;line-height:1.45;font-weight:600}
+.dept small{color:var(--muted);font-size:12px;line-height:1.4}
+.dept .stats{font-size:12px;color:var(--accent);font-weight:650}
+.dept .stats.off{color:var(--bad)}
+.dept.featured{grid-column:1/-1;min-height:136px;padding:24px 26px;border-color:color-mix(in srgb,var(--accent) 50%,var(--line));background:color-mix(in srgb,var(--accent) 7%,var(--panel))}
+.dept.featured .code{min-width:76px;height:76px;font-size:18px;background:var(--accent);color:#0b1520}
+:root[data-theme="light"] .dept.featured .code{color:#fff}
+.dept.featured strong{font-size:21px;font-weight:700}
+.dept.featured .stats{font-size:13px}
+.folder{display:flex;text-align:start;gap:13px;align-items:center;min-height:88px;border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s}
+.folder:hover{border-color:var(--accent);transform:translateY(-1px)}
+.folder .ico{background:var(--sub);border-radius:10px;width:auto;min-width:48px;padding:0 9px;height:42px;flex:none;display:grid;place-items:center;color:var(--accent);font:700 11.5px/1 var(--sans);letter-spacing:.05em}
+.folder .ico.empty{font-size:20px}
+.folder .ico.icon{min-width:46px;height:46px}
+.folder .ico svg{width:22px;height:22px}
+.folder .copy{flex:1;min-width:0}
+.folder strong{display:block;white-space:normal;line-height:1.45;font-size:14px;font-weight:600}
+.folder small{display:block;color:var(--muted);margin-top:4px}
+[dir="rtl"] .folder .copy strong,[dir="rtl"] .folder .copy small,[dir="rtl"] .file .name{text-align:right}
+[dir="ltr"] .file .name{text-align:left}
+
+/* ---------- 7. Files ---------- */
+.files{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px;background:var(--panel)}
+.files h3{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0;padding:13px 16px;font-size:13.5px;color:var(--text);font-weight:700;background:var(--card);border-bottom:1px solid var(--line)}
+.recent{margin-top:30px}
+.sortbar{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.sortbar button{background:var(--panel);border:0;color:var(--muted);padding:5px 11px;font-size:12px;cursor:pointer;min-height:32px}
+.sortbar button[aria-pressed="true"]{background:var(--sub);color:var(--accent);font-weight:700}
+.file{display:flex;align-items:center;gap:13px;padding:13px 16px;border-top:1px solid var(--line);min-width:0}
+.files h3+.file{border-top:0}
+.file .fico{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font:600 10.5px/1 var(--mono);letter-spacing:.02em;background:var(--sub);color:var(--accent);text-transform:uppercase}
+.fico.pdf{--k:#ec8f82}.fico.doc{--k:#86aef0}.fico.ppt{--k:#eba862}.fico.xls{--k:#74c794}.fico.img{--k:#bda2ec}
+:root[data-theme="light"] .fico.pdf{--k:#b4473a}:root[data-theme="light"] .fico.doc{--k:#2f5fae}:root[data-theme="light"] .fico.ppt{--k:#a85f12}:root[data-theme="light"] .fico.xls{--k:#257a48}:root[data-theme="light"] .fico.img{--k:#6c4bb0}
+.fico.pdf,.fico.doc,.fico.ppt,.fico.xls,.fico.img{color:var(--k);background:color-mix(in srgb,var(--k) 22%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k) 30%,transparent)}
+:root[data-theme="light"] :is(.fico.pdf,.fico.doc,.fico.ppt,.fico.xls,.fico.img){background:color-mix(in srgb,var(--k) 12%,var(--panel))}
+.file .copy{flex:1;min-width:0}
+.file .name{display:block;font-weight:600;line-height:1.45;overflow-wrap:anywhere;text-align:start}
+.file button.name{width:100%;background:none;border:0;padding:0;color:var(--text);cursor:pointer}
+.file button.name:hover{color:var(--accent)}
+.file .meta{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--muted);font-size:12px;margin-top:2px}
+.file .meta .path{color:var(--accent)}
+.file .acts{display:flex;gap:6px;flex:none}
+.file .acts .btn.dl{min-width:42px}
+.dlico{display:none}
+.more-wrap{display:flex;justify-content:center;margin-top:14px}
+
+/* ---------- 8. States ---------- */
+.state{padding:38px 20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted);display:grid;justify-items:center;gap:8px}
+.state .big{font-size:30px;line-height:1}
+.state strong{color:var(--text);font-size:15px}
+.state p{margin:0;max-width:520px}
+.state.bad{border-style:solid;border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.skel{min-height:96px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(90deg,var(--panel) 25%,var(--card) 50%,var(--panel) 75%);background-size:300% 100%;animation:sk 1.3s ease-in-out infinite}
+@keyframes sk{from{background-position:100% 0}to{background-position:0 0}}
+
+/* ---------- 9. Share & footer ---------- */
+.share{display:flex;align-items:center;gap:18px;margin-top:22px;padding:20px 22px;border:1px dashed color-mix(in srgb,var(--accent) 55%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--accent) 5%,var(--panel))}
+.share .plus{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:10px;background:var(--sub);color:var(--accent);font:700 28px/1 system-ui,sans-serif}
+.share .copy{flex:1;min-width:0}
+.share strong{display:block;font-size:16px;line-height:1.45;font-weight:700}
+.share p{margin:3px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+.share .btn{flex:none;padding-inline:20px}
+.share.compact{margin-top:16px;padding:14px 16px}
+.share.compact .plus{width:42px;height:42px;font-size:22px}
+.share.compact strong{font-size:14.5px}
+.howto-line{margin:34px 0 40px;text-align:center;color:var(--muted);font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:19px 0;color:var(--muted);font-size:12px}
+footer .wrap{display:flex;justify-content:center;align-items:center}
+[lang="en"] .sig{font:italic 600 21px/1.3 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.sig{font:700 25px/1.3 "Rassasi Brand","Amiri","Noto Naskh Arabic",serif;color:var(--accent);padding:0 2px}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.sig{background:linear-gradient(100deg,var(--accent),var(--warn));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
+
+/* ---------- 10. Preview ---------- */
+.viewer{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.viewerbar{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.viewerbar strong{font-size:14px}
+.viewerbar p{color:var(--muted);margin:2px 0 0;font-size:12px}
+.view-actions{display:flex;gap:8px;flex-wrap:wrap}
+.frame-wrap{position:relative;background:white}
+.frame-wrap iframe{width:100%;height:min(660px,70vh);min-height:400px;display:block;border:0;background:#fff}
+dialog.preview{padding:0;border:0;background:transparent;width:min(1100px,94vw);max-width:none;max-height:none;height:min(92dvh,900px);color:var(--text)}
+dialog.preview::backdrop{background:#03070cc4}
+dialog.preview .viewer{height:100%;display:flex;flex-direction:column;box-shadow:0 20px 60px var(--shadow)}
+dialog.preview .viewerbar{flex:none}
+dialog.preview .viewerbar>div:first-child{min-width:0;flex:1}
+dialog.preview .viewerbar strong{display:block;overflow-wrap:anywhere}
+dialog.preview .frame-wrap{flex:1;min-height:0;background:var(--card)}
+dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
+.pv-help{margin:3px 0 0;font-size:12px;color:var(--muted)}
+.pv-help:empty{display:none}
+.pv-help a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.frame-state{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:var(--card)}
+
+/* ---------- 11. Tablet ---------- */
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- 12. Phone (≤600px): compact look, comfortable touch (≥40–44px targets) ---------- */
+@media(max-width:600px){
+  body{font-size:14px;line-height:1.7}
+  .wrap{width:calc(100% - 32px)}
+  /* header */
+  .topin{min-height:56px;gap:10px}
+  .mark{width:34px;height:34px;border-radius:9px;font-size:12px}
+  .brand{gap:9px}
+  .brand strong{font-size:14px;white-space:nowrap}
+  .brand small{display:block;font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:6px}
+  .topright .btn{position:relative;min-height:38px;padding:4px 11px;font-size:13px;border-radius:9px;white-space:nowrap}
+  .topright .lbl{display:none}
+  /* invisible enlargement of small controls to a ≥44px touch area */
+  .topright .btn::after,.navrow .back::after,.modebar .btn.sm::after,.files .file .acts .btn::after{content:"";position:absolute;inset:-3px -2px}
+  .modebar .btn.sm::after{inset:-7px -3px}
+  /* hero & status */
+  .hero{grid-template-columns:1fr;padding:20px 0 10px;gap:10px}
+  .eyebrow{display:none}
+  .hero h1{font-size:24px;margin:0 0 4px}
+  .hero p{font-size:13.5px;line-height:1.75}
+  .hero-stats{display:flex;gap:16px;border:0;background:none;border-radius:0;overflow:visible}
+  .hero-stats div{padding:0;min-width:0;display:flex;align-items:baseline;gap:5px}
+  .hero-stats div+div{border:0}
+  .hero-stats b{font-size:15px}
+  .hero-stats span{font-size:12.5px}
+  .modebar{font-size:12px;gap:6px 8px;margin:0 0 4px}
+  .modebar .btn.sm{position:relative;min-height:30px;padding:0 10px;font-size:12px}
+  /* search & path (16px input: iPhone Safari won't zoom the page on focus) */
+  .toolbar{margin:10px 0 4px}
+  .search input{font-size:16px;min-height:48px;border-radius:12px;padding-top:10px;padding-bottom:10px}
+  .navrow{margin:12px 0;gap:8px}
+  .navrow .back{position:relative;min-width:40px;min-height:40px}
+  .crumbs{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;gap:4px;scrollbar-width:none}
+  .crumbs::-webkit-scrollbar{display:none}
+  .crumbs button{padding:9px 3px}
+  /* sections & cards */
+  .sectionline{margin-bottom:12px;padding-bottom:8px}
+  .sectionline h2{font-size:17px}
+  #sectionTitle{scroll-margin-top:68px}
+  .cards{grid-template-columns:1fr;gap:10px}
+  .cards.depts{grid-template-columns:1fr 1fr;gap:10px}
+  .dept{flex-direction:column;align-items:flex-start;gap:8px;padding:14px;min-height:0;border-radius:12px}
+  .dept .arr,.dept small{display:none}
+  .dept .code{min-width:40px;height:40px;font-size:12px;border-radius:9px}
+  .dept strong{font-size:14px}
+  .dept .stats{font-size:12px}
+  .dept.featured{flex-direction:row;align-items:center;gap:12px;padding:16px;min-height:0}
+  .dept.featured .code{min-width:50px;height:50px;font-size:14px}
+  .dept.featured strong{font-size:16px}
+  .dept.featured small{display:block;font-size:12px}
+  .dept.featured .stats{font-size:12.5px}
+  .folder{min-height:0;padding:14px;gap:12px;border-radius:12px}
+  .folder .ico,.folder .ico.icon{min-width:40px;height:40px;border-radius:9px;font-size:11px}
+  .folder .ico svg{width:20px;height:20px}
+  .folder strong{font-size:14px}
+  .folder small{font-size:12px;margin-top:2px}
+  /* files: name opens the preview; "Preview" + download icon side by side */
+  .files{border-radius:12px;margin-top:12px}
+  .files h3{padding:10px 14px;font-size:13px}
+  .sortbar{overflow:visible}
+  .sortbar button{position:relative;min-height:38px;padding:4px 12px;font-size:12.5px;border-radius:8px}
+  .sortbar button::after{content:"";position:absolute;inset:-3px 0}
+  .files .file{padding:12px 14px;gap:12px}
+  .files .file .fico{width:36px;height:36px;font-size:9.5px;border-radius:9px}
+  .file .name{font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .file .meta{font-size:12px;gap:2px 10px}
+  .files .file .acts{gap:6px;align-self:center}
+  .files .file .acts .btn{position:relative;min-height:40px;padding:4px 14px;font-size:13px}
+  .files .file .acts .btn:first-child{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:600}
+  :root[data-theme="light"] .files .file .acts .btn:first-child{color:#fff}
+  .files .file .acts .btn.dl{min-width:40px;width:40px;padding:0;font-size:16px}
+  .files .file .acts .btn.dl .lbl{display:none}
+  .files .file .acts .btn.dl .dlico{display:inline}
+  .recent{margin-top:22px}
+  .more-wrap .btn{min-height:44px}
+  .state,.skel{border-radius:12px}
+  /* share & footer */
+  .share{flex-wrap:wrap;margin-top:14px;padding:14px;gap:12px;border-radius:12px}
+  .share .plus{width:38px;height:38px;font-size:21px;border-radius:9px}
+  .share strong{font-size:14.5px}
+  .share p{font-size:12.5px;line-height:1.7}
+  .share .btn{width:100%;min-height:44px;font-size:14px}
+  .share.compact{margin-top:14px;padding:14px}
+  .howto-line{margin:24px 0 28px;font-size:12px}
+  footer{padding:14px 0}
+  .sig{font-size:22px}
+  /* preview: full screen */
+  dialog.preview{width:100vw;height:100dvh;max-height:100dvh;margin:0}
+  dialog.preview .viewer{border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom)}
+  .viewerbar{align-items:flex-start}
+  dialog.preview .view-actions .btn{min-height:40px}
+  /* inside a department/course the page intro isn't needed; warnings stay visible */
+  body.inside .hero{display:none}
+  body.inside #modebar:not(.off):not(.demo){display:none}
+  body.inside .toolbar{margin-top:14px}
+}
+
+/* ---------- 13. Very small phones (≤360px) ---------- */
+@media(max-width:360px){
+  .wrap{width:calc(100% - 24px)}
+  .topin{gap:8px}
+  .brand{gap:7px}
+  .mark{width:32px;height:32px}
+  .brand{min-width:0;flex:1 1 auto}
+  .brand>span:last-child{min-width:0}
+  .brand strong{font-size:13px;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:4px}
+  .topright .btn{padding:4px 8px;font-size:12.5px}
+  .files .file{padding:12px}
+}
+
+
+/* ---------- 14. Reduced motion ---------- */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.folder,.dept{transition:none}.folder:hover,.dept:hover{transform:none}.skel{animation:none}}
+
+
+/* 15. phone: Drive-like folder header and compact file rows */
+@media (max-width:600px){
+  section[data-t-aria="browse_aria"]{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px}
+  section[data-t-aria="browse_aria"]>*{grid-column:1/-1;min-width:0}
+  section[data-t-aria="browse_aria"]>.toolbar{grid-row:1}
+  .navrow:not(.root){display:contents}
+  .navrow:not(.root) .back{grid-row:2;grid-column:1;align-self:center;margin-top:12px}
+  .navrow:not(.root) ~ .sectionline{grid-row:2;grid-column:2;margin:12px 0 0;padding:0;border:0;min-height:40px}
+  .navrow:not(.root) ~ .sectionline h2{font-size:18px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .navrow:not(.root) .crumbs{grid-row:3;grid-column:1/-1;min-width:0;font-size:12px;margin:4px 0 12px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+  .navrow:not(.root) .crumbs button{padding:7px 2px}
+  .file{position:relative}
+  .file button.name::after{content:"";position:absolute;inset:0}
+  .file:active{background:var(--sub)}
+  .files .file .acts{position:relative;z-index:1}
+  .files .file .acts .btn:not(.dl){display:none}
+  .file .name{-webkit-line-clamp:2;line-height:1.45}
+  .file .meta{gap:1px 8px;margin-top:3px}
+  .file .meta>span{white-space:nowrap}
+  .file .meta .path{flex-basis:100%;overflow:hidden;text-overflow:ellipsis}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap topin"><a class="brand" href="#/"><span class="mark">EE</span><span><strong data-t="committee">المكتبة الأكاديمية</strong><small data-t="club">لطلاب الهندسة الكهربائية</small></span></a><div class="topright"><button id="lang" class="btn" type="button">EN</button><button id="theme" class="btn" type="button" data-t-title="theme_title" title="تبديل المظهر">☀︎ فاتح</button></div></div></header>
+<main class="wrap"><section class="hero"><div class="hero-copy"><span class="eyebrow">YIC ACADEMIC LIBRARY</span><h1 data-t="h1">المكتبة الأكاديمية</h1><p data-t="lead">مصادر المقررات مرتبة حسب التخصص والمادة. تصفّحها، عاينها، وحمّلها من مكان واحد.</p></div><div class="hero-stats" id="heroStats"></div></section>
+<div id="modebar" class="modebar" role="status"></div>
+<section data-t-aria="browse_aria" aria-label="تصفح المكتبة"><div class="toolbar"><label class="search"><input id="search" autocomplete="off" type="search" data-t-ph="search_ph" placeholder="ابحث برمز المقرر أو اسمه أو اسم الملف..." data-t-aria="search_aria" aria-label="بحث في المكتبة"></label></div><div class="navrow" id="navrow"><button type="button" class="btn sm back" id="goBack" data-t-aria="back" aria-label="رجوع"><span aria-hidden="true">→</span></button><nav class="crumbs" id="crumbs" data-t-aria="crumbs_aria" aria-label="مسار المجلدات"></nav></div><div class="sectionline"><h2 id="sectionTitle" dir="auto">التخصصات</h2><span class="count" id="count"></span></div><div id="cards" class="cards"></div><div id="share"></div><div id="files" class="files hidden"></div><div id="state" class="hidden"></div><div id="shareBottom"></div></section>
+<p class="howto-line" id="howto"></p>
+</main><footer><div class="wrap"><span class="sig" data-t="sig" dir="auto">الرصاصي</span></div></footer>
+
+<dialog id="preview" class="preview" aria-labelledby="pvTitle"><section class="viewer"><div class="viewerbar"><div><strong id="pvTitle"></strong><p id="pvMeta"></p><p id="pvHelp" class="pv-help"></p></div><div class="view-actions"><a id="pvDownload" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="download">تنزيل ↓</a><button id="pvClose" class="btn sm primary" type="button" data-t="close">إغلاق ✕</button></div></div><div class="frame-wrap" id="pvBody"></div></section></dialog>
+
+<script>
+'use strict';
+/* =====================================================================
+   CONFIGURATION — the only part you normally edit
+   ---------------------------------------------------------------------
+   MODE     'demo' : sample data built into this file (for previewing the
+                     interface). Nothing is fetched from Google.
+            'live' : real folders and files, read through your Google Apps
+                     Script web app (see apps-script/Code.gs + SETUP guide).
+   API_URL  The Apps Script web-app URL (ends with /exec). It is a public
+            endpoint, NOT a secret: no API keys or OAuth tokens live here.
+   ROOTS    The five department folders. Keep these IDs identical to
+            ROOT_FOLDERS in Code.gs — the backend refuses anything else.
+   BLOCKED  Folder/file names that are never shown, even if the backend
+            returned them (second line of defence; Code.gs filters first).
+   ===================================================================== */
+const CONFIG = {
+  MODE: 'live',
+  API_URL: 'https://script.google.com/macros/s/AKfycbz6Y6lzqPUKFgkYrwhSp2ydwLPmAEvKQ4z55Vdeuf3SjU3M0hNOiPPgwf7u5_ABqr1F/exec',
+  SHARE_FORM_URL: 'https://forms.gle/igT6oxmwWqvjxxPD9',   // "share a resource" form
+  REQUEST_TIMEOUT_MS: 25000,
+  ROOTS: [
+    {id:'1tTYloDY7RScDAApOMlxT_qdwFbMs5Az8', ar:'الهندسة الكهربائية',             en:'Electrical Engineering',        sub:'EE · Electrical Engineering'},
+    {id:'1fvnC8RDQKNupmP3cKimyTPQvIcL-51nm', ar:'تقنية القوى الكهربائية',          en:'Electrical Power Technology',   sub:'EPT · Electrical Power Technology'},
+    {id:'1ekjjn7udol0HOc_8TPhUgzwCxSpGC9uL', ar:'تقنية الإلكترونيات والاتصالات',   en:'Electronics & Communication',   sub:'ECT · Electronics & Communication'},
+    {id:'1HuKz2Ps1qxkd9wGey2pZEq89zDCPjaa_', ar:'تقنية الآلات الدقيقة والتحكم',    en:'Instrumentation & Control',     sub:'ICT · Instrumentation & Control'},
+    {id:'1LadMkd2tw3SYTmDJcDJnETwk99vf4rc0', ar:'تقنية الميكاترونيكس',             en:'Mechatronics',                  sub:'MCT · Mechatronics'}
+  ],
+  BLOCKED: [/^\s*00(\s|[-–_.]|$)/, /pending\s*review/i, /^[_.~]/, /\bprivate\b/i, /قيد\s*المراجعة/, /خاص/]
+};
+
+/* ===== Demo data =====================================================
+   Folder IDs below are the real ones from the original page (departments,
+   EE courses and their four categories). Every FILE is invented sample
+   data, marked demo:true and labelled "[DEMO]" — none of it exists on
+   Google Drive. A "00 – Pending Review" folder is included on purpose to
+   show that it is filtered out.                                        */
+const DEMO_COURSES = [
+  ['1IVp3Hx3WmhrofMMCNm8ulqE984H9Tbe7','EE202 – Electronics I',['1DdqhfU4_-T6h4kitX_4Dh9y-uMkJtadj','1dJl9JODlhgnomQ_DuZeZbh_mEx8bqU-p','1zwOaxKQE7_eL-2Y3fyhb_rcA7wsy5C2T','1MHzmhElMqbtkC0vCZVFTkmmvSw93d8xN']],
+  ['1KFNKlVwVH7ainF0lPLDa0tV219bC0Fz2','EE204 – Signals and Systems',['1ihr2X6e1wKd5YUwTuuPStJbnqQyxw_qt','1T2MtgyyEeuLPzgypbRTrL4TcPutGL7cT','1VulPnbGaqI5nXVQAzlTfT_f5O13pV_Ew','1SoxdUVzvxyrP07zz6I7iOs6alYPTY8Av']],
+  ['1BcaW2pWwJopTQydS6DPhe9bpk2otz2Ub','EE302 – Electrical Energy Engineering',['15EGGdlMB6-1gj_jnDqCloD65isgtqLfI','1gnkbyRT2_Cnj13nHqTkDJdo65_7zYNcM','1PjkSkZtupJnqfHTgorU4-ofOWGHc1I5l','18ejLI-0gHxkaiDX7jkkYhSOUp7IDsS7-']],
+  ['10PmMkBI9fASDneHCu30gopDd2d1y8RDy','EE304 – Control Systems',['1UT-7XWKcY2kymcDVmUcaLaF8gqOanuUM','13ARqkXaFNcYerlAfIjW3R-mQxaLK6zy5','1hHwuwAnyFhsbQ9j2iNqSUG-JGFeF2Itr','1eOjsEXPDhRIIf2GZ6-3cVN7yHtvTaGMa']]
+];
+const DEMO_CATS = ['01 – Lectures','02 – Summaries','03 – Assignments','04 – Review Questions'];
+function buildDemoIndex(){
+  const nodes = [], ee = CONFIG.ROOTS[0].id;
+  const day = (n) => new Date(Date.UTC(2026, 8, 1 + n, 9, 30)).toISOString();
+  let n = 0;
+  const file = (parent, name, mime, size, extra) => nodes.push(Object.assign({id:'demo-file-' + (++n), parent, kind:'file', name, mime, size, modified:day(n % 40), public:true, demo:true}, extra || {}));
+  DEMO_COURSES.forEach(([cid, cname, cats], ci) => {
+    const code = cname.split(' ')[0];
+    nodes.push({id:cid, parent:ee, kind:'folder', name:cname, modified:day(ci)});
+    cats.forEach((id, k) => nodes.push({id, parent:cid, kind:'folder', name:DEMO_CATS[k], modified:day(ci + k)}));
+    file(cats[0], `[DEMO] ${code} Lecture 01 - Introduction.pdf`, 'application/pdf', 1840000);
+    file(cats[0], `[DEMO] ${code} Lecture 02.pdf`, 'application/pdf', 2310000);
+    file(cats[0], `[DEMO] ${code} Lecture slides.pptx`, 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 5400000);
+    file(cats[1], `[DEMO] ${code} Summary sheet.pdf`, 'application/pdf', 640000);
+    file(cats[1], `[DEMO] ${code} Notes.docx`, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 220000);
+    if (ci !== 3) file(cats[2], `[DEMO] ${code} Assignment 1.pdf`, 'application/pdf', 410000);
+    if (ci === 1) {
+      file(cats[3], '[DEMO] EE204 Review questions (solution).pdf', 'application/pdf', 980000);
+      file(cats[3], '[DEMO] EE204 Formula sheet.png', 'image/png', 350000);
+      file(cats[3], '[DEMO] EE204 Restricted file (not shared).pdf', 'application/pdf', 300000, {public:false});
+    }
+  });
+  // Must never appear: filtered by isBlocked()
+  nodes.push({id:'demo-pending', parent:ee, kind:'folder', name:'00 – Pending Review', modified:day(3)});
+  file('demo-pending', '[DEMO] Unreviewed upload.pdf', 'application/pdf', 100000);
+  return {ok:true, demo:true, generated:new Date().toISOString(), nodes, errors:[]};
+}
+
+/* ===== Text ===== */
+const T = {
+  ar:{committee:'المكتبة الأكاديمية',club:'لطلاب الهندسة الكهربائية',home:'الرئيسية ↗',home_title:'العودة للرئيسية',theme_title:'تبديل المظهر',light:'☀︎ فاتح',dark:'☾ داكن',lang:'EN',h1:'المكتبة الأكاديمية',
+    lead:'مصادر المقررات مرتبة حسب التخصص والمادة. تصفّحها، عاينها، وحمّلها من مكان واحد.',
+    st_depts:'تخصصات',st_courses:'مقرر',st_files:'ملف',courses:n=>n===1?'مقرر واحد':n===2?'مقرران':n===0?'0 مقرر':n<=10?`${n} مقررات`:`${n} مقررًا`,dept_empty:'تُضاف المصادر قريبًا',dl_pdf:'تحميل PDF',
+    browse_aria:'تصفح المكتبة',search_ph:'ابحث برمز المقرر أو اسمه أو اسم الملف...',search_aria:'بحث في المكتبة',crumbs_aria:'مسار المجلدات',back:'رجوع',
+    root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':n===0?'0 مجلد':n<=10?`${n} مجلدات`:`${n} مجلدًا`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':n===0?'0 ملف':n<=10?`${n} ملفات`:`${n} ملفًا`,
+    open_folder:'لا توجد ملفات بعد',files_h:'الملفات',
+    preview:'معاينة',download:'تحميل ↓',close:'إغلاق ✕',
+    search_h:'نتائج البحث',
+    demo_bar:'<b>وضع تجريبي:</b> الملفات المعروضة أمثلة وهمية للتجربة فقط وليست من مصادر المكتبة.',
+    live_bar:(t)=>`<b>المكتبة محدّثة</b> · آخر تحديث ${t}`,off_bar:'<b>غير متصل</b> · تعذّر تحميل المكتبة',
+    refresh:'↻ تحديث',
+    loading:'جارٍ تحميل المكتبة…',
+    empty_t:'المجلد فارغ',empty_p:'لا توجد ملفات منشورة هنا بعد. ستظهر هنا فور نشرها.',
+    nores_t:'لا توجد نتائج',nores_p:'جرّب رمز المقرر (مثل EE204) أو جزءًا من اسم الملف.',
+    net_t:'تعذّر الاتصال بالمكتبة',net_p:'تحقق من الاتصال بالإنترنت ثم أعد المحاولة.',
+    denied_t:'لا توجد صلاحية للوصول',denied_p:'هذا المحتوى غير متاح في المكتبة العامة.',
+    cfg_t:'ربط المكتبة غير مُعدّ',cfg_p:'الصفحة في الوضع المباشر لكن عنوان الخادم (API_URL) فارغ. راجع دليل الإعداد.',
+    bad_t:'استجابة غير متوقعة من الخادم',bad_p:'حدث خطأ مؤقت أثناء تحميل المكتبة. حاول مرة أخرى بعد قليل.',
+    retry:'إعادة المحاولة',home_btn:'العودة للتخصصات',
+    dept_unavailable:'غير متاح حاليًا',
+    restricted:'غير منشور',restricted_t:'هذا الملف غير منشور للعامة',restricted_p:'هذا الملف غير متاح للعرض في المكتبة.',
+    demo_badge:'تجريبي',
+    pv_demo_note:'معاينة تجريبية، وليست ملفًا حقيقيًا.',
+            howto:'جميع المصادر تُنشر بعد مراجعتها.',
+    recent_h:'أحدث الملفات',show_more:'عرض المزيد',
+    share_t:'عندك ملف يفيد زملاءك؟',share_p:'ملخص، شرح مرتب، حل واجب أو أسئلة مراجعة… شاركه وساعد غيرك يذاكر أسهل. نراجعه ثم ننشره في المكتبة.',share_tc:(c)=>`عندك مصدر لـ ${c}؟`,share_pc:'شاركه وساعد زميلك. نراجعه ثم ننشره هنا.',share_btn:'شارك مصدرًا',sort_name:'الاسم',sort_new:'الأحدث',sort_aria:'ترتيب الملفات',
+    syncing:'جارٍ التحقق من التحديثات…',saved_copy:(t)=>`<b>غير متصل</b> · المعروض نسخة محفوظة على جهازك (آخر تحديث ${t})`,saved_bar:(t)=>`<b>نسخة محفوظة</b> · آخر تحديث ${t}`,truncated:'المكتبة كبيرة جدًا، وقد لا تظهر بعض الملفات.',pv_help:'ما ظهر الملف؟',pv_dl_link:'حمّله وافتحه على جهازك',
+    sig:'الرصاصي',
+        kb:'ك.ب',mb:'م.ب'},
+  en:{committee:'Academic Library',club:'For Electrical Engineering students',home:'Home ↗',home_title:'Back to home',theme_title:'Toggle theme',light:'☀︎ Light',dark:'☾ Dark',lang:'عربي',h1:'Academic Library',
+    lead:'Course resources organised by department and course. Browse, preview and download them in one place.',
+    st_depts:'departments',st_courses:'courses',st_files:'files',courses:n=>`${n} course${n===1?'':'s'}`,dept_empty:'Resources coming soon',dl_pdf:'Download PDF',
+    browse_aria:'Browse the library',search_ph:'Search by course code, course name, or file name…',search_aria:'Search the library',crumbs_aria:'Folder path',back:'Back',
+    root:'Academic Library',depts:'Departments',folders:n=>`${n} folder${n===1?'':'s'}`,filesN:n=>`${n} file${n===1?'':'s'}`,
+    open_folder:'No files yet',files_h:'Files',
+    preview:'Preview',download:'Download ↓',close:'Close ✕',
+    search_h:'Search results',
+    demo_bar:'<b>Demo mode:</b> the files shown are invented samples for trying the interface, not library resources.',
+    live_bar:(t)=>`<b>Library up to date</b> · updated ${t}`,off_bar:'<b>Offline</b> · the library couldn’t be loaded',
+    refresh:'↻ Refresh',
+    loading:'Loading the library…',
+    empty_t:'This folder is empty',empty_p:'Nothing has been published here yet. Files appear here as soon as they are published.',
+    nores_t:'No results',nores_p:'Try a course code (e.g. EE204) or part of a file name.',
+    net_t:'Couldn’t reach the library',net_p:'Check your internet connection and try again.',
+    denied_t:'Access denied',denied_p:'This content isn’t available in the public library.',
+    cfg_t:'Library connection not configured',cfg_p:'The page is in live mode but API_URL is empty. See the setup guide.',
+    bad_t:'Unexpected server response',bad_p:'Something went wrong while loading the library. Please try again shortly.',
+    retry:'Try again',home_btn:'Back to departments',
+    dept_unavailable:'Currently unavailable',
+    restricted:'Not published',restricted_t:'This file isn’t shared publicly',restricted_p:'This file isn’t available to view in the library.',
+    demo_badge:'Demo',
+    pv_demo_note:'Demo preview generated in the page, not a real file.',
+            howto:'All resources are published after review.',
+    recent_h:'Recently added',show_more:'Show more',
+    share_t:'Have a file that could help others?',share_p:'A summary, clear notes, a solved assignment or review questions… share it and help a classmate study. We review it, then publish it in the library.',share_tc:(c)=>`Have a resource for ${c}?`,share_pc:'Share it and help a classmate. We review it, then publish it here.',share_btn:'Share a resource',sort_name:'Name',sort_new:'Newest',sort_aria:'Sort files',
+    syncing:'Checking for updates…',saved_copy:(t)=>`<b>Offline</b> · showing the copy saved on this device (updated ${t})`,saved_bar:(t)=>`<b>Saved copy</b> · updated ${t}`,truncated:'The library is very large; some files may not appear.',pv_help:'File not showing?',pv_dl_link:'Download it and open it on your device',
+    sig:'Al-Rasasi',
+        kb:'KB',mb:'MB'}
+};
+
+/* ===== State ===== */
+const $ = (id) => document.getElementById(id);
+let lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
+const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
+const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map(), syncing:false, offlineCopy:false };
+let sortMode = (() => { try { return localStorage.getItem('ee_library_sort') === 'new' ? 'new' : 'name'; } catch (e) { return 'name'; } })();
+let currentId = 'root', searchLimit = {folders:60, files:100};
+
+/* ===== Helpers ===== */
+const norm = (s) => String(s || '').toLowerCase()
+  .replace(/[\u064B-\u0652\u0670\u0640]/g, '')            // tashkeel + tatweel
+  .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي')
+  .replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+  .replace(/[\s\-–—_·.()[\]]/g, '');
+const isBlocked = (name) => CONFIG.BLOCKED.some((r) => r.test(String(name || '')));
+const ROOT_IDS = new Set(CONFIG.ROOTS.map((r) => r.id));
+function el(tag, attrs, ...children){
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  for (const c of children) if (c != null) e.append(c);
+  return e;
+}
+function ext(n){ const m = /\.([a-z0-9]{1,5})$/i.exec(n.name || ''); if (m) return m[1].toLowerCase();
+  const map = {'application/pdf':'pdf','application/vnd.google-apps.document':'gdoc','application/vnd.google-apps.presentation':'gslides','application/vnd.google-apps.spreadsheet':'gsheet'}; return map[n.mime] || 'file'; }
+function kindClass(x){ if (x === 'pdf') return 'pdf'; if (/^(docx?|gdoc|odt|rtf|txt)$/.test(x)) return 'doc'; if (/^(pptx?|gslides|key|odp)$/.test(x)) return 'ppt'; if (/^(xlsx?|csv|gsheet|ods)$/.test(x)) return 'xls'; if (/^(png|jpe?g|gif|webp|svg|heic)$/.test(x)) return 'img'; return ''; }
+function fmtSize(b){ if (!b) return ''; return b < 1e6 ? Math.max(1, Math.round(b / 1e3)) + ' ' + t('kb') : (b / 1e6).toFixed(1) + ' ' + t('mb'); }
+function fmtDate(iso){ if (!iso) return ''; try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-ca-gregory-nu-latn' : 'en-GB', {year:'numeric', month:'short', day:'numeric', timeZone:'UTC'}).format(new Date(iso.length === 10 ? iso + 'T00:00:00Z' : iso)); } catch (e) { return iso.slice(0, 10); } }
+function fmtTime(iso){ try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-ca-gregory-nu-latn' : 'en-GB', {hour:'2-digit', minute:'2-digit', day:'numeric', month:'short'}).format(new Date(iso)); } catch (e) { return ''; } }
+const deptOf = (id) => CONFIG.ROOTS.find((r) => r.id === id);
+function titleOf(id){ if (id === 'root') return t('root'); const d = deptOf(id); if (d) return d[lang]; const n = store.byId.get(id); return n ? n.name : ''; }
+function pathTo(id){ const out = []; let cur = id, guard = 0; while (cur && cur !== 'root' && guard++ < 30) { out.unshift(cur); if (ROOT_IDS.has(cur)) break; const n = store.byId.get(cur); cur = n && n.parent; } return ['root', ...out]; }
+const drivePreviewUrl = (id) => 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/preview';
+const driveDownloadUrl = (id) => 'https://drive.google.com/uc?export=download&id=' + encodeURIComponent(id);
+// Google Docs/Slides/Sheets have no original file: download them as PDF.
+function downloadUrl(n){
+  const x = ext(n), id = encodeURIComponent(n.id);
+  if (x === 'gdoc') return 'https://docs.google.com/document/d/' + id + '/export?format=pdf';
+  if (x === 'gslides') return 'https://docs.google.com/presentation/d/' + id + '/export/pdf';
+  if (x === 'gsheet') return 'https://docs.google.com/spreadsheets/d/' + id + '/export?format=pdf';
+  return driveDownloadUrl(n.id);
+}
+const isGoogleType = (n) => /^g(doc|slides|sheet)$/.test(ext(n));
+const fileCountCache = new Map();
+function fileCount(id){
+  if (fileCountCache.has(id)) return fileCountCache.get(id);
+  let c = 0; for (const k of store.kids.get(id) || []) c += k.kind === 'file' ? 1 : fileCount(k.id);
+  fileCountCache.set(id, c); return c;
+}
+// "EE204 – Signals and Systems" → badge EE204 + title; "01 – Lectures" → 01 + Lectures
+function splitName(name){
+  const s = String(name || '');
+  let m = /^\s*([A-Za-z]{2,5})\s?-?(\d{3}[A-Za-z]?)\s*(?:[–—:\-|]\s*)?(.*)$/.exec(s);
+  if (m) return { badge: (m[1] + m[2]).toUpperCase(), title: m[3] || s };
+  m = /^\s*(\d{1,2})\s*[–—.\-_)]\s*(.+)$/.exec(s);
+  if (m) return { badge: m[1].padStart(2, '0'), title: m[2] };
+  return { badge: '', title: s };
+}
+
+/* ===== Data loading ===== */
+function ingest(index){
+  if (!index || index.ok !== true || !Array.isArray(index.nodes)) throw Object.assign(new Error('bad'), {code:'bad'});
+  // Build into fresh maps; the current library stays intact until the new one is complete.
+  const byId = new Map(), kids = new Map(), rootErrors = new Map();
+  const accepted = new Map();
+  for (const raw of index.nodes) {
+    // v2 rows: [id, parent, name, isFolder, size, 'YYYY-MM-DD', googleMime?]; v1: objects
+    const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', public:true} : raw;
+    if (!n || typeof n.id !== 'string' || typeof n.parent !== 'string' || (n.kind !== 'file' && n.kind !== 'folder')) continue;
+    if (isBlocked(n.name)) continue;
+    accepted.set(n.id, n);
+  }
+  // Keep only nodes whose whole ancestry leads to a configured root through accepted folders
+  const ok = (n, guard = 0) => guard < 30 && (ROOT_IDS.has(n.parent) || (accepted.has(n.parent) && accepted.get(n.parent).kind === 'folder' && ok(accepted.get(n.parent), guard + 1)));
+  for (const n of accepted.values()) if (!ROOT_IDS.has(n.id) && ok(n)) {
+    byId.set(n.id, n);
+    if (!kids.has(n.parent)) kids.set(n.parent, []);
+    kids.get(n.parent).push(n);
+  }
+  for (const list of kids.values()) list.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'folder' ? -1 : 1) || String(a.name).localeCompare(String(b.name), undefined, {numeric:true}));
+  for (const e of index.errors || []) if (e && ROOT_IDS.has(e.root)) rootErrors.set(e.root, e.error || 'access');
+  store.byId = byId; store.kids = kids; store.rootErrors = rootErrors; // swap in one step
+  fileCountCache.clear();
+  store.generated = index.generated || new Date().toISOString();
+  store.demo = !!index.demo;
+  store.truncated = !!index.truncated;
+}
+let jsonpCounter = 0;
+const LOCAL_KEY = 'ee_library_index_v2';
+
+function getPublicIndexJsonp(url){
+  return new Promise((resolve, reject) => {
+    const cb = 'yicLibraryCb_' + Date.now() + '_' + (++jsonpCounter);
+    const sc = document.createElement('script');
+    let done = false, timeout;
+    function cleanup(){
+      if (done) return;
+      done = true; clearTimeout(timeout); sc.remove();
+      try { delete window[cb]; } catch (_) { window[cb] = undefined; }
+    }
+    window[cb] = (data) => { if (!done) { cleanup(); resolve(data); } };
+    sc.onerror = () => { if (!done) { cleanup(); reject(Object.assign(new Error('jsonp script failed to load'), {code:'network'})); } };
+    sc.onload = () => { if (!done) { cleanup(); reject(Object.assign(new Error('jsonp callback missing'), {code:'bad'})); } };
+    timeout = setTimeout(() => { if (!done) { cleanup(); reject(Object.assign(new Error('jsonp timeout'), {code:'network'})); } }, CONFIG.REQUEST_TIMEOUT_MS);
+    sc.src = url + '&callback=' + encodeURIComponent(cb);
+    sc.async = true;
+    document.head.appendChild(sc);
+  });
+}
+function readLocal(){
+  try { const o = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null'); const fresh = o && Date.now() - Date.parse(o.generated) < 7 * 864e5; // older copies are not shown
+    return o && fresh && o.ok === true && Array.isArray(o.nodes) && o.api === CONFIG.API_URL ? o : null; } catch (e) { return null; }
+}
+function saveLocal(index){
+  try { localStorage.setItem(LOCAL_KEY, JSON.stringify(Object.assign({}, index, {api:CONFIG.API_URL}))); } catch (e) { /* storage full or blocked: fine */ }
+}
+function fetchIndex(refresh, since){
+  if (!CONFIG.API_URL) return Promise.reject(Object.assign(new Error('config'), {code:'config'}));
+  const url = CONFIG.API_URL + (CONFIG.API_URL.includes('?') ? '&' : '?') + 'action=index' +
+    (refresh ? '&refresh=1' : '') + (since ? '&since=' + encodeURIComponent(since) : '');
+  // Apps Script responses have no CORS headers: JSONP loads ONLY the public, server-filtered metadata.
+  return getPublicIndexJsonp(url).then((data) => {
+    if (data && data.ok === false) throw Object.assign(new Error(data.error || 'bad'), {code:data.error === 'access' ? 'denied' : 'bad'});
+    return data;
+  });
+}
+// Re-draw after new data arrives; don't touch the search box while the student is typing in it.
+function rerenderKeepingPlace(){ const y = window.scrollY; if (document.activeElement === $('search')) render(); else route(); window.scrollTo(0, y); }
+
+let loadSeq = 0;
+async function load(refresh){
+  const seq = ++loadSeq; // a slower, older request must never overwrite a newer one
+  store.syncing = false; store.offlineCopy = false;
+  if (CONFIG.MODE === 'demo') {
+    store.status = 'loading'; store.error = null; render();
+    await new Promise((r) => setTimeout(r, 350)); if (seq !== loadSeq) return; ingest(buildDemoIndex()); store.status = 'ready'; route(); return;
+  }
+  // 1) Show the copy saved on this device instantly, then check Drive in the background.
+  let local = !refresh && readLocal();
+  if (local) {
+    try { ingest(local); store.status = 'ready'; store.error = null; store.syncing = true; route(); }
+    catch (e) { local = null; store.status = 'loading'; try { localStorage.removeItem(LOCAL_KEY); } catch (_) {} } // damaged copy: ignore it
+  }
+  if (store.status !== 'ready' || refresh) { store.status = 'loading'; store.error = null; render(); }
+  try {
+    let data = await fetchIndex(refresh, local ? local.generated : '');
+    if (seq !== loadSeq) return;
+    // "Nothing changed" is only valid if a good copy is loaded; otherwise fetch the full index.
+    if (data.unchanged && !(local && store.byId.size)) { data = await fetchIndex(false, ''); if (seq !== loadSeq) return; }
+    if (!data.unchanged) { ingest(data); saveLocal(data); }       // new or re-fetched index
+    else if (!(local && store.byId.size)) throw Object.assign(new Error('bad'), {code:'bad'});
+    store.status = 'ready'; store.syncing = false;
+    rerenderKeepingPlace();
+  } catch (e) {
+    if (seq !== loadSeq) return;
+    console.error('YIC Library connection error:', e);
+    store.syncing = false;
+    if (local && store.byId.size) { store.status = 'ready'; store.offlineCopy = true; renderModebar(); return; }
+    store.status = 'error'; store.error = e.code || 'network'; route();
+  }
+}
+
+/* ===== Routing (hash keeps the phone's back button working) ===== */
+// Routes: #/  ·  #/f/<folderId>  ·  #/s/<search text>  (search keeps the folder you started from)
+let pendingScroll = false;
+function route(){
+  const h = location.hash, s = /^#\/s\/(.*)$/.exec(h);
+  if (s) {
+    let q = ''; try { q = decodeURIComponent(s[1]); } catch (e) {}
+    if ($('search').value.trim() !== q) $('search').value = q;
+    if (history.state && typeof history.state.searchFrom === 'string') currentId = history.state.searchFrom; // where the search started
+  }
+  else { if ($('search').value) $('search').value = ''; const m = /^#\/f\/([\w-]{1,100})$/.exec(h); currentId = m ? m[1] : 'root'; }
+  render();
+  afterRender();
+}
+const folderHash = () => currentId === 'root' ? '#/' : '#/f/' + currentId;
+function go(id){ const h = id === 'root' ? '#/' : '#/f/' + id; if (location.hash !== h) location.hash = h; else route(); }
+window.addEventListener('hashchange', route);
+function syncSearchToUrl(){
+  const q = $('search').value.trim(), onSearch = /^#\/s\//.test(location.hash);
+  if (q) {
+    const h = '#/s/' + encodeURIComponent(q);
+    if (!onSearch) history.pushState({searchFrom:currentId}, '', h); // Back leaves the search
+    else if (location.hash !== h) history.replaceState(history.state, '', h);
+  } else if (onSearch) {
+    if (history.state && typeof history.state.searchFrom === 'string') { history.back(); return true; } // back to where it started
+    history.replaceState(null, '', folderHash());
+  }
+}
+function afterRender(){
+  // Scroll only after the new folder is on screen, and only if its title isn't already in view.
+  if (pendingScroll) {
+    pendingScroll = false;
+    const title = $('sectionTitle'), top = title.getBoundingClientRect().top;
+    if (top < 60 || top > innerHeight * 0.55) title.scrollIntoView({block:'start', behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  }
+  // Long paths scroll sideways on phones: keep the current folder visible.
+  const c = $('crumbs');
+  if (c.scrollWidth > c.clientWidth + 2) c.scrollLeft = document.documentElement.dir === 'rtl' ? -(c.scrollWidth - c.clientWidth) : c.scrollWidth - c.clientWidth; // moves the path bar only, never the page
+}
+
+/* ===== Rendering ===== */
+const openFolder = (id) => () => { pendingScroll = true; go(id); };
+function folderCard(id, name, sub, extra, badge){
+  const sp = badge != null ? {badge, title:name} : splitName(name);
+  const icon = badge == null && (/^\d+$/.test(sp.badge) || !sp.badge) ? iconFor(name) : null;
+  const ico = icon ? el('span', {class:'ico icon', 'aria-hidden':'true'}, icon) : el('span', {class:'ico' + (sp.badge ? '' : ' empty'), 'aria-hidden':'true', text:sp.badge || '▱'});
+  return el('button', {type:'button', class:'folder', onclick:openFolder(id)},
+    ico,
+    el('span', {class:'copy'}, el('strong', {text:sp.title, dir:'auto'}), el('small', {text:sub, dir:'auto'}), extra || null),
+    el('span', {class:'arr', 'aria-hidden':'true', text:'‹'}));
+}
+const ICONS = {
+  lecture:'<path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/>',
+  summary:'<rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>',
+  assign:'<path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>',
+  exam:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 6l1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/>',
+  lab:'<path d="M9 3h6M10 3v6l-5.2 9.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9V3"/><path d="M7.5 15h9"/>',
+  book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>'
+};
+function svgIcon(k){
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '1.7'); svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round');
+  svg.innerHTML = ICONS[k]; // fixed markup above, never Drive data
+  return svg;
+}
+function iconFor(name){
+  const s = String(name || '');
+  const k = /lectur|محاضر|slides|شرائح/i.test(s) ? 'lecture' : /summar|ملخص|notes|مذكر/i.test(s) ? 'summary' : /assign|homework|واجب|تكليف/i.test(s) ? 'assign'
+    : /review|مراجع|quiz|exam|midterm|final|اختبار|كويز|امتحان/i.test(s) ? 'exam' : /lab|معمل|مختبر|تجارب/i.test(s) ? 'lab' : /book|text|كتاب|مرجع|reference/i.test(s) ? 'book' : '';
+  return k ? svgIcon(k) : null;
+}
+function deptCard(r, featured){
+  const err = store.rootErrors.get(r.id), code = r.sub.split('·')[0].trim();
+  const nCourses = (store.kids.get(r.id) || []).filter((n) => n.kind === 'folder').length, nFiles = fileCount(r.id);
+  const stats = err ? t('dept_unavailable') : [nCourses ? t('courses', nCourses) : '', nFiles ? t('filesN', nFiles) : ''].filter(Boolean).join(' · ') || t('dept_empty');
+  return el('button', {type:'button', class:'dept' + (featured ? ' featured' : ''), onclick:openFolder(r.id)},
+    el('span', {class:'code', 'aria-hidden':'true', text:code}),
+    el('span', {class:'copy'}, el('strong', {text:r[lang]}), el('small', {}, el('bdi', {text:lang === 'ar' ? r.en : r.ar})), el('span', {class:'stats' + (err ? ' off' : ''), text:stats})),
+    el('span', {class:'arr', 'aria-hidden':'true', text:'‹'}));
+}
+function shareCard(courseLabel){
+  if (!CONFIG.SHARE_FORM_URL) return null;
+  return el('div', {class:'share' + (courseLabel ? ' compact' : '')},
+    el('span', {class:'plus', 'aria-hidden':'true', text:'+'}),
+    el('span', {class:'copy'}, el('strong', {dir:'auto', text:courseLabel ? t('share_tc', courseLabel) : t('share_t')}), el('p', {text:courseLabel ? t('share_pc') : t('share_p')})),
+    el('a', {class:'btn primary', href:CONFIG.SHARE_FORM_URL, target:'_blank', rel:'noopener noreferrer'}, t('share_btn')));
+}
+function renderHeroStats(){
+  const box = $('heroStats'); box.replaceChildren();
+  if (store.status !== 'ready') return;
+  let courses = 0; for (const r of CONFIG.ROOTS) courses += (store.kids.get(r.id) || []).filter((n) => n.kind === 'folder').length;
+  const files = CONFIG.ROOTS.reduce((a, r) => a + fileCount(r.id), 0);
+  const item = (num, label) => el('div', {}, el('b', {text:String(num)}), el('span', {text:label}));
+  box.append(item(CONFIG.ROOTS.length, t('st_depts')), item(courses, t('st_courses')), item(files, t('st_files')));
+}
+function fileRow(n, withPath){
+  const x = ext(n), meta = el('span', {class:'meta'});
+  if (withPath) { const p = pathTo(n.parent).slice(1).map(titleOf).join(' › '); meta.append(el('span', {class:'path', text:p, dir:'auto'})); }
+  meta.append(el('span', {text:x.toUpperCase()}));
+  if (n.size) meta.append(el('span', {text:fmtSize(n.size)}));
+  if (n.modified) meta.append(el('span', {text:fmtDate(n.modified)}));
+  if (n.demo) meta.append(el('span', {class:'badge demo', text:t('demo_badge')}));
+  if (n.public === false) meta.append(el('span', {class:'badge lock', text:t('restricted')}));
+  const acts = el('span', {class:'acts'},
+    el('button', {type:'button', class:'btn sm', onclick:() => openPreview(n)}, t('preview')),
+    n.demo ? null : el('a', {class:'btn sm dl', href:downloadUrl(n), target:'_blank', rel:'noopener noreferrer', 'aria-label':(isGoogleType(n) ? t('dl_pdf') : t('download')) + ' ' + n.name},
+      el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})));
+  return el('div', {class:'file'},
+    el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
+    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta),
+    acts);
+}
+function stateBox(kind, icon, title, text, actions){
+  return el('div', {class:'state' + (kind === 'bad' ? ' bad' : ''), role: kind === 'bad' ? 'alert' : 'status'},
+    el('span', {class:'big', 'aria-hidden':'true', text:icon}), el('strong', {text:title}), el('p', {text:text}), actions || null);
+}
+function renderModebar(){
+  const mb = $('modebar'); mb.replaceChildren();
+  let cls = 'modebar', html;
+  if (CONFIG.MODE === 'demo') { cls += ' demo'; html = t('demo_bar'); }
+  else if (store.status === 'ready' && store.offlineCopy) { cls += ' off'; html = t('saved_copy', fmtTime(store.generated)); }
+  else if (store.status === 'ready' && store.syncing) html = t('saved_bar', fmtTime(store.generated));
+  else if (store.status === 'ready') html = t('live_bar', fmtTime(store.generated));
+  else { cls += ' off'; html = t('off_bar'); }
+  mb.className = cls;
+  const txt = el('span', {class:'grow'}); txt.innerHTML = html; // fixed strings only, no Drive data
+  mb.append(el('span', {class:'dot', 'aria-hidden':'true'}), txt);
+  if (store.syncing) mb.append(el('span', {class:'sync', text:t('syncing')}));
+  if (store.status === 'ready' && store.truncated) { mb.classList.add('off'); mb.append(el('span', {class:'sync', text:t('truncated')})); }
+  if (CONFIG.MODE === 'live' && store.status !== 'loading' && !store.syncing) mb.append(el('button', {type:'button', class:'btn sm', id:'refresh', onclick:() => load(true)}, t('refresh')));
+  if (store.status === 'loading') mb.replaceChildren();
+  renderHeroStats();
+}
+function render(){
+  renderModebar();
+  $('howto').textContent = t('howto');
+  const cards = $('cards'), files = $('files'), state = $('state');
+  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('moreWrap')?.remove(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
+  cards.classList.remove('hidden', 'depts'); files.classList.add('hidden'); files.classList.remove('recent'); state.classList.add('hidden');
+  const q = $('search').value.trim();
+
+  // Breadcrumbs
+  const crumbs = $('crumbs'); crumbs.replaceChildren();
+  $('navrow').classList.toggle('root', currentId === 'root' && !q);
+  document.body.classList.toggle('inside', currentId !== 'root' || !!q);
+  const trail = store.status === 'ready' && (currentId === 'root' || store.byId.has(currentId) || ROOT_IDS.has(currentId)) ? pathTo(currentId) : ['root'];
+  trail.forEach((id, i) => {
+    if (i) crumbs.append(el('span', {class:'slash', text:'/'}));
+    crumbs.append(el('button', {type:'button', dir:'auto', 'aria-current': i === trail.length - 1 ? 'page' : 'false', onclick:() => go(id)}, titleOf(id)));
+  });
+
+  const showState = (...a) => { cards.classList.add('hidden'); state.classList.remove('hidden'); state.append(stateBox(...a)); };
+  const retry = el('button', {type:'button', class:'btn primary', onclick:() => load(true)}, t('retry'));
+
+  if (store.status === 'loading') {
+    $('sectionTitle').textContent = t('loading'); $('count').textContent = '';
+    for (let i = 0; i < 6; i++) cards.append(el('div', {class:'skel', 'aria-hidden':'true'}));
+    cards.setAttribute('aria-busy', 'true'); return;
+  }
+  cards.removeAttribute('aria-busy');
+  if (store.status === 'error') {
+    $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
+    const map = {network:['bad','⚠︎',t('net_t'),t('net_p'),retry], denied:['bad','🔒',t('denied_t'),t('denied_p'),null], config:['bad','⚙︎',t('cfg_t'),t('cfg_p'),null], bad:['bad','⚠︎',t('bad_t'),t('bad_p'),retry]};
+    const picked = map[store.error] || map.network;
+    return showState(picked[0], picked[1], picked[2], picked[3], picked[4]);
+  }
+
+  // Search across everything published
+  if (q) {
+    const nq = norm(q);
+    const hit = (n) => norm(n.name).includes(nq) || (n.kind === 'file' && norm(pathTo(n.parent).map(titleOf).join(' ')).includes(nq));
+    const all = [...store.byId.values()];
+    const fol = all.filter((n) => n.kind === 'folder' && norm(n.name).includes(nq));
+    const fil = all.filter((n) => n.kind === 'file' && hit(n));
+    const deps = CONFIG.ROOTS.filter((r) => norm(r.ar + r.en + r.sub).includes(nq));
+    $('sectionTitle').textContent = t('search_h');
+    $('count').textContent = t('folders', fol.length + deps.length) + ' · ' + t('filesN', fil.length);
+    deps.forEach((r) => cards.append(folderCard(r.id, r[lang], r.sub, null, r.sub.split('·')[0].trim())));
+    fol.slice(0, searchLimit.folders).forEach((n) => cards.append(folderCard(n.id, n.name, pathTo(n.parent).slice(1).map(titleOf).join(' › '))));
+    if (fil.length) { files.classList.remove('hidden'); fil.slice(0, searchLimit.files).forEach((n) => files.append(fileRow(n, true))); }
+    if (fol.length > searchLimit.folders || fil.length > searchLimit.files)
+      files.after(el('div', {class:'more-wrap', id:'moreWrap'}, el('button', {type:'button', class:'btn', onclick:() => { searchLimit.folders += 60; searchLimit.files += 100; render(); }}, t('show_more'))));
+    if (!fol.length && !fil.length && !deps.length) showState('', '⌕', t('nores_t'), t('nores_p'));
+    return;
+  }
+
+  // Root: departments
+  if (currentId === 'root') {
+    $('sectionTitle').textContent = t('depts'); $('count').textContent = '';
+    cards.classList.add('depts');
+    CONFIG.ROOTS.forEach((r, i) => cards.append(deptCard(r, i === 0)));
+    const sc = shareCard(); if (sc) $('share').append(sc);
+    const recent = [...store.byId.values()].filter((n) => n.kind === 'file' && n.modified)
+      .sort((a, b) => String(b.modified).localeCompare(String(a.modified))).slice(0, matchMedia('(max-width:600px)').matches ? 4 : 8);
+    if (recent.length) {
+      files.classList.remove('hidden'); files.classList.add('recent');
+      files.append(el('h3', {text:t('recent_h')}));
+      recent.forEach((n) => files.append(fileRow(n, true)));
+    }
+    return;
+  }
+
+  // Unknown or filtered folder: never reveal whether it exists
+  if (!ROOT_IDS.has(currentId) && !(store.byId.has(currentId) && store.byId.get(currentId).kind === 'folder')) {
+    $('sectionTitle').textContent = t('denied_t'); $('count').textContent = '';
+    return showState('bad', '🔒', t('denied_t'), t('denied_p'), el('button', {type:'button', class:'btn primary', onclick:() => go('root')}, t('home_btn')));
+  }
+  if (ROOT_IDS.has(currentId) && store.rootErrors.has(currentId)) {
+    $('sectionTitle').textContent = titleOf(currentId); $('count').textContent = '';
+    return showState('bad', '🔒', t('denied_t'), t('dept_unavailable'), retry);
+  }
+
+  const kids = store.kids.get(currentId) || [];
+  const fol = kids.filter((n) => n.kind === 'folder'), fil = kids.filter((n) => n.kind === 'file');
+  $('sectionTitle').textContent = titleOf(currentId);
+  $('count').textContent = [fol.length ? t('folders', fol.length) : '', fil.length ? t('filesN', fil.length) : ''].filter(Boolean).join(' · ');
+  fol.forEach((n) => { const sub = (store.kids.get(n.id) || []); const nf = sub.filter((x) => x.kind === 'folder').length, nfi = sub.length - nf;
+    cards.append(folderCard(n.id, n.name, nf ? t('folders', nf) + (nfi ? ' · ' + t('filesN', nfi) : '') : nfi ? t('filesN', nfi) : t('open_folder'))); });
+  if (!fol.length) cards.classList.add('hidden');
+  if (fil.length) {
+    const sorted = sortMode === 'new' ? fil.slice().sort((a, b) => String(b.modified || '').localeCompare(String(a.modified || ''))) : fil;
+    const sb = (mode, label) => el('button', {type:'button', 'aria-pressed':String(sortMode === mode), onclick:() => { sortMode = mode; try { localStorage.setItem('ee_library_sort', mode); } catch (e) {} render(); }}, label);
+    files.classList.remove('hidden');
+    files.append(el('h3', {}, el('span', {text:t('files_h')}), fil.length > 1 ? el('span', {class:'sortbar', role:'group', 'aria-label':t('sort_aria')}, sb('name', t('sort_name')), sb('new', t('sort_new'))) : null));
+    sorted.forEach((n) => files.append(fileRow(n, false)));
+  }
+  if (!kids.length) showState('', '📂', t('empty_t'), t('empty_p'));
+  // Invite students to contribute, labelled with the course they are in.
+  const course = pathTo(currentId).slice(1).map((id) => ROOT_IDS.has(id) ? '' : splitName(titleOf(id)).badge).filter((b) => b && !/^\d+$/.test(b))[0];
+  const sc = shareCard(course || titleOf(currentId)); if (sc) $('shareBottom').append(sc);
+}
+
+/* ===== Preview ===== */
+function demoDoc(n){
+  // Demo preview is a small HTML page (works on every browser, unlike PDF-in-iframe on Android).
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ar = lang === 'ar';
+  return '<!doctype html><html lang="' + lang + '" dir="' + (ar ? 'rtl' : 'ltr') + '"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<style>body{margin:0;background:#e9e8e5;font:15px/1.7 system-ui,sans-serif;color:#292e34;padding:24px}.page{max-width:720px;margin:auto;background:#fff;border-radius:6px;padding:40px 36px;box-shadow:0 2px 12px #0002}' +
+    '.tag{display:inline-block;background:#f4e7cf;color:#7a5414;font-weight:700;font-size:12px;padding:3px 10px;border-radius:5px}h1{font-size:22px;margin:16px 0 6px;unicode-bidi:plaintext}p{color:#55606b}.bar{height:10px;background:#eceae5;border-radius:4px;margin:14px 0}.bar.s{width:70%}.bar.m{width:85%}</style>' +
+    '<div class="page"><span class="tag">' + (ar ? 'معاينة تجريبية' : 'DEMO PREVIEW') + '</span><h1>' + esc(n.name) + '</h1><p>' +
+    (ar ? 'هذا محتوى تجريبي مولّد داخل الصفحة وليس ملفًا حقيقيًا. في الوضع المباشر يظهر الملف الحقيقي هنا.' : 'This is generated sample content, not a real file. In live mode the real file appears here.') +
+    '</p><div class="bar"></div><div class="bar m"></div><div class="bar s"></div><div class="bar"></div><div class="bar m"></div></div></html>';
+}
+function openPreview(n){
+  const dlg = $('preview'), body = $('pvBody'), x = ext(n);
+  body.replaceChildren();
+  $('pvTitle').textContent = n.name; $('pvTitle').dir = 'auto';
+  $('pvHelp').replaceChildren();
+  $('pvMeta').textContent = [x.toUpperCase(), fmtSize(n.size), fmtDate(n.modified), n.demo ? t('pv_demo_note') : ''].filter(Boolean).join(' · ');
+  const dl = $('pvDownload');
+  dl.classList.toggle('hidden', !!n.demo || n.public === false);
+  dl.href = n.demo ? '#' : downloadUrl(n);
+  dl.textContent = isGoogleType(n) ? t('dl_pdf') : t('download');
+  const center = (icon, title, text) => el('div', {class:'frame-state'}, stateBox('', icon, title, text));
+  if (n.public === false) body.append(center('🔒', t('restricted_t'), t('restricted_p')));
+  else if (n.demo) body.append(el('iframe', {srcdoc:demoDoc(n), title:n.name, sandbox:''}));
+  else {
+    const frame = el('iframe', {src:drivePreviewUrl(n.id), title:n.name, allow:'autoplay', referrerpolicy:'strict-origin-when-cross-origin'});
+    // The iframe can't tell us whether Google actually showed the file, so a quiet, permanent
+    // hint under the title offers the download; it never covers the document.
+    $('pvHelp').replaceChildren(t('pv_help') + ' ', el('a', {href:downloadUrl(n), target:'_blank', rel:'noopener noreferrer'}, t('pv_dl_link')));
+    body.append(frame);
+  }
+  if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
+}
+function closePreview(){ const dlg = $('preview'); $('pvBody').replaceChildren(); if (dlg.open) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); } }
+$('pvClose').addEventListener('click', closePreview);
+$('preview').addEventListener('close', () => { $('pvBody').replaceChildren(); });
+$('preview').addEventListener('click', (e) => { if (e.target === e.currentTarget) closePreview(); });
+
+/* ===== Language & theme ===== */
+function applyLang(){
+  const h = document.documentElement; h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.title = lang === 'ar' ? 'المكتبة الأكاديمية | طلاب الهندسة الكهربائية' : 'Academic Library | Electrical Engineering students';
+  document.querySelectorAll('[data-t]').forEach((e) => (e.textContent = t(e.dataset.t)));
+  document.querySelectorAll('[data-t-ph]').forEach((e) => (e.placeholder = t(e.dataset.tPh)));
+  document.querySelectorAll('[data-t-aria]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.tAria)));
+  document.querySelectorAll('[data-t-title]').forEach((e) => (e.title = t(e.dataset.tTitle)));
+  $('lang').textContent = t('lang'); $('lang').setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
+  setTheme(document.documentElement.dataset.theme, true);
+}
+function setTheme(v, quiet){
+  document.documentElement.dataset.theme = v;
+  const lb = v === 'dark' ? t('light') : t('dark'); $('theme').replaceChildren(el('span', {'aria-hidden':'true', text:lb.slice(0, 2)}), el('span', {class:'lbl', text:lb.slice(2).trim()})); $('theme').setAttribute('aria-label', lb.slice(2).trim());
+  const mc = document.querySelector('meta[name=theme-color]'); if (mc) mc.content = v === 'dark' ? '#0b0e13' : '#e9e8e5';
+  if (!quiet) try { ['ee_library_theme','ee_theme','ee_theme_v3'].forEach((k) => localStorage.setItem(k, v)); } catch (e) {}
+}
+$('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+$('lang').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; try { ['ee_library_lang','ee_language','ee_lang'].forEach((k) => localStorage.setItem(k, lang)); } catch (e) {} applyLang(); render(); };
+$('goBack').onclick = () => { if ($('search').value) { $('search').value = ''; if (!syncSearchToUrl()) render(); return; } const tr = pathTo(currentId); if (currentId !== 'root' && tr.length > 1) go(tr[tr.length - 2]); else go('root'); };
+let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchLimit = {folders:60, files:100}; searchTimer = setTimeout(() => { if (!syncSearchToUrl()) render(); }, 150); });
+document.addEventListener('keydown', (e) => { if (e.key === '/' && document.activeElement !== $('search') && !$('preview').open) { e.preventDefault(); $('search').focus(); } });
+
+applyLang();
+{ const m = /^#\/f\/([\w-]{1,100})$/.exec(location.hash); if (m) currentId = m[1]; } // open shared links directly
+load(false);
+</script></body></html>
