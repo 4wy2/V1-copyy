@@ -406,9 +406,9 @@ const T = {
     st_depts:'تخصصات',st_courses:'مقرر',st_files:'ملف',courses:n=>n===1?'مقرر واحد':n===2?'مقرران':n<=10?`${n} مقررات`:`${n} مقررًا`,dept_empty:'تُضاف المصادر قريبًا',dl_pdf:'تحميل PDF',
     browse_aria:'تصفح المكتبة',search_ph:'ابحث برمز المقرر أو اسمه أو اسم الملف...',search_aria:'بحث في المكتبة',crumbs_aria:'مسار المجلدات',back:'رجوع',
     root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':`${n} مجلدات`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':`${n} ملفات`,
-    browse:'تصفح المجلدات',open_folder:'عرض المحتويات',files_h:'الملفات',
-    preview:'معاينة',open:'فتح ↗',open_drive:'فتح في Drive ↗',download:'تحميل ↓',close:'إغلاق ✕',
-    results:(q,a,b)=>`نتائج البحث عن «${q}»: ${a} · ${b}`,search_h:'نتائج البحث',
+    open_folder:'عرض المحتويات',files_h:'الملفات',
+    preview:'معاينة',download:'تحميل ↓',close:'إغلاق ✕',
+    search_h:'نتائج البحث',
     demo_bar:'<b>وضع تجريبي:</b> الملفات المعروضة أمثلة وهمية للتجربة فقط وليست من مصادر المكتبة.',
     live_bar:(t)=>`<b>المكتبة محدّثة</b> · آخر تحديث ${t}`,off_bar:'<b>غير متصل</b> · تعذّر تحميل المكتبة',
     refresh:'↻ تحديث',
@@ -424,9 +424,7 @@ const T = {
     restricted:'غير منشور',restricted_t:'هذا الملف غير منشور للعامة',restricted_p:'هذا الملف غير متاح للعرض في المكتبة.',
     demo_badge:'تجريبي',
     pv_demo_note:'معاينة تجريبية — ليست ملفًا حقيقيًا.',
-    pv_slow:'حمّله وافتحه على جهازك.',
-    pv_noprev_t:'المعاينة غير متاحة لهذا النوع في الوضع التجريبي',pv_noprev_p:'في الوضع المباشر تُعرض ملفات PDF والصور ومستندات Office عبر معاينة Google.',
-    howto:'جميع المصادر تُنشر بعد مراجعتها من اللجنة العلمية.',
+            howto:'جميع المصادر تُنشر بعد مراجعتها من اللجنة العلمية.',
     recent_h:'أحدث الملفات',show_more:'عرض المزيد',
     share_t:'عندك ملف يفيد زملاءك؟',share_p:'ملخص، شرح مرتب، حل واجب أو أسئلة مراجعة… شاركه وساعد غيرك يذاكر أسهل. نراجعه ثم ننشره في المكتبة.',share_tc:(c)=>`عندك مصدر لـ ${c}؟`,share_pc:'شاركه وساعد زميلك. نراجعه ثم ننشره هنا.',share_btn:'شارك مصدرًا',sort_name:'الاسم',sort_new:'الأحدث',sort_aria:'ترتيب الملفات',
     syncing:'جارٍ التحقق من التحديثات…',saved_copy:(t)=>`<b>غير متصل</b> · المعروض نسخة محفوظة على جهازك (آخر تحديث ${t})`,saved_bar:(t)=>`<b>نسخة محفوظة</b> · آخر تحديث ${t}`,truncated:'المكتبة كبيرة جدًا، وقد لا تظهر بعض الملفات.',pv_help:'ما ظهر الملف؟',pv_dl_link:'حمّله وافتحه على جهازك',
@@ -437,9 +435,9 @@ const T = {
     st_depts:'departments',st_courses:'courses',st_files:'files',courses:n=>`${n} course${n===1?'':'s'}`,dept_empty:'Resources coming soon',dl_pdf:'Download PDF',
     browse_aria:'Browse the library',search_ph:'Search by course code, course name, or file name…',search_aria:'Search the library',crumbs_aria:'Folder path',back:'Back',
     root:'Academic Library',depts:'Departments',folders:n=>`${n} folder${n===1?'':'s'}`,filesN:n=>`${n} file${n===1?'':'s'}`,
-    browse:'Browse folders',open_folder:'View contents',files_h:'Files',
-    preview:'Preview',open:'Open ↗',open_drive:'Open in Drive ↗',download:'Download ↓',close:'Close ✕',
-    results:(q,a,b)=>`Results for “${q}”: ${a} · ${b}`,search_h:'Search results',
+    open_folder:'View contents',files_h:'Files',
+    preview:'Preview',download:'Download ↓',close:'Close ✕',
+    search_h:'Search results',
     demo_bar:'<b>Demo mode:</b> the files shown are invented samples for trying the interface, not library resources.',
     live_bar:(t)=>`<b>Library up to date</b> · updated ${t}`,off_bar:'<b>Offline</b> · the library couldn’t be loaded',
     refresh:'↻ Refresh',
@@ -455,9 +453,7 @@ const T = {
     restricted:'Not published',restricted_t:'This file isn’t shared publicly',restricted_p:'This file isn’t available to view in the library.',
     demo_badge:'Demo',
     pv_demo_note:'Demo preview generated in the page — not a real file.',
-    pv_slow:'Download it and open it on your device.',
-    pv_noprev_t:'Preview isn’t available for this type in demo mode',pv_noprev_p:'In live mode PDFs, images and Office files are shown through Google’s viewer.',
-    howto:'All resources are published after review by the Scientific Committee.',
+            howto:'All resources are published after review by the Scientific Committee.',
     recent_h:'Recently added',show_more:'Show more',
     share_t:'Have a file that could help others?',share_p:'A summary, clear notes, a solved assignment or review questions… share it and help a classmate study. We review it, then publish it in the library.',share_tc:(c)=>`Have a resource for ${c}?`,share_pc:'Share it and help a classmate. We review it, then publish it here.',share_btn:'Share a resource',sort_name:'Name',sort_new:'Newest',sort_aria:'Sort files',
     syncing:'Checking for updates…',saved_copy:(t)=>`<b>Offline</b> · showing the copy saved on this device (updated ${t})`,saved_bar:(t)=>`<b>Saved copy</b> · updated ${t}`,truncated:'The library is very large; some files may not appear.',pv_help:'File not showing?',pv_dl_link:'Download it and open it on your device',
@@ -471,7 +467,7 @@ let lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
 const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
 const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map(), syncing:false, offlineCopy:false, checked:null };
 let sortMode = (() => { try { return localStorage.getItem('ee_library_sort') === 'new' ? 'new' : 'name'; } catch (e) { return 'name'; } })();
-let currentId = 'root', previewTimer = null, previewUrl = null, searchLimit = {folders:60, files:100};
+let currentId = 'root', searchLimit = {folders:60, files:100};
 
 /* ===== Helpers ===== */
 const norm = (s) => String(s || '').toLowerCase()
@@ -875,7 +871,6 @@ function demoDoc(n){
 }
 function openPreview(n){
   const dlg = $('preview'), body = $('pvBody'), x = ext(n);
-  clearTimeout(previewTimer); if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
   body.replaceChildren();
   $('pvTitle').textContent = n.name; $('pvTitle').dir = 'auto';
   $('pvHelp').replaceChildren();
@@ -896,9 +891,9 @@ function openPreview(n){
   }
   if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
 }
-function closePreview(){ const dlg = $('preview'); clearTimeout(previewTimer); $('pvBody').replaceChildren(); if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; } if (dlg.open) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); } }
+function closePreview(){ const dlg = $('preview'); $('pvBody').replaceChildren(); if (dlg.open) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); } }
 $('pvClose').addEventListener('click', closePreview);
-$('preview').addEventListener('close', () => { clearTimeout(previewTimer); $('pvBody').replaceChildren(); });
+$('preview').addEventListener('close', () => { $('pvBody').replaceChildren(); });
 $('preview').addEventListener('click', (e) => { if (e.target === e.currentTarget) closePreview(); });
 
 /* ===== Language & theme ===== */
