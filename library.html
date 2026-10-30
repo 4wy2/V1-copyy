@@ -40,8 +40,6 @@ a{color:inherit;text-decoration:none}
 .badge.lock{background:color-mix(in srgb,var(--bad) 15%,var(--panel));color:var(--bad)}
 .arr{color:var(--muted)}
 [dir="ltr"] .arr{transform:scaleX(-1)}
-.warning{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:14px 17px;border-radius:10px;margin-top:14px;font-size:13px;line-height:1.9}
-.warning strong{color:var(--text)}
 
 /* ---------- 3. Header ---------- */
 .top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
@@ -97,7 +95,6 @@ a{color:inherit;text-decoration:none}
 .sectionline h2{font-size:19px;font-weight:700;margin:0}
 #sectionTitle{scroll-margin-top:88px}
 .count{font-size:12px;color:var(--muted)}
-.results-note{color:var(--muted);font-size:13px;margin:-4px 0 12px}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .cards.depts{grid-template-columns:repeat(2,minmax(0,1fr))}
 .dept{display:flex;align-items:center;gap:16px;text-align:start;padding:18px 20px;min-height:108px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;font:inherit;transition:border-color .15s,transform .15s,background-color .15s}
@@ -122,13 +119,13 @@ a{color:inherit;text-decoration:none}
 .folder .copy{flex:1;min-width:0}
 .folder strong{display:block;white-space:normal;line-height:1.45;font-size:14px;font-weight:600}
 .folder small{display:block;color:var(--muted);margin-top:4px}
-[dir="rtl"] .folder .copy strong,[dir="rtl"] .folder .copy small{text-align:right}
+[dir="rtl"] .folder .copy strong,[dir="rtl"] .folder .copy small,[dir="rtl"] .file .name{text-align:right}
+[dir="ltr"] .file .name{text-align:left}
 
 /* ---------- 7. Files ---------- */
 .files{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px;background:var(--panel)}
 .files h3{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0;padding:13px 16px;font-size:13.5px;color:var(--text);font-weight:700;background:var(--card);border-bottom:1px solid var(--line)}
 .recent{margin-top:30px}
-.recent .sectionline{margin-bottom:0}
 .sortbar{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
 .sortbar button{background:var(--panel);border:0;color:var(--muted);padding:5px 11px;font-size:12px;cursor:pointer;min-height:32px}
 .sortbar button[aria-pressed="true"]{background:var(--sub);color:var(--accent);font-weight:700}
@@ -142,7 +139,7 @@ a{color:inherit;text-decoration:none}
 .fico.img{color:#b79be6;background:color-mix(in srgb,#b79be6 15%,var(--panel))}
 .file .copy{flex:1;min-width:0}
 .file .name{display:block;font-weight:600;line-height:1.45;overflow-wrap:anywhere;text-align:start}
-.file button.name{background:none;border:0;padding:0;color:var(--text);cursor:pointer}
+.file button.name{width:100%;background:none;border:0;padding:0;color:var(--text);cursor:pointer}
 .file button.name:hover{color:var(--accent)}
 .file .meta{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--muted);font-size:12px;margin-top:2px}
 .file .meta .path{color:var(--accent)}
@@ -322,7 +319,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 <header class="top"><div class="wrap topin"><a class="brand" href="index.html" data-t-title="home_title" title="العودة للرئيسية"><span class="mark">EE</span><span><strong data-t="committee">اللجنة العلمية</strong><small data-t="club">نادي الهندسة الكهربائية</small></span></a><div class="topright"><button id="lang" class="btn" type="button">EN</button><button id="theme" class="btn" type="button" data-t-title="theme_title" title="تبديل المظهر">☀︎ فاتح</button><a class="btn" href="index.html" data-t="home">الرئيسية ↗</a></div></div></header>
 <main class="wrap"><section class="hero"><div class="hero-copy"><span class="eyebrow">YIC ACADEMIC LIBRARY</span><h1 data-t="h1">المكتبة الأكاديمية</h1><p data-t="lead">مصادر المقررات مرتبة حسب التخصص والمادة. تصفّحها، عاينها، وحمّلها من مكان واحد.</p></div><div class="hero-stats" id="heroStats"></div></section>
 <div id="modebar" class="modebar" role="status"></div>
-<section data-t-aria="browse_aria" aria-label="تصفح المكتبة"><div class="toolbar"><label class="search"><input id="search" autocomplete="off" type="search" data-t-ph="search_ph" placeholder="ابحث برمز المقرر أو اسمه أو اسم الملف..." data-t-aria="search_aria" aria-label="بحث في المكتبة"></label></div><div class="navrow" id="navrow"><button type="button" class="btn sm back" id="goBack" data-t-aria="back" aria-label="رجوع"><span aria-hidden="true">→</span></button><nav class="crumbs" id="crumbs" data-t-aria="crumbs_aria" aria-label="مسار المجلدات"></nav></div><div class="sectionline"><h2 id="sectionTitle" dir="auto">التخصصات</h2><span class="count" id="count"></span></div><p id="resultsNote" class="results-note hidden"></p><div id="cards" class="cards"></div><div id="share"></div><div id="files" class="files hidden"></div><div id="state" class="hidden"></div><div id="shareBottom"></div></section>
+<section data-t-aria="browse_aria" aria-label="تصفح المكتبة"><div class="toolbar"><label class="search"><input id="search" autocomplete="off" type="search" data-t-ph="search_ph" placeholder="ابحث برمز المقرر أو اسمه أو اسم الملف..." data-t-aria="search_aria" aria-label="بحث في المكتبة"></label></div><div class="navrow" id="navrow"><button type="button" class="btn sm back" id="goBack" data-t-aria="back" aria-label="رجوع"><span aria-hidden="true">→</span></button><nav class="crumbs" id="crumbs" data-t-aria="crumbs_aria" aria-label="مسار المجلدات"></nav></div><div class="sectionline"><h2 id="sectionTitle" dir="auto">التخصصات</h2><span class="count" id="count"></span></div><div id="cards" class="cards"></div><div id="share"></div><div id="files" class="files hidden"></div><div id="state" class="hidden"></div><div id="shareBottom"></div></section>
 <p class="howto-line" id="howto"></p>
 </main><footer><div class="wrap"><span data-t="footer">بوابة اللجنة العلمية · نادي الهندسة الكهربائية</span><span class="dev sig" dir="rtl" lang="ar">الرصاصي</span></div></footer>
 
@@ -403,9 +400,9 @@ function buildDemoIndex(){
 const T = {
   ar:{committee:'اللجنة العلمية',club:'نادي الهندسة الكهربائية',home:'الرئيسية ↗',home_title:'العودة للرئيسية',theme_title:'تبديل المظهر',light:'☀︎ فاتح',dark:'☾ داكن',lang:'EN',h1:'المكتبة الأكاديمية',
     lead:'مصادر المقررات مرتبة حسب التخصص والمادة. تصفّحها، عاينها، وحمّلها من مكان واحد.',
-    st_depts:'تخصصات',st_courses:'مقرر',st_files:'ملف',courses:n=>n===1?'مقرر واحد':n===2?'مقرران':n<=10?`${n} مقررات`:`${n} مقررًا`,dept_empty:'تُضاف المصادر قريبًا',dl_pdf:'تحميل PDF',
+    st_depts:'تخصصات',st_courses:'مقرر',st_files:'ملف',courses:n=>n===1?'مقرر واحد':n===2?'مقرران':n===0?'0 مقرر':n<=10?`${n} مقررات`:`${n} مقررًا`,dept_empty:'تُضاف المصادر قريبًا',dl_pdf:'تحميل PDF',
     browse_aria:'تصفح المكتبة',search_ph:'ابحث برمز المقرر أو اسمه أو اسم الملف...',search_aria:'بحث في المكتبة',crumbs_aria:'مسار المجلدات',back:'رجوع',
-    root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':`${n} مجلدات`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':`${n} ملفات`,
+    root:'المكتبة الأكاديمية',depts:'التخصصات',folders:n=>n===1?'مجلد واحد':n===2?'مجلدان':n===0?'0 مجلد':n<=10?`${n} مجلدات`:`${n} مجلدًا`,filesN:n=>n===1?'ملف واحد':n===2?'ملفان':n===0?'0 ملف':n<=10?`${n} ملفات`:`${n} ملفًا`,
     open_folder:'عرض المحتويات',files_h:'الملفات',
     preview:'معاينة',download:'تحميل ↓',close:'إغلاق ✕',
     search_h:'نتائج البحث',
@@ -465,7 +462,7 @@ const T = {
 const $ = (id) => document.getElementById(id);
 let lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
 const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
-const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map(), syncing:false, offlineCopy:false, checked:null };
+const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map(), syncing:false, offlineCopy:false };
 let sortMode = (() => { try { return localStorage.getItem('ee_library_sort') === 'new' ? 'new' : 'name'; } catch (e) { return 'name'; } })();
 let currentId = 'root', searchLimit = {folders:60, files:100};
 
@@ -495,7 +492,6 @@ function fmtTime(iso){ try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-
 const deptOf = (id) => CONFIG.ROOTS.find((r) => r.id === id);
 function titleOf(id){ if (id === 'root') return t('root'); const d = deptOf(id); if (d) return d[lang]; const n = store.byId.get(id); return n ? n.name : ''; }
 function pathTo(id){ const out = []; let cur = id, guard = 0; while (cur && cur !== 'root' && guard++ < 30) { out.unshift(cur); if (ROOT_IDS.has(cur)) break; const n = store.byId.get(cur); cur = n && n.parent; } return ['root', ...out]; }
-const driveFileUrl = (id) => 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/view';
 const drivePreviewUrl = (id) => 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/preview';
 const driveDownloadUrl = (id) => 'https://drive.google.com/uc?export=download&id=' + encodeURIComponent(id);
 // Google Docs/Slides/Sheets have no original file: download them as PDF.
@@ -613,7 +609,6 @@ async function load(refresh){
     if (seq !== loadSeq) return;
     // "Nothing changed" is only valid if a good copy is loaded; otherwise fetch the full index.
     if (data.unchanged && (!local || !store.byId.size)) { data = await fetchIndex(false, ''); if (seq !== loadSeq) return; }
-    if (data.unchanged) store.checked = new Date().toISOString();
     else { ingest(data); saveLocal(data); }
     store.status = 'ready'; store.syncing = false;
     rerenderKeepingPlace();
@@ -650,7 +645,7 @@ function syncSearchToUrl(){
     if (!onSearch) history.pushState({searchFrom:currentId}, '', h); // Back leaves the search
     else if (location.hash !== h) history.replaceState(history.state, '', h);
   } else if (onSearch) {
-    if (history.state && typeof history.state.searchFrom === 'string') { history.back(); return; } // back to where it started
+    if (history.state && typeof history.state.searchFrom === 'string') { history.back(); return true; } // back to where it started
     history.replaceState(null, '', folderHash());
   }
 }
@@ -761,9 +756,9 @@ function renderModebar(){
 function render(){
   renderModebar();
   $('howto').textContent = t('howto');
-  const cards = $('cards'), files = $('files'), state = $('state'), note = $('resultsNote');
+  const cards = $('cards'), files = $('files'), state = $('state');
   cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('moreWrap')?.remove(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
-  cards.classList.remove('hidden', 'depts'); files.classList.add('hidden'); files.classList.remove('recent'); state.classList.add('hidden'); note.classList.add('hidden');
+  cards.classList.remove('hidden', 'depts'); files.classList.add('hidden'); files.classList.remove('recent'); state.classList.add('hidden');
   const q = $('search').value.trim();
 
   // Breadcrumbs
@@ -915,8 +910,8 @@ function setTheme(v, quiet){
 }
 $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 $('lang').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; try { ['ee_library_lang','ee_language','ee_lang'].forEach((k) => localStorage.setItem(k, lang)); } catch (e) {} applyLang(); render(); };
-$('goBack').onclick = () => { if ($('search').value) { $('search').value = ''; syncSearchToUrl(); render(); return; } const tr = pathTo(currentId); if (currentId !== 'root' && tr.length > 1) go(tr[tr.length - 2]); else location.href = 'index.html'; };
-let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchLimit = {folders:60, files:100}; searchTimer = setTimeout(() => { syncSearchToUrl(); render(); }, 150); });
+$('goBack').onclick = () => { if ($('search').value) { $('search').value = ''; if (!syncSearchToUrl()) render(); return; } const tr = pathTo(currentId); if (currentId !== 'root' && tr.length > 1) go(tr[tr.length - 2]); else location.href = 'index.html'; };
+let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchLimit = {folders:60, files:100}; searchTimer = setTimeout(() => { if (!syncSearchToUrl()) render(); }, 150); });
 document.addEventListener('keydown', (e) => { if (e.key === '/' && document.activeElement !== $('search') && !$('preview').open) { e.preventDefault(); $('search').focus(); } });
 
 applyLang();
