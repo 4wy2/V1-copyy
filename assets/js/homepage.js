@@ -12,7 +12,7 @@
       introText: 'مبادرة علمية تهدف إلى دعم طلاب قسم الهندسة الكهربائية وتسهيل الوصول للمصادر التعليمية.',
       servicesTitle: 'المنصات والخدمات الأكاديمية', flowcharts: 'فلوشارت التخصصات', schedule: 'أنشئ جدولك',
       shareTitle: 'شاركنا مصادرك الدراسية',
-      shareText: 'عندك ملخص أو اختبار سابق أو ملف يفيد زملاءك؟ أرسله عبر النموذج، ونراجعه قبل نشره.',
+      shareText: 'عندك ملخص أو شرح أو أسئلة مراجعة تفيد زملاءك؟ أرسلها عبر النموذج، ونراجعها قبل نشرها.',
       addSource: 'إضافة مصدر',
       resourcesTitle: 'ملفات ومراجع',
       courseLibrary: 'مكتبة المواد', summaries: 'ملخصات', reviews: 'مراجعات وتدريبات', labs: 'تجارب', soon: 'قريباً',
@@ -32,7 +32,7 @@
       introText: 'A student initiative supporting Electrical Engineering students and making study resources easier to reach.',
       servicesTitle: 'Platforms and academic services', flowcharts: 'Major flowcharts', schedule: 'Build your schedule',
       shareTitle: 'Share your study resources',
-      shareText: 'Have a summary, a past exam or a useful file? Send it through the form and we will review it before publishing.',
+      shareText: 'Have a summary, notes or review questions that could help others? Send them through the form and we will review them before publishing.',
       addSource: 'Add a resource',
       resourcesTitle: 'Files and references',
       courseLibrary: 'Course library', summaries: 'Summaries', reviews: 'Reviews and practice', labs: 'Labs', soon: 'Soon',
@@ -69,8 +69,8 @@
     document.title = s.title;
   }
 
-  langBtn.addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; save('ee_language', lang); render(); });
-  themeBtn.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; save('ee_theme', theme); render(); });
+  langBtn.addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; ['ee_language','ee_lang','ee_library_lang'].forEach((k) => save(k, lang)); render(); });
+  themeBtn.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; ['ee_theme','ee_theme_v3','ee_library_theme'].forEach((k) => save(k, theme)); render(); });
 
   function setBackground(inert) { document.querySelectorAll('header, main, footer').forEach((n) => { n.inert = inert; }); }
 
