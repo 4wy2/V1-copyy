@@ -1,485 +1,388 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Engineer | انشئ جدولك</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    :root { --primary: #1e40af; --bg: #f8fafc; --midterm-theme: #dc2626; }
-    body { font-family: 'Cairo', sans-serif; background: var(--bg); padding: 5px; color: #1e293b; overflow-x: hidden; }
-    
-    .control-panel { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 10px; border: 1px solid #e2e8f0; }
-    .midterm-box { border: 2px solid #e2e8f0; border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
-    .midterm-note { background: #fef2f2; padding: 8px; border-bottom: 1px solid #e2e8f0; }
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#151a22">
+<title>جدولي الدراسي | نادي الهندسة الكهربائية</title>
+<meta name="description" content="ارفع جدولك من الإيدوقيت أو أضف موادك يدويًا، واعرض جدولك الأسبوعي وتوقيت الاختبارات النصفية.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_theme','ee_theme_v3','ee_library_theme']);document.documentElement.dataset.theme=th==='light'?'light':'dark'}catch(e){}})()</script>
+<style>
+/* ---------- Tokens (same as the library) ---------- */
+:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--warn:#e0b45c;--bad:#e58a7d}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--warn:#94641c;--bad:#a8473a}
 
-    .input-group input { width: 100%; background: #f1f5f9; border: 2px solid #e2e8f0; border-radius: 8px; padding: 8px; font-weight: 700; font-size: 13px; margin-bottom: 6px; outline: none; transition: 0.2s; }
-    .input-group input:focus { border-color: var(--primary); }
-    
-    .day-btn { flex: 1; min-width: 45px; padding: 5px; background: white; border: 1.5px solid #e2e8f0; border-radius: 6px; text-align: center; cursor: pointer; font-size: 10px; font-weight: 700; transition: 0.2s; }
-    .day-btn.active { background: #10b981; color: white; border-color: #10b981; }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
 
-    .time-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
-    .time-btn { padding: 4px; font-size: 9px; background: white; border: 1px solid #cbd5e1; border-radius: 5px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; }
-    .time-btn.selected { background: var(--primary); color: white; }
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14.5px/1.7 var(--sans);-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button,a{touch-action:manipulation}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(980px,calc(100% - 32px));margin:auto}
+.hidden{display:none!important}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:700}
+:root[data-theme="light"] .btn.primary{color:#fff}
+.btn.block{width:100%}
+.btn svg{width:17px;height:17px;flex:none}
+.link-danger{background:none;border:0;color:var(--bad);cursor:pointer;font-weight:600;padding:8px 4px}
 
-    .schedule-card { background: white; border-radius: 10px; padding: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); width: 100%; margin: 0 auto; }
-    .grid-table { display: grid; grid-template-columns: 0.8fr repeat(5, 1fr); gap: 1.5px; width: 100%; background: #e2e8f0; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; }
-    .header-pill { background: #1e293b; color: white; padding: 6px 0; font-weight: 900; font-size: 9px; text-align: center; }
-    .cell-base { background: white; min-height: 45px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 2px; transition: background-color 0.3s; }
-    .time-cell { background: #f8fafc; color: var(--primary); font-weight: 900; border-left: 1.5px solid #cbd5e1; }
-    .midterm-mode-active .time-cell { color: var(--midterm-theme); background: #fef2f2; }
+/* ---------- Header ---------- */
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
+.topin{display:flex;align-items:center;gap:16px;min-height:72px}
+.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:700;font-size:13px}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}
+.brand strong{font-size:14.5px;display:block;font-weight:700}
+.brand small{color:var(--muted);display:block}
+.topright{margin-inline-start:auto;display:flex;gap:8px}
 
-    .time-cell div:first-child { font-size: 10px; line-height: 1; }
-    .time-cell div:last-child { font-size: 8px; opacity: 0.6; }
-    
-    .course-card { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 4px; }
-    .c-name { font-weight: 900; font-size: 9px; line-height: 1.1; margin-bottom: 1px; word-break: break-all; }
-    .c-room { font-size: 7px; font-weight: 700; color: rgba(0,0,0,0.5); border-top: 0.5px solid rgba(0,0,0,0.1); width: 90%; padding-top: 1px; }
+/* ---------- Page ---------- */
+.hero{padding:30px 0 6px}
+.hero h1{margin:0 0 4px;font-size:26px;font-weight:700}
+.hero p{margin:0;color:var(--muted);max-width:620px}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start;padding:18px 0 40px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.panel h2{font-size:15px;margin:0 0 10px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:3px;margin-bottom:14px}
+.tabs button{border:0;background:none;border-radius:8px;min-height:38px;cursor:pointer;color:var(--muted);font-weight:600}
+.tabs button[aria-selected="true"]{background:var(--sub);color:var(--accent)}
+.hint{color:var(--muted);font-size:13px;margin:0 0 12px}
+.privacy{color:var(--muted);font-size:12px;margin:10px 0 0;line-height:1.6}
+.drop{border:1px dashed var(--line);border-radius:12px;padding:16px;background:var(--card)}
+.progress{margin-top:12px}
+.progress span{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.field input{width:100%;min-height:44px;padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:var(--card);font-size:16px}
+.field input:focus{border-color:var(--accent);outline:0}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:8px;min-height:38px;padding:4px 11px;cursor:pointer;font-weight:600;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--sub);border-color:var(--accent);color:var(--accent)}
+.daycfg{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px;background:var(--card)}
+.daycfg b{display:block;font-size:13px;margin-bottom:6px}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.slots .chip{font:500 12.5px/1.2 var(--mono);padding:6px 4px;direction:ltr}
+.divider{border:0;border-top:1px solid var(--line);margin:16px 0}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:none;border:0;padding:4px 0;cursor:pointer;text-align:start}
+.switch b{display:block;font-size:14px}
+.switch small{display:block;color:var(--muted);font-size:12.5px}
+.toggle{flex:none;width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;transition:background .2s}
+.toggle::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.switch[aria-checked="true"] .toggle{background:var(--bad)}
+.switch[aria-checked="true"] .toggle::after{transform:translateX(-18px)}
 
-    .edit-actions { position: absolute; inset: 0; background: rgba(255,255,255,0.85); display: none; align-items: center; justify-content: space-around; z-index: 20; border-radius: 4px; }
-    .delete-mode .edit-actions { display: flex !important; }
-    .action-btn { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; cursor: pointer; transition: 0.2s; }
-    .action-btn:active { transform: scale(0.9); }
-    .btn-del { background: #ef4444; }
+/* ---------- Schedule ---------- */
+.sched{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.sched-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.sched-head h2{margin:0;font-size:16px}
+.sched-head small{color:var(--muted);font-size:12.5px}
+.midterm .sched-head small{color:var(--bad)}
+.grid{display:grid;grid-template-columns:minmax(64px,.8fr) repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grid .h{background:var(--card);font-weight:700;font-size:12.5px;text-align:center;padding:7px 2px}
+.grid .c{background:var(--panel);min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:3px;text-align:center}
+.grid .t{background:var(--card);font:500 11.5px/1.35 var(--mono);color:var(--accent);direction:ltr}
+.grid .t small{display:block;font-size:10.5px;color:var(--muted)}
+.midterm .grid .t{color:var(--bad)}
+.grid .band{grid-column:1/-1;background:color-mix(in srgb,var(--bad) 14%,var(--panel));color:var(--bad);font-size:12px;font-weight:600;text-align:center;padding:5px}
+.course{width:100%;height:100%;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 2px}
+.course b{font:600 12px/1.2 var(--mono);word-break:break-word}
+.course span{font-size:10.5px;opacity:.8;margin-top:2px}
+.del{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:color-mix(in srgb,var(--panel) 70%,transparent);border:0;cursor:pointer}
+.del i{width:28px;height:28px;border-radius:50%;background:var(--bad);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.editing .del{display:flex}
+.empty-note{color:var(--muted);font-size:13px;text-align:center;margin:12px 0 0}
+.sched-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sched-actions .btn{flex:1}
+.btn[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
 
-    .btn-main { width: 100%; background: var(--primary); color: white; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 14px; margin-top: 8px; transition: 0.2s; }
-    .btn-main:active { transform: scale(0.98); }
-    
-    /* أنيميشن الرفع السحابي */
-    .scanning-line { position: absolute; width: 100%; height: 2px; background: #3b82f6; top: 0; left: 0; z-index: 10; animation: scan 1.5s infinite linear; }
-    @keyframes scan { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
+footer{border-top:1px solid var(--line);padding:19px 0;color:var(--muted);font-size:12px}
+footer .wrap{display:flex;justify-content:center;align-items:center}
+.sig{font:700 25px/1.3 "Rassasi Brand","Amiri","Noto Naskh Arabic",serif;color:var(--accent);padding:0 2px}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.sig{background:linear-gradient(100deg,var(--accent),var(--warn));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
 
-    /* تنسيق أزرار التبديل */
-    .tab-btn { transition: all 0.3s ease; }
-    .tab-active { background-color: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
-    .tab-inactive { background-color: #f8fafc; border-color: transparent; color: #64748b; }
-  </style>
+
+/* ---------- Tablet / phone ---------- */
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+@media (max-width:600px){
+  body{font-size:14px}
+  .wrap{width:calc(100% - 24px)}
+  .topin{min-height:56px;gap:8px}
+  .mark{width:32px;height:32px;border-radius:9px;font-size:12px}
+  .brand{gap:7px;flex:1 1 auto}
+  .brand strong{font-size:13px;white-space:nowrap}
+  .brand small{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:4px}
+  .topright .btn{min-height:38px;padding:4px 9px;font-size:12.5px;white-space:nowrap}
+  .hero{padding:18px 0 0}
+  .hero h1{font-size:21px}
+  .hero p{font-size:13.5px}
+  .layout{padding:14px 0 28px;gap:14px}
+  .panel,.sched{padding:12px;border-radius:12px}
+  .sched{padding:10px 6px}
+  .sched-head{padding:0 4px}
+  .grid{grid-template-columns:52px repeat(5,minmax(0,1fr))}
+  .grid .h{font-size:11px;padding:6px 1px}
+  .grid .c{min-height:48px;padding:2px}
+  .grid .t{font-size:10px}
+  .grid .t small{font-size:9.5px}
+  .course b{font-size:10.5px}
+  .course span{font-size:9.5px}
+}
+@media print{.top,.hero,.panel,.sched-actions,footer{display:none!important}body{background:#fff}.layout{display:block}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <header class="no-print py-4 px-2 text-center">
-    <div class="inline-flex items-center justify-center gap-2 mb-1">
-        <div class="w-8 h-8 bg-blue-900 rounded-xl flex items-center justify-center shadow-blue-200 shadow-lg">
-            <span class="text-white text-xs font-black italic"> EEC </span>
+<header class="top"><div class="wrap topin">
+  <a class="brand" href="index.html" title="العودة للرئيسية"><span class="mark">EE</span><span><strong>اللجنة العلمية</strong><small>نادي الهندسة الكهربائية</small></span></a>
+  <div class="topright"><button id="theme" class="btn" type="button" title="تبديل المظهر">☀︎ فاتح</button><a class="btn" href="index.html">الرئيسية ↗</a></div>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>جدولي الدراسي</h1>
+    <p>ارفع ملف الجدول من الإيدوقيت ويترتب لك تلقائيًا، أو أضف موادك يدويًا. الجدول ينحفظ في جهازك.</p>
+  </section>
+
+  <div class="layout">
+    <section class="panel" aria-label="إضافة المواد">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tabSmart" aria-selected="true" aria-controls="secSmart">من ملف الإيدوقيت</button>
+        <button type="button" role="tab" id="tabManual" aria-selected="false" aria-controls="secManual">إضافة يدوية</button>
+      </div>
+
+      <div id="secSmart" role="tabpanel">
+        <p class="hint">من الإيدوقيت حمّل «الجدول الدراسي» بصيغة PDF، وارفعه هنا. نستخرج منه المواد والأوقات والقاعات.</p>
+        <div class="drop">
+          <input type="file" id="scheduleFile" accept="application/pdf" class="hidden">
+          <button type="button" id="uploadBtn" class="btn primary block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>اختر ملف الجدول (PDF)</button>
+          <div id="loader" class="progress hidden" role="status" aria-live="polite"><span id="statusText">جارٍ رفع الملف…</span><div class="bar"><i id="progressBar"></i></div></div>
         </div>
-        <h1 class="text-blue-900 font-black text-xl tracking-tight">Electrical Engineering Club</h1>
-    </div>
-    <p class="text-slate-500 text-[10px] font-bold tracking-[0.2em] uppercase">اللجنة العلمية</p>
-    <div class="w-16 h-1 bg-blue-100 mx-auto mt-3 rounded-full"></div>
-  </header>
+        <p class="privacy">يُرسل الملف إلى خادم التحليل لاستخراج الجدول، وتنحفظ النتيجة في جهازك فقط.</p>
+      </div>
 
-<div class="page-container">
-  <div class="control-panel no-print" id="ui-panel">
-    
-    <div class="flex gap-2 mb-4">
-        <button id="tab-smart" onclick="switchMode('smart')" class="tab-btn tab-active flex-1 py-2.5 rounded-lg text-[10px] font-black border-2 flex items-center justify-center gap-1.5">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> تحليل ذكي
-        </button>
-        <button id="tab-manual" onclick="switchMode('manual')" class="tab-btn tab-inactive flex-1 py-2.5 rounded-lg text-[10px] font-black border-2 flex items-center justify-center gap-1.5 hover:bg-slate-100">
-            <i class="fa-solid fa-pen"></i> إضافة يدوية
-        </button>
-    </div>
+      <div id="secManual" role="tabpanel" class="hidden">
+        <label class="field"><span>رمز المادة</span><input id="courseName" type="text" placeholder="مثال: EE202" autocomplete="off" maxlength="20"></label>
+        <label class="field"><span>القاعة (اختياري)</span><input id="roomName" type="text" autocomplete="off" maxlength="30"></label>
+        <span class="hint" style="display:block;margin-bottom:6px">اختر الأيام ثم الأوقات:</span>
+        <div class="days" id="days"></div>
+        <div id="daysConfigs"></div>
+        <button type="button" id="saveBtn" class="btn primary block">إضافة للجدول</button>
+      </div>
 
-   <div id="section-smart" class="mb-4">
-        <div class="p-3.5 rounded-xl bg-slate-50 border-2 border-dashed border-blue-200 relative overflow-hidden">
-            <div id="scanLine" class="scanning-line hidden"></div>
-            
-            <div class="text-center mb-3">
-                <h3 class="text-[12px] font-black text-blue-900 mb-1.5 flex items-center justify-center gap-1.5">
-                    ليش تتعب يدك والنظام يضبطك؟ 🤖
-                </h3>
-                <p class="text-[9px] text-slate-500 font-bold leading-relaxed bg-blue-100/40 p-2 rounded-lg inline-block">
-                    ارفع ملف الـ PDF، وخل <span class="text-blue-600 font-black">الذكاء الاصطناعي</span> يسوي السحر..<br> بيسحب الأوقات والقاعات ويرصها لك بالجدول تلقائياً ⚡
-                </p>
-            </div>
-            
-            <input type="file" id="scheduleFile" accept="application/pdf" class="hidden" onchange="processFileWithBackend(event)">
-            
-            <button onclick="document.getElementById('scheduleFile').click()" id="uploadBtn" class="w-full bg-white border-2 border-blue-200 text-blue-700 py-2.5 rounded-lg text-[10px] font-black flex items-center justify-center gap-2 hover:bg-blue-50 transition-all active:scale-95 shadow-sm">
-                <i class="fa-solid fa-wand-magic-sparkles text-lg text-blue-400"></i> إرفع الجدول PDF الي حملته من الايدوقيت وشوف السحر 🪄
-            </button>
-            
-            <div id="loader" class="hidden text-center mt-3 px-2">
-                <span id="status-text" class="text-[9px] text-blue-600 font-bold">الخوارزمية شغالة تفكك الجدول... ⚙️</span>
-                <div class="w-full bg-slate-200 h-1 rounded-full mt-1.5 overflow-hidden">
-                    <div id="progress-bar" class="bg-blue-500 h-full w-0 transition-all duration-300"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+      <hr class="divider">
+      <button type="button" id="midtermToggle" class="switch" role="switch" aria-checked="false">
+        <span><b>توقيت الاختبارات النصفية</b><small>يعرض جدولك بأوقات فترة الاختبارات النصفية.</small></span>
+        <span class="toggle" aria-hidden="true"></span>
+      </button>
+    </section>
 
-    <div id="section-manual" class="mb-4 hidden">
-        <div class="input-group">
-          <input id="courseName" type="text" placeholder="رمز المادة (مثال: EE202)" />
-          <input id="roomName" type="text" placeholder="القاعة" />
-        </div>
-
-        <div class="flex gap-1 mb-2 overflow-x-auto">
-          <div class="day-btn" onclick="toggleDay(0, this)">الاحد</div>
-          <div class="day-btn" onclick="toggleDay(1, this)">الاثنين</div>
-          <div class="day-btn" onclick="toggleDay(2, this)">الثلاثاء</div>
-          <div class="day-btn" onclick="toggleDay(3, this)">الاربعاء</div>
-          <div class="day-btn" onclick="toggleDay(4, this)">الخميس</div>
-        </div>
-
-        <div id="daysConfigs" class="space-y-2 mb-2"></div>
-        <button onclick="saveEntry()" class="btn-main shadow-md">إضافة للجدول</button>
-    </div>
-
-    <div class="border-t border-slate-100 pt-3">
-        <div id="midterm-box" class="midterm-box mb-2">
-            <div class="midterm-note">
-                <p id="midterm-note-text" class="text-[10px] text-red-800 font-semibold italic text-center">
-                    💡 ملاحظة: الألوان ثابتة ومميزة لكل مادة تلقائياً.
-                </p>
-            </div>
-            <button id="midterm-toggle" onclick="toggleMidtermMode()" class="w-full bg-slate-800 text-white py-2.5 text-[11px] font-black flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95">
-                <span id="midterm-text">توقيت الاختبارات النصفية</span>
-                <span id="midterm-badge" class="bg-red-500 text-white px-2 py-0.5 rounded-full text-[8px] animate-pulse">ON</span>
-            </button>
-        </div>
-        <button onclick="resetAll()" class="w-full text-red-500 font-bold text-[10px] active:scale-95 transition-all">تصفية الجدول</button>
-    </div>
+    <section id="displayArea" class="sched" aria-label="الجدول">
+      <div class="sched-head"><h2>الجدول الأسبوعي</h2><small id="subLabel">التوقيت المعتاد</small></div>
+      <div id="grid" class="grid"></div>
+      <p id="emptyNote" class="empty-note hidden">ما فيه مواد بعد. ارفع ملف الجدول أو أضف مادة.</p>
+      <div class="sched-actions">
+        <button type="button" id="editBtn" class="btn" aria-pressed="false">حذف مادة</button>
+        <button type="button" id="resetBtn" class="link-danger">مسح الجدول</button>
+      </div>
+    </section>
   </div>
-
-  <div id="display-area" class="schedule-card">
-    <div class="flex justify-between items-center mb-2 px-1">
-        <div>
-            <h1 class="text-blue-900 font-black text-sm">Engineering Vision</h1>
-            <p id="sub-label" class="text-gray-400 text-[8px]">الجدول الدراسي الأكاديمي (12H)</p>
-        </div>
-        <div class="text-[8px] font-bold text-slate-400">2026 Season</div>
-    </div>
-    <div id="grid-container" class="grid-table"></div>
-    
-    <div class="flex">
-        <button id="edit-toggle-btn" onclick="toggleEditMode()" class="no-print mt-3 w-full py-2 border border-dashed border-slate-300 text-slate-500 rounded text-[10px] font-bold transition-all active:scale-95">وضع التعديل</button>
-    </div>
-  </div>
-</div>
+</main>
+<footer><div class="wrap"><span class="sig">الرصاصي</span></div></footer>
 
 <script>
-  // الفترات الرسمية 
+(function(){
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const API = 'https://sch-1-rq5a.onrender.com/upload-schedule/';
+  const DAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+
+  // Official periods (ids come from the registration system)
   const TIME_SLOTS = [
-    { id: "54", s: "07:15 AM", e: "08:05 AM" }, { id: "86", s: "08:15 AM", e: "09:05 AM" },
-    { id: "44", s: "09:15 AM", e: "10:05 AM" }, { id: "80", s: "10:15 AM", e: "11:05 AM" },
-    { id: "57", s: "11:15 AM", e: "12:05 PM" }, { id: "47", s: "12:15 PM", e: "01:05 PM" },
-    { id: "63", s: "01:15 PM", e: "02:05 PM" }, { id: "52", s: "02:15 PM", e: "03:05 PM" },
-    { id: "51", s: "03:15 PM", e: "04:05 PM" }
+    { id: '54', s: '07:15 AM', e: '08:05 AM' }, { id: '86', s: '08:15 AM', e: '09:05 AM' },
+    { id: '44', s: '09:15 AM', e: '10:05 AM' }, { id: '80', s: '10:15 AM', e: '11:05 AM' },
+    { id: '57', s: '11:15 AM', e: '12:05 PM' }, { id: '47', s: '12:15 PM', e: '01:05 PM' },
+    { id: '63', s: '01:15 PM', e: '02:05 PM' }, { id: '52', s: '02:15 PM', e: '03:05 PM' },
+    { id: '51', s: '03:15 PM', e: '04:05 PM' }
   ];
-
-  // أوقات الاختبارات النصفية المحدثة
   const MIDTERM_SLOTS = [
-    { id: "54", s: "07:15 AM", e: "07:55 AM" }, { id: "86", s: "08:00 AM", e: "08:40 AM" },
-    { id: "44", s: "08:45 AM", e: "09:25 AM" }, { id: "80", s: "10:55 AM", e: "11:35 AM" },
-    { id: "57", s: "11:40 AM", e: "12:20 PM" }, { id: "47", s: "12:25 PM", e: "01:05 PM" },
-    { id: "63", s: "02:35 PM", e: "03:15 PM" }, { id: "52", s: "03:20 PM", e: "04:00 PM" },
-    { id: "51", s: "04:05 PM", e: "04:45 PM" }
+    { id: '54', s: '07:15 AM', e: '07:55 AM' }, { id: '86', s: '08:00 AM', e: '08:40 AM' },
+    { id: '44', s: '08:45 AM', e: '09:25 AM' }, { id: '80', s: '10:55 AM', e: '11:35 AM' },
+    { id: '57', s: '11:40 AM', e: '12:20 PM' }, { id: '47', s: '12:25 PM', e: '01:05 PM' },
+    { id: '63', s: '02:35 PM', e: '03:15 PM' }, { id: '52', s: '03:20 PM', e: '04:00 PM' },
+    { id: '51', s: '04:05 PM', e: '04:45 PM' }
   ];
+  const short = (t) => t.replace(/^0/, '').replace(/ (AM|PM)$/, '');
 
-  let scheduleData = JSON.parse(localStorage.getItem("ev_v10")) || [];
-  let currentSelectedDays = new Map();
+  // ---- storage (same keys as before, so saved schedules keep working)
+  const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+  const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const validEntry = (x) => x && typeof x.name === 'string' && x.name.trim() && Number.isInteger(Number(x.day)) && x.day >= 0 && x.day < 5 && TIME_SLOTS.some((s) => s.id === String(x.slotId));
+  let scheduleData = (Array.isArray(read('ev_v10', [])) ? read('ev_v10', []) : []).filter(validEntry);
+  let isMidterm = read('midterm_active', false) === true;
   let editMode = false;
-  let isMidtermMode = JSON.parse(localStorage.getItem("midterm_active")) || false;
+  const picked = new Map(); // day -> Set(slotId)
 
-  // ==== 🎛️ دالة تبديل وضع الإنشاء ====
-  function switchMode(mode) {
-      const btnSmart = document.getElementById('tab-smart');
-      const btnManual = document.getElementById('tab-manual');
-      const secSmart = document.getElementById('section-smart');
-      const secManual = document.getElementById('section-manual');
-
-      if (mode === 'smart') {
-          btnSmart.classList.replace('tab-inactive', 'tab-active');
-          btnManual.classList.replace('tab-active', 'tab-inactive');
-          secSmart.classList.remove('hidden');
-          secManual.classList.add('hidden');
-      } else {
-          btnManual.classList.replace('tab-inactive', 'tab-active');
-          btnSmart.classList.replace('tab-active', 'tab-inactive');
-          secManual.classList.remove('hidden');
-          secSmart.classList.add('hidden');
-      }
-  }
-
-  // خوارزمية التلوين
-  function getConsistentColor(courseName) {
-    const name = courseName.toUpperCase().trim().replace(/\s/g, '');
-    let hash = 5381;
-    for (let i = 0; i < name.length; i++) {
-        hash = ((hash << 5) + hash) + name.charCodeAt(i);
-        hash = hash & hash;
+  // ---- small DOM helper (text only: names never become HTML)
+  function el(tag, attrs, ...kids){
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v == null || v === false) continue;
+      if (k === 'text') n.textContent = v; else if (k === 'class') n.className = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v === true ? '' : v);
     }
-    const scrambledHash = Math.abs(hash * 0x5BD1E995);
-    const hue = scrambledHash % 360;
-    const saturation = 65 + (scrambledHash % 25); 
-    const lightness = 94; 
-    return { bg: `hsl(${hue}, ${saturation}%, ${lightness}%)`, text: `hsl(${hue}, ${saturation}%, 20%)` };
+    for (const c of kids) if (c != null) n.append(c);
+    return n;
   }
 
-  // تنظيف بسيط للنص قبل حقنه في الـ HTML (يمنع كسر العرض لو فيه رمز غريب)
-  function escapeHtml(str) {
-    return String(str == null ? '' : str)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  // ---- stable colour per course, adjusted to the theme
+  function hueOf(name){
+    const s = String(name).toUpperCase().replace(/\s/g, '');
+    let h = 5381; for (let i = 0; i < s.length; i++) { h = ((h << 5) + h) + s.charCodeAt(i); h = h & h; }
+    return Math.abs(h * 0x5BD1E995) % 360;
+  }
+  function colorOf(name){
+    const h = hueOf(name), light = document.documentElement.dataset.theme === 'light';
+    return light ? { bg: `hsl(${h} 62% 90%)`, text: `hsl(${h} 55% 24%)` } : { bg: `hsl(${h} 38% 24%)`, text: `hsl(${h} 75% 84%)` };
   }
 
-  // ==== 🔌 الربط السحابي (محسّن: مهلة + تقدّم صادق + رسائل واضحة) ====
-  async function processFileWithBackend(event) {
+  // ---- render the weekly table
+  function renderTable(){
+    const grid = $('grid'), slots = isMidterm ? MIDTERM_SLOTS : TIME_SLOTS;
+    let last = 4;
+    for (const x of scheduleData) { const i = slots.findIndex((s) => s.id === String(x.slotId)); if (i > last) last = i; }
+    const kids = [el('div', {class:'h', text:'الوقت'}), ...DAYS.map((d) => el('div', {class:'h', text:d}))];
+    for (const slot of slots.slice(0, last + 1)) {
+      if (isMidterm && slot.id === '80') kids.push(el('div', {class:'band', text:'الفترة الأولى للاختبارات: 9:40 – 10:40'}));
+      if (isMidterm && slot.id === '63') kids.push(el('div', {class:'band', text:'الفترة الثانية للاختبارات: 1:20 – 2:20'}));
+      kids.push(el('div', {class:'c t'}, short(slot.s), el('small', {text:short(slot.e)})));
+      for (let d = 0; d < 5; d++) {
+        const x = scheduleData.find((e) => Number(e.day) === d && String(e.slotId) === slot.id);
+        if (!x) { kids.push(el('div', {class:'c'})); continue; }
+        const col = colorOf(x.name);
+        const card = el('div', {class:'course', style:`background:${col.bg};color:${col.text}`}, el('b', {text:x.name}), x.room ? el('span', {text:x.room}) : null);
+        const del = el('button', {type:'button', class:'del', 'aria-label':'حذف ' + x.name, onclick:() => deleteCourse(x.name)}, el('i', {'aria-hidden':'true', text:'×'}));
+        kids.push(el('div', {class:'c'}, card, del));
+      }
+    }
+    grid.replaceChildren(...kids);
+    $('emptyNote').classList.toggle('hidden', scheduleData.length > 0);
+  }
+
+  function updateMidtermUI(){
+    $('midtermToggle').setAttribute('aria-checked', String(isMidterm));
+    $('subLabel').textContent = isMidterm ? 'توقيت الاختبارات النصفية' : 'التوقيت المعتاد';
+    $('displayArea').classList.toggle('midterm', isMidterm);
+  }
+
+  // ---- tabs
+  function switchMode(mode){
+    const smart = mode === 'smart';
+    $('tabSmart').setAttribute('aria-selected', String(smart)); $('tabManual').setAttribute('aria-selected', String(!smart));
+    $('secSmart').classList.toggle('hidden', !smart); $('secManual').classList.toggle('hidden', smart);
+  }
+  $('tabSmart').onclick = () => switchMode('smart');
+  $('tabManual').onclick = () => switchMode('manual');
+
+  // ---- upload to the analysis server
+  $('uploadBtn').onclick = () => $('scheduleFile').click();
+  $('scheduleFile').onchange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-
-    const uploadBtn = document.getElementById('uploadBtn');
-    const loader = document.getElementById('loader');
-    const scanLine = document.getElementById('scanLine');
-    const statusText = document.getElementById('status-text');
-    const progressBar = document.getElementById('progress-bar');
-
-    uploadBtn.classList.add('hidden');
-    loader.classList.remove('hidden');
-    scanLine.classList.remove('hidden');
-
-    // رسائل تقدّم تتحرك لكنها تتوقف عند 80% وتنتظر البيانات الحقيقية
-    // (ما تقول "اكتمل" إلا بعد ما يوصل الرد فعلاً)
-    const steps = [
-        { t: "جاري رفع الملف للسيرفر... 📤", p: "25%" },
-        { t: "السيرفر يجهّز (قد يأخذ لحظات أول مرة)... ⏳", p: "55%" },
-        { t: "استخراج المواد والأوقات والقاعات... 🔍", p: "80%" }
-    ];
-    let stepIdx = 0;
-    statusText.innerText = steps[0].t;
-    progressBar.style.width = steps[0].p;
-    const interval = setInterval(() => {
-        stepIdx++;
-        if (stepIdx < steps.length) {
-            statusText.innerText = steps[stepIdx].t;
-            progressBar.style.width = steps[stepIdx].p;
-        } else {
-            clearInterval(interval);
-        }
-    }, 1200);
-
-    // مهلة 90 ثانية — تكفي حتى لو السيرفر نايم ويحتاج يصحى، وتمنع التعليق للأبد
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 90000);
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    function resetUI() {
-        uploadBtn.classList.remove('hidden');
-        loader.classList.add('hidden');
-        scanLine.classList.add('hidden');
-        progressBar.style.width = "0%";
-        event.target.value = "";
-    }
-
+    const btn = $('uploadBtn'), loader = $('loader'), status = $('statusText'), bar = $('progressBar');
+    btn.classList.add('hidden'); loader.classList.remove('hidden');
+    const steps = [['جارٍ رفع الملف…', '25%'], ['الخادم يجهّز (أول مرة قد تأخذ لحظات)…', '55%'], ['استخراج المواد والأوقات والقاعات…', '80%']];
+    let i = 0; status.textContent = steps[0][0]; bar.style.width = steps[0][1];
+    const timer = setInterval(() => { i++; if (i < steps.length) { status.textContent = steps[i][0]; bar.style.width = steps[i][1]; } else clearInterval(timer); }, 1200);
+    const ctrl = new AbortController(), timeout = setTimeout(() => ctrl.abort(), 90000);
+    const done = () => { btn.classList.remove('hidden'); loader.classList.add('hidden'); bar.style.width = '0'; event.target.value = ''; };
     try {
-        const response = await fetch("https://sch-1-rq5a.onrender.com/upload-schedule/", {
-            method: "POST",
-            body: formData,
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        clearInterval(interval);
-
-        const result = await response.json();
-
-        if (result.status === "success" && result.data.length > 0) {
-            // اكتمل فعلاً → نعرض على طول بدون أي تأخير مصطنع
-            statusText.innerText = "اكتمل البناء بنجاح! ✅";
-            progressBar.style.width = "100%";
-
-            scheduleData = result.data.map(item => ({
-                ...item,
-                color: getConsistentColor(item.name)
-            }));
-            localStorage.setItem("ev_v10", JSON.stringify(scheduleData));
-            renderTable();
-
-            // إغلاق سريع للودر (مجرد لمسة بصرية بسيطة)
-            setTimeout(resetUI, 400);
-        } else {
-            alert("⚠️ " + (result.message || "لم نتمكن من تحليل الملف، تأكد من أنه جدول الإيدوقيت الأصلي."));
-            resetUI();
-        }
+      const fd = new FormData(); fd.append('file', file);
+      const res = await fetch(API, { method: 'POST', body: fd, signal: ctrl.signal });
+      clearTimeout(timeout); clearInterval(timer);
+      const result = await res.json();
+      const rows = result && result.status === 'success' && Array.isArray(result.data) ? result.data.filter(validEntry) : [];
+      if (rows.length) {
+        status.textContent = 'تم ترتيب الجدول'; bar.style.width = '100%';
+        scheduleData = rows.map((x) => ({ day: Number(x.day), slotId: String(x.slotId), name: String(x.name).trim().slice(0, 30), room: x.room ? String(x.room).slice(0, 40) : '' }));
+        write('ev_v10', scheduleData); renderTable();
+        setTimeout(done, 400);
+      } else {
+        alert((result && typeof result.message === 'string' && result.message) || 'ما قدرنا نقرأ الملف. تأكد إنه ملف الجدول الأصلي من الإيدوقيت.');
+        done();
+      }
     } catch (e) {
-        clearTimeout(timeoutId);
-        clearInterval(interval);
-        if (e.name === 'AbortError') {
-            alert("⏳ السيرفر تأخّر بالرد (قد يكون في وضع السكون). انتظر دقيقة وحاول مرة ثانية.");
-        } else {
-            alert("❌ تعذّر الاتصال بسيرفر التحليل. تأكد من اتصالك بالإنترنت وحاول مرة ثانية.");
-        }
-        resetUI();
+      clearTimeout(timeout); clearInterval(timer);
+      alert(e.name === 'AbortError' ? 'الخادم تأخر بالرد، غالبًا كان في وضع السكون. انتظر دقيقة وحاول مرة ثانية.' : 'تعذّر الاتصال بخادم التحليل. تأكد من الإنترنت وحاول مرة ثانية.');
+      done();
     }
-  }
+  };
 
-  // ==== رسم الجدول ====
-  function renderTable() {
-    const container = document.getElementById("grid-container");
-    const ACTIVE_SLOTS = isMidtermMode ? MIDTERM_SLOTS : TIME_SLOTS;
-    
-    let lastSlotIndex = 4;
-    if (scheduleData.length > 0) {
-        scheduleData.forEach(entry => {
-            const idx = ACTIVE_SLOTS.findIndex(s => s.id === entry.slotId);
-            if (idx > lastSlotIndex) lastSlotIndex = idx;
-        });
-    }
-    
-    const visibleSlots = ACTIVE_SLOTS.slice(0, lastSlotIndex + 1);
-    container.innerHTML = `<div class="header-pill">الوقت</div>` + ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس"].map(d => `<div class="header-pill">${d}</div>`).join("");
-    
-    visibleSlots.forEach(slot => {
-      // تنبيه الفترة الأولى للاختبارات
-      if (isMidtermMode && slot.id === "80") {
-          container.innerHTML += `<div class="col-span-6 bg-red-100 text-red-800 text-[10px] font-black py-1 text-center italic border-y border-red-200">الفترة الأولى للاختبارات (09:40 AM - 10:40 AM)</div>`;
-      }
-      // تنبيه الفترة الثانية للاختبارات
-      if (isMidtermMode && slot.id === "63") {
-          container.innerHTML += `<div class="col-span-6 bg-red-100 text-red-800 text-[10px] font-black py-1 text-center italic border-y border-red-200">الفترة الثانية للاختبارات (01:20 PM - 02:20 PM)</div>`;
-      }
-      
-      container.innerHTML += `<div class="cell-base time-cell"><div>${slot.s}</div><div>${slot.e}</div></div>`;
-      for (let d = 0; d < 5; d++) {
-        const entry = scheduleData.find(x => x.day == d && x.slotId === slot.id);
-        if (entry) {
-          const safeName = escapeHtml(entry.name);
-          const safeRoom = escapeHtml(entry.room);
-          const nameAttr = String(entry.name).replace(/'/g, "\\'");
-          container.innerHTML += `
-            <div class="cell-base" style="background:${entry.color.bg};">
-              <div class="edit-actions">
-                <div class="action-btn btn-del" onclick="deleteEntireCourse('${nameAttr}')">×</div>
-              </div>
-              <div class="course-card" style="color:${entry.color.text}">
-                <div class="c-name">${safeName}</div>
-                ${entry.room ? `<div class="c-room">${safeRoom}</div>` : ''}
-              </div>
-            </div>`;
-        } else { container.innerHTML += `<div class="cell-base"></div>`; }
-      }
+  // ---- manual entry
+  function renderDays(){
+    $('days').replaceChildren(...DAYS.map((d, i) => el('button', {type:'button', class:'chip', 'aria-pressed':String(picked.has(i)), text:d, onclick:() => { picked.has(i) ? picked.delete(i) : picked.set(i, new Set()); renderDays(); }})));
+    const cfg = [];
+    picked.forEach((set, di) => {
+      cfg.push(el('div', {class:'daycfg'}, el('b', {text:DAYS[di]}),
+        el('div', {class:'slots'}, ...TIME_SLOTS.map((s) => el('button', {type:'button', class:'chip', 'aria-pressed':String(set.has(s.id)), 'aria-label':DAYS[di] + ' ' + s.s, text:short(s.s), onclick:(e) => { set.has(s.id) ? set.delete(s.id) : set.add(s.id); e.currentTarget.setAttribute('aria-pressed', String(set.has(s.id))); }})))));
     });
+    $('daysConfigs').replaceChildren(...cfg);
   }
+  $('saveBtn').onclick = () => {
+    const name = $('courseName').value.trim().toUpperCase().slice(0, 20), room = $('roomName').value.trim().slice(0, 30);
+    let any = false; picked.forEach((s) => { if (s.size) any = true; });
+    if (!name || !any) return alert('اكتب رمز المادة واختر يوم ووقت واحد على الأقل.');
+    let conflict = '';
+    picked.forEach((set, di) => set.forEach((sid) => { const x = scheduleData.find((e) => Number(e.day) === di && String(e.slotId) === sid); if (x && x.name !== name) conflict = x.name; }));
+    if (conflict) return alert(`هذا الوقت محجوز لمادة ${conflict}.`);
+    picked.forEach((set, di) => set.forEach((sid) => {
+      scheduleData = scheduleData.filter((e) => !(Number(e.day) === di && String(e.slotId) === sid));
+      scheduleData.push({ day: di, slotId: sid, name, room });
+    }));
+    write('ev_v10', scheduleData);
+    $('courseName').value = ''; $('roomName').value = ''; picked.clear(); renderDays(); renderTable();
+  };
 
-  function toggleMidtermMode() {
-    isMidtermMode = !isMidtermMode;
-    localStorage.setItem("midterm_active", isMidtermMode);
-    updateMidtermUI();
-    renderTable(); 
+  // ---- edit / reset / midterm
+  function deleteCourse(name){
+    if (!confirm(`حذف مادة ${name} من الجدول؟`)) return;
+    scheduleData = scheduleData.filter((x) => x.name !== name); write('ev_v10', scheduleData); renderTable();
   }
+  $('editBtn').onclick = () => {
+    editMode = !editMode;
+    $('displayArea').classList.toggle('editing', editMode);
+    $('editBtn').setAttribute('aria-pressed', String(editMode));
+    $('editBtn').textContent = editMode ? 'تم' : 'حذف مادة';
+  };
+  $('resetBtn').onclick = () => { if (confirm('مسح الجدول كامل؟')) { scheduleData = []; try { localStorage.removeItem('ev_v10'); } catch (e) {} renderTable(); } };
+  $('midtermToggle').onclick = () => { isMidterm = !isMidterm; write('midterm_active', isMidterm); updateMidtermUI(); renderTable(); };
 
-  function updateMidtermUI() {
-    const btn = document.getElementById("midterm-toggle");
-    const subLabel = document.getElementById("sub-label");
-    const area = document.getElementById("display-area");
-    
-    if(isMidtermMode) {
-        btn.classList.replace("bg-slate-800", "bg-red-700");
-        subLabel.innerText = "توقيت الاختبارات النصفية (12H)";
-        area.classList.add("midterm-mode-active");
-    } else {
-        btn.classList.replace("bg-red-700", "bg-slate-800");
-        subLabel.innerText = "الجدول الدراسي الأكاديمي (12H)";
-        area.classList.remove("midterm-mode-active");
-    }
+  // ---- theme (shared with the rest of the site)
+  function applyTheme(){
+    const light = document.documentElement.dataset.theme === 'light';
+    $('theme').textContent = light ? '☾ داكن' : '☀︎ فاتح';
+    const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = light ? '#f3f2ef' : '#151a22';
   }
+  $('theme').onclick = () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    ['ee_theme', 'ee_theme_v3', 'ee_library_theme'].forEach((k) => { try { localStorage.setItem(k, next); } catch (e) {} });
+    applyTheme(); renderTable();
+  };
 
-  function toggleDay(idx, el) {
-    currentSelectedDays.has(idx) ? currentSelectedDays.delete(idx) : currentSelectedDays.set(idx, new Set());
-    el.classList.toggle("active");
-    renderConfigs();
-  }
-
-  function renderConfigs() {
-    const container = document.getElementById("daysConfigs");
-    container.innerHTML = "";
-    currentSelectedDays.forEach((slots, dayIdx) => {
-      container.innerHTML += `<div class="bg-slate-50 p-2 rounded border border-slate-100"><div class="text-[9px] font-bold text-blue-800 mb-1">${["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس"][dayIdx]}</div><div class="time-grid">${TIME_SLOTS.map(t => `<div class="time-btn ${slots.has(t.id) ? 'selected' : ''}" onclick="toggleTime(${dayIdx}, '${t.id}', this)">${t.id}</div>`).join("")}</div></div>`;
-    });
-  }
-
-  function toggleTime(d, s, el) { 
-      const slots = currentSelectedDays.get(d); 
-      slots.has(s) ? slots.delete(s) : slots.add(s); 
-      el.classList.toggle("selected"); 
-  }
-  
-  function toggleEditMode() { 
-      editMode = !editMode; 
-      document.getElementById("display-area").classList.toggle("delete-mode", editMode); 
-      document.getElementById("edit-toggle-btn").innerText = editMode ? "إغلاق التعديل" : "وضع التعديل";
-      document.getElementById("edit-toggle-btn").classList.toggle("bg-slate-200", editMode);
-  }
-  
-  function deleteEntireCourse(n) { 
-      if(confirm(`⚠️ هل أنت متأكد من حذف مادة "${n}" بالكامل؟`)) { 
-          scheduleData = scheduleData.filter(x => x.name !== n); 
-          localStorage.setItem("ev_v10", JSON.stringify(scheduleData)); 
-          renderTable(); 
-      } 
-  }
-  
-  function resetAll() { 
-      if(confirm("🚨 هل أنت متأكد من تصفية الجدول بالكامل؟")) { 
-          localStorage.removeItem("ev_v10"); 
-          scheduleData = [];
-          renderTable(); 
-      } 
-  }
-  
-  // ==== حماية التعارض ====
-  function saveEntry() {
-    const nameInput = document.getElementById("courseName");
-    const roomInput = document.getElementById("roomName");
-    
-    const name = nameInput.value.trim().toUpperCase();
-    const room = roomInput.value.trim();
-    
-    if (!name || currentSelectedDays.size === 0) return alert("⚠️ الرجاء إدخال رمز المادة واختيار يوم ووقت واحد على الأقل.");
-    
-    let hasConflict = false;
-    let conflictCourse = "";
-    currentSelectedDays.forEach((slots, dayIdx) => {
-        slots.forEach(slotId => {
-            const existing = scheduleData.find(x => x.day == dayIdx && x.slotId === slotId);
-            if (existing && existing.name !== name) {
-                hasConflict = true;
-                conflictCourse = existing.name;
-            }
-        });
-    });
-
-    if (hasConflict) {
-        return alert(`❌ تعارض! هذا الوقت محجوز مسبقاً لمادة (${conflictCourse}).`);
-    }
-
-    const courseColor = getConsistentColor(name); 
-    
-    currentSelectedDays.forEach((slots, dayIdx) => {
-      slots.forEach(slotId => {
-        scheduleData = scheduleData.filter(x => !(x.day == dayIdx && x.slotId === slotId));
-        scheduleData.push({ day: dayIdx, slotId, name, room: room, color: courseColor });
-      });
-    });
-    
-    localStorage.setItem("ev_v10", JSON.stringify(scheduleData));
-    
-    nameInput.value = "";
-    roomInput.value = "";
-    currentSelectedDays.clear();
-    renderConfigs();
-    document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
-    renderTable(); 
-  }
-
-  // التهيئة الأولى
-  updateMidtermUI();
-  renderTable();
+  applyTheme(); updateMidtermUI(); renderDays(); renderTable();
+})();
 </script>
 </body>
 </html>
