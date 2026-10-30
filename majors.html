@@ -1,197 +1,155 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>التخصصات والخطط الدراسية</title>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#151a22">
+<title>التخصصات والخطط الدراسية | نادي الهندسة الكهربائية</title>
+<meta name="description" content="خطط وأوصاف مقررات برامج قسم الهندسة الكهربائية: البكالوريوس والدبلومات.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_theme','ee_theme_v3','ee_library_theme']);document.documentElement.dataset.theme=th==='light'?'light':'dark'}catch(e){}})()</script>
+<style>
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg0: #060714; --bg1: #0B1026; --stroke: rgba(255,255,255,.08);
-      --brand: #4F46E5; --brand2: #06B6D4; --text: rgba(255,255,255,.92);
-    }
-    body {
-      font-family: 'Cairo', sans-serif;
-      background:
-        radial-gradient(900px 380px at 20% 10%, rgba(79,70,229,.25), transparent 60%),
-        radial-gradient(800px 340px at 80% 25%, rgba(6,182,212,.18), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      color: var(--text);
-      min-height: 100vh;
-    }
-    .glass { background: rgba(15,23,42,.72); backdrop-filter: blur(10px); border: 1px solid var(--stroke); }
-    .btn-brand {
-      background: linear-gradient(135deg, rgba(79,70,229,1) 0%, rgba(6,182,212,1) 100%);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-    }
-    .btn-brand:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(79,70,229,.22); filter: brightness(1.02); }
-    .btn-ghost { border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); transition: background .18s ease, transform .18s ease; }
-    .btn-ghost:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
-    .major-card { transition: all 0.3s ease; }
-    .major-card:hover { border-color: rgba(255,255,255,0.2); transform: scale(1.01); }
-  </style>
+:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--warn:#e0b45c}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--warn:#94641c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14.5px/1.7 var(--sans);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(980px,calc(100% - 32px));margin:auto}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:700}
+:root[data-theme="light"] .btn.primary{color:#fff}
+.btn svg{width:18px;height:18px;flex:none}
+.btn .ext{margin-inline-start:auto;opacity:.6;font-size:13px}
+/* header */
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
+.topin{display:flex;align-items:center;gap:16px;min-height:72px}
+.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:700;font-size:13px}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}
+.brand strong{font-size:14.5px;display:block;font-weight:700}
+.brand small{color:var(--muted);display:block}
+.topright{margin-inline-start:auto;display:flex;gap:8px}
+.topright .btn{background:var(--panel);font-weight:500;min-height:42px}
+/* page */
+.hero{padding:30px 0 4px}
+.hero h1{margin:0 0 4px;font-size:26px;font-weight:700}
+.hero p{margin:0;color:var(--muted);max-width:640px}
+.sec{display:flex;align-items:center;gap:10px;margin:26px 0 12px;color:var(--muted);font-size:13px;font-weight:600}
+.sec::after{content:"";flex:1;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.prog{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column}
+.prog.featured{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.prog-head{display:flex;gap:12px;align-items:flex-start}
+.code{flex:none;min-width:48px;height:48px;padding:0 8px;border-radius:10px;background:var(--sub);color:var(--accent);display:grid;place-items:center;font:600 13px/1 var(--mono)}
+.prog small{display:block;color:var(--accent);font-size:12.5px;font-weight:600}
+.prog h3{margin:0;font-size:18px;line-height:1.4}
+.prog.featured h3{font-size:21px}
+.prog .en{display:block;color:var(--muted);font-size:12.5px;text-align:right}
+.prog p{margin:12px 0 16px;color:var(--muted);font-size:14px}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+footer{border-top:1px solid var(--line);padding:19px 0;margin-top:40px}
+footer .wrap{display:flex;justify-content:center;align-items:center}
+.sig{font:700 25px/1.3 "Rassasi Brand","Amiri","Noto Naskh Arabic",serif;color:var(--accent);padding:0 2px}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.sig{background:linear-gradient(100deg,var(--accent),var(--warn));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
+[lang="en"] .sig{font:italic 600 21px/1.3 Georgia,"Times New Roman",serif}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+@media (max-width:600px){
+  body{font-size:14px}
+  .wrap{width:calc(100% - 24px)}
+  .topin{min-height:56px;gap:8px}
+  .mark{width:32px;height:32px;border-radius:9px;font-size:12px}
+  .brand{gap:7px;flex:1 1 auto}
+  .brand strong{font-size:13px;white-space:nowrap}
+  .brand small{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:4px}
+  .topright .btn{min-height:38px;padding:4px 9px;font-size:12.5px;white-space:nowrap}
+  .hero{padding:18px 0 0}
+  .hero h1{font-size:21px}
+  .hero p{font-size:13.5px}
+  .sec{margin:20px 0 10px}
+  .grid{gap:10px}
+  .prog{padding:14px;border-radius:12px}
+  .code{min-width:42px;height:42px;font-size:12px;border-radius:9px}
+  .prog h3,.prog.featured h3{font-size:16.5px}
+  .prog p{margin:10px 0 12px;font-size:13.5px}
+  .btn{font-size:13.5px;padding:8px 10px}
+  footer{margin-top:28px}
+}
+@media (max-width:360px){.links{grid-template-columns:1fr}}
+</style>
 </head>
-
-<body class="overflow-x-hidden">
-  <main class="px-4 sm:px-6 pb-12">
-    <div class="max-w-5xl mx-auto">
-
-      <section class="mt-8 glass rounded-[2.25rem] p-8 text-center">
-        <div class="flex flex-col items-center">
-          <h2 class="text-2xl md:text-3xl font-black leading-tight">التخصصات والخطط الدراسية</h2>
-          <p class="mt-3 max-w-xl text-sm md:text-base text-white/70 leading-7">
-            هنا تجد المسارات المعتمدة تحت قسم الهندسة الكهربائية. اختر تخصصك للوصول إلى خطة التخصص ووصف المقررات.
-          </p>
-          <div class="mt-6">
-            <a href="index.html" class="btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold">
-              <i class="fa-solid fa-arrow-right"></i>
-              العودة للرئيسية
-            </a>
-          </div>
+<body>
+<header class="top"><div class="wrap topin">
+  <a class="brand" href="index.html" title="العودة للرئيسية"><span class="mark">EE</span><span><strong>اللجنة العلمية</strong><small>نادي الهندسة الكهربائية</small></span></a>
+  <div class="topright"><button id="theme" class="btn" type="button" title="تبديل المظهر">☀︎ فاتح</button><a class="btn" href="index.html">الرئيسية ↗</a></div>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <h1>التخصصات والخطط الدراسية</h1>
+    <p>هنا تجد المسارات المعتمدة تحت قسم الهندسة الكهربائية. اختر تخصصك للوصول إلى خطة التخصص ووصف المقررات.</p>
+  </section>
+  <div class="sec">برامج البكالوريوس</div>
+      <article class="prog featured">
+        <div class="prog-head"><span class="code">EE</span><div><small>بكالوريوس</small><h3>الهندسة الكهربائية</h3><span class="en" dir="ltr">Electrical Engineering</span></div></div>
+        <p>التخصص الأساسي للبكالوريوس في القسم، يشمل المسارات التخصصية المتقدمة.</p>
+        <div class="links">
+          <a class="btn primary" href="https://rcjy.edu.sa/umb/rcjy-media/lqkpluzl/ee-bachelor-of-science-in-electrical-engineering-21-6-2023.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>خطة التخصص<span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn" href="https://rcjy.edu.sa/umb/rcjy-media/of5orhpc/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D9%87%D9%86%D8%AF%D8%B3%D8%A9-%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A6%D9%8A%D8%A9.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>وصف المقررات<span class="ext" aria-hidden="true">↗</span></a>
         </div>
-      </section>
-
-      <div class="mt-10 space-y-6">
-        
-        <div class="flex items-center gap-3 px-4">
-            <span class="h-px flex-1 bg-white/10"></span>
-            <span class="text-xs font-black tracking-widest text-white/40 uppercase">برامج البكالوريوس</span>
-            <span class="h-px flex-1 bg-white/10"></span>
+      </article>
+  <div class="sec">برامج الدبلوم</div>
+  <div class="grid">
+      <article class="prog">
+        <div class="prog-head"><span class="code">PWR</span><div><small>دبلوم</small><h3>تقنية القوى الكهربائية</h3><span class="en" dir="ltr">Power</span></div></div>
+        <p>مسار يهتم بأنظمة القدرة، التوليد، النقل، والتوزيع.</p>
+        <div class="links">
+          <a class="btn primary" href="https://rcjy.edu.sa/umb/rcjy-media/1odcalx4/ee-diploma-in-electrical-power-technology.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>خطة التخصص<span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn" href="https://rcjy.edu.sa/umb/rcjy-media/kkggxweq/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%AF%D8%A8%D9%84%D9%88%D9%85-%D9%82%D9%88%D9%89.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>وصف المقررات<span class="ext" aria-hidden="true">↗</span></a>
         </div>
-
-        <article class="glass rounded-[2.25rem] p-6 sm:p-8 major-card">
-          <div class="flex items-start justify-between gap-4 text-right">
-            <div>
-              <div class="text-xs text-indigo-400 font-black mb-1">بكالوريوس</div>
-              <h3 class="text-2xl font-black leading-tight">
-                الهندسة الكهربائية
-                <span class="block mt-1 text-sm text-white/50 font-bold">(Electrical Engineering)</span>
-              </h3>
-              <p class="mt-3 text-sm text-white/70 leading-7">التخصص الأساسي للبكالوريوس في القسم، يشمل المسارات التخصصية المتقدمة.</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center glass flex-shrink-0">
-              <i class="fa-solid fa-bolt-lightning text-yellow-400 text-xl"></i>
-            </div>
-          </div>
-
-          <div class="mt-6 grid md:grid-cols-2 gap-4">
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/lqkpluzl/ee-bachelor-of-science-in-electrical-engineering-21-6-2023.pdf" target="_blank" class="btn-brand rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm"><i class="fa-solid fa-map-location-dot ms-2"></i> خطة التخصص</span>
-              <i class="fa-solid fa-chevron-left text-xs opacity-50"></i>
-            </a>
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/of5orhpc/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D9%87%D9%86%D8%AF%D8%B3%D8%A9-%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A6%D9%8A%D8%A9.pdf" target="_blank" class="btn-ghost rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm"><i class="fa-solid fa-book-open ms-2 text-cyan-300"></i> وصف المقررات</span>
-              <i class="fa-solid fa-chevron-left text-xs opacity-50"></i>
-            </a>
-          </div>
-        </article>
-
-        <div class="flex items-center gap-3 px-4 pt-4">
-            <span class="h-px flex-1 bg-white/10"></span>
-            <span class="text-xs font-black tracking-widest text-white/40 uppercase">برامج الدبلوم</span>
-            <span class="h-px flex-1 bg-white/10"></span>
+      </article>
+      <article class="prog">
+        <div class="prog-head"><span class="code">ECT</span><div><small>دبلوم</small><h3>تقنية الإلكترونيات والاتصالات</h3><span class="en" dir="ltr">Electronics</span></div></div>
+        <p>مسار يركز على الدوائر الإلكترونية، الإشارات، والشبكات.</p>
+        <div class="links">
+          <a class="btn primary" href="https://rcjy.edu.sa/umb/rcjy-media/t15ccrke/diploma-in-electronics-and-communication-technology.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>خطة التخصص<span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn" href="https://rcjy.edu.sa/umb/rcjy-media/ikennchp/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A7%D8%AA.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>وصف المقررات<span class="ext" aria-hidden="true">↗</span></a>
         </div>
-
-        <article class="glass rounded-[2.25rem] p-6 sm:p-8 major-card">
-          <div class="flex items-start justify-between gap-4 text-right">
-            <div>
-              <div class="text-xs text-indigo-400 font-black mb-1">دبلوم</div>
-              <h3 class="text-2xl font-black leading-tight">تقنية القوى الكهربائية <span class="text-sm text-white/50">(Power)</span></h3>
-              <p class="mt-2 text-sm text-white/70">مسار يهتم بأنظمة القدرة، التوليد، النقل، والتوزيع.</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center glass flex-shrink-0">
-              <i class="fa-solid fa-microchip text-cyan-300 text-xl"></i>
-            </div>
-          </div>
-          <div class="mt-6 grid md:grid-cols-2 gap-4">
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/1odcalx4/ee-diploma-in-electrical-power-technology.pdf" target="_blank" class="btn-brand rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">خطة التخصص</span>
-              <i class="fa-solid fa-file-pdf"></i>
-            </a>
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/kkggxweq/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%AF%D8%A8%D9%84%D9%88%D9%85-%D9%82%D9%88%D9%89.pdf" target="_blank" class="btn-ghost rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">وصف المقررات</span>
-              <i class="fa-solid fa-circle-info"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="glass rounded-[2.25rem] p-6 sm:p-8 major-card">
-          <div class="flex items-start justify-between gap-4 text-right">
-            <div>
-              <div class="text-xs text-indigo-400 font-black mb-1">دبلوم</div>
-              <h3 class="text-2xl font-black leading-tight">تقنية الإلكترونيات والاتصالات <span class="text-sm text-white/50">(Electronics)</span></h3>
-              <p class="mt-2 text-sm text-white/70">مسار يركز على الدوائر الإلكترونية، الإشارات، والشبكات.</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center glass flex-shrink-0">
-              <i class="fa-solid fa-tower-broadcast text-cyan-300 text-xl"></i>
-            </div>
-          </div>
-          <div class="mt-6 grid md:grid-cols-2 gap-4">
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/t15ccrke/diploma-in-electronics-and-communication-technology.pdf" target="_blank" class="btn-brand rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">خطة التخصص</span>
-              <i class="fa-solid fa-file-pdf"></i>
-            </a>
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/ikennchp/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A7%D8%AA.pdf" target="_blank" class="btn-ghost rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">وصف المقررات</span>
-              <i class="fa-solid fa-circle-info"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="glass rounded-[2.25rem] p-6 sm:p-8 major-card">
-          <div class="flex items-start justify-between gap-4 text-right">
-            <div>
-              <div class="text-xs text-indigo-400 font-black mb-1">دبلوم</div>
-              <h3 class="text-2xl font-black leading-tight">تقنية الآلات الدقيقة والتحكم <span class="text-sm text-white/50">(I&C)</span></h3>
-              <p class="mt-2 text-sm text-white/70">يهتم بالحساسات، القياس الصناعي، وأنظمة التحكم المؤتمتة.</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center glass flex-shrink-0">
-              <i class="fa-solid fa-gauge-high text-cyan-300 text-xl"></i>
-            </div>
-          </div>
-          <div class="mt-6 grid md:grid-cols-2 gap-4">
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/s1rpzb23/diploma-in-instrumentation-and-control-technology.pdf" target="_blank" class="btn-brand rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">خطة التخصص</span>
-              <i class="fa-solid fa-file-pdf"></i>
-            </a>
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/0namtnqq/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D8%AC%D9%87%D8%B2%D8%A9.pdf" target="_blank" class="btn-ghost rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">وصف المقررات</span>
-              <i class="fa-solid fa-circle-info"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="glass rounded-[2.25rem] p-6 sm:p-8 major-card">
-          <div class="flex items-start justify-between gap-4 text-right">
-            <div>
-              <div class="text-xs text-indigo-400 font-black mb-1">دبلوم</div>
-              <h3 class="text-2xl font-black leading-tight">تقنية الميكاترونيكس <span class="text-sm text-white/50">(Mechatronics)</span></h3>
-              <p class="mt-2 text-sm text-white/70">تكامل بين الأنظمة الميكانيكية والتحكم الإلكتروني والبرمجة.</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center glass flex-shrink-0">
-              <i class="fa-solid fa-robot text-cyan-300 text-xl"></i>
-            </div>
-          </div>
-          <div class="mt-6 grid md:grid-cols-2 gap-4">
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/xvjhgycj/ee-diploma-in-mechatronics-technology-program.pdf" target="_blank" class="btn-brand rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">خطة التخصص</span>
-              <i class="fa-solid fa-file-pdf"></i>
-            </a>
-            <a href="https://rcjy.edu.sa/umb/rcjy-media/bsjnhglh/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%8A%D9%83%D8%A7%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D9%83%D8%B3.pdf" target="_blank" class="btn-ghost rounded-2xl p-4 flex items-center justify-between">
-              <span class="font-bold text-sm">وصف المقررات</span>
-              <i class="fa-solid fa-circle-info"></i>
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </main>
+      </article>
+      <article class="prog">
+        <div class="prog-head"><span class="code">I&amp;C</span><div><small>دبلوم</small><h3>تقنية الآلات الدقيقة والتحكم</h3><span class="en" dir="ltr">I&amp;C</span></div></div>
+        <p>يهتم بالحساسات، القياس الصناعي، وأنظمة التحكم المؤتمتة.</p>
+        <div class="links">
+          <a class="btn primary" href="https://rcjy.edu.sa/umb/rcjy-media/s1rpzb23/diploma-in-instrumentation-and-control-technology.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>خطة التخصص<span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn" href="https://rcjy.edu.sa/umb/rcjy-media/0namtnqq/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D8%AC%D9%87%D8%B2%D8%A9.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>وصف المقررات<span class="ext" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="prog">
+        <div class="prog-head"><span class="code">MCT</span><div><small>دبلوم</small><h3>تقنية الميكاترونيكس</h3><span class="en" dir="ltr">Mechatronics</span></div></div>
+        <p>تكامل بين الأنظمة الميكانيكية والتحكم الإلكتروني والبرمجة.</p>
+        <div class="links">
+          <a class="btn primary" href="https://rcjy.edu.sa/umb/rcjy-media/xvjhgycj/ee-diploma-in-mechatronics-technology-program.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>خطة التخصص<span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn" href="https://rcjy.edu.sa/umb/rcjy-media/bsjnhglh/%D9%88%D8%B5%D9%81-%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%8A%D9%83%D8%A7%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D9%83%D8%B3.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V20a2.5 2.5 0 0 0-2.5-2.5H2z"/><path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5H22z"/></svg>وصف المقررات<span class="ext" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+  </div>
+</main>
+<footer><div class="wrap"><span class="sig">الرصاصي</span></div></footer>
+<script>
+(function(){
+  var b=document.getElementById('theme'),r=document.documentElement;
+  function apply(){var l=r.dataset.theme==='light';b.textContent=l?'☾ داكن':'☀︎ فاتح';var m=document.querySelector('meta[name=theme-color]');if(m)m.content=l?'#f3f2ef':'#151a22'}
+  b.onclick=function(){var n=r.dataset.theme==='light'?'dark':'light';r.dataset.theme=n;['ee_theme','ee_theme_v3','ee_library_theme'].forEach(function(k){try{localStorage.setItem(k,n)}catch(e){}});apply()};
+  apply();
+})();
+</script>
 </body>
 </html>
