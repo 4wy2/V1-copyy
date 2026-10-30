@@ -397,6 +397,12 @@ footer .wrap{display:flex;justify-content:center;align-items:center}
     applyTheme(); renderTable();
   };
 
+  // The free analysis server sleeps when idle; wake it as soon as the page opens
+  // so it is ready by the time the student picks the file (no data is sent).
+  function wakeServer(){ try { fetch(new URL(API).origin + '/ping', { mode: 'no-cors', cache: 'no-store' }).catch(() => {}); } catch (e) {} }
+  wakeServer();
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') wakeServer(); });
+
   applyTheme(); updateMidtermUI(); renderDays(); renderTable();
 })();
 </script>
