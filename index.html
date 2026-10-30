@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#11141c" />
   <meta property="og:title" content="بوابة اللجنة العلمية | نادي الهندسة الكهربائية" />
@@ -11,7 +11,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <script>
     try {
-      var l = localStorage.getItem('ee_language'), t = localStorage.getItem('ee_theme');
+      var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null}; var l = g(['ee_language','ee_lang','ee_library_lang']), t = g(['ee_theme','ee_theme_v3','ee_library_theme']);
       document.documentElement.lang = l === 'en' ? 'en' : 'ar';
       document.documentElement.dir = l === 'en' ? 'ltr' : 'rtl';
       document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="assets/css/main.css" />
   <title>بوابة اللجنة العلمية | نادي الهندسة الكهربائية</title>
 </head>
@@ -43,6 +43,7 @@
       <a href="#home"><i class="fa-solid fa-house" aria-hidden="true"></i><span data-i18n="navHome">الرئيسية</span></a>
       <a href="majors.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span data-i18n="navMajors">التخصصات والخطط الدراسية</span></a>
       <a href="faculty.html"><i class="fa-solid fa-user-tie" aria-hidden="true"></i><span data-i18n="navFaculty">بحث هيئة التدريس</span></a>
+      <a href="schedule.html"><i class="fa-solid fa-calendar-plus" aria-hidden="true"></i><span data-i18n="schedule">أنشئ جدولك</span></a>
       <a href="certificates.html"><i class="fa-solid fa-award" aria-hidden="true"></i><span data-i18n="navCerts">الشهادات</span></a>
       <hr />
       <a href="https://jic.blackboard.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span data-i18n="blackboard">البلاك بورد</span></a>
@@ -98,7 +99,7 @@
 
     <section id="share" class="card" aria-labelledby="shareTitle">
       <h2 id="shareTitle" data-i18n="shareTitle">شاركنا مصادرك الدراسية</h2>
-      <p data-i18n="shareText">عندك ملخص أو اختبار سابق أو ملف يفيد زملاءك؟ أرسله عبر النموذج، ونراجعه قبل نشره.</p>
+      <p data-i18n="shareText">عندك ملخص أو شرح أو أسئلة مراجعة تفيد زملاءك؟ أرسلها عبر النموذج، ونراجعها قبل نشرها.</p>
       <a class="btn btn-outline btn-wide" href="https://forms.gle/igT6oxmwWqvjxxPD9" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i><span data-i18n="addSource">إضافة مصدر</span></a>
     </section>
 
