@@ -1,299 +1,225 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بحث أعضاء هيئة التدريس</title>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#151a22">
+<title>أعضاء هيئة التدريس | نادي الهندسة الكهربائية</title>
+<meta name="description" content="ابحث عن أعضاء هيئة التدريس في قسم الهندسة الكهربائية: المكتب والبريد الإلكتروني.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_theme','ee_theme_v3','ee_library_theme']);document.documentElement.dataset.theme=th==='light'?'light':'dark'}catch(e){}})()</script>
+<style>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
 
-  <style>
-    :root {
-      --bg0: #060714; --bg1: #0B1026; --stroke: rgba(255,255,255,.08);
-      --brand: #4F46E5; --brand2: #06B6D4; --text: rgba(255,255,255,.92);
-    }
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: radial-gradient(900px 380px at 20% 10%, rgba(79,70,229,.15), transparent 60%),
-                  radial-gradient(800px 340px at 80% 25%, rgba(6,182,212,.12), transparent 55%),
-                  var(--bg0);
-      color: var(--text);
-      min-height: 100vh;
-    }
-    .glass { background: rgba(15,23,42,.6); backdrop-filter: blur(12px); border: 1px solid var(--stroke); }
-    .btn-ghost { border: 1px solid var(--stroke); background: rgba(255,255,255,0.03); transition: all .2s; }
-    .btn-ghost:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
-    
-    .faculty-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--stroke);
-      transition: all 0.3s ease;
-    }
-    .faculty-card:hover {
-      border-color: var(--brand2);
-      background: rgba(255, 255, 255, 0.05);
-      transform: translateY(-3px);
-    }
-
-    /* Pulse Animation for the add button */
-    @keyframes pulse-soft {
-      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
-    }
-    .btn-pulse { animation: pulse-soft 2s infinite; }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 10000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal.active { display: flex; }
-
-    .toast {
-      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
-      z-index: 9999; background: var(--brand); color: #fff; padding: 12px 24px;
-      border-radius: 50px; font-weight: 700; opacity: 0; pointer-events: none;
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    input::-webkit-search-cancel-button { display: none; }
-  </style>
+:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--warn:#e0b45c}
+:root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#5e6772;--accent:#2a6e6c;--sub:#dceae6;--warn:#94641c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14.5px/1.7 var(--sans);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(980px,calc(100% - 32px));margin:auto}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:700}
+:root[data-theme="light"] .btn.primary{color:#fff}
+.btn svg{width:18px;height:18px;flex:none}
+.btn .ext{margin-inline-start:auto;opacity:.6;font-size:13px}
+/* header */
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
+.topin{display:flex;align-items:center;gap:16px;min-height:72px}
+.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:700;font-size:13px}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}
+.brand strong{font-size:14.5px;display:block;font-weight:700}
+.brand small{color:var(--muted);display:block}
+.topright{margin-inline-start:auto;display:flex;gap:8px}
+.topright .btn{background:var(--panel);font-weight:500;min-height:42px}
+/* page */
+.hero{padding:30px 0 4px}
+.hero h1{margin:0 0 4px;font-size:26px;font-weight:700}
+.hero p{margin:0;color:var(--muted);max-width:640px}
+.contrib{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px dashed color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:14px;padding:14px 16px;margin:18px 0}
+.contrib .plus{flex:none;width:42px;height:42px;border-radius:10px;background:var(--sub);color:var(--accent);display:grid;place-items:center;font-size:22px;font-weight:600}
+.contrib div{flex:1;min-width:0}
+.contrib b{display:block;font-size:15px}
+.contrib span{color:var(--muted);font-size:13px}
+.search{position:relative}
+.search input{width:100%;min-height:50px;padding:10px 46px 10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:inherit;font-size:16px}
+.search input:focus{outline:0;border-color:var(--accent)}
+.search svg{position:absolute;right:15px;top:50%;width:19px;height:19px;transform:translateY(-50%);color:var(--muted)}
+.search input::-webkit-search-cancel-button{display:none}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 14px;color:var(--muted);font-size:13px}
+.bar b{color:var(--text);font-family:var(--mono);font-weight:600}
+.linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;font-weight:600;padding:8px 2px}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.person-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.person h3{margin:0;font-size:16px;line-height:1.4;direction:ltr;text-align:right}
+.person .job{color:var(--muted);font-size:13px;direction:ltr;text-align:right}
+.rank{flex:none;font:600 11.5px/1 var(--mono);padding:6px 8px;border-radius:7px;background:var(--sub);color:var(--accent)}
+.meta{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:10px}
+.row{display:flex;align-items:center;gap:9px;font-size:13.5px;min-width:0}
+.row svg{flex:none;width:17px;height:17px;color:var(--accent)}
+.row .v{font-family:var(--mono);font-size:13px;direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{width:100%;background:var(--card);border:1px solid var(--line);border-radius:9px;min-height:40px;padding:6px 10px;cursor:pointer;color:var(--text)}
+.copy:hover{border-color:var(--accent)}
+.copy .hint{margin-inline-start:auto;color:var(--muted);font-size:12px;font-family:var(--sans)}
+.empty{text-align:center;color:var(--muted);padding:40px 10px;border:1px dashed var(--line);border-radius:14px}
+.note{text-align:center;color:var(--muted);font-size:12.5px;margin:22px 0 0}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,16px);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:30}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);padding:20px;width:min(440px,calc(100% - 24px))}
+dialog::backdrop{background:rgb(0 0 0 / .6)}
+dialog h2{margin:0 0 2px;font-size:18px}
+dialog p{margin:0 0 14px;color:var(--muted);font-size:13.5px}
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.field input{width:100%;min-height:44px;padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:16px}
+.field input:focus{outline:0;border-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dlg-actions{display:flex;gap:8px;margin-top:6px}
+.dlg-actions .btn{flex:1}
+footer{border-top:1px solid var(--line);padding:19px 0;margin-top:40px}
+footer .wrap{display:flex;justify-content:center;align-items:center}
+.sig{font:700 25px/1.3 "Rassasi Brand","Amiri","Noto Naskh Arabic",serif;color:var(--accent);padding:0 2px}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.sig{background:linear-gradient(100deg,var(--accent),var(--warn));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
+@media (max-width:760px){.list{grid-template-columns:1fr}}
+@media (max-width:600px){
+  body{font-size:14px}
+  .wrap{width:calc(100% - 24px)}
+  .topin{min-height:56px;gap:8px}
+  .mark{width:32px;height:32px;border-radius:9px;font-size:12px}
+  .brand{gap:7px;flex:1 1 auto}
+  .brand strong{font-size:13px;white-space:nowrap}
+  .brand small{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:4px}
+  .topright .btn{min-height:38px;padding:4px 9px;font-size:12.5px;white-space:nowrap}
+  .hero{padding:18px 0 0}
+  .hero h1{font-size:21px}
+  .hero p{font-size:13.5px}
+  .contrib{flex-wrap:wrap;padding:12px}
+  .contrib .btn{width:100%}
+  .list{gap:10px}
+  .person{padding:12px 14px;border-radius:12px}
+  footer{margin-top:28px}
+}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
 </head>
+<body>
+<header class="top"><div class="wrap topin">
+  <a class="brand" href="index.html" title="العودة للرئيسية"><span class="mark">EE</span><span><strong>اللجنة العلمية</strong><small>نادي الهندسة الكهربائية</small></span></a>
+  <div class="topright"><button id="theme" class="btn" type="button" title="تبديل المظهر">☀︎ فاتح</button><a class="btn" href="index.html">الرئيسية ↗</a></div>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <h1>أعضاء هيئة التدريس</h1>
+    <p>ابحث باسم الدكتور، واعرف مكتبه وانسخ بريده بضغطة.</p>
+  </section>
 
-<body class="px-4 py-6 md:px-8 md:py-10">
-  <div class="max-w-4xl mx-auto">
-    
-    <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-6">
-      <a href="index.html" class="w-full md:w-auto btn-ghost rounded-2xl px-6 py-3 font-bold text-sm flex items-center justify-center gap-2">
-        <i class="fa-solid fa-arrow-right"></i> رجوع للبوابة
-      </a>
+  <section class="contrib">
+    <span class="plus" aria-hidden="true">+</span>
+    <div><b>تعرف دكتور مو موجود؟</b><span>ساعد زملاءك وأرسل بياناته، ونراجعها قبل إضافتها.</span></div>
+    <button type="button" id="openAdd" class="btn primary">شاركنا البيانات</button>
+  </section>
 
-      <div class="flex items-center gap-4">
-        <div class="text-right">
-          <h1 class="text-xl md:text-2xl font-black">أعضاء هيئة التدريس</h1>
-          <p class="text-xs text-white/50 tracking-widest uppercase">Faculty Directory</p>
-        </div>
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center bg-indigo-500/20 border border-indigo-500/30">
-          <i class="fa-solid fa-user-tie text-indigo-400 text-2xl"></i>
-        </div>
-      </div>
+  <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" autocomplete="off" placeholder="اكتب اسم الدكتور…" aria-label="ابحث عن عضو هيئة تدريس"></label>
+  <div class="bar"><span>النتائج: <b id="count">0</b> من <b id="total">0</b></span><button id="clear" type="button" class="linkbtn">مسح البحث</button></div>
+
+  <div id="resultsList" class="list"></div>
+  <p id="emptyState" class="empty" hidden>ما لقينا أحد بهذا الاسم. جرّب جزء من الاسم أو اكتبه بالإنجليزي.</p>
+  <p class="note">البيانات للتواصل الأكاديمي فقط.</p>
+</main>
+
+<dialog id="addModal" aria-labelledby="addTitle">
+  <form id="addForm" method="dialog">
+    <h2 id="addTitle">إضافة بيانات عضو</h2>
+    <p>نراجع البيانات قبل إضافتها.</p>
+    <label class="field"><span>الاسم الثلاثي</span><input type="text" id="newName" required dir="auto" placeholder="مثال: Sami Alalwani"></label>
+    <div class="two">
+      <label class="field"><span>الرتبة</span><input type="text" id="newRank" dir="ltr" placeholder="Dr. / Eng."></label>
+      <label class="field"><span>رقم المكتب</span><input type="text" id="newOffice" dir="ltr" placeholder="ACX-F00"></label>
     </div>
+    <label class="field"><span>البريد الإلكتروني</span><input type="email" id="newEmail" required dir="ltr" placeholder="email@rcjy.edu.sa"></label>
+    <div class="dlg-actions"><button type="submit" class="btn primary">إرسال عبر واتساب</button><button type="button" id="closeAdd" class="btn">إلغاء</button></div>
+  </form>
+</dialog>
 
-    <div class="glass rounded-3xl p-6 mb-8 border-indigo-500/20 flex flex-col md:flex-row items-center gap-6 bg-gradient-to-r from-indigo-500/10 to-transparent">
-      <div class="bg-indigo-500/20 w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
-        <i class="fa-solid fa-lightbulb text-indigo-400 text-2xl"></i>
-      </div>
-      <div class="text-center md:text-right flex-grow">
-        <h3 class="text-lg font-bold mb-1">تعرف دكتور مو موجود؟</h3>
-        <p class="text-sm text-white/60">ساعد زملائك وساهم في تحديث البيانات لنبني مرجعاً أكاديمياً شاملاً.</p>
-      </div>
-      <button onclick="toggleModal(true)" class="btn-pulse bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-black text-sm transition-all flex items-center gap-2 whitespace-nowrap shadow-xl">
-        <i class="fa-solid fa-plus-circle"></i> شاركنا البيانات
-      </button>
-    </div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer><div class="wrap"><span class="sig">الرصاصي</span></div></footer>
+<script>
+(function(){
+  var b=document.getElementById('theme'),r=document.documentElement;
+  function apply(){var l=r.dataset.theme==='light';b.textContent=l?'☾ داكن':'☀︎ فاتح';var m=document.querySelector('meta[name=theme-color]');if(m)m.content=l?'#f3f2ef':'#151a22'}
+  b.onclick=function(){var n=r.dataset.theme==='light'?'dark':'light';r.dataset.theme=n;['ee_theme','ee_theme_v3','ee_library_theme'].forEach(function(k){try{localStorage.setItem(k,n)}catch(e){}});apply()};
+  apply();
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  const facultyData = [{"rank":"Eng.","name":"Sami Alalwani","jobTitle":"Lecturer","office":"ACX-F139","phone":"NA","email":"hsami@rcjy.edu.sa"},{"rank":"Eng.","name":"Motaz Mohamed Deebes","jobTitle":"Lecturer","office":"ACX-F136","phone":"41896","email":"mdeebes@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ali Abdullah Sayghe","jobTitle":"Assistant Professor","office":"ACX-F66","phone":"41129","email":"sayghea@rcjy.edu.sa;"},{"rank":"Dr.","name":"Abdularahman Hawsawi","jobTitle":"Lecturer","office":"NA","phone":"NA","email":"husawia@rcyci.edu.sa"},{"rank":"Eng.","name":"Mir Masood Zuberi","jobTitle":"Trainer","office":"APX-F30","phone":"41357","email":"mzuberi@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mohammad Istiaq Ahmad","jobTitle":"Lecturer","office":"ACX-F71","phone":"41428","email":"ahmad1@rcjy.edu.sa;"},{"rank":"Eng.","name":"Suresh Kalidas","jobTitle":"Lecturer","office":"ACXF135","phone":"41386","email":"khalidas@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mustajab Ahmad khan","jobTitle":"Lecturer","office":"ACX-F137","phone":"41398","email":"mustajab@rcjy.edu.sa;"},{"rank":"Eng.","name":"Roberto Maximo Cenidoza","jobTitle":"Lecturer","office":"ACX-F62","phone":"41457","email":"cenidozar@rcjy.edu.sa;"},{"rank":"Eng.","name":"Fawwaz Ahmed Ayesh","jobTitle":"Lecturer","office":"APX-F23","phone":"41362","email":"fayesh@rcjy.edu.sa;"},{"rank":"Dr.","name":"Fahad Ahmed Banakhr","jobTitle":"Associate Professor","office":"ACX-F143","phone":"41075","email":"banakhrf@rcjy.edu.sa;"},{"rank":"Dr.","name":"Sameer Alsibiani","jobTitle":"Assistant Professor","office":"APX-F62","phone":"41000","email":"alsibianis1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Adnan Badawood","jobTitle":"Assistant Professor","office":"ACX F31","phone":"41169","email":"Badawood1@rcjy.edu.sa;"},{"rank":"Eng.","name":"Nafea Alenezi","jobTitle":"Lecturer","office":"ACX-F130","phone":"41435","email":"alenezin@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ali Saad Alghamdi","jobTitle":"Assistant Professor","office":"ACX-F04","phone":"41652","email":"alghamdiasg@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shameer A. Koya","jobTitle":"Lecturer","office":"AD-230","phone":"41432","email":"skoya@rcjy.edu.sa;"},{"rank":"Eng.","name":"Girish Ganpatrao Shirsikar","jobTitle":"Lecturer","office":"APX-F19","phone":"41465","email":"gshirsikar@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohamed Ibrahim Mosaad","jobTitle":"Associate Professor","office":"ACX-F67","phone":"41596","email":"mosaadm@rcjy.edu.sa;"},{"rank":"Eng.","name":"Umasankar","jobTitle":"Lecturer","office":"APX-F25","phone":"41332","email":"aumasankar@rcjy.edu.sa;"},{"rank":"Dr.","name":"Liaqat Hayat","jobTitle":"Assistant Professor","office":"APX-F16","phone":"41200","email":"Liaqat@rcjy.edu.sa;"},{"rank":"Eng.","name":"Muhammed Kutty K.V.","jobTitle":"Trainer","office":"APX-F31","phone":"41368","email":"kuttym@rcjy.edu.sa;"},{"rank":"Dr.","name":"Nabil Saleh Rousan","jobTitle":"Assistant Professor","office":"ACX-F59","phone":"41248","email":"nrousan@rcjy.edu.sa;"},{"rank":"Eng.","name":"Moneer Almalki","jobTitle":"Lecturer","office":"APX-F56","phone":"NA","email":"malkimon@rcjy.gov.sa"},{"rank":"Eng.","name":"Nasir Ayub","jobTitle":"Trainer","office":"ACX-F138","phone":"41373","email":"nasirayub@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shah Jehan","jobTitle":"Trainer","office":"APX-F65","phone":"41429","email":"shahj@rcjy.edu.sa;"},{"rank":"Eng.","name":"Arif Ali Rehman","jobTitle":"Trainer","office":"ACX-F145","phone":"41337","email":"arehman@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Bahussain","jobTitle":"Trainer","office":"ACX-F65","phone":"41452","email":"abahussain@rcjy.edu.sa;"},{"rank":"Eng.","name":"Abdullah Fawaz Abdullah","jobTitle":"Trainer","office":"YTI-4F07","phone":"41041","email":"afawaz@rcjy.edu.sa;"},{"rank":"Dr.","name":"Yahya Alfadhli","jobTitle":"Assistant Professor","office":"ACX-F134","phone":"41279","email":"fadhli@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Ahmed M. Azab","jobTitle":"Associate Professor","office":"ACX-F79","phone":"NA","email":"moustafa@rcjy.edu.sa;"},{"rank":"Dr.","name":"Suresh Kumar","jobTitle":"Assistant Professor","office":"APX-F21","phone":"41227","email":"suresh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ronilo S. Santos","jobTitle":"Trainer","office":"ACX-F69","phone":"41372","email":"rsantos@rcjy.edu.sa;"},{"rank":"Dr.","name":"Abdalla Younes","jobTitle":"Assistant Professor","office":"ACXF146","phone":"41118","email":"younesa@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ahmed Abdul Aziz Alsubhi","jobTitle":"Associate Professor","office":"ACX-F60","phone":"41377","email":"subhi@rcjy.edu.sa;"},{"rank":"Dr.","name":"Adel Mohammed Alturki","jobTitle":"Assistant Professor","office":"ACX-F78","phone":"41507","email":"alturkia@rcjy.edu.sa;"},{"rank":"Dr.","name":"Annamalai Arunagiri","jobTitle":"Assistant Professor","office":"ACXF76","phone":"41365","email":"arunagiria@rcjy.edu.sa;"},{"rank":"Dr.","name":"Bakur AlQaudi","jobTitle":"Assistant Professor","office":"ACX-F140","phone":"41367","email":"Alqaudib@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Mostafa","jobTitle":"Assistant Professor","office":"ACX-F129","phone":"41225","email":"merg@rcjy.edu.sa;"},{"rank":"Eng.","name":"John A. Acielo","jobTitle":"Trainer","office":"APX-F61","phone":"41361","email":"jacielo@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ali Al-Nahas","jobTitle":"Lecturer","office":"APX-F24","phone":"41129","email":"aleisa@RCJY.EDU.SA;"},{"rank":"Dr.","name":"Mohammed Mousa","jobTitle":"Assistant Professor","office":"ACX-F63","phone":"41379","email":"mousam1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Salem Mohammed Batiyah","jobTitle":"Assistant Professor","office":"ACX-F70","phone":"41356","email":"batiyahs@rcjy.edu.sa;"},{"rank":"Dr.","name":"Musfer AlRadady","jobTitle":"Assistant Professor","office":"ACX-F 72","phone":"41251","email":"AlRadadym@rcjy.edu.sa;"},{"rank":"Eng.","name":"Zainudin Kornain","jobTitle":"Lecturer","office":"ACX-F77","phone":"41436","email":"kornainz@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ayman Khalid Alhejji","jobTitle":"Associate Professor","office":"APX-F54","phone":"41121","email":"alhejjia@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mohammed Sayed","jobTitle":"Lecturer","office":"APX-F66","phone":"NA","email":"sayedm1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohamed Mahfouz","jobTitle":"Assistant Professor","office":"ACXF80","phone":"41427","email":"mahfouzm@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mansour Abdullah Aljohani","jobTitle":"Assistant Professor","office":"ACX-F64","phone":"41030","email":"majohani@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Hussain Mayyan","jobTitle":"Assistant Professor","office":"APX-F20","phone":"41235","email":"mayyan@rcjy.edu.sa;"},{"rank":"Dr.","name":"Yousuf Dawood Almoallem","jobTitle":"Assistant Professor","office":"ACX-F65","phone":"41632","email":"moallemy@rcjy.edu.sa;"},{"rank":"Eng.","name":"Othman M. Said Ahtiwash","jobTitle":"Lecturer","office":"ACX-F147","phone":"41374","email":"oahtiwash@rcjy.edu.sa;"},{"rank":"Dr.","name":"Latif Ismael Shaikh","jobTitle":"Assistant Professor","office":"ACX-F68","phone":"41391","email":"lshaikh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Naushaad V. Moosa","jobTitle":"Lecturer","office":"APX-F32","phone":"41369","email":"moosan@rcjy.edu.sa;"},{"rank":"Eng.","name":"Imran Fazal","jobTitle":"Lecturer","office":"APX F67","phone":"41364","email":"Ifazal@rcjy.edu.sa;"},{"rank":"Dr.","name":"Azzeddine Djaiz","jobTitle":"Assistant Professor","office":"ACX-F82","phone":"41385","email":"adjaiz@rcjy.edu.sa;"},{"rank":"Eng.","name":"Loai Abdullah Al-Aswad","jobTitle":"Trainer","office":"APX-F68","phone":"41474","email":"lalaswad@rcjy.edu.sa;"},{"rank":"Eng.","name":"Almahdi Ali Ababneh","jobTitle":"Lecturer","office":"ACX-F61","phone":"41371","email":"aababneh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Omar Alandejani","jobTitle":"Lecturer","office":"ACX-F144","phone":"41381","email":"oalandejani@rcjy.edu.sa;"},{"rank":"Eng.","name":"Bakheet Al-Ghamdi","jobTitle":"Trainer","office":"APX-F28","phone":"41080","email":"bakheetg@rcjy.edu.sa;"},{"rank":"Eng.","name":"Muath Aloufi","jobTitle":"Trainer","office":"ACX-F81","phone":"NA","email":"aloufim@rcjy.edu.sa;"},{"rank":"Eng.","name":"Turki Alsayed","jobTitle":"Lecturer","office":"ACX-F74","phone":"41363","email":"alsayedt@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shakir Alghamdi","jobTitle":"Lecturer","office":"APX-F18","phone":"41383","email":"shakir@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ashfaq Hussain Chaudhry","jobTitle":"Lecturer","office":"YUC/E1-120","phone":"41447","email":"ashfaq@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Bakht Sultan","jobTitle":"Trainer","office":"ACX-F59","phone":"41192","email":"sultanba@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Abdallah Saleh Almalki","jobTitle":"Trainer","office":"APX-F22","phone":"41295","email":"malkiaas@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Abdulkarim Almuagili albalawi","jobTitle":"Trainer","office":"APX-F29","phone":"NA","email":"almuagiliaa@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ibrahim Salem Al Jehef","jobTitle":"Trainer","office":"APX-F33","phone":"NA","email":"juhaifis@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Mana Alhashel","jobTitle":"Trainer","office":"APX-F53","phone":"4NA","email":"hashela@rcjy.edu.sa;"},{"rank":"Eng.","name":"Omar Alsalamah","jobTitle":"Trainer","office":"APX-F55","phone":"4NA","email":"Salamhom@rcjy.edu.sa;"}];
+  const $ = (id) => document.getElementById(id);
+  const ICON = {
+    pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+    mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>'
+  };
+  function el(tag, attrs, ...kids){
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) { if (v == null) continue; if (k === 'text') n.textContent = v; else if (k === 'class') n.className = v; else if (k === 'icon') n.insertAdjacentHTML('afterbegin', ICON[v]); else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v); }
+    for (const c of kids) if (c != null) n.append(c);
+    return n;
+  }
+  const cleanEmail = (e) => (e ?? '').toString().trim().replace(/;+/g, '').toLowerCase();
+  const usable = (v) => v && !/^4?na$/i.test(String(v).trim());
 
-    <section class="glass rounded-[2.5rem] p-6 md:p-10 shadow-2xl">
-      <div class="mb-8 text-center md:text-right">
-        <h2 class="text-2xl font-black mb-2">ابحث عن دكتور</h2>
-        <p class="text-white/60 text-sm">اكتب الاسم، وسنقوم بالبحث لك في القائمة.</p>
-      </div>
+  let toastTimer;
+  function showToast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2000); }
+  async function copyEmail(email){
+    try { await navigator.clipboard.writeText(email); showToast('تم نسخ البريد'); }
+    catch (e) { window.location.href = 'mailto:' + email; }
+  }
 
-      <div class="space-y-4">
-        <div class="relative">
-          <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-white/30"></i>
-          <input id="q" type="search" autocomplete="off"
-            placeholder="اكتب اسم الدكتور هنا..."
-            class="w-full pr-12 pl-4 py-4 rounded-2xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 text-white placeholder:text-white/20 transition-all text-lg" />
-        </div>
+  function card(p){
+    const email = cleanEmail(p.email);
+    return el('article', {class:'person'},
+      el('div', {class:'person-head'},
+        el('div', {}, el('h3', {text:p.name}), el('div', {class:'job', text:p.jobTitle || 'Faculty Member'})),
+        el('span', {class:'rank', dir:'ltr', text:p.rank || '—'})),
+      el('div', {class:'meta'},
+        el('div', {class:'row', icon:'pin'}, el('span', {text:'المكتب:'}), el('span', {class:'v', text:usable(p.office) ? p.office : 'غير متوفر'})),
+        usable(email) ? el('button', {type:'button', class:'row copy', icon:'mail', 'aria-label':'نسخ بريد ' + p.name, onclick:() => copyEmail(email)}, el('span', {class:'v', text:email}), el('span', {class:'hint', text:'نسخ'})) : null));
+  }
+  function render(list){
+    $('count').textContent = list.length;
+    $('resultsList').replaceChildren(...list.map(card));
+    $('emptyState').hidden = list.length > 0;
+  }
+  $('total').textContent = facultyData.length;
+  $('q').addEventListener('input', (e) => { const q = e.target.value.toLowerCase().trim(); render(facultyData.filter((p) => p.name.toLowerCase().includes(q))); });
+  $('clear').onclick = () => { $('q').value = ''; render(facultyData); $('q').focus(); };
 
-        <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
-          <div class="flex gap-2">
-            <span class="bg-white/5 px-4 py-2 rounded-xl text-xs font-bold border border-white/5">
-              الإجمالي: <span id="total" class="text-indigo-400">0</span>
-            </span>
-            <span class="bg-indigo-500/10 px-4 py-2 rounded-xl text-xs font-bold border border-indigo-500/20">
-              النتائج: <span id="count" class="text-cyan-400">0</span>
-            </span>
-          </div>
-          <button id="clear" class="text-xs font-bold text-white/40 hover:text-white transition">
-            <i class="fa-solid fa-eraser ml-1"></i> مسح البحث
-          </button>
-        </div>
-      </div>
+  // add-member request → WhatsApp (same number as before)
+  const dlg = $('addModal');
+  $('openAdd').onclick = () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); };
+  $('closeAdd').onclick = () => dlg.close();
+  $('addForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = (id) => $(id).value.trim();
+    const msg = 'طلب إضافة عضو هيئة تدريس جديد:\n- الاسم: ' + v('newName') + '\n- الرتبة: ' + v('newRank') + '\n- المكتب: ' + v('newOffice') + '\n- الإيميل: ' + v('newEmail');
+    window.open('https://wa.me/966541048510?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    dlg.close(); $('addForm').reset(); showToast('جارٍ تحويلك للواتساب…');
+  });
 
-      <div id="resultsList" class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-
-      <div id="emptyState" class="hidden py-20 text-center">
-        <i class="fa-solid fa-face-frown text-4xl text-white/20 mb-4"></i>
-        <p class="text-white/40 font-bold">عذراً، لم نجد أحداً بهذا الاسم</p>
-      </div>
-
-      <p class="mt-10 text-center text-[10px] text-white/30 uppercase tracking-[0.2em]">
-        البيانات للتواصل الأكاديمي فقط • تم التطوير بواسطة الرصاصي
-      </p>
-    </section>
-  </div>
-
-  <div id="addModal" class="modal">
-    <div class="glass w-full max-w-md rounded-[2.5rem] p-8 relative border-indigo-500/30">
-      <button onclick="toggleModal(false)" class="absolute left-6 top-6 text-white/30 hover:text-white">
-        <i class="fa-solid fa-xmark text-xl"></i>
-      </button>
-      
-      <div class="mb-8 text-center">
-        <div class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <i class="fa-solid fa-user-plus text-indigo-400 text-2xl"></i>
-        </div>
-        <h3 class="text-xl font-black">إضافة بيانات عضو</h3>
-        <p class="text-sm text-white/50 mt-1">سيتم مراجعة البيانات قبل إضافتها</p>
-      </div>
-
-      <form id="addForm" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-white/50 mb-2 mr-2">الاسم الثلاثي</label>
-          <input type="text" id="newName" required placeholder="مثال:SAMI..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-sm focus:outline-none focus:border-indigo-500 transition-all">
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-white/50 mb-2 mr-2">الرتبة</label>
-            <input type="text" id="newRank" placeholder="Dr. / Eng." class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-sm focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-white/50 mb-2 mr-2">رقم المكتب</label>
-            <input type="text" id="newOffice" placeholder="ACX-F00" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-sm focus:outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-white/50 mb-2 mr-2">البريد الإلكتروني</label>
-          <input type="email" id="newEmail" required placeholder="email@rcjy.edu.sa" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-sm focus:outline-none focus:border-indigo-500 text-left" dir="ltr">
-        </div>
-        
-        <button type="submit" class="w-full bg-indigo-600 py-4 rounded-2xl font-black mt-4 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">
-          إرسال البيانات للرصاصي
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <div id="toast" class="toast">تم نسخ البريد بنجاح!</div>
-
-  <script>
-    // بياناتك الأساسية
-    const facultyData = [{"rank":"Eng.","name":"Sami Alalwani","jobTitle":"Lecturer","office":"ACX-F139","phone":"NA","email":"hsami@rcjy.edu.sa"},{"rank":"Eng.","name":"Motaz Mohamed Deebes","jobTitle":"Lecturer","office":"ACX-F136","phone":"41896","email":"mdeebes@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ali Abdullah Sayghe","jobTitle":"Assistant Professor","office":"ACX-F66","phone":"41129","email":"sayghea@rcjy.edu.sa;"},{"rank":"Dr.","name":"Abdularahman Hawsawi","jobTitle":"Lecturer","office":"NA","phone":"NA","email":"husawia@rcyci.edu.sa"},{"rank":"Eng.","name":"Mir Masood Zuberi","jobTitle":"Trainer","office":"APX-F30","phone":"41357","email":"mzuberi@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mohammad Istiaq Ahmad","jobTitle":"Lecturer","office":"ACX-F71","phone":"41428","email":"ahmad1@rcjy.edu.sa;"},{"rank":"Eng.","name":"Suresh Kalidas","jobTitle":"Lecturer","office":"ACXF135","phone":"41386","email":"khalidas@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mustajab Ahmad khan","jobTitle":"Lecturer","office":"ACX-F137","phone":"41398","email":"mustajab@rcjy.edu.sa;"},{"rank":"Eng.","name":"Roberto Maximo Cenidoza","jobTitle":"Lecturer","office":"ACX-F62","phone":"41457","email":"cenidozar@rcjy.edu.sa;"},{"rank":"Eng.","name":"Fawwaz Ahmed Ayesh","jobTitle":"Lecturer","office":"APX-F23","phone":"41362","email":"fayesh@rcjy.edu.sa;"},{"rank":"Dr.","name":"Fahad Ahmed Banakhr","jobTitle":"Associate Professor","office":"ACX-F143","phone":"41075","email":"banakhrf@rcjy.edu.sa;"},{"rank":"Dr.","name":"Sameer Alsibiani","jobTitle":"Assistant Professor","office":"APX-F62","phone":"41000","email":"alsibianis1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Adnan Badawood","jobTitle":"Assistant Professor","office":"ACX F31","phone":"41169","email":"Badawood1@rcjy.edu.sa;"},{"rank":"Eng.","name":"Nafea Alenezi","jobTitle":"Lecturer","office":"ACX-F130","phone":"41435","email":"alenezin@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ali Saad Alghamdi","jobTitle":"Assistant Professor","office":"ACX-F04","phone":"41652","email":"alghamdiasg@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shameer A. Koya","jobTitle":"Lecturer","office":"AD-230","phone":"41432","email":"skoya@rcjy.edu.sa;"},{"rank":"Eng.","name":"Girish Ganpatrao Shirsikar","jobTitle":"Lecturer","office":"APX-F19","phone":"41465","email":"gshirsikar@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohamed Ibrahim Mosaad","jobTitle":"Associate Professor","office":"ACX-F67","phone":"41596","email":"mosaadm@rcjy.edu.sa;"},{"rank":"Eng.","name":"Umasankar","jobTitle":"Lecturer","office":"APX-F25","phone":"41332","email":"aumasankar@rcjy.edu.sa;"},{"rank":"Dr.","name":"Liaqat Hayat","jobTitle":"Assistant Professor","office":"APX-F16","phone":"41200","email":"Liaqat@rcjy.edu.sa;"},{"rank":"Eng.","name":"Muhammed Kutty K.V.","jobTitle":"Trainer","office":"APX-F31","phone":"41368","email":"kuttym@rcjy.edu.sa;"},{"rank":"Dr.","name":"Nabil Saleh Rousan","jobTitle":"Assistant Professor","office":"ACX-F59","phone":"41248","email":"nrousan@rcjy.edu.sa;"},{"rank":"Eng.","name":"Moneer Almalki","jobTitle":"Lecturer","office":"APX-F56","phone":"NA","email":"malkimon@rcjy.gov.sa"},{"rank":"Eng.","name":"Nasir Ayub","jobTitle":"Trainer","office":"ACX-F138","phone":"41373","email":"nasirayub@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shah Jehan","jobTitle":"Trainer","office":"APX-F65","phone":"41429","email":"shahj@rcjy.edu.sa;"},{"rank":"Eng.","name":"Arif Ali Rehman","jobTitle":"Trainer","office":"ACX-F145","phone":"41337","email":"arehman@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Bahussain","jobTitle":"Trainer","office":"ACX-F65","phone":"41452","email":"abahussain@rcjy.edu.sa;"},{"rank":"Eng.","name":"Abdullah Fawaz Abdullah","jobTitle":"Trainer","office":"YTI-4F07","phone":"41041","email":"afawaz@rcjy.edu.sa;"},{"rank":"Dr.","name":"Yahya Alfadhli","jobTitle":"Assistant Professor","office":"ACX-F134","phone":"41279","email":"fadhli@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Ahmed M. Azab","jobTitle":"Associate Professor","office":"ACX-F79","phone":"NA","email":"moustafa@rcjy.edu.sa;"},{"rank":"Dr.","name":"Suresh Kumar","jobTitle":"Assistant Professor","office":"APX-F21","phone":"41227","email":"suresh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ronilo S. Santos","jobTitle":"Trainer","office":"ACX-F69","phone":"41372","email":"rsantos@rcjy.edu.sa;"},{"rank":"Dr.","name":"Abdalla Younes","jobTitle":"Assistant Professor","office":"ACXF146","phone":"41118","email":"younesa@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ahmed Abdul Aziz Alsubhi","jobTitle":"Associate Professor","office":"ACX-F60","phone":"41377","email":"subhi@rcjy.edu.sa;"},{"rank":"Dr.","name":"Adel Mohammed Alturki","jobTitle":"Assistant Professor","office":"ACX-F78","phone":"41507","email":"alturkia@rcjy.edu.sa;"},{"rank":"Dr.","name":"Annamalai Arunagiri","jobTitle":"Assistant Professor","office":"ACXF76","phone":"41365","email":"arunagiria@rcjy.edu.sa;"},{"rank":"Dr.","name":"Bakur AlQaudi","jobTitle":"Assistant Professor","office":"ACX-F140","phone":"41367","email":"Alqaudib@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Mostafa","jobTitle":"Assistant Professor","office":"ACX-F129","phone":"41225","email":"merg@rcjy.edu.sa;"},{"rank":"Eng.","name":"John A. Acielo","jobTitle":"Trainer","office":"APX-F61","phone":"41361","email":"jacielo@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ali Al-Nahas","jobTitle":"Lecturer","office":"APX-F24","phone":"41129","email":"aleisa@RCJY.EDU.SA;"},{"rank":"Dr.","name":"Mohammed Mousa","jobTitle":"Assistant Professor","office":"ACX-F63","phone":"41379","email":"mousam1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Salem Mohammed Batiyah","jobTitle":"Assistant Professor","office":"ACX-F70","phone":"41356","email":"batiyahs@rcjy.edu.sa;"},{"rank":"Dr.","name":"Musfer AlRadady","jobTitle":"Assistant Professor","office":"ACX-F 72","phone":"41251","email":"AlRadadym@rcjy.edu.sa;"},{"rank":"Eng.","name":"Zainudin Kornain","jobTitle":"Lecturer","office":"ACX-F77","phone":"41436","email":"kornainz@rcjy.edu.sa;"},{"rank":"Dr.","name":"Ayman Khalid Alhejji","jobTitle":"Associate Professor","office":"APX-F54","phone":"41121","email":"alhejjia@rcjy.edu.sa;"},{"rank":"Eng.","name":"Mohammed Sayed","jobTitle":"Lecturer","office":"APX-F66","phone":"NA","email":"sayedm1@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohamed Mahfouz","jobTitle":"Assistant Professor","office":"ACXF80","phone":"41427","email":"mahfouzm@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mansour Abdullah Aljohani","jobTitle":"Assistant Professor","office":"ACX-F64","phone":"41030","email":"majohani@rcjy.edu.sa;"},{"rank":"Dr.","name":"Mohammed Hussain Mayyan","jobTitle":"Assistant Professor","office":"APX-F20","phone":"41235","email":"mayyan@rcjy.edu.sa;"},{"rank":"Dr.","name":"Yousuf Dawood Almoallem","jobTitle":"Assistant Professor","office":"ACX-F65","phone":"41632","email":"moallemy@rcjy.edu.sa;"},{"rank":"Eng.","name":"Othman M. Said Ahtiwash","jobTitle":"Lecturer","office":"ACX-F147","phone":"41374","email":"oahtiwash@rcjy.edu.sa;"},{"rank":"Dr.","name":"Latif Ismael Shaikh","jobTitle":"Assistant Professor","office":"ACX-F68","phone":"41391","email":"lshaikh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Naushaad V. Moosa","jobTitle":"Lecturer","office":"APX-F32","phone":"41369","email":"moosan@rcjy.edu.sa;"},{"rank":"Eng.","name":"Imran Fazal","jobTitle":"Lecturer","office":"APX F67","phone":"41364","email":"Ifazal@rcjy.edu.sa;"},{"rank":"Dr.","name":"Azzeddine Djaiz","jobTitle":"Assistant Professor","office":"ACX-F82","phone":"41385","email":"adjaiz@rcjy.edu.sa;"},{"rank":"Eng.","name":"Loai Abdullah Al-Aswad","jobTitle":"Trainer","office":"APX-F68","phone":"41474","email":"lalaswad@rcjy.edu.sa;"},{"rank":"Eng.","name":"Almahdi Ali Ababneh","jobTitle":"Lecturer","office":"ACX-F61","phone":"41371","email":"aababneh@rcjy.edu.sa;"},{"rank":"Eng.","name":"Omar Alandejani","jobTitle":"Lecturer","office":"ACX-F144","phone":"41381","email":"oalandejani@rcjy.edu.sa;"},{"rank":"Eng.","name":"Bakheet Al-Ghamdi","jobTitle":"Trainer","office":"APX-F28","phone":"41080","email":"bakheetg@rcjy.edu.sa;"},{"rank":"Eng.","name":"Muath Aloufi","jobTitle":"Trainer","office":"ACX-F81","phone":"NA","email":"aloufim@rcjy.edu.sa;"},{"rank":"Eng.","name":"Turki Alsayed","jobTitle":"Lecturer","office":"ACX-F74","phone":"41363","email":"alsayedt@rcjy.edu.sa;"},{"rank":"Eng.","name":"Shakir Alghamdi","jobTitle":"Lecturer","office":"APX-F18","phone":"41383","email":"shakir@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ashfaq Hussain Chaudhry","jobTitle":"Lecturer","office":"YUC/E1-120","phone":"41447","email":"ashfaq@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Bakht Sultan","jobTitle":"Trainer","office":"ACX-F59","phone":"41192","email":"sultanba@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Abdallah Saleh Almalki","jobTitle":"Trainer","office":"APX-F22","phone":"41295","email":"malkiaas@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Abdulkarim Almuagili albalawi","jobTitle":"Trainer","office":"APX-F29","phone":"NA","email":"almuagiliaa@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ibrahim Salem Al Jehef","jobTitle":"Trainer","office":"APX-F33","phone":"NA","email":"juhaifis@rcjy.edu.sa;"},{"rank":"Eng.","name":"Ahmed Mana Alhashel","jobTitle":"Trainer","office":"APX-F53","phone":"4NA","email":"hashela@rcjy.edu.sa;"},{"rank":"Eng.","name":"Omar Alsalamah","jobTitle":"Trainer","office":"APX-F55","phone":"4NA","email":"Salamhom@rcjy.edu.sa;"}];
-
-    const qEl = document.getElementById("q");
-    const resultsList = document.getElementById("resultsList");
-    const emptyState = document.getElementById("emptyState");
-    const totalEl = document.getElementById("total");
-    const countEl = document.getElementById("count");
-    const clearBtn = document.getElementById("clear");
-    const toastEl = document.getElementById("toast");
-    const addModal = document.getElementById("addModal");
-    const addForm = document.getElementById("addForm");
-
-    totalEl.textContent = facultyData.length;
-
-    function cleanEmail(e) { return (e ?? "").toString().trim().replace(/;+/g, "").toLowerCase(); }
-
-    async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); return true; } 
-      catch { return false; }
-    }
-
-    function showToast(msg = "تم نسخ البريد بنجاح!") {
-      toastEl.textContent = msg;
-      toastEl.classList.add("show");
-      setTimeout(() => toastEl.classList.remove("show"), 2000);
-    }
-
-    function toggleModal(show) {
-      if(show) addModal.classList.add("active");
-      else addModal.classList.remove("active");
-    }
-
-    addForm.onsubmit = (e) => {
-      e.preventDefault();
-      const name = document.getElementById("newName").value;
-      const rank = document.getElementById("newRank").value;
-      const office = document.getElementById("newOffice").value;
-      const email = document.getElementById("newEmail").value;
-
-      const message = `طلب إضافة عضو هيئة تدريس جديد:%0A- الاسم: ${name}%0A- الرتبة: ${rank}%0A- المكتب: ${office}%0A- الإيميل: ${email}`;
-      window.open(`https://wa.me/966541048510?text=${message}`, '_blank');
-      
-      toggleModal(false);
-      addForm.reset();
-      showToast("جاري تحويلك للواتساب...");
-    };
-
-    function render(list) {
-      countEl.textContent = list.length;
-      resultsList.innerHTML = "";
-      if (list.length === 0) {
-        emptyState.classList.remove("hidden");
-        return;
-      }
-      emptyState.classList.add("hidden");
-
-      list.forEach(p => {
-        const email = cleanEmail(p.email);
-        const card = document.createElement("div");
-        card.className = "faculty-card rounded-2xl p-5 flex flex-col justify-between";
-        card.innerHTML = `
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <span class="text-[10px] font-black px-2 py-1 bg-white/10 rounded-lg text-white/50 uppercase">${p.rank || 'NA'}</span>
-              <i class="fa-solid fa-id-card text-white/10 text-xl"></i>
-            </div>
-            <h3 class="font-black text-lg text-white/90 mb-1">${p.name}</h3>
-            <p class="text-xs text-white/40 mb-4">${p.jobTitle || 'Faculty Member'}</p>
-          </div>
-          <div class="space-y-3 border-t border-white/5 pt-4">
-            <div class="flex items-center gap-3 text-sm">
-              <i class="fa-solid fa-location-dot text-indigo-400 w-4"></i>
-              <span class="text-white/70">المكتب: ${p.office || 'NA'}</span>
-            </div>
-            <button onclick="handleCopy('${email}')" class="w-full flex items-center gap-3 text-sm hover:text-cyan-400 transition-colors group">
-              <i class="fa-solid fa-envelope text-cyan-400 w-4"></i>
-              <span class="text-white/70 group-hover:text-cyan-400 truncate">${email}</span>
-            </button>
-          </div>
-        `;
-        resultsList.appendChild(card);
-      });
-    }
-
-    window.handleCopy = async (email) => {
-      if (email && email !== 'na') {
-        const ok = await copyText(email);
-        if (ok) showToast();
-      }
-    };
-
-    qEl.addEventListener("input", (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      const filtered = facultyData.filter(p => p.name.toLowerCase().includes(q));
-      render(filtered);
-    });
-
-    clearBtn.addEventListener("click", () => {
-      qEl.value = "";
-      render(facultyData);
-      qEl.focus();
-    });
-
-    render(facultyData);
-  </script>
+  render(facultyData);
+})();
+</script>
 </body>
 </html>
