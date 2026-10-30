@@ -193,7 +193,9 @@ dialog.preview .viewerbar>div:first-child{min-width:0;flex:1}
 dialog.preview .viewerbar strong{display:block;overflow-wrap:anywhere}
 dialog.preview .frame-wrap{flex:1;min-height:0;background:var(--card)}
 dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
-.frame-note{position:absolute;inset:auto 12px 12px 12px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:13px;color:var(--muted);box-shadow:0 8px 24px var(--shadow)}
+.pv-help{margin:3px 0 0;font-size:12px;color:var(--muted)}
+.pv-help:empty{display:none}
+.pv-help a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .frame-state{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:var(--card)}
 
 /* ---------- 11. Tablet ---------- */
@@ -238,6 +240,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   /* sections & cards */
   .sectionline{margin-bottom:12px;padding-bottom:8px}
   .sectionline h2{font-size:17px}
+  #sectionTitle{scroll-margin-top:68px}
   .cards{grid-template-columns:1fr;gap:10px}
   .cards.depts{grid-template-columns:1fr 1fr;gap:10px}
   .dept{flex-direction:column;align-items:flex-start;gap:8px;padding:14px;min-height:0;border-radius:12px}
@@ -323,7 +326,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 <p class="howto-line" id="howto"></p>
 </main><footer><div class="wrap"><span data-t="footer">بوابة اللجنة العلمية · نادي الهندسة الكهربائية</span><span class="dev sig" dir="rtl" lang="ar">الرصاصي</span></div></footer>
 
-<dialog id="preview" class="preview" aria-labelledby="pvTitle"><section class="viewer"><div class="viewerbar"><div><strong id="pvTitle"></strong><p id="pvMeta"></p></div><div class="view-actions"><a id="pvDownload" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="download">تنزيل ↓</a><button id="pvClose" class="btn sm primary" type="button" data-t="close">إغلاق ✕</button></div></div><div class="frame-wrap" id="pvBody"></div></section></dialog>
+<dialog id="preview" class="preview" aria-labelledby="pvTitle"><section class="viewer"><div class="viewerbar"><div><strong id="pvTitle"></strong><p id="pvMeta"></p><p id="pvHelp" class="pv-help"></p></div><div class="view-actions"><a id="pvDownload" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="download">تنزيل ↓</a><button id="pvClose" class="btn sm primary" type="button" data-t="close">إغلاق ✕</button></div></div><div class="frame-wrap" id="pvBody"></div></section></dialog>
 
 <script>
 'use strict';
@@ -346,7 +349,6 @@ const CONFIG = {
   API_URL: 'https://script.google.com/macros/s/AKfycbz6Y6lzqPUKFgkYrwhSp2ydwLPmAEvKQ4z55Vdeuf3SjU3M0hNOiPPgwf7u5_ABqr1F/exec',
   SHARE_FORM_URL: 'https://forms.gle/igT6oxmwWqvjxxPD9',   // "share a resource" form
   REQUEST_TIMEOUT_MS: 25000,
-  PREVIEW_FALLBACK_MS: 7000,
   ROOTS: [
     {id:'1tTYloDY7RScDAApOMlxT_qdwFbMs5Az8', ar:'الهندسة الكهربائية',             en:'Electrical Engineering',        sub:'EE · Electrical Engineering'},
     {id:'1fvnC8RDQKNupmP3cKimyTPQvIcL-51nm', ar:'تقنية القوى الكهربائية',          en:'Electrical Power Technology',   sub:'EPT · Electrical Power Technology'},
@@ -427,7 +429,7 @@ const T = {
     howto:'جميع المصادر تُنشر بعد مراجعتها من اللجنة العلمية.',
     recent_h:'أحدث الملفات',show_more:'عرض المزيد',
     share_t:'عندك ملف يفيد زملاءك؟',share_p:'ملخص، شرح مرتب، حل واجب أو أسئلة مراجعة… شاركه وساعد غيرك يذاكر أسهل. نراجعه ثم ننشره في المكتبة.',share_tc:(c)=>`عندك مصدر لـ ${c}؟`,share_pc:'شاركه وساعد زميلك. نراجعه ثم ننشره هنا.',share_btn:'شارك مصدرًا',sort_name:'الاسم',sort_new:'الأحدث',sort_aria:'ترتيب الملفات',
-    syncing:'جارٍ التحقق من التحديثات…',saved_copy:(t)=>`<b>غير متصل</b> · المعروض نسخة محفوظة على جهازك (آخر تحديث ${t})`,saved_bar:(t)=>`<b>نسخة محفوظة</b> · آخر تحديث ${t}`,truncated:'المكتبة كبيرة جدًا، وقد لا تظهر بعض الملفات.',pv_help:'ما ظهر الملف؟',
+    syncing:'جارٍ التحقق من التحديثات…',saved_copy:(t)=>`<b>غير متصل</b> · المعروض نسخة محفوظة على جهازك (آخر تحديث ${t})`,saved_bar:(t)=>`<b>نسخة محفوظة</b> · آخر تحديث ${t}`,truncated:'المكتبة كبيرة جدًا، وقد لا تظهر بعض الملفات.',pv_help:'ما ظهر الملف؟',pv_dl_link:'حمّله وافتحه على جهازك',
     footer:'بوابة اللجنة العلمية · نادي الهندسة الكهربائية',
         kb:'ك.ب',mb:'م.ب'},
   en:{committee:'Scientific Committee',club:'Electrical Engineering Club',home:'Home ↗',home_title:'Back to home',theme_title:'Toggle theme',light:'☀︎ Light',dark:'☾ Dark',lang:'عربي',h1:'Academic Library',
@@ -458,7 +460,7 @@ const T = {
     howto:'All resources are published after review by the Scientific Committee.',
     recent_h:'Recently added',show_more:'Show more',
     share_t:'Have a file that could help others?',share_p:'A summary, clear notes, a solved assignment or review questions… share it and help a classmate study. We review it, then publish it in the library.',share_tc:(c)=>`Have a resource for ${c}?`,share_pc:'Share it and help a classmate. We review it, then publish it here.',share_btn:'Share a resource',sort_name:'Name',sort_new:'Newest',sort_aria:'Sort files',
-    syncing:'Checking for updates…',saved_copy:(t)=>`<b>Offline</b> · showing the copy saved on this device (updated ${t})`,saved_bar:(t)=>`<b>Saved copy</b> · updated ${t}`,truncated:'The library is very large; some files may not appear.',pv_help:'File not showing?',
+    syncing:'Checking for updates…',saved_copy:(t)=>`<b>Offline</b> · showing the copy saved on this device (updated ${t})`,saved_bar:(t)=>`<b>Saved copy</b> · updated ${t}`,truncated:'The library is very large; some files may not appear.',pv_help:'File not showing?',pv_dl_link:'Download it and open it on your device',
     footer:'Scientific Committee Portal · Electrical Engineering Club',
         kb:'KB',mb:'MB'}
 };
@@ -526,34 +528,28 @@ function splitName(name){
 }
 
 /* ===== Data loading ===== */
-// Exam-type folders are shown as "Review Questions" (display only; Drive is unchanged).
-const EXAMISH = /quiz|exam|midterm|final|اختبار|امتحان|كويز/i;
-function softenFolderName(name){
-  const s = String(name || '');
-  if (!EXAMISH.test(s)) return s;
-  const pre = (/^\s*\d{1,2}\s*[–—.\-_)]\s*/.exec(s) || [''])[0];
-  return pre + (/[؀-ۿ]/.test(s) ? 'أسئلة مراجعة' : 'Review Questions');
-}
 function ingest(index){
   if (!index || index.ok !== true || !Array.isArray(index.nodes)) throw Object.assign(new Error('bad'), {code:'bad'});
-  store.byId.clear(); store.kids.clear(); store.rootErrors.clear();
+  // Build into fresh maps; the current library stays intact until the new one is complete.
+  const byId = new Map(), kids = new Map(), rootErrors = new Map();
   const accepted = new Map();
   for (const raw of index.nodes) {
     // v2 rows: [id, parent, name, isFolder, size, 'YYYY-MM-DD', googleMime?]; v1: objects
     const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', public:true} : raw;
     if (!n || typeof n.id !== 'string' || typeof n.parent !== 'string' || (n.kind !== 'file' && n.kind !== 'folder')) continue;
     if (isBlocked(n.name)) continue;
-    accepted.set(n.id, n.kind === 'folder' ? Object.assign({}, n, {name:softenFolderName(n.name)}) : n);
+    accepted.set(n.id, n);
   }
   // Keep only nodes whose whole ancestry leads to a configured root through accepted folders
   const ok = (n, guard = 0) => guard < 30 && (ROOT_IDS.has(n.parent) || (accepted.has(n.parent) && accepted.get(n.parent).kind === 'folder' && ok(accepted.get(n.parent), guard + 1)));
   for (const n of accepted.values()) if (!ROOT_IDS.has(n.id) && ok(n)) {
-    store.byId.set(n.id, n);
-    if (!store.kids.has(n.parent)) store.kids.set(n.parent, []);
-    store.kids.get(n.parent).push(n);
+    byId.set(n.id, n);
+    if (!kids.has(n.parent)) kids.set(n.parent, []);
+    kids.get(n.parent).push(n);
   }
-  for (const list of store.kids.values()) list.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'folder' ? -1 : 1) || a.name.localeCompare(b.name, undefined, {numeric:true}));
-  for (const e of index.errors || []) if (e && ROOT_IDS.has(e.root)) store.rootErrors.set(e.root, e.error || 'access');
+  for (const list of kids.values()) list.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'folder' ? -1 : 1) || String(a.name).localeCompare(String(b.name), undefined, {numeric:true}));
+  for (const e of index.errors || []) if (e && ROOT_IDS.has(e.root)) rootErrors.set(e.root, e.error || 'access');
+  store.byId = byId; store.kids = kids; store.rootErrors = rootErrors; // swap in one step
   fileCountCache.clear();
   store.generated = index.generated || new Date().toISOString();
   store.demo = !!index.demo;
@@ -582,7 +578,7 @@ function getPublicIndexJsonp(url){
   });
 }
 function readLocal(){
-  try { const o = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null'); const fresh = o && Date.now() - Date.parse(o.generated) < 30 * 864e5;
+  try { const o = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null'); const fresh = o && Date.now() - Date.parse(o.generated) < 7 * 864e5; // older copies are not shown
     return o && fresh && o.ok === true && Array.isArray(o.nodes) && o.api === CONFIG.API_URL ? o : null; } catch (e) { return null; }
 }
 function saveLocal(index){
@@ -610,15 +606,17 @@ async function load(refresh){
     await new Promise((r) => setTimeout(r, 350)); if (seq !== loadSeq) return; ingest(buildDemoIndex()); store.status = 'ready'; route(); return;
   }
   // 1) Show the copy saved on this device instantly, then check Drive in the background.
-  const local = !refresh && readLocal();
+  let local = !refresh && readLocal();
   if (local) {
     try { ingest(local); store.status = 'ready'; store.error = null; store.syncing = true; route(); }
-    catch (e) { store.status = 'loading'; }
+    catch (e) { local = null; store.status = 'loading'; try { localStorage.removeItem(LOCAL_KEY); } catch (_) {} } // damaged copy: ignore it
   }
   if (store.status !== 'ready' || refresh) { store.status = 'loading'; store.error = null; render(); }
   try {
-    const data = await fetchIndex(refresh, local ? local.generated : '');
+    let data = await fetchIndex(refresh, local ? local.generated : '');
     if (seq !== loadSeq) return;
+    // "Nothing changed" is only valid if a good copy is loaded; otherwise fetch the full index.
+    if (data.unchanged && (!local || !store.byId.size)) { data = await fetchIndex(false, ''); if (seq !== loadSeq) return; }
     if (data.unchanged) store.checked = new Date().toISOString();
     else { ingest(data); saveLocal(data); }
     store.status = 'ready'; store.syncing = false;
@@ -669,7 +667,7 @@ function afterRender(){
   }
   // Long paths scroll sideways on phones: keep the current folder visible.
   const c = $('crumbs');
-  if (c.scrollWidth > c.clientWidth + 2 && c.lastElementChild) c.lastElementChild.scrollIntoView({block:'nearest', inline:'end'});
+  if (c.scrollWidth > c.clientWidth + 2) c.scrollLeft = document.documentElement.dir === 'rtl' ? -(c.scrollWidth - c.clientWidth) : c.scrollWidth - c.clientWidth; // moves the path bar only, never the page
 }
 
 /* ===== Rendering ===== */
@@ -880,6 +878,7 @@ function openPreview(n){
   clearTimeout(previewTimer); if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
   body.replaceChildren();
   $('pvTitle').textContent = n.name; $('pvTitle').dir = 'auto';
+  $('pvHelp').replaceChildren();
   $('pvMeta').textContent = [x.toUpperCase(), fmtSize(n.size), fmtDate(n.modified), n.demo ? t('pv_demo_note') : ''].filter(Boolean).join(' · ');
   const dl = $('pvDownload');
   dl.classList.toggle('hidden', !!n.demo || n.public === false);
@@ -890,15 +889,10 @@ function openPreview(n){
   else if (n.demo) body.append(el('iframe', {srcdoc:demoDoc(n), title:n.name, sandbox:''}));
   else {
     const frame = el('iframe', {src:drivePreviewUrl(n.id), title:n.name, allow:'autoplay', referrerpolicy:'strict-origin-when-cross-origin'});
-    // The iframe "load" event fires even when Google shows an error page instead of the file,
-    // so it can't prove the preview worked: after a few seconds always offer the download (dismissible).
-    const slow = el('div', {class:'frame-note hidden', role:'status'},
-      el('span', {text:t('pv_help') + ' ' + t('pv_slow')}),
-      el('span', {style:'display:flex;gap:6px'},
-        el('a', {class:'btn sm primary', href:downloadUrl(n), target:'_blank', rel:'noopener noreferrer'}, isGoogleType(n) ? t('dl_pdf') : t('download')),
-        el('button', {type:'button', class:'btn sm', 'aria-label':t('close'), onclick:() => slow.classList.add('hidden')}, '✕')));
-    previewTimer = setTimeout(() => slow.classList.remove('hidden'), CONFIG.PREVIEW_FALLBACK_MS);
-    body.append(frame, slow);
+    // The iframe can't tell us whether Google actually showed the file, so a quiet, permanent
+    // hint under the title offers the download; it never covers the document.
+    $('pvHelp').replaceChildren(t('pv_help') + ' ', el('a', {href:downloadUrl(n), target:'_blank', rel:'noopener noreferrer'}, t('pv_dl_link')));
+    body.append(frame);
   }
   if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
 }
