@@ -1,1184 +1,1567 @@
-<!doctype html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-
-  <title>EE Degree Plan - Progress Tracker</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-
-  <style>
-  
-
-    :root {
-
-      --bg-dark: #050810;
-
-      --card-bg: rgba(15, 23, 42, 0.8);
-
-      --card-border: rgba(255, 255, 255, 0.1);
-
-      --text-main: #f1f5f9;
-
-      --text-muted: #64748b;
-
-      --accent-blue: #38bdf8;
-
-      --accent-yellow: #fbbf24;
-
-      --accent-green: #22c55e;
-
-      --card-width: 135px;
-
-    }
-
-
-
-    * { box-sizing: border-box; }
-
-    body {
-
-      margin: 0;
-
-      background: var(--bg-dark);
-
-      color: var(--text-main);
-
-      font-family: 'Cairo', sans-serif;
-
-      overflow: hidden; 
-
-      height: 100vh;
-
-      width: 100vw;
-
-      touch-action: none;
-
-    }
-
-
-
-    header {
-
-      padding: 20px;
-
-      text-align: center;
-
-      position: fixed;
-
-      top: 0; left: 0; right: 0;
-
-      background: rgba(5, 8, 16, 0.95);
-
-      backdrop-filter: blur(10px);
-
-      z-index: 1000;
-
-      border-bottom: 1px solid var(--card-border);
-
-    }
-
-    .legend {
-
-      display: inline-flex;
-
-      gap: 20px;
-
-      font-size: 0.8rem;
-
-      margin-top: 10px;
-
-    }
-
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-
-    .dot { width: 10px; height: 10px; border-radius: 2px; }
-
-
-
-    .viewport {
-
-      width: 100vw;
-
-      height: 100vh;
-
-      cursor: grab;
-
-      position: relative;
-
-      overflow: hidden;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-    }
-
-    .viewport:active { cursor: grabbing; }
-
-
-
-    .flowchart-wrapper {
-
-      position: absolute;
-
-      transform-origin: center center; 
-
-      padding: 500px;
-
-      will-change: transform;
-
-      display: flex;
-
-      flex-direction: column;
-
-    }
-
-
-
-    /* --- تعديل السنوات --- */
-
-    .year-section {
-
-  display: flex;
-
-  margin-bottom: 80px; /* المسافة بين السنوات */
-
-  position: relative;
-
-  padding-bottom: 75px; /* مسافة لترك مساحة للخط في المنتصف */
-
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#151a22"><script>try{var d=document.documentElement,g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(["ee_theme_v3","ee_theme","ee_library_theme"]),lg=g(["ee_lang","ee_language","ee_library_lang"]);if(th!=="light"&&th!=="dark")th="dark";d.dataset.theme=th;if(lg==="en"){d.lang="en";d.dir="ltr"}}catch(e){}</script><meta name="description" content="خريطة تفاعلية لخطة دبلوم تقنية الإلكترونيات والاتصالات: تتبع الإنجاز واستكشاف متطلبات المقررات."><meta property="og:title" content="خطة دبلوم تقنية الإلكترونيات والاتصالات | نادي الهندسة الكهربائية">
+<meta property="og:description" content="خريطة تفاعلية لخطة دبلوم تقنية الإلكترونيات والاتصالات: متطلبات المواد وتتبع الإنجاز واقتراح المواد.">
+<meta property="og:image" content="https://engineer-ee.com/images/preview-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>خطة دبلوم تقنية الإلكترونيات والاتصالات | نادي الهندسة الكهربائية</title><style>
+/* =========================================================
+   EE Study Plan — stylesheet
+   Themes: "dark" = Midnight Ink (default), "light" = Stone (soft light)
+   Layout: header → toolbar → map/list → footer; course panel docks
+   on the side (desktop) or as a slim bar at the bottom (≤900px)
+   ========================================================= */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #0b0e13;
+  --panel: #151a22;
+  --map: #0b0e13;
+  --map-dots: none;
+  --line: #2b3039;
+  --shell-bd: #2b3039;
+  --text: #e8ecf2;
+  --muted: #98a1b0;
+  --name: #d6e0ee;
+  --blue: #67b9e3;
+  --green: #6cba8c;
+  --gold: #d8b662;
+  --edge: #526778;
+  --edge2: #353e4a;
+  --scroll: #394f69;
+  --card: #151a22;
+  --card-bd: #353e4a;
+  --card-hover: #151a22;
+  --btn: #151a22;
+  --btn-bd: #2b3039;
+  --btn-hover: #151a22;
+  --ok-bd: #4ba27b;
+  --ok-bg: #14261d;
+  --cur-bg: #151a22;
+  --active: #24313c;
+  --rec-bg: #1b2933;
+  --c-pre: #56c5f4;
+  --c-co: #efc76b;
+  --c-next: #8a95a5;
+  --on-blue: #07202e;
+  --toast-bg: #e1f5ec;
+  --toast-fg: #0e3022;
+  --shadow: #0009;
+  --lo: 0.22;
+
+  --pad: clamp(12px, 2vw, 24px);
+  --radius: 8px;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* map geometry (fixed canvas, scaled by script) */
+  --card-w: 135px;
+  --card-h: 85px;
+  --card-gap: 45px;
+  --row-gap: 75px;
+  --year-bar: 60px;
+  --sem-w: 100px;
 }
 
-
-
-/* رسم الخط الكامل باستخدام Pseudo-element */
-
-.year-section::after {
-
-  content: "";
-
-  position: absolute;
-
-  bottom: 0;
-
-  left: 80px;  /* يبدأ بعد السايدبار قليلاً */
-
-  right: 40px; /* ينتهي قبل الحافة اليمنى */
-
-  height: 2px; /* سمك الخط */
-
-  /* تدرج لوني: شفاف -> لون خفيف -> شفاف */
-
-  background: linear-gradient(90deg, 
-
-    transparent, 
-
-    rgba(255, 255, 255, 0.15) 20%, 
-
-    rgba(255, 255, 255, 0.15) 80%, 
-
-    transparent
-
-  );
-
-  border-radius: 2px;
-
+/* "light" = Stone: soft off-white with warm grey, calm accents */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #e9e8e5;
+  --panel: #efeeeb;
+  --map: #ecebe8;
+  --map-dots: radial-gradient(#d6d4cf 0.8px, transparent 0.8px);
+  --line: #d9d7d2;
+  --shell-bd: #d4d2cc;
+  --text: #2b2d2f;
+  --muted: #6c6a66;
+  --name: #37393b;
+  --blue: #2a6e6c;
+  --green: #437c55;
+  --gold: #977035;
+  --edge: #9a9b97;
+  --edge2: #d0cec8;
+  --scroll: #c3c0ba;
+  --card: #f4f3f1;
+  --card-bd: #cfccc6;
+  --card-hover: #f7f6f4;
+  --btn: #f3f2ef;
+  --btn-bd: #d2d0ca;
+  --btn-hover: #f6f5f3;
+  --ok-bd: #5c9470;
+  --ok-bg: #e2eae2;
+  --cur-bg: #f0e9de;
+  --active: #e0e9e6;
+  --rec-bg: #deeae7;
+  --c-pre: #3a8583;
+  --c-co: #b48a48;
+  --c-next: #8e8c86;
+  --on-blue: #f5f7f6;
+  --toast-bg: #2b2d2f;
+  --toast-fg: #f2f1ee;
+  --shadow: #2b2d2f1f;
+  --lo: 0.4;
 }
 
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0 auto;
+  max-width: 1920px;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input, select { font: inherit; color: inherit; }
+button, select, .upload {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--btn-bd);
+  border-radius: var(--radius);
+  background: var(--btn);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+select { padding: 0 8px; }
+button:disabled { opacity: 0.4; cursor: default; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+a { color: var(--blue); }
+.muted, small { color: var(--muted); }
+[hidden] { display: none !important; }
 
-
-/* إخفاء الخط بعد السنة الأخيرة (Senior) */
-
-.year-section:last-of-type::after {
-
-  display: none;
-
+@media (hover: hover) {
+  button:not(:disabled):hover, select:hover, .upload:hover { border-color: var(--blue); background: var(--btn-hover); }
 }
 
-    /* --- تعديل السايدبار لضمان عدم انكسار السطر --- */
-.year-sidebar {
-  width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
-  border-right: 3px solid #333;
-  flex-shrink: 0;
-  overflow: visible; /* لضمان عدم قص النص */
+/* Brand name: Aref Ruqaa (plain outlines), subset to the name only and embedded (works offline).
+   Not the "Ink" build: its SVG colour glyphs make Safari ignore the gradient and draw red ink. */
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0600-06FF, U+FE70-FEFF;
+  src: url(data:font/woff2;base64,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) format("woff2"); }
+@font-face { font-family: "Rassasi Brand"; font-weight: 700; font-display: swap; unicode-range: U+0000-00FF;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAUEAA8AAAAACJwAAASxAAEAxQAAAAAAAAAAAAAAAAAAAAAAAAAAGhgbIBwwBmAAXBEICockhW8BNgIkAyALEgAEIAWDdgcgDAcb0QZRlA9OBuDnQdmmp9lYLMqIc8oSpCVI8eO/vfAqnv//e3OfN+9PSgUpFUsDaRiRcGZ5GlDIxoIRCFBWNBGo9wd29q+adW4dtPko14fB/uZP4S4TRNvCr8tmukwxGf+yhhXWqsojGoD/czm9Ozy8azzfHGpi7d811sKxbUxMbawJFmBYgFmAcLrJuvQLvcBU5rXgawmwCEAgMMh1HphnzxFyFZeSAxwMQNEAMBwdA+x9ipuuyipwnFRSbeCIRxl6k6l7DaA968ShsVOqJA/BHBSg4YyoM0TP8+vEOFhoH9mP0QJVmg3ZgeuaT3QrNjFA/b+yiCEDWCWBAfsiZanUqAVZtPez9V4Ha2Mtrjk1q6YIIRJI0cTwWeetAgsgZwC5AwAdgNYx5O47K3JrcyqZtaG62eJz82TWN4wF8WIamNT6lqplo+AEiDzbKvSSFQBTQRKCe4eG/KV57gE0SEOBUEg+rzDHx9aOarFhUxpB/Qq05m1q/dvA3LXBoVL1/G6s72ORIPIgPz4DYDIApKk6NxpWfj6I3Crk6ZK+7hJYJKeQ7nKLuSv1B9Qxu3vKRd9N48lkTFxbgUt0McNXgRoUXbzEx+aSGA9NmYedVBeuf79TtcgGR9EMgs0FdR7zx0fQbD4zZT10NYdF4cbSMYan0+Ez3ca9ts6I3ECXrzWnn5tuPoDIRL+Pje5eUvWNxRgfsv/p0+cPh0uKpDfVAqtw5Fw/nk3N9F3WrAXQO1bKd3vYRi22y3NO22wjfHq5eXGpi86xrLTOsu2P2DXPtSyAi1ahKA8i3hhZKCO+4YKMhZIY3I/h2Y00jWSRzJeUXSTLVv65G9heRZK941NdlAmn3iTZjg76FpcVk77BbKQskT+TpCvVr4a+H9VOROaGRIgscsQW8hR5/PYmK5oz8iqaHWcjLXnr4o9vJIgxrkdbynVWj3qxMM5pZu/ZPTzjVZiuj+2eJk/vEoc4XjphO6prghNxKNsVTUKyoHpiV2f3ohfPb4v5bpKBjrL/cw+RSElKN/FBpYSw/1ZVO8tBvPu2sFTnqHMMhdw1W1k5HF7LPsZj8n1P2ihLPghoD5ctWm/3ZqdAjAz1yuMwMV2h/0f18Q4JjJkmJD5xb+2PE8+1DqPXjbk6ZbfWvfFbitTVXGDnFlb6sM/Ia25aFSHaNn1XuK8GJwID4ou0Vl2WGkK+eFo2AASIY5GL+s4rF4d842DYSwCe9jYOBHz0cvpBh/0fxJzdNYBgQSNlm9U4/EEg1uqb6t/N5ivLKAa4bQCwWx44p4D+lSj6c1ZYzCCnEGDWVoM5+hpUo3EzimCQzgXwDWweQuE3D8WJiIexRMVjcEwCj8k2dc9gsc9Al9p16KVLo3oNKDgLEzNf+gGW9lxcjga1cJG61KqDy9JNp0qVcBm6tGtSqxqFhG46NPgP6ULCeWhAoXQgBTEyqteIStFNFUPksu1aGVVq0aiOHqWXDrUky8rW68r1pIPrsY6knuVqkWp16a5WDVycdm0HpN1o67dxsXJlSWVmYvia1CjtWtSgwMDTTKyCRUqRKE5wVNnQ61vtf6NEUHn1uUmNlbXhOepf14wR4uqhROmvoYe9MMYB) format("woff2"); }
+
+/* ---------- 3. Header ---------- */
+header {
+  padding: 12px var(--pad) 10px;
+  padding-left: max(var(--pad), env(safe-area-inset-left));
+  padding-right: max(var(--pad), env(safe-area-inset-right));
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.mast { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; direction: ltr; }
+.academic-heading { min-width: 0; }
+h1 { margin: 0 0 3px; font-size: clamp(15px, 1.5vw, 18px); font-weight: 700; letter-spacing: 1.2px; line-height: 1.3; }
+.subtitle { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+.subtitle span { padding: 0 8px; }
+.mast-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.tools { display: flex; gap: 8px; }
+button.icon { min-width: 34px; padding: 0 10px; }
+#themeBtn { display: inline-grid; place-items: center; overflow: hidden; }
+#themeBtn svg { grid-area: 1 / 1; transition: transform 0.45s cubic-bezier(.4, 1.6, .5, 1), opacity 0.3s; }
+#themeBtn .i-moon, :root[data-theme="light"] #themeBtn .i-sun { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+:root[data-theme="light"] #themeBtn .i-moon { opacity: 1; transform: none; }
+html.theme-fade, html.theme-fade * {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease !important;
 }
 
+.brand { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; white-space: nowrap; direction: ltr; color: var(--muted); }
+.brand-by { font-size: 10px; letter-spacing: 0.8px; }
+[dir="rtl"] .brand-by { letter-spacing: 0; font-size: 11px; }
+/* Latin name reads larger than Ruqaa at the same size: scale it down to match */
+:root[lang="en"] .brand-ar { font-size: 23px; }
+.brand-ar { font: 700 30px/1.3 "Rassasi Brand", "Amiri", "Noto Naskh Arabic", serif; color: var(--blue); padding: 0 2px; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .brand-ar {
+    background: linear-gradient(100deg, var(--blue), var(--c-co));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; font-size: 12px; }
+.progress strong { font-weight: 600; }
+.track { flex: 1 1 140px; max-width: 420px; height: 5px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.fill { width: 0; height: 100%; border-radius: 99px; background: var(--green); transition: width 0.2s; }
+#percent { font-weight: 700; color: var(--green); }
+
+/* ---------- 4. Toolbar & mode bars ---------- */
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  padding: 10px var(--pad);
+  padding-left: max(var(--pad), env(safe-area-inset-left));
+  padding-right: max(var(--pad), env(safe-area-inset-right));
+}
+.tb-find { display: flex; gap: 8px; flex: 1 1 260px; min-width: 0; }
+.search { position: relative; flex: 1 1 220px; max-width: 340px; min-width: 0; }
+.search input {
+  width: 100%; min-height: 34px; padding: 0 12px;
+  border: 1px solid var(--btn-bd); border-radius: var(--radius);
+  background: var(--btn); color: var(--text); font-size: 13px;
+  -webkit-appearance: none; appearance: none;
+}
+.tb-act { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-inline-start: auto; }
+
+.seg { display: inline-flex; overflow: hidden; border: 1px solid var(--btn-bd); border-radius: var(--radius); background: var(--panel); }
+.seg button { min-height: 32px; padding: 0 12px; border: 0; border-radius: 0; background: transparent; color: var(--muted); }
+.seg button + button { border-inline-start: 1px solid var(--btn-bd); }
+.seg button[aria-pressed="true"] { background: var(--active); color: var(--blue); font-weight: 600; }
+
+.primary { background: var(--blue); border-color: var(--blue); color: var(--on-blue); font-weight: 600; }
+@media (hover: hover) { .primary:not(:disabled):hover { background: var(--blue); border-color: var(--blue); filter: brightness(1.08); } }
+.primary[aria-pressed="true"] { outline: 2px solid var(--blue); outline-offset: 2px; }
+#bulkToggle[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); }
+
+.bulkbar, .recommend-bar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  margin: 0 var(--pad) 8px; padding: 7px 10px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--panel); font-size: 12px;
+}
+.bulkbar { position: sticky; top: 0; z-index: 5; gap: 8px; }
+.bulkbar strong { margin-inline-end: auto; font-size: 13px; }
+.bulk-hours {
+  padding: 5px 11px; border: 1px solid var(--edge2); border-radius: 7px;
+  background: var(--active); color: var(--blue); font-size: 13px; font-weight: 700; white-space: nowrap;
+}
+.recommend-bar { gap: 12px; border-color: var(--edge); }
+.recommend-bar label { display: flex; align-items: center; gap: 7px; }
+.recommend-bar input { width: 18px; height: 18px; accent-color: var(--blue); }
+.recommend-bar button { margin-inline-start: auto; }
+.recommend-bar p { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 11px; }
+
+/* ---------- 5. Map shell ---------- */
+main {
+  padding: 0 var(--pad) 14px;
+  padding-left: max(var(--pad), env(safe-area-inset-left));
+  padding-right: max(var(--pad), env(safe-area-inset-right));
+}
+.map-shell { min-width: 0; overflow: hidden; border: 1px solid var(--shell-bd); border-radius: 10px; background: var(--map); }
+.map-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 51px; padding: 7px 12px;
+  border-bottom: 1px solid var(--line); background: var(--panel);
+}
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); }
+.legend i { display: inline-block; width: 16px; height: 2px; margin-inline-end: 5px; vertical-align: middle; background: var(--c-pre); }
+.legend i.co { background: var(--c-co); }
+.map-controls { display: flex; align-items: center; gap: 5px; margin-inline-start: auto; flex-shrink: 0; direction: ltr; }
+.zoom-control { min-width: 34px; padding: 0 8px; border-radius: 7px; font: 600 19px/1 system-ui, sans-serif; }
+#zoomValue { min-width: 43px; text-align: center; font: 12px var(--mono); color: var(--muted); }
+
+.viewport {
+  height: clamp(420px, 68dvh, 790px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: none;
+  cursor: grab;
+  direction: ltr;
+  background-color: var(--map);
+  background-image: var(--map-dots);
+  background-size: 24px 24px;
+  scrollbar-color: var(--scroll) var(--map);
+}
+.viewport:active { cursor: grabbing; }
+.space { position: relative; }
+.map {
+  position: absolute; left: 0; top: 0;
+  width: 1650px; padding: 26px 28px 36px;
+  transform-origin: top left; direction: ltr;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+#lines { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+
+.year { position: relative; display: flex; margin-bottom: 80px; padding-bottom: 60px; }
+.year:last-child { margin-bottom: 0; padding-bottom: 0; }
+.year:not(:last-child)::after {
+  content: ""; position: absolute; left: 80px; right: 28px; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line) 12%, var(--line) 86%, transparent);
+}
 .year-label {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-weight: 900;
-  letter-spacing: 5px;
-  font-size: 1.2rem;
-  transition: all 0.3s;
-  
-  /* الحل السحري هنا */
-  white-space: nowrap; /* يمنع نزول الرقم لسطر جديد */
-  display: block;
-  width: max-content; /* يجعل العرض على مقاس النص بالضبط */
+  flex: none; width: var(--year-bar); padding-left: 12px;
+  writing-mode: vertical-rl; transform: rotate(180deg); text-align: center;
+  font-size: 17px; font-weight: 800; letter-spacing: 4px; color: var(--muted);
+  border-left: 3px solid var(--edge);
+  background: linear-gradient(0deg, transparent, var(--panel));
+}
+.year:nth-child(2) .year-label { color: var(--blue); border-left-color: var(--blue); }
+.year:nth-child(3) .year-label { color: var(--green); border-left-color: var(--green); }
+.year:nth-child(4) .year-label { color: var(--gold); border-left-color: var(--gold); }
+.rows { display: flex; flex-direction: column; gap: var(--row-gap); min-width: 0; }
+.row { display: flex; align-items: center; min-height: var(--card-h); padding-left: 30px; }
+.semester {
+  flex: none; width: var(--sem-w); padding-left: 14px;
+  border-left: 2px solid var(--line);
+  font: 700 12px var(--mono); letter-spacing: 1px; color: var(--muted);
+}
+.cards { display: flex; align-items: center; gap: var(--card-gap); }
+
+/* ---------- 6. Course card ---------- */
+.card {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  width: var(--card-w); min-width: var(--card-w); height: var(--card-h); padding: 7px 8px;
+  border: 1px solid var(--card-bd); border-radius: var(--radius);
+  background: var(--card); text-align: center;
+  transition: border-color 0.15s, opacity 0.15s, box-shadow 0.15s;
+}
+@media (hover: hover) { .card:hover { border-color: var(--blue); background: var(--card-hover); } }
+.card .code { font: 700 13px/1.2 var(--mono); color: var(--blue); }
+.card .name { max-height: 28px; overflow: hidden; font-size: 10.5px; line-height: 1.25; color: var(--name); }
+.card .badge { font-size: 9.5px; line-height: 1.15; color: var(--muted); }
+
+.card.completed { border-color: var(--ok-bd); background: var(--ok-bg); }
+.card.completed .code { color: var(--green); }
+.card.current { border: 2px solid var(--gold); background: var(--cur-bg); }
+.card.recommended { border: 2px solid var(--blue); background: var(--rec-bg); }
+.card.recommended .badge { color: var(--blue); }
+.card.selected { outline: 2px solid var(--blue); outline-offset: 2px; }
+.card.rel-pre { box-shadow: 0 0 0 2px var(--c-pre); }
+.card.rel-co { box-shadow: 0 0 0 2px var(--c-co); }
+.card.rel-next { box-shadow: 0 0 0 2px var(--c-next); }
+.card.fade { opacity: 0.2; }
+.card.dimmed { opacity: 0.24; }
+.card:focus-visible { z-index: 2; }
+
+.bulk-mode .card::before {
+  content: ""; position: absolute; top: 6px; right: 6px; width: 15px; height: 15px;
+  border: 1px solid var(--muted); border-radius: 3px; background: var(--bg);
+  font-size: 12px; line-height: 15px; text-align: center;
+}
+.bulk-mode .card.bulk-selected::before { content: "✓"; border-color: var(--blue); background: var(--blue); color: var(--on-blue); }
+.card.bulk-selected { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- 7. List view ---------- */
+body.list .viewport { height: auto; overflow: visible; touch-action: auto; cursor: auto; }
+body.list .space { width: auto !important; height: auto !important; }
+body.list .map { position: relative; width: auto; padding: 15px; transform: none !important; -webkit-user-select: auto; user-select: auto; }
+body.list #lines, body.list .map-controls, body.list .legend > span:nth-child(-n + 2) { display: none; }
+body.list .year { display: block; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+body.list .year:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+body.list .year::after { display: none; }
+body.list .year-label {
+  width: auto; margin-bottom: 16px; padding: 0 0 6px 10px;
+  writing-mode: horizontal-tb; transform: none; text-align: left; background: none;
+}
+body.list .rows { gap: 25px; }
+body.list .row { display: block; padding: 0; }
+body.list .semester { width: auto; margin-bottom: 12px; }
+body.list .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 12px; }
+body.list .card { width: 100%; min-width: 0; height: 90px; }
+body.list .card.dimmed { display: none; }
+
+/* ---------- 8. Footer, empty, toast, dialog ---------- */
+.empty { padding: 30px; text-align: center; color: var(--muted); }
+.hint { margin: 8px 0; font-size: 11px; color: var(--muted); }
+.footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 12px; }
+.footer summary { padding: 10px; cursor: pointer; }
+.backup { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; }
+.upload { display: inline-flex; align-items: center; }
+
+#toast {
+  position: fixed; z-index: 20; left: 50%; bottom: calc(var(--dock-h, 0px) + 24px + env(safe-area-inset-bottom));
+  max-width: 90%; padding: 12px 20px; border-radius: 12px;
+  background: var(--toast-bg); color: var(--toast-fg); box-shadow: 0 8px 40px #0005;
+  transform: translateX(-50%);
+}
+#toast:empty { display: none; }
+
+dialog {
+  width: min(520px, calc(100% - 24px)); max-height: 85dvh; padding: 18px; overflow: auto;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--panel); color: var(--text);
+}
+dialog::backdrop { background: #02060dba; }
+.dialog-head { display: flex; align-items: start; justify-content: space-between; gap: 15px; }
+dialog h2 { margin: 6px 0; font-size: 18px; }
+dialog p { margin: 8px 0; font-size: 13px; }
+
+/* ---------- 9. Course panel (side dock on desktop) ---------- */
+#detail {
+  position: fixed; z-index: 15; inset-block: 0; inset-inline-start: 0;
+  width: min(340px, 100%); padding: 16px; overflow: auto;
+  background: var(--panel); border-inline-end: 1px solid var(--line);
+  box-shadow: -10px 0 30px var(--shadow);
+}
+[dir="ltr"] #detail { box-shadow: 10px 0 30px var(--shadow); }
+body.has-dock { padding-inline-start: min(340px, 100%); }
+.d-head { display: flex; align-items: start; justify-content: space-between; gap: 15px; }
+.eyebrow { font-size: 11px; letter-spacing: 3px; color: var(--blue); }
+#detail h2 { margin: 6px 0 2px; font-size: 19px; }
+#detail h3 {
+  margin: 14px 0 8px; padding-inline-start: 8px;
+  border-inline-start: 3px solid var(--edge); font-size: 12px;
+}
+#detail h3.k-pre { border-inline-start-color: var(--c-pre); }
+#detail h3.k-co { border-inline-start-color: var(--c-co); }
+.states { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.states button { flex: 1; min-height: 32px; padding: 0 8px; font-size: 12px; white-space: nowrap; }
+.states .active { border-color: var(--blue); background: var(--active); }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; direction: ltr; }
+.chips { unicode-bidi: isolate; }
+.chips button { min-height: 28px; padding: 2px 8px; font: 12px var(--mono); }
+.rec-reason { margin: 10px 0; padding: 10px 12px; border-inline-start: 2px solid var(--blue); background: var(--active); font-size: 12px; }
+#detail ul { margin: 6px 0 0; padding: 0 20px; font-size: 12px; color: var(--muted); }
+#detail li { margin: 3px 0; }
+#detail details { margin-top: 18px; font-size: 13px; }
+#detail summary { color: var(--blue); cursor: pointer; }
+#detail .hint { margin: 12px 0 0; }
+.rel-line { display: none; }
+.card { scroll-margin-bottom: calc(var(--dock-h, 0px) + 20px); }
+
+/* ---------- 10. Touch devices ---------- */
+@media (pointer: coarse) {
+  button, select, .upload { min-height: 40px; }
+  .seg button { min-height: 38px; }
+  .chips button { min-height: 34px; }
+  /* iOS zooms the page when a focused field is under 16px */
+  .search input, select { min-height: 40px; font-size: 16px; }
 }
 
-
-
-    .semesters-container {
-
-      flex-grow: 1;
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 75px; 
-
-    }
-
-
-
-    /* --- تعديل السمسترات --- */
-
-    .semester-row { 
-
-        display: flex; 
-
-        align-items: center; 
-
-        padding-left: 30px; 
-
-        transition: all 0.3s ease;
-
-    }
-
-    .sem-indicator {
-
-      width: 100px;
-
-      font-size: 0.75rem;
-
-      font-weight: 800;
-
-      text-transform: uppercase;
-
-      flex-shrink: 0;
-
-      color: var(--text-muted); /* لون موحد هادئ */
-
-      border-left: 2px solid rgba(255,255,255,0.05);
-
-      padding-left: 15px;
-
-      letter-spacing: 2px;
-
-      transition: all 0.3s ease;
-
-    }
-
-    .semester-row:hover .sem-indicator {
-
-        color: var(--text-main);
-
-        border-left-color: rgba(255,255,255,0.3);
-
-    }
-
-
-
-    .course-list { display: flex; gap: 50px; }
-
-
-
-    .card {
-
-      width: var(--card-width);
-
-      height: 85px;
-
-      background: var(--card-bg);
-
-      border: 1px solid var(--card-border);
-
-      border-radius: 8px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      text-align: center;
-
-      position: relative;
-
-      z-index: 10;
-
-      transition: all 0.3s;
-
-      cursor: pointer;
-
-      user-select: none;
-
-    }
-
-    
-
-    .card.selected { 
-
-        border-color: var(--accent-yellow) !important; 
-
-        box-shadow: 0 0 25px rgba(251, 191, 36, 0.5); 
-
-        z-index: 100;
-
-        background: #1e293b;
-
-    }
-
-
-
-    .card.completed {
-
-      border-color: var(--accent-green) !important;
-
-      background: rgba(34, 197, 94, 0.2) !important;
-
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
-
-    }
-
-    .card.completed::after {
-
-      content: '✓';
-
-      position: absolute;
-
-      top: 5px;
-
-      right: 8px;
-
-      color: var(--accent-green);
-
-      font-weight: bold;
-
-      font-size: 14px;
-
-    }
-
-    .card.completed .code { color: var(--accent-green) !important; }
-
-
-
-    .card.dimmed { opacity: 0.2; filter: grayscale(0.5); }
-
-    
-
-    .code { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--accent-blue); font-weight: 800; pointer-events: none; }
-
-    .name { font-size: 0.6rem; color: #cbd5e1; margin-top: 5px; font-weight: 600; line-height: 1.2; padding: 0 8px; pointer-events: none; }
-
-
-
-    #svg-canvas {
-
-      position: absolute;
-
-      top: 0; left: 0;
-
-      width: 100%; height: 100%;
-
-      pointer-events: none;
-
-      z-index: 1;
-
-    }
-
-
-
-    path { transition: opacity 0.4s ease; stroke-linecap: round; }
-
-    path.active-path { opacity: 1 !important; stroke-width: 3; filter: drop-shadow(0 0 5px var(--accent-blue)); }
-
-    path.faded { opacity: 0.02 !important; }
-
-
-
-    .zoom-controls {
-
-      position: fixed;
-
-      bottom: 30px;
-
-      right: 30px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 10px;
-
-      z-index: 2000;
-
-    }
-
-    
-
-    .zoom-btn {
-
-      width: 50px;
-
-      height: 50px;
-
-      border-radius: 12px;
-
-      border: 1px solid var(--card-border);
-
-      background: rgba(15, 23, 42, 0.9);
-
-      color: white;
-
-      font-size: 24px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      backdrop-filter: blur(5px);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-    }
-    @media (max-width: 600px) {
-  header h2 {
-    font-size: 1rem !important; /* تصغير عنوان الصفحة */
+/* ---------- 11. Tablet & phone: slim course bar ---------- */
+@media (max-width: 900px) {
+  .viewport { height: clamp(400px, 63dvh, 680px); }
+  body.has-dock { padding-inline-start: 0; padding-bottom: var(--dock-h, 0px); }
+
+  #detail {
+    inset-block: auto 0; inset-inline: 0; width: auto; max-height: 60dvh;
+    padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
+    border: 0; border-top: 1px solid var(--blue); border-radius: 14px 14px 0 0;
+    box-shadow: 0 -10px 30px var(--shadow) !important;
   }
-  .legend {
-    gap: 10px;
-    font-size: 0.6rem;
-  }
-  .year-label {
-    font-size: 1rem; /* تصغير كلمة YEAR قليلاً لتناسب الشاشة */
-  }
+  #detail .d-head { align-items: center; gap: 10px; }
+  #detail .d-head > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  #detail .eyebrow { flex: none; font-size: 11px; letter-spacing: 1px; white-space: nowrap; }
+  #detail h2 { margin: 0; overflow: hidden; font-size: 14px; white-space: nowrap; text-overflow: ellipsis; }
+  #detailMeta { display: none; }
+  #detailClose { flex: none; min-width: 34px; min-height: 34px; padding: 0; }
+  #detailBody > h3, #detailBody > .chips, #detailBody > .hint { display: none; }
+  #detail .rel-line { display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 6px; font-size: 12px; color: var(--muted); }
+  .rel-line b { font-weight: 600; direction: ltr; unicode-bidi: isolate; }
+  .rel-line .p b { color: var(--c-pre); }
+  .rel-line .c b { color: var(--c-co); }
+  .rel-line .n b { color: var(--text); }
+  #detail .states { margin: 8px 0 0; gap: 6px; }
+  #detail .states button { min-height: 36px; padding: 0 6px; }
+  #detail .rec-reason { margin: 6px 0 0; padding: 5px 9px; font-size: 11.5px; }
+  #detail details { margin-top: 6px; font-size: 12px; }
 }
 
-  </style>
+/* ---------- 12. Phone ---------- */
+@media (max-width: 600px) {
+  header { padding-block: 10px; }
+  .mast { flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+  .academic-heading { flex: 1 1 auto; }
+  .mast-right { display: contents; }
+  .tools { order: 2; }
+  .brand { order: 3; flex: 1 1 100%; flex-direction: row; align-items: baseline; gap: 6px; }
+  h1 { margin: 0; font-size: 15px; letter-spacing: 1px; }
+  .subtitle { font-size: 8.5px; letter-spacing: 1px; }
+  .brand-by { font-size: 9.5px; }
+  .brand-ar { font-size: 21px; line-height: 1.2; }
+  [dir="rtl"] .brand { flex-direction: row-reverse; justify-content: flex-end; }
+  :root[lang="en"] .brand-ar { font-size: 17px; }
+  [dir="ltr"] .progress strong { flex-basis: 100%; }
+  button.icon { min-width: 36px; padding: 0 8px; }
+  .progress { margin-top: 8px; gap: 8px; }
+  .track { max-width: none; min-width: 75px; }
 
+  .toolbar { gap: 8px; padding-block: 8px; }
+  .tb-find, .tb-act { display: contents; }
+  .search { order: 1; flex: 1 1 52%; max-width: none; }
+  #filter { order: 2; flex: 1 1 34%; min-width: 0; }
+  .seg { order: 3; flex: none; }
+  #bulkToggle, #plan { flex: 1 1 0; min-width: 0; padding: 0 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  #bulkToggle { order: 4; }
+  #plan { order: 5; }
+
+  .bulkbar { gap: 7px; }
+  .bulkbar strong { flex-basis: auto; }
+  .bulk-hours { flex: 1 1 auto; text-align: center; font-size: 12px; }
+  .bulkbar button { flex: 1 1 auto; padding: 0 8px; white-space: nowrap; }
+
+  .map-head { flex-wrap: nowrap; min-height: 0; padding: 6px 10px; gap: 8px; }
+  .legend { flex: 1 1 auto; min-width: 0; gap: 2px 10px; font-size: 10px; line-height: 1.6; }
+  #zoomValue { display: none; }
+  .map-controls { gap: 4px; margin-inline-start: 0; }
+  .zoom-control { min-width: 36px; }
+
+  /* the scaled map is short on phones: let the box hug it */
+  body:not(.list) .viewport { height: auto; max-height: min(68dvh, 620px); }
+
+  .hint { margin: 8px 2px; }
+  .footer { padding: 0 4px; }
+  dialog { max-height: 88dvh; }
+}
+
+@media (max-width: 370px) {
+  .legend { font-size: 9.5px; gap: 2px 8px; }
+  #bulkToggle, #plan, .seg button { padding: 0 6px; font-size: 12px; }
+}
+
+@media (pointer: coarse) {
+  button:not(.card), select, .upload, .search input, #detail .states button { min-height: 44px; }
+  button.icon, .zoom-control, #detailClose { min-width: 44px; min-height: 44px; }
+  .recommend-bar input { min-width: 24px; min-height: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
 </head>
-
 <body>
-
-
-
-<header>
-    
-
-    <h2 style="margin:0; font-weight:900; letter-spacing: 2px; color: #fff; text-transform: uppercase; line-height: 1.2;">
-        ELECTRONICS & COMMUNICATION <br> 
-        <span style="color: #38bdf8;"> STUDY PLAN</span>
-    </h2>
-
-    <div style="font-size: 0.85rem; color: #fff; font-weight: 600; letter-spacing: 1px; margin-top: 8px;">
-        Designed & Developed by <span style="color: #38bdf8; border-bottom: 1px solid rgba(56, 189, 248, 0.3);">AL-RASSASI</span>
-    </div>
-
-    <div class="legend" style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <div class="legend-item"><div class="dot" style="background:var(--accent-blue)"></div> Prerequisite</div>
-        <div class="legend-item"><div class="dot" style="background:var(--accent-yellow)"></div> Co-requisite</div>
-        <div class="legend-item"><div class="dot" style="background:var(--accent-green)"></div> Completed (Double Click)</div>
-    </div>
-</header>
-
-
-
-<div class="zoom-controls">
-
-  <button class="zoom-btn" onclick="manualZoom(1.2)">+</button>
-
-  <button class="zoom-btn" onclick="manualZoom(0.8)">-</button>
-
-  <button class="zoom-btn" onclick="resetView()" style="font-size: 12px;">RESET</button>
-
-</div>
-
-
-
-<div class="viewport" id="viewport">
-
-  <div class="flowchart-wrapper" id="main-wrapper">
-
-    <svg id="svg-canvas"></svg>
-
-
-
-    <div class="year-section">
-    <div class="year-sidebar"><span class="year-label" style="color:var(--text-main);">YEAR 1</span></div>
-    <div class="semesters-container">
-        <div class="semester-row">
-            <div class="sem-indicator">SEM 1</div>
-            <div class="course-list">
-                <div class="card" id="ENG101"><div class="code">ENG 101</div><div class="name">English Comm.</div></div>
-                <div class="card" id="GSMA101"><div class="code">GSMA 101</div><div class="name">Calculus I</div></div>
-                <div class="card" id="ELET104"><div class="code">ELET 104</div><div class="name">Computer Programming</div></div>
-                <div class="card" id="GSPH101"><div class="code">GSPH 101</div><div class="name">General Physics</div></div>
-                <div class="card" id="ELET101"><div class="code">ELET 101</div><div class="name">Electrical Circuits I</div></div>
-                <div class="card" id="GSPE101"><div class="code">GSPE 101</div><div class="name">Physical Education I</div></div>
-            </div>
-        </div>
-        <div class="semester-row">
-            <div class="sem-indicator">SEM 2</div>
-            <div class="course-list">
-                <div class="card" id="GSCH101"><div class="code">GSCH 101</div><div class="name">General Chemistry</div></div>
-                <div class="card" id="GSMA102"><div class="code">GSMA 102</div><div class="name">Calculus II</div></div>
-                <div class="card" id="ENG102"><div class="code">ENG 102</div><div class="name">English Composition</div></div>
-                <div class="card" id="ELET102"><div class="code">ELET 102</div><div class="name">Electrical Circuits II</div></div>
-                <div class="card" id="ELET103"><div class="code">ELET 103</div><div class="name">Electrical Machines I</div></div>
-                <div class="card" id="ELET105"><div class="code">ELET 105</div><div class="name">Electronics I</div></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="year-section">
-    <div class="year-sidebar"><span class="year-label" style="color:#f26d5b;">YEAR 2</span></div>
-    <div class="semesters-container">
-        <div class="semester-row">
-            <div class="sem-indicator">SEM 3</div>
-            <div class="course-list">
-                <div class="card" id="GSST201"><div class="code">GSST 201</div><div class="name">Applied Statistics</div></div>
-                <div class="card" id="ENGT201"><div class="code">ENGT 201</div><div class="name">Industrial Safety</div></div>
-                <div class="card" id="ENGT202"><div class="code">ENGT 202</div><div class="name">Industrial Supervision</div></div>
-                <div class="card" id="ELET201"><div class="code">ELET 201</div><div class="name">Basic Industrial Electronics</div></div>
-                <div class="card" id="ELET202"><div class="code">ELET 202</div><div class="name">Digital Electronics I</div></div>
-                <div class="card" id="ELET203"><div class="code">ELET 203</div><div class="name">Control System Components</div></div>
-                <div class="card" id="ELET230"><div class="code">ELET 230</div><div class="name">PCB Fabrication</div></div>
-                <div class="card" id="ELET231"><div class="code">ELET 231</div><div class="name">Electronics II</div></div>
-            </div>
-        </div>
-        <div class="semester-row">
-            <div class="sem-indicator">SEM 4</div>
-            <div class="course-list">
-                <div class="card" id="ENG201"><div class="code">ENG 201</div><div class="name">Technical Report Writing</div></div>
-                <div class="card" id="GSIS101"><div class="code">GSIS 101</div><div class="name">Islamic Ideology</div></div>
-                <div class="card" id="ELET212"><div class="code">ELET 212</div><div class="name">Microcontroller</div></div>
-                <div class="card" id="ELET232"><div class="code">ELET 232</div><div class="name">Digital Electronics II</div></div>
-                <div class="card" id="ELET233"><div class="code">ELET 233</div><div class="name">Analog & Digital Comm.</div></div>
-                <div class="card" id="ELET234"><div class="code">ELET 234</div><div class="name">Troubleshooting & Maint.</div></div>
-                <div class="card" id="ELET235"><div class="code">ELET 235</div><div class="name">Telecommunication Systems</div></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="year-section">
-    <div class="year-sidebar"><span class="year-label" style="color:var(--accent-green);">CO-OP</span></div>
-    <div class="semesters-container">
-      <div class="semester-row">
-        <div class="sem-indicator">TRAINING</div>
-        <div class="course-list">
-          <div class="card" id="ELET330" style="width: 280px;">
-            <div class="code">ELET 330</div>
-            <div class="name">Co-op Training (14 Weeks)</div>
-            <div style="font-size: 0.5rem; color: var(--accent-yellow); margin-top: 4px;">Requires Completion of 67 Credit Hours</div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
-    </div>
-
-  </div>
-
-
-
-  </div>
-
-</div>
-
-
-
-<script src="assets/js/progress.js"></script>
+<header><div class="mast"><div class="academic-heading" dir="ltr"><h1>ELECTRONICS &amp; COMMUNICATION</h1><div class="subtitle">DIPLOMA STUDY PLAN <span> / </span> PROGRESS TRACKER</div></div><div class="mast-right"><div class="tools"><button id="themeBtn" class="icon"></button><button id="langBtn" class="icon"></button></div><div class="brand"><span class="brand-ar" data-i="brand_name" dir="auto">الرصاصي</span></div></div></div><div class="progress"><strong id="progressText"></strong><div class="track" role="progressbar" data-iaria="prog_aria" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill"></div></div><span id="percent">0%</span><span id="currentCount" class="muted"></span></div></header>
+<div class="toolbar"><div class="tb-find"><div class="search"><input id="search" type="search" data-iph="search_ph" data-iaria="search_aria"></div><select id="filter" data-iaria="filter_aria"><option value="all" data-i="f_all"></option><option value="completed" data-i="f_completed"></option><option value="current" data-i="f_current"></option><option value="available" data-i="f_available"></option><option value="remaining" data-i="f_remaining"></option></select></div><div class="tb-act"><div class="seg" role="group" data-iaria="view_aria"><button id="viewMap" aria-pressed="true" data-i="v_map"></button><button id="viewList" aria-pressed="false" data-i="v_list"></button></div><button id="bulkToggle" aria-pressed="false" data-i="bulk"></button><button id="plan" class="primary" data-i="plan"></button></div></div>
+<div id="bulkbar" class="bulkbar" hidden role="region" data-iaria="bulk_aria"><strong id="bulkCount" aria-live="polite"></strong><span id="bulkHours" class="bulk-hours" aria-live="polite"></span><button data-bulk="completed" data-i="b_completed" disabled></button><button data-bulk="current" data-i="b_current" disabled></button><button data-bulk="none" data-i="b_none" disabled></button><button id="bulkCancel" data-i="b_end"></button></div><div id="recommendBar" class="recommend-bar" hidden><strong id="recommendCount"></strong><label><input type="checkbox" id="assume" checked> <span data-i="assume"></span></label><button id="endRecommendations" data-i="rec_end"></button><p data-i="rec_note"></p></div><main><div class="map-shell"><div class="map-head"><div class="legend"><span><i></i><span data-i="l_pre"></span></span><span><i class="co"></i><span data-i="l_co"></span></span><span style="color:var(--green)" data-i="l_done"></span><span style="color:var(--gold)" data-i="l_cur"></span></div><div class="map-controls" role="group" aria-label="Map zoom"><button id="zoomOut" class="zoom-control" type="button" title="تصغير" aria-label="تصغير">−</button><span id="zoomValue" aria-live="polite">100%</span><button id="zoomIn" class="zoom-control" type="button" title="تكبير" aria-label="تكبير">+</button><button id="zoomFit" class="zoom-control fit-control" type="button" title="ملاءمة العرض" aria-label="ملاءمة العرض">⤢</button></div></div><div id="viewport" class="viewport" tabindex="0" data-iaria="vp_aria"><div class="space"><div id="map" class="map"><svg id="lines" aria-hidden="true"></svg><div id="years"></div></div></div></div><div id="empty" class="empty" hidden data-i="empty"></div></div><p class="hint" data-i="hint"></p><div class="footer"><span id="saveNote"></span><details><summary data-i="sum"></summary><div class="backup"><button id="export" data-i="export"></button><label class="upload"><span data-i="import"></span><input id="import" type="file" accept=".json,application/json" hidden></label><button id="help" data-i="help"></button></div></details></div></main>
+<aside id="detail" hidden aria-labelledby="detailTitle"><div class="d-head"><div><div class="eyebrow" id="detailCode"></div><h2 id="detailTitle"></h2><div class="muted" id="detailMeta"></div></div><button id="detailClose" data-iaria="close_panel">✕</button></div><div id="detailBody"></div></aside>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-head"><h2 id="helpTitle" data-i="help"></h2><button data-close data-iaria="close">✕</button></div><p data-i="h1"></p><p data-i="h2"></p><p data-i="h3"></p><p data-i="h4"></p><p class="muted" data-i="h_note"></p></dialog><div id="toast" role="status" aria-live="polite"></div>
 <script>
-
-const wrapper = document.getElementById('main-wrapper');
-
-const viewport = document.getElementById('viewport');
-
-const svg = document.getElementById('svg-canvas');
-
-
-
-let scale = 0.7;
-
-let translateX = 0;
-
-let translateY = 0;
-
-let isDragging = false;
-
-let startX, startY;
-
-let initialPinchDist = null;
-
-
-
-const connections = [
-  // SEM 2
-  { from: 'GSPH101', to: 'ELET101', type: 'co' },
-  { from: 'GSMA101', to: 'GSMA102', type: 'pre' },
-  { from: 'ENG101',  to: 'ENG102',  type: 'pre' },
-  { from: 'ELET101', to: 'ELET102', type: 'pre' },
-  { from: 'ELET101', to: 'ELET103', type: 'pre' },
-  { from: 'ELET102', to: 'ELET103', type: 'co'  },
-  { from: 'ELET101', to: 'ELET105', type: 'pre' },
-  { from: 'ELET102', to: 'ELET105', type: 'co'  },
-
-  // SEM 3
-  { from: 'GSMA102', to: 'GSST201', type: 'pre' },
-  { from: 'ENG102',  to: 'ENGT201', type: 'pre' },
-  { from: 'ENG102',  to: 'ENGT202', type: 'pre' },
-  { from: 'ELET105', to: 'ELET201', type: 'pre' },
-  { from: 'ELET105', to: 'ELET202', type: 'pre' },
-  { from: 'GSMA102', to: 'ELET203', type: 'pre' },
-  { from: 'ELET105', to: 'ELET230', type: 'pre' },
-  { from: 'ELET105', to: 'ELET231', type: 'pre' },
-
-  // SEM 4
-  { from: 'ENG102',  to: 'ENG201',  type: 'pre' },
-  { from: 'ELET104', to: 'ELET212', type: 'pre' },
-  { from: 'ELET202', to: 'ELET212', type: 'pre' },
-  { from: 'ELET202', to: 'ELET232', type: 'pre' },
-  { from: 'ELET231', to: 'ELET233', type: 'pre' },
-  { from: 'ELET232', to: 'ELET233', type: 'co'  },
-  { from: 'ELET230', to: 'ELET234', type: 'pre' },
-  { from: 'ELET231', to: 'ELET234', type: 'pre' },
-  { from: 'ELET231', to: 'ELET235', type: 'pre' },
-  { from: 'ELET233', to: 'ELET235', type: 'co'  },
-
-  // CO-OP
-  { from: 'ELET231', to: 'ELET330', type: 'pre' } // مثال للربط بالتدريب
+const courses = [
+  { id: "ENG101", code: "ENG 101", name: "English Communication", sem: 1 },
+  { id: "GSMA101", code: "GSMA 101", name: "Calculus I", sem: 1 },
+  { id: "GSPH101", code: "GSPH 101", name: "General Physics", sem: 1 },
+  { id: "GSPE101", code: "GSPE 101", name: "Physical Education I", sem: 1 },
+  { id: "ELET101", code: "ELET 101", name: "Electric Circuit I", sem: 1 },
+  { id: "ELET104", code: "ELET 104", name: "Computer Programming", sem: 1 },
+  { id: "GSCH101", code: "GSCH 101", name: "General Chemistry", sem: 2 },
+  { id: "GSMA102", code: "GSMA 102", name: "Calculus II", sem: 2 },
+  { id: "ENG102", code: "ENG 102", name: "English Composition", sem: 2 },
+  { id: "ELET102", code: "ELET 102", name: "Electrical Circuits II", sem: 2 },
+  { id: "ELET103", code: "ELET 103", name: "Electrical Machines I", sem: 2 },
+  { id: "ELET105", code: "ELET 105", name: "Electronics I", sem: 2 },
+  { id: "GSST201", code: "GSST 201", name: "Applied Statistics", sem: 3 },
+  { id: "ENGT201", code: "ENGT 201", name: "Industrial Safety", sem: 3 },
+  { id: "ENGT202", code: "ENGT 202", name: "Industrial Supervision", sem: 3 },
+  { id: "ELET201", code: "ELET 201", name: "Basic Industrial Electronics", sem: 3 },
+  { id: "ELET202", code: "ELET 202", name: "Digital Electronics I", sem: 3 },
+  { id: "ELET203", code: "ELET 203", name: "Control System Components", sem: 3 },
+  { id: "ELET230", code: "ELET 230", name: "PCB Fabrication", sem: 3 },
+  { id: "ELET231", code: "ELET 231", name: "Electronics II", sem: 3 },
+  { id: "ENG201", code: "ENG 201", name: "Technical Report Writing", sem: 4 },
+  { id: "GSIS101", code: "GSIS 101", name: "Islamic Ideology & Thoughts", sem: 4 },
+  { id: "ELET212", code: "ELET 212", name: "Microcontroller", sem: 4 },
+  { id: "ELET232", code: "ELET 232", name: "Digital Electronics II", sem: 4 },
+  { id: "ELET233", code: "ELET 233", name: "Analog & Digital Comm.", sem: 4 },
+  { id: "ELET234", code: "ELET 234", name: "Troubleshooting & Maint.", sem: 4 },
+  { id: "ELET235", code: "ELET 235", name: "Telecommunication Systems", sem: 4 },
+  { id: "ELET330", code: "ELET 330", name: "Co-op Training (14 Weeks)", sem: 5 },
 ];
-
-const MIN_SCALE = 0.4;
-
-const MAX_SCALE = 2.0;
-
-function updateTransform() {
-
-    const vWidth = viewport.clientWidth;
-
-    const vHeight = viewport.clientHeight;
-
-    const headerHeight = document.querySelector('header').offsetHeight; // حساب ارتفاع الهيدر تلقائياً
-
-
-
-    // حساب الأبعاد الحقيقية للمحتوى بعد الزوم
-
-    const rect = wrapper.getBoundingClientRect();
-
-    const contentWidth = rect.width;
-
-    const contentHeight = rect.height;
-
-
-
-    // قيود الحركة (Bounds)
-
-    // القيد العلوي: يمنع أول مادة من الصعود فوق حافة الهيدر
-
-    const topLimit = (contentHeight * 0.5 * scale) - (vHeight * 0.5) + headerHeight + 20; 
-
-    
-
-    // القيد الجانبي والسفلي
-
-    const maxX = (contentWidth / 2) + (vWidth / 2) - 100;
-
-    const maxY = (contentHeight / 2) + (vHeight / 2) - 100;
-
-
-
-    // تطبيق القيود
-
-    translateX = Math.min(Math.max(translateX, -maxX), maxX);
-
-    // القيد الجديد لـ Y يضمن عدم الاختفاء خلف الهيدر
-
-    translateY = Math.max(translateY, -topLimit); 
-
-    translateY = Math.min(translateY, maxY);
-
-
-
-    wrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-
+const connections = [
+  { from: "GSPH101", to: "ELET101", type: "co" },
+  { from: "GSMA101", to: "GSMA102", type: "pre" },
+  { from: "ENG101", to: "ENG102", type: "pre" },
+  { from: "ELET101", to: "ELET102", type: "pre" },
+  { from: "ELET101", to: "ELET103", type: "pre" },
+  { from: "ELET102", to: "ELET103", type: "co" },
+  { from: "ELET101", to: "ELET105", type: "pre" },
+  { from: "ELET102", to: "ELET105", type: "co" },
+  { from: "GSMA102", to: "GSST201", type: "pre" },
+  { from: "ENG102", to: "ENGT201", type: "pre" },
+  { from: "ENG102", to: "ENGT202", type: "pre" },
+  { from: "ELET105", to: "ELET201", type: "pre" },
+  { from: "ELET105", to: "ELET202", type: "pre" },
+  { from: "GSMA102", to: "ELET203", type: "pre" },
+  { from: "ELET105", to: "ELET230", type: "pre" },
+  { from: "ELET105", to: "ELET231", type: "pre" },
+  { from: "ENG102", to: "ENG201", type: "pre" },
+  { from: "ELET104", to: "ELET212", type: "pre" },
+  { from: "ELET202", to: "ELET212", type: "pre" },
+  { from: "ELET202", to: "ELET232", type: "pre" },
+  { from: "ELET231", to: "ELET233", type: "pre" },
+  { from: "ELET232", to: "ELET233", type: "co" },
+  { from: "ELET230", to: "ELET234", type: "pre" },
+  { from: "ELET231", to: "ELET234", type: "pre" },
+  { from: "ELET231", to: "ELET235", type: "pre" },
+  { from: "ELET233", to: "ELET235", type: "co" },
+];
+const CH = {
+  ENG101: 2,
+  GSMA101: 3,
+  GSPH101: 4,
+  GSPE101: 1,
+  ELET101: 3,
+  ELET104: 2,
+  GSCH101: 4,
+  GSMA102: 3,
+  ENG102: 2,
+  ELET102: 3,
+  ELET103: 3,
+  ELET105: 3,
+  GSST201: 2,
+  ENGT201: 1,
+  ENGT202: 1,
+  ELET201: 3,
+  ELET202: 2,
+  ELET203: 3,
+  ELET230: 1,
+  ELET231: 3,
+  ENG201: 3,
+  GSIS101: 2,
+  ELET212: 2,
+  ELET232: 3,
+  ELET233: 3,
+  ELET234: 2,
+  ELET235: 3,
+  ELET330: 3,
+};
+const ELECT = [];
+const T = {
+  ar: {
+    prog_aria: "نسبة الساعات المعتمدة المجتازة",
+    search_ph: "رمز المادة أو اسمها",
+    search_aria: "ابحث عن مادة",
+    filter_aria: "تصفية المواد",
+    f_all: "كل المواد",
+    f_completed: "المجتازة",
+    f_current: "قيد الدراسة",
+    f_available: "متطلباتها مكتملة",
+    f_remaining: "المتبقية",
+    view_list: "عرض كقائمة",
+    view_map: "عرض الخريطة",
+    v_map: "الخريطة",
+    v_list: "قائمة",
+    view_aria: "طريقة العرض",
+    bulk: "تحديد متعدد",
+    plan: "اقتراح مواد",
+    bulk_aria: "تعديل المواد المحددة",
+    bulk_hint: "اختر المواد من الخريطة أو القائمة",
+    bulk_n: (n) => (n === 1 ? "مادة واحدة محددة" : n === 2 ? "مادتان محددتان" : `${n} مواد محددة`),
+    b_completed: "✓ مجتازة",
+    b_current: "◷ قيد الدراسة",
+    b_none: "لم تبدأ",
+    b_end: "إنهاء التحديد",
+    assume: "افترض اجتياز المواد قيد الدراسة",
+    rec_end: "عرض كل المواد",
+    rec_note:
+      "المواد المقترحة محددة بالأزرق؛ الرقم يوضح الأولوية. اضغط المادة لمعرفة السبب. الترتيب يفضل المواد التي تفتح مواد أخرى مباشرة، ثم أطول سلاسل المتطلبات. لا يشمل توفر الشعب أو الحد الأقصى للساعات.",
+    rec_count: (n) => `${n} مادة مقترحة`,
+    rec_none: "لا توجد مواد مقترحة وفق الحالات الحالية",
+    rec_reason: (k, n, co) => `أولوية ${k} · ${n ? `ترتبط بـ ${n} مادة لاحقة.` : "لا تتفرع منها مواد أخرى."}${co ? ` يلزم تسجيلها مع: ${co}` : ""}`,
+    l_pre: "متطلب سابق",
+    l_co: "متطلب متزامن",
+    l_done: "✓ مجتازة",
+    l_cur: "◷ قيد الدراسة",
+    zoom_out: "تصغير الخريطة",
+    zoom_in: "تكبير الخريطة",
+    fit: "ملاءمة العرض",
+    vp_aria: "خريطة الخطة الدراسية؛ استخدم التمرير للتنقل",
+    empty: "لا توجد مواد تطابق بحثك.",
+    hint: "اضغط المادة لعرض متطلباتها وتغيير حالتها. اسحب الخريطة أو قرّبها بإصبعين وتبقى المادة محددة، وتقدر تبدّل للعرض كقائمة من زر «قائمة».",
+    save_ok: "التقدم محفوظ على هذا المتصفح • نسبة الإنجاز بالساعات المعتمدة",
+    save_fail: "الحفظ غير متاح في هذا المتصفح؛ صدّر نسخة قبل الإغلاق.",
+    sum: "حفظ واستيراد · مساعدة",
+    export: "تصدير التقدم",
+    import: "استيراد التقدم",
+    help: "طريقة الاستخدام",
+    close: "إغلاق",
+    close_panel: "إغلاق اللوحة",
+    h1: "١. اختر المادة ثم حدّد: مجتازة، قيد الدراسة، أو لم تبدأ.",
+    h2: "٢. الأزرق يوضح المتطلبات السابقة، والأصفر المتطلبات المتزامنة.",
+    h3: "٣. افتح «اقتراح مواد» لإبراز المواد المقترحة على الخريطة.",
+    h4: "٤. صدّر تقدمك لنقله إلى جهاز آخر. الاستيراد يستبدل تقدم هذا المتصفح بعد تأكيدك.",
+    h_note:
+      "الخطة تضم 28 مادة (70 ساعة معتمدة) كما وردت في الخطة الرسمية لدبلوم تقنية الإلكترونيات والاتصالات. توفر مادة دون متطلبات مسجلة لا يثبت أهلية التسجيل الرسمية. لكل طالب تقدمه الخاص على متصفحه.",
+    prog: (cr, n, total) => `${cr} / 70 ساعة معتمدة · ${n} / ${total} مادة`,
+    cur_n: (n) => `${n} قيد الدراسة`,
+    avail: "متطلباتها مكتملة",
+    prio: (n) => `أولوية ${n}`,
+    hours: (n) => (n === 1 ? "ساعة معتمدة" : n === 2 ? "ساعتان معتمدتان" : `${n} ساعات معتمدة`),
+    s_none: "لم تبدأ",
+    s_current: "قيد الدراسة",
+    s_completed: "مجتازة",
+    h_pre: "المتطلبات السابقة",
+    h_co: "المتطلبات المتزامنة",
+    h_next: "المواد التالية المرتبطة بها مباشرة",
+    chip_empty: "لا يوجد في الخطة المرفقة",
+    elec: "الاختياريات المتاحة (تختار ٣)",
+    hint_490: "يشترط إتمام 67 ساعة معتمدة (كل مواد الخطة)؛ راجع الكلية لتأكيد الأهلية.",
+    hint_gen: "المتطلب السابق يُجتاز أولًا، والمتزامن يمكن دراسته معها أو اجتيازه قبلها، وفق ضوابط الكلية.",
+    n_state: "تم تحديث حالة المادة",
+    n_bulk: (n) => (n === 1 ? "تم تحديث مادة واحدة" : n === 2 ? "تم تحديث مادتين" : `تم تحديث ${n} مواد`),
+    n_export: "تم تصدير التقدم",
+    n_import: "تم استيراد التقدم",
+    n_bad: "الملف غير صالح. استخدم ملف تقدم مُصدّر من هذا الموقع.",
+    n_read: "تعذر قراءة الحفظ السابق؛ يمكنك استيراد نسخة احتياطية.",
+    confirm: "استبدال التقدم الحالي بالتقدم الموجود في الملف؟",
+    t_light: "التبديل إلى الوضع الفاتح",
+    t_dark: "التبديل إلى الوضع الداكن",
+    lang_aria: "Switch to English",
+    rel: ["يحتاج", "مع", "يفتح"],
+    brand_name: "الرصاصي",
+    rel_none: "لا ترتبط بمواد أخرى في الخطة",
+  },
+  en: {
+    prog_aria: "Completed credit hours percentage",
+    search_ph: "Course code or name",
+    search_aria: "Search courses",
+    filter_aria: "Filter courses",
+    f_all: "All courses",
+    f_completed: "Completed",
+    f_current: "In progress",
+    f_available: "Prerequisites met",
+    f_remaining: "Remaining",
+    view_list: "List view",
+    view_map: "Map view",
+    v_map: "Map",
+    v_list: "List",
+    view_aria: "View mode",
+    bulk: "Multi-select",
+    plan: "Suggest courses",
+    bulk_aria: "Edit selected courses",
+    bulk_hint: "Select courses from the map or list",
+    bulk_n: (n) => `${n} selected`,
+    b_completed: "✓ Completed",
+    b_current: "◷ In progress",
+    b_none: "Not started",
+    b_end: "Done",
+    assume: "Assume in-progress courses are passed",
+    rec_end: "Show all courses",
+    rec_note:
+      "Suggested courses are outlined in blue; the number shows priority. Tap a course to see why. Priority favors courses unlocking others directly, then longer prerequisite chains. Section availability and credit-hour limits are not included.",
+    rec_count: (n) => `${n} suggested`,
+    rec_none: "No suggestions for the current statuses",
+    rec_reason: (k, n, co) =>
+      `Priority ${k} · ${n ? `Leads to ${n} later course${n > 1 ? "s" : ""}.` : "No later courses depend on it."}${co ? ` Must be taken together with: ${co}` : ""}`,
+    l_pre: "Prerequisite",
+    l_co: "Co-requisite",
+    l_done: "✓ Completed",
+    l_cur: "◷ In progress",
+    zoom_out: "Zoom out",
+    zoom_in: "Zoom in",
+    fit: "Fit to width",
+    vp_aria: "Study plan map; scroll to navigate",
+    empty: "No courses match your search.",
+    hint: "Tap a course to see its requirements and change its status. Drag or pinch the map and the course stays selected; switch to the List view anytime.",
+    save_ok: "Progress is saved in this browser • Percentage is by credit hours",
+    save_fail: "Saving is unavailable in this browser; export a backup before closing.",
+    sum: "Save, import & help",
+    export: "Export progress",
+    import: "Import progress",
+    help: "How to use",
+    close: "Close",
+    close_panel: "Close panel",
+    h1: "1. Select a course, then choose: Completed, In progress, or Not started.",
+    h2: "2. Blue marks prerequisites; yellow marks co-requisites.",
+    h3: '3. Open "Suggest courses" to highlight suggested courses on the map.',
+    h4: "4. Export your progress to move it to another device. Importing replaces this browser's progress after you confirm.",
+    h_note:
+      "The plan has 28 courses (70 credit hours), as listed in the official Electronics & Communication Technology diploma plan. A course being unlocked here does not prove official registration eligibility. Each student's progress is stored in their own browser.",
+    prog: (cr, n, total) => `${cr} / 70 credit hours · ${n} / ${total} courses`,
+    cur_n: (n) => `${n} in progress`,
+    avail: "Prerequisites met",
+    prio: (n) => `Priority ${n}`,
+    hours: (n) => `${n} credit hour${n > 1 ? "s" : ""}`,
+    s_none: "Not started",
+    s_current: "In progress",
+    s_completed: "Completed",
+    h_pre: "Prerequisites",
+    h_co: "Co-requisites",
+    h_next: "Courses it leads to directly",
+    chip_empty: "None in this plan",
+    elec: "Available electives (choose 3)",
+    hint_490: "Requires 67 completed credit hours (the whole plan). Check with the college to confirm eligibility.",
+    hint_gen:
+      "A prerequisite must be passed first; a co-requisite can be taken together with the course or passed before it, subject to college rules.",
+    n_state: "Course status updated",
+    n_bulk: (n) => `${n} course${n > 1 ? "s" : ""} updated`,
+    n_export: "Progress exported",
+    n_import: "Progress imported",
+    n_bad: "Invalid file. Use a progress file exported from this site.",
+    n_read: "Couldn't read the saved progress; you can import a backup.",
+    confirm: "Replace the current progress with the progress in this file?",
+    t_light: "Switch to light mode",
+    t_dark: "Switch to dark mode",
+    lang_aria: "التبديل إلى العربية",
+    rel: ["Needs", "With", "Unlocks"],
+    brand_name: "Al-Rasasi",
+    rel_none: "Not linked to other courses in the plan",
+  },
+};
+let lang = (() => {
+    try {
+      const v = localStorage.getItem("ee_lang") || localStorage.getItem("ee_language") || localStorage.getItem("ee_library_lang");
+      if (v === "ar" || v === "en") return v;
+    } catch {}
+    return "ar";
+  })(),
+  theme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+const t = (k, ...a) => {
+  const v = T[lang][k];
+  return typeof v === "function" ? v(...a) : v;
+};
+function applyTheme() {
+  document.documentElement.dataset.theme = theme;
+  const mt = document.querySelector("meta[name=theme-color]");
+  if (mt) mt.content = theme === "light" ? "#efeeeb" : "#151a22";
+  const b = document.getElementById("themeBtn");
+  if (!b.querySelector(".i-sun"))
+    b.innerHTML =
+      '<svg class="i-sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>' +
+      '<svg class="i-moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>';
+  b.setAttribute("aria-label", t(theme === "light" ? "t_dark" : "t_light"));
+  b.title = b.getAttribute("aria-label");
 }
-
-// السحب بالماوس
-
-viewport.addEventListener('mousedown', (e) => {
-
-  if (e.target.closest('.card')) return;
-
-  isDragging = true;
-
-  startX = e.clientX - translateX;
-
-  startY = e.clientY - translateY;
-
-});
-
-
-
-window.addEventListener('mousemove', (e) => {
-
-  if (!isDragging) return;
-
-  translateX = e.clientX - startX;
-
-  translateY = e.clientY - startY;
-
-  updateTransform();
-
-});
-
-
-
-window.addEventListener('mouseup', () => isDragging = false);
-
-
-
-// اللمس للجوال
-
-viewport.addEventListener('touchstart', (e) => {
-
-  if (e.touches.length === 1) {
-
-    if (e.target.closest('.card')) return;
-
-    isDragging = true;
-
-    startX = e.touches[0].clientX - translateX;
-
-    startY = e.touches[0].clientY - translateY;
-
-  } else if (e.touches.length === 2) {
-
-    initialPinchDist = Math.hypot(
-
-      e.touches[0].clientX - e.touches[1].clientX,
-
-      e.touches[0].clientY - e.touches[1].clientY
-
-    );
-
+function applyLang() {
+  const h = document.documentElement;
+  h.lang = lang;
+  h.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i]").forEach((e) => (e.textContent = t(e.dataset.i)));
+  document.querySelectorAll("[data-iph]").forEach((e) => (e.placeholder = t(e.dataset.iph)));
+  document.querySelectorAll("[data-iaria]").forEach((e) => e.setAttribute("aria-label", t(e.dataset.iaria)));
+  const lb = document.getElementById("langBtn");
+  lb.textContent = lang === "ar" ? "EN" : "عربي";
+  lb.setAttribute("aria-label", t("lang_aria"));
+  lb.title = t("lang_aria");
+  document.getElementById("saveNote").textContent = t("save_ok");
+  applyTheme();
+  updateBulk();
+}
+const MW = 1650;
+const $ = (s) => document.querySelector(s),
+  key = "ect_plan_v1";
+let state = {},
+  selected = null,
+  scale = 0.75,
+  toastTimer;
+let bulkMode = false;
+const bulkIds = new Set();
+let recommendMode = false,
+  recommended = [];
+const valid = new Set(courses.map((c) => c.id));
+// Index the immutable academic graph once; keep its original edge order.
+const courseById = new Map(courses.map(c => [c.id, c]));
+const incomingEdges = new Map(courses.map(c => [c.id, connections.filter(edge => edge.to === c.id)]));
+const outgoingEdges = new Map(courses.map(c => [c.id, connections.filter(edge => edge.from === c.id)]));
+const incoming = (id, type) => incomingEdges.get(id).filter(edge => !type || edge.type === type).map(edge => edge.from);
+const totalCredits = courses.reduce((sum, course) => sum + CH[course.id], 0);
+let stateRevision = 0;
+function notify(s) {
+  $("#toast").textContent = s;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => ($("#toast").textContent = ""), 3500);
+}
+function sanitize(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) throw Error("format");
+  const result = {};
+  for (const [id, status] of Object.entries(data)) {
+    if (!valid.has(id) || !["completed", "current", "none"].includes(status)) throw Error("format");
+    if (status !== "none") result[id] = status;
   }
-
-}, { passive: false });
-
-
-
-viewport.addEventListener('touchmove', (e) => {
-
-  if (e.touches.length === 1 && isDragging) {
-
-    translateX = e.touches[0].clientX - startX;
-
-    translateY = e.touches[0].clientY - startY;
-
-  } else if (e.touches.length === 2 && initialPinchDist) {
-
-    const currentDist = Math.hypot(
-
-      e.touches[0].clientX - e.touches[1].clientX,
-
-      e.touches[0].clientY - e.touches[1].clientY
-
-    );
-
-    const delta = currentDist / initialPinchDist;
-
-    scale = Math.min(Math.max(0.2, scale * delta), 3);
-
-    initialPinchDist = currentDist;
-
+  return result;
+}
+try {
+  const saved = localStorage.getItem(key);
+  if (saved) state = sanitize(JSON.parse(saved));
+  else {
+    // carry over progress saved by the previous ECT page (any older "ect" key)
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || k === key || !/ect/i.test(k)) continue;
+      let old; try { old = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+      const ids = Array.isArray(old) ? old : old && typeof old === "object" ? Object.keys(old).filter((id) => old[id] === true || old[id] === "completed" || old[id] === 1) : [];
+      ids.filter((id) => valid.has(id)).forEach((id) => (state[id] = "completed"));
+    }
   }
-
-  updateTransform();
-
-  e.preventDefault();
-
-}, { passive: false });
-
-
-
-viewport.addEventListener('touchend', () => {
-
-  isDragging = false;
-
-  initialPinchDist = null;
-
-});
-
-
-
-// الزوم
-
-viewport.addEventListener('wheel', (e) => {
-
-  e.preventDefault();
-
-  const delta = e.deltaY > 0 ? 0.9 : 1.1;
-
-  scale = Math.min(Math.max(0.2, scale * delta), 3);
-
-  updateTransform();
-
-}, { passive: false });
-
-
-
-// تعديل دالة manualZoom لترتبط بالحدود الجديدة
-
-function manualZoom(factor) {
-
-    const newScale = scale * factor;
-
-    if (newScale >= MIN_SCALE && newScale <= MAX_SCALE) {
-
-        scale = newScale;
-
-        updateTransform();
-
-    }
-
+} catch {
+  notify(t("n_read"));
 }
-
-
-
-// تعديل دالة resetView لتكون هي الـ "Safe Zone"
-
-function resetView() {
-    const vWidth = viewport.clientWidth;
-    const vHeight = viewport.clientHeight;
-    const headerHeight = document.querySelector('header').offsetHeight;
-
-    // الحصول على الأبعاد الحقيقية للمحتوى داخل الـ wrapper
-    // سنستخدمgetBoundingClientRect للمحتوى الداخلي وليس الـ wrapper نفسه لأنه يحتوي على padding كبير
-    const contentRect = wrapper.getBoundingClientRect();
-    
-    // الأبعاد الفعلية للخطة (تقريبية بناءً على العناصر)
-    const planWidth = 1200;  // عرض المسارات والكروت تقريباً
-    const planHeight = 1000; // طول السنوات تقريباً
-
-    // حساب الـ Scale المناسب ليناسب العرض أو الطول (الأصغر بينهما)
-    const availableHeight = vHeight - headerHeight - 40;
-    const scaleX = vWidth / planWidth;
-    const scaleY = availableHeight / planHeight;
-    
-    // اختيار المقياس الأصغر لضمان ظهور الخطة كاملة
-    scale = Math.min(scaleX, scaleY) * 0.9; 
-
-    // التأكد من أن الـ scale لا يقل عن الحد الأدنى
-    scale = Math.max(scale, MIN_SCALE);
-
-    // التوسيط
-    translateX = 0;
-    // دفع الخطة للأسفل قليلاً لتبدأ بعد الهيدر مباشرة
-    translateY = (headerHeight / 2); 
-
-    updateTransform();
+function save() {
+  stateRevision++;
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+    $("#saveNote").textContent = t("save_ok");
+  } catch {
+    $("#saveNote").textContent = t("save_fail");
+  }
 }
-
-function drawConnections() {
-
-  svg.innerHTML = `
-
-    <defs>
-
-      <marker id="arrow-pre" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-
-        <path d="M0,0 L8,4 L0,8 Z" fill="#38bdf8" />
-
-      </marker>
-
-      <marker id="arrow-co" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-
-        <path d="M0,0 L8,4 L0,8 Z" fill="#fbbf24" />
-
-      </marker>
-
-    </defs>
-
-  `;
-
-  
-
-  const wrapRect = wrapper.getBoundingClientRect();
-
-  svg.setAttribute('width', wrapper.scrollWidth);
-
-  svg.setAttribute('height', wrapper.scrollHeight);
-
-
-
-  connections.forEach((c) => {
-
-    const f = document.getElementById(c.from);
-
-    const t = document.getElementById(c.to);
-
-    if(!f || !t) return;
-
-
-
-    const r1 = f.getBoundingClientRect();
-
-    const r2 = t.getBoundingClientRect();
-
-
-
-    const x1 = (r1.left + r1.width/2 - wrapRect.left) / scale;
-
-    const y1 = (r1.bottom - wrapRect.top) / scale;
-
-    const x2 = (r2.left + r2.width/2 - wrapRect.left) / scale;
-
-    const y2 = (r2.top - wrapRect.top) / scale;
-
-
-
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-    let d;
-
-
-
-    if (c.type === 'co') {
-
-      const cx1 = (r1.right - wrapRect.left) / scale;
-
-      const cy1 = (r1.top + r1.height/2 - wrapRect.top) / scale;
-
-      const cx2 = (r2.left - wrapRect.left) / scale;
-
-      const cy2 = (r2.top + r2.height/2 - wrapRect.top) / scale;
-
-      d = `M ${cx1} ${cy1} L ${cx1+20} ${cy1} L ${cx1+20} ${cy2} L ${cx2-5} ${cy2}`;
-
-      path.setAttribute('stroke', '#fbbf24');
-
-      path.setAttribute('marker-end', 'url(#arrow-co)');
-
-    } else {
-
-      const midY = y1 + (y2 - y1) / 2;
-
-      d = `M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2 - 5}`;
-
-      path.setAttribute('stroke', '#38bdf8');
-
-      path.setAttribute('marker-end', 'url(#arrow-pre)');
-
+function eligible(id, done) {
+  if (id === "ELET330") return courses.reduce((s, c) => s + (c.id !== "ELET330" && done.has(c.id) ? CH[c.id] : 0), 0) >= 67;
+  return incoming(id, "pre").every((x) => done.has(x));
+}
+function available(id, done = new Set(courses.filter(c => state[c.id] === "completed").map(c => c.id))) {
+  return eligible(id, done) && incoming(id, "co").every((x) => done.has(x) || eligible(x, done));
+}
+function descendants(id, seen = new Set()) {
+  for (const c of outgoingEdges.get(id)) {
+    if (!seen.has(c.to)) {
+      seen.add(c.to);
+      descendants(c.to, seen);
     }
-
-
-
-    path.setAttribute('d', d);
-
-    path.setAttribute('fill', 'none');
-
-    path.setAttribute('stroke-width', '2');
-
-    path.setAttribute('opacity', '0.2');
-
-    path.setAttribute('data-from', c.from);
-
-    path.setAttribute('data-to', c.to);
-
-    svg.appendChild(path);
-
+  }
+  return seen;
+}
+// Official naming: 2nd year (first diploma year), 3rd year, then co-op training.
+const labels = [["2ND YEAR", [1, 2]], ["3RD YEAR", [3, 4]], ["CO-OP", [5]]];
+const semLabel = { 1: "SEM 1", 2: "SEM 2", 3: "SEM 1", 4: "SEM 2", 5: "TRAINING" };
+$("#years").innerHTML = labels
+  .map(
+    ([y, sems]) =>
+      `<section class="year"><div class="year-label">${y}</div><div class="rows">${sems
+        .map(
+          (sem) =>
+            `<div class="row"><div class="semester">${semLabel[sem]}</div><div class="cards">${courses
+              .filter((c) => c.sem === sem)
+              .map(
+                (c) =>
+                  `<button class="card" id="${c.id}" data-id="${c.id}" aria-label="${c.code} ${c.name}"><span class="code">${c.code}</span><span class="name">${c.name}</span><span class="badge"></span></button>`,
+              )
+              .join("")}</div></div>`,
+        )
+        .join("")}</div></section>`,
+  )
+  .join("");
+const cardNodes = new Map(courses.map(c => {
+  const node = document.getElementById(c.id);
+  return [c.id, { node, badge: node.querySelector(".badge") }];
+}));
+function textIfChanged(node, text) {
+  if (node.textContent !== String(text)) node.textContent = text;
+}
+function toggleIfChanged(node, name, value) {
+  if (node.classList.contains(name) !== !!value) node.classList.toggle(name, !!value);
+}
+function attributeIfChanged(node, name, value) {
+  if (node.getAttribute(name) !== String(value)) node.setAttribute(name, value);
+}
+function refresh() {
+  if (recommendMode) recommendations();
+  let count = 0,
+    cur = 0,
+    matches = 0,
+    cr = 0;
+  const q = $("#search").value.toLowerCase().replace(/\s/g, ""),
+    filter = $("#filter").value,
+    rel = selected ? relOf(selected) : null;
+  const done = new Set(courses.filter(c => state[c.id] === "completed").map(c => c.id));
+  const ranks = new Map(recommended.map((course, index) => [course.id, index + 1]));
+  for (const c of courses) {
+    const el = cardNodes.get(c.id).node,
+      st = state[c.id];
+    count += st === "completed";
+    if (st === "completed") cr += CH[c.id];
+    cur += st === "current";
+    toggleIfChanged(el, "completed", st === "completed");
+    toggleIfChanged(el, "current", st === "current");
+    toggleIfChanged(el, "selected", selected === c.id);
+    toggleIfChanged(el, "rel-pre", !!rel && rel.pre.has(c.id));
+    toggleIfChanged(el, "rel-co", !!rel && rel.co.has(c.id));
+    toggleIfChanged(el, "rel-next", !!rel && rel.next.has(c.id));
+    toggleIfChanged(el, "fade", !!rel && c.id !== selected && !rel.pre.has(c.id) && !rel.co.has(c.id) && !rel.next.has(c.id));
+    toggleIfChanged(el, "bulk-selected", bulkIds.has(c.id));
+    if (bulkMode) attributeIfChanged(el, "aria-pressed", bulkIds.has(c.id));
+    else if (el.hasAttribute("aria-pressed")) el.removeAttribute("aria-pressed");
+    const match =
+      (c.code + c.name).toLowerCase().replace(/\s/g, "").includes(q) &&
+      (filter === "all" || filter === st || (filter === "remaining" && st !== "completed") || (filter === "available" && !st && available(c.id, done)));
+    matches += match;
+    const rec = recommendMode ? ranks.get(c.id) : null;
+    toggleIfChanged(el, "recommended", !!rec);
+    toggleIfChanged(el, "dimmed", !match || (recommendMode && !rec));
+    textIfChanged(cardNodes.get(c.id).badge, rec ? t("prio", rec) : st === "completed" ? t("l_done") : st === "current" ? t("l_cur") : available(c.id, done) ? t("avail") : "");
+  }
+  $("#empty").hidden = matches > 0;
+  textIfChanged($("#progressText"), t("prog", cr, count, courses.length));
+  const p = Math.round((cr / totalCredits) * 100);
+  textIfChanged($("#percent"), p + "%");
+  if ($(".fill").style.width !== p + "%") $(".fill").style.width = p + "%";
+  attributeIfChanged($(".track"), "aria-valuenow", p);
+  textIfChanged($("#currentCount"), cur ? t("cur_n", cur) : "");
+  scheduleDraw();
+}
+const MAX_SCALE = 2.2;
+const isPhone = () => matchMedia("(max-width:600px)").matches;
+const isCompact = () => matchMedia("(max-width:900px)").matches;
+// Smallest zoom: 38%, or less when needed so "fit" really fits narrow screens.
+const minScale = () => Math.min(0.38, Math.max(0.15, ($("#viewport").clientWidth - 8) / MW));
+let autoFit = true;
+function fitScale() {
+  return Math.max(minScale(), Math.min(1, ($("#viewport").clientWidth - 8) / MW));
+}
+let cameraFrame = 0, pendingCamera = null, mapHeight = 0;
+function updateZoomLabel() {
+  textIfChanged($("#zoomValue"), Math.round(scale * 100) + "%");
+}
+function cameraPosition() {
+  return pendingCamera || { left: $("#viewport").scrollLeft, top: $("#viewport").scrollTop };
+}
+function queueCamera(left, top) {
+  pendingCamera = { left, top };
+  if (!cameraFrame) cameraFrame = requestAnimationFrame(flushCamera);
+}
+function flushCamera() {
+  if (cameraFrame) cancelAnimationFrame(cameraFrame);
+  cameraFrame = 0;
+  if (document.body.classList.contains("list")) { pendingCamera = null; return; }
+  const view = $("#viewport"), map = $("#map"), space = $(".space");
+  if (!mapHeight) mapHeight = map.offsetHeight;
+  const width = MW * scale + "px", height = mapHeight * scale + "px", transform = `scale(${scale})`;
+  if (space.style.width !== width) space.style.width = width;
+  if (space.style.height !== height) space.style.height = height;
+  if (map.style.transform !== transform) map.style.transform = transform;
+  if (pendingCamera) {
+    view.scrollLeft = pendingCamera.left;
+    view.scrollTop = pendingCamera.top;
+    pendingCamera = null;
+  }
+  updateZoomLabel();
+}
+function setZoom(next, clientX, clientY) {
+  if (document.body.classList.contains("list")) return;
+  const view = $("#viewport"), old = scale;
+  next = Math.max(minScale(), Math.min(MAX_SCALE, next));
+  if (Math.abs(next - old) < 0.0001) return;
+  const rect = view.getBoundingClientRect(), position = cameraPosition();
+  const px = clientX == null ? view.clientWidth / 2 : clientX - rect.left;
+  const py = clientY == null ? view.clientHeight / 2 : clientY - rect.top;
+  scale = next;
+  autoFit = false;
+  queueCamera((position.left + px) * next / old - px, (position.top + py) * next / old - py);
+}
+function applyScale() {
+  if (document.body.classList.contains("list")) return;
+  const position = cameraPosition();
+  queueCamera(position.left, position.top);
+}
+let resizeFrame = 0;
+function resize() {
+  if (resizeFrame) return;
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0;
+    if (document.body.classList.contains("list")) return;
+    if (autoFit) scale = fitScale();
+    applyScale();
+    scheduleDraw();
   });
-
 }
-
-
-
-// دالة حفظ الإنجاز في ذاكرة المتصفح
-
-function saveProgress() {
-  EEProgress.save('ect', document.querySelectorAll('.card'));
+// Connections live in map coordinates: zoom/pan never changes their geometry.
+let drawFrame = 0, geometryDirty = true;
+const edgeNodes = new Map();
+function scheduleDraw() {
+  if (!drawFrame) drawFrame = requestAnimationFrame(() => { drawFrame = 0; draw(); });
 }
-
-function loadProgress() {
-  EEProgress.load('ect', document.querySelectorAll('.card'));
-}
-
-
-
-function initInteractions() {
-
-  const cards = document.querySelectorAll('.card');
-
-  const paths = document.querySelectorAll('path:not(defs path)');
-
-
-
-  cards.forEach(card => {
-
-    
-
-    // --- (1) نظام اللابتوب: النقر المزدوج بالماوس ---
-
-    card.addEventListener('dblclick', (e) => {
-
-      e.stopPropagation();
-
-      card.classList.toggle('completed');
-
-      saveProgress();
-
-      console.log('تم التفعيل عبر اللابتوب (Double Click)');
-
-    });
-
-
-
-    // --- (2) نظام الجوال والايباد: النقر المزدوج باللمس ---
-
-    let lastTap = 0;
-
-    card.addEventListener('touchstart', (e) => {
-
-      const currentTime = new Date().getTime();
-
-      const tapLength = currentTime - lastTap;
-
-      
-
-      if (tapLength < 300 && tapLength > 0) {
-
-        // تم اكتشاف نقرتين باللمس
-
-        e.preventDefault(); // منع الزوم الافتراضي للجوال
-
-        card.classList.toggle('completed');
-
-        saveProgress();
-
-        if (navigator.vibrate) navigator.vibrate(50); 
-
-      }
-
-      lastTap = currentTime;
-
-    });
-
-
-
-    // --- (3) نظام العرض (النقرة الواحدة): لجميع الأجهزة ---
-
-    card.addEventListener('click', (e) => {
-
-      e.stopPropagation();
-
-      const cid = card.id;
-
-
-
-      if (card.classList.contains('selected')) {
-
-        clearSelection();
-
-        return;
-
-      }
-
-
-
-      clearSelection();
-
-      cards.forEach(c => c.classList.add('dimmed'));
-
-      paths.forEach(p => p.classList.add('faded'));
-
-      card.classList.remove('dimmed');
-
-      card.classList.add('selected');
-
-
-
-      paths.forEach(p => {
-
-        if (p.getAttribute('data-from') === cid || p.getAttribute('data-to') === cid) {
-
-          p.classList.remove('faded');
-
-          p.classList.add('active-path');
-
-          const fromNode = document.getElementById(p.getAttribute('data-from'));
-
-          const toNode = document.getElementById(p.getAttribute('data-to'));
-
-          if(fromNode) fromNode.classList.remove('dimmed');
-
-          if(toNode) toNode.classList.remove('dimmed');
-
+function draw() {
+  if (document.body.classList.contains("list")) return;
+  if (geometryDirty) {
+    flushCamera();
+    const m = $("#map"),
+      r = m.getBoundingClientRect(),
+      cs = getComputedStyle(document.documentElement),
+      col = { pre: "var(--c-pre)", co: "var(--c-co)" },
+      lo = parseFloat(cs.getPropertyValue("--lo")) || 0.22;
+    // Card boxes in unscaled map coordinates.
+    const box = {};
+    for (const c of courses) {
+      const b = document.getElementById(c.id).getBoundingClientRect();
+      box[c.id] = { l: (b.left - r.left) / scale, r: (b.right - r.left) / scale, t: (b.top - r.top) / scale, b: (b.bottom - r.top) / scale };
+    }
+    const colOf = {},
+      row = {};
+    const SEMS = Math.max(...courses.map((c) => c.sem));
+    for (let sem = 1; sem <= SEMS; sem++) {
+      const ids = courses.filter((c) => c.sem === sem).map((c) => c.id);
+      ids.forEach((id, i) => (colOf[id] = i));
+      row[sem] = { t: box[ids[0]].t, b: box[ids[0]].b };
+    }
+    const s1 = courses.filter((c) => c.sem === 1),
+      gap = box[s1[1].id].l - box[s1[0].id].r,
+      semOf = (id) => courseById.get(id).sem,
+      // Horizontal lanes inside the channel between two rows keep parallel lines apart.
+      lane = (top, bottom, k) => Math.min(bottom - 14, top + 12 + (k % 6) * 7),
+      f = (n) => Math.round(n * 10) / 10;
+    const paths = connections.map((c) => {
+      const a = box[c.from],
+        b = box[c.to];
+      let d;
+      if (c.type === "co") {
+        const x1 = a.r,
+          y1 = (a.t + a.b) / 2,
+          x2 = b.l,
+          y2 = (b.t + b.b) / 2;
+        d = `M${f(x1)} ${f(y1)}H${f(x1 + 18)}V${f(y2)}H${f(x2 - 6)}`;
+      } else {
+        const sa = semOf(c.from),
+          sb = semOf(c.to),
+          x1 = (a.l + a.r) / 2,
+          x2 = (b.l + b.r) / 2,
+          yA = lane(row[sa].b, row[sa + 1].t, colOf[c.from]);
+        if (sb === sa + 1) d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(x2)}V${f(b.t - 5)}`;
+        else {
+          // Skip rows: drop down the gutter beside the target column, never across a card.
+          const right = colOf[c.to] < colOf[c.from],
+            gx = (right ? b.r + gap / 2 : b.l - gap / 2) + ((colOf[c.from] % 3) - 1) * 6,
+            yB = lane(row[sb - 1].b, row[sb].t, colOf[c.to] + 3);
+          d = `M${f(x1)} ${f(a.b)}V${f(yA)}H${f(gx)}V${f(yB)}H${f(x2)}V${f(b.t - 5)}`;
         }
-
-      });
-
+      }
+      const active = selected === c.from || selected === c.to;
+      return { active, svg: `<path d="${d}" fill="none" stroke="${col[c.type]}" stroke-width="${active ? 2.5 : 1.5}" stroke-linejoin="round" opacity="${active ? 0.95 : selected ? 0.08 : lo}" data-edge="${connections.indexOf(c)}" marker-end="url(#arrow-${c.type})"/>` };
     });
+    $("#lines").setAttribute("width", MW);
+    $("#lines").setAttribute("height", m.offsetHeight);
+    $("#lines").innerHTML =
+      "<defs>" +
+      ["pre", "co"]
+        .map(
+          (t) =>
+            `<marker id="arrow-${t}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${col[t]}"/></marker>`,
+        )
+        .join("") +
+      "</defs>" +
+      // Highlighted lines last so they sit on top.
+      paths.filter((p) => !p.active).map((p) => p.svg).join("") +
+      paths.filter((p) => p.active).map((p) => p.svg).join("");
+    edgeNodes.clear();
+    $("#lines").querySelectorAll("path[data-edge]").forEach(node => edgeNodes.set(connections[Number(node.dataset.edge)], node));
+    geometryDirty = false;
+  }
+  const lo = getComputedStyle(document.documentElement).getPropertyValue("--lo").trim();
+  for (const edge of connections) {
+    const node = edgeNodes.get(edge);
+    const active = selected === edge.from || selected === edge.to;
+    attributeIfChanged(node, "opacity", active ? .95 : selected ? .08 : lo);
+    attributeIfChanged(node, "stroke-width", active ? 2.5 : 1.5);
+    // Move only newly active paths; keep them above the quiet lines.
+    if (active && node.dataset.active !== "true") $("#lines").append(node);
+    attributeIfChanged(node, "data-active", active);
+  }
 
+}
+function chip(ids) {
+  return ids.length
+    ? ids
+        .map((id) => `<button data-course="${id}">${courseById.get(id).code} ${state[id] === "completed" ? "✓" : ""}</button>`)
+        .join("")
+    : `<span class="muted">${t("chip_empty")}</span>`;
+}
+const relOf = (id) => ({
+  pre: new Set(incoming(id, "pre")),
+  co: new Set(incoming(id, "co")),
+  next: new Set(connections.filter((x) => x.from === id).map((x) => x.to)),
+});
+function relLine(id) {
+  const codes = (ids) => ids.map((x) => courseById.get(x).code).join(lang === "ar" ? "، " : ", ");
+  const groups = [incoming(id, "pre"), incoming(id, "co"), connections.filter((x) => x.from === id).map((x) => x.to)];
+  const parts = groups.map((ids, i) => (ids.length ? `<span class="${"pcn"[i]}">${t("rel")[i]}: <b>${codes(ids)}</b></span>` : "")).join("");
+  return `<div class="rel-line">${parts || `<span>${t("rel_none")}</span>`}</div>`;
+}
+const dock = $("#detail");
+function closeDetail() {
+  clearTimeout(revealTimer);
+  selected = null;
+  dock.hidden = true;
+  document.body.classList.remove("has-dock");
+  refresh();
+}
+let revealTimer;
+const scrollMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+function reveal(id) {
+  clearTimeout(revealTimer);
+  revealTimer = setTimeout(() => {
+    if (selected !== id) return;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ block: "nearest", inline: "nearest", behavior: scrollMotion() });
+  }, 90);
+}
+function showCourse(id) {
+  selected = id;
+  const c = courseById.get(id),
+    cur = state[id] || "none",
+    sep = lang === "ar" ? "، " : ", ";
+  $("#detailCode").textContent = c.code;
+  $("#detailTitle").textContent = c.name;
+  $("#detailMeta").textContent = t("hours", CH[id]);
+  const rec = recommendMode ? recommended.find((x) => x.id === id) : null;
+  $("#detailBody").innerHTML =
+    `${rec ? `<div class="rec-reason">${t("rec_reason", recommended.indexOf(rec) + 1, rec.score, rec.co.map((x) => courseById.get(x).code).join(sep))}</div>` : ""}${relLine(id)}<div class="states">${["none", "current", "completed"].map((s) => `<button data-state="${s}" class="${cur === s ? "active" : ""}" aria-pressed="${cur === s}">${t("s_" + s)}</button>`).join("")}</div><h3 class="k-pre">${t("h_pre")}</h3><div class="chips">${chip(incoming(id, "pre"))}</div><h3 class="k-co">${t("h_co")}</h3><div class="chips">${chip(incoming(id, "co"))}</div><h3>${t("h_next")}</h3><div class="chips">${chip(connections.filter((x) => x.from === id).map((x) => x.to))}</div>${id.startsWith("EE4xx") ? `<details><summary>${t("elec")}</summary><ul>${ELECT.map((e) => `<li><span dir="ltr">${e[0]}</span> ${e[1]}</li>`).join("")}</ul></details>` : ""}<p class="hint">${t(id === "ELET330" ? "hint_490" : "hint_gen")}</p>`;
+  dock.hidden = false;
+  document.body.classList.add("has-dock");
+  refresh();
+  reveal(id);
+}
+function updateBulk() {
+  document.body.classList.toggle("bulk-mode", bulkMode);
+  $("#bulkbar").hidden = !bulkMode;
+  $("#bulkToggle").setAttribute("aria-pressed", bulkMode);
+  $("#bulkCount").textContent = bulkIds.size ? t("bulk_n", bulkIds.size) : t("bulk_hint");
+  $("#bulkHours").textContent = bulkIds.size
+    ? lang === "ar"
+      ? `المجموع: ${[...bulkIds].reduce((sum, id) => sum + (CH[id] || 0), 0)} ساعة معتمدة`
+      : `Total: ${[...bulkIds].reduce((sum, id) => sum + (CH[id] || 0), 0)} credit hours`
+    : "";
+  document.querySelectorAll("[data-bulk]").forEach((b) => (b.disabled = !bulkIds.size));
+}
+function endBulk() {
+  bulkMode = false;
+  bulkIds.clear();
+  updateBulk();
+  refresh();
+}
+$("#bulkToggle").onclick = () => {
+  if (bulkMode) endBulk();
+  else {
+    if (recommendMode) endRecommendations();
+    bulkMode = true;
+    selected = null;
+    dock.hidden = true;
+    document.body.classList.remove("has-dock");
+    updateBulk();
+    refresh();
+  }
+};
+$("#bulkCancel").onclick = endBulk;
+$("#bulkbar").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-bulk]");
+  if (!b || !bulkIds.size) return;
+  const n = bulkIds.size;
+  for (const id of bulkIds) {
+    if (b.dataset.bulk === "none") delete state[id];
+    else state[id] = b.dataset.bulk;
+  }
+  save();
+  bulkIds.clear();
+  updateBulk();
+  refresh();
+  notify(t("n_bulk", n));
+});
+$("#years").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-id]");
+  if (b) {
+    if (bulkMode) {
+      const id = b.dataset.id;
+      if (bulkIds.has(id)) bulkIds.delete(id);
+      else bulkIds.add(id);
+      updateBulk();
+      refresh();
+    } else if (selected === b.dataset.id) closeDetail();
+    else showCourse(b.dataset.id);
+  }
+});
+$("#detailBody").addEventListener("click", (e) => {
+  const st = e.target.closest("[data-state]"),
+    c = e.target.closest("[data-course]");
+  if (st) {
+    if (st.dataset.state === "none") delete state[selected];
+    else state[selected] = st.dataset.state;
+    save();
+    showCourse(selected);
+    notify(t("n_state"));
+  }
+  if (c) showCourse(c.dataset.course);
+});
+let recommendationCache = null;
+function recommendations() {
+  const cacheKey = `${stateRevision}:${$("#assume").checked}`;
+  if (recommendationCache?.key === cacheKey) {
+    recommended = recommendationCache.value;
+    textIfChanged($("#recommendCount"), recommended.length ? t("rec_count", recommended.length) : t("rec_none"));
+    return;
+  }
+  const done = new Set(courses.filter((c) => state[c.id] === "completed" || ($("#assume").checked && state[c.id] === "current")).map((c) => c.id));
+  // Bundle co-requisites; a co-requisite's own pre-requisites must be met.
+  function bundle(id, seen = new Set()) {
+    if (done.has(id)) return seen;
+    if (seen.has(id)) return seen;
+    if (!eligible(id, done)) return null;
+    seen.add(id);
+    for (const co of incoming(id, "co")) if (!bundle(co, seen)) return null;
+    return seen;
+  }
+  const memo = new Map();
+  function depth(id, visited = new Set()) {
+    if (visited.has(id)) return 0;
+    const next = connections.filter((e) => e.from === id && e.type === "pre" && !done.has(e.to)).map((e) => e.to);
+    return next.length ? 1 + Math.max(...next.map((n) => depth(n, new Set([...visited, id])))) : 0;
+  }
+  function scoreFor(id) {
+    if (memo.has(id)) return memo.get(id);
+    const downstream = [...descendants(id)].filter((x) => !done.has(x) && x !== id);
+    const immediate = connections.filter((e) => e.from === id && e.type === "pre" && !done.has(e.to)).map((e) => e.to);
+    const unlocked = immediate.filter((to) => incoming(to, "pre").every((pre) => done.has(pre) || pre === id)).length;
+    const critical = depth(id);
+    // Priority favors directly unlocking courses and longer prerequisite chains.
+    const score = unlocked * 100 + critical * 25 + downstream.length * 5;
+    const result = { score, unlocked, critical, downstream: downstream.length };
+    memo.set(id, result);
+    return result;
+  }
+  recommended = courses
+    .filter((c) => !done.has(c.id))
+    .map((c) => ({ c, group: bundle(c.id) }))
+    .filter((x) => x.group !== null)
+    .map(({ c, group }) => ({
+      ...c,
+      ...scoreFor(c.id),
+      co: [...group].filter((id) => id !== c.id),
+      score: [...descendants(c.id)].filter((id) => !done.has(id)).length,
+    }))
+    .sort(
+      (a, b) => b.unlocked - a.unlocked || b.critical - a.critical || b.downstream - a.downstream || a.sem - b.sem || a.code.localeCompare(b.code),
+    );
+  recommendationCache = { key: cacheKey, value: recommended };
+  $("#recommendCount").textContent = recommended.length ? t("rec_count", recommended.length) : t("rec_none");
+}
+function endRecommendations() {
+  recommendMode = false;
+  recommended = [];
+  $("#recommendBar").hidden = true;
+  $("#plan").setAttribute("aria-pressed", "false");
+  refresh();
+}
+$("#plan").onclick = () => {
+  if (recommendMode) {
+    endRecommendations();
+    return;
+  }
+  endBulk();
+  if (!isPhone()) setView(false);
+  $("#search").value = "";
+  $("#filter").value = "all";
+  recommendMode = true;
+  $("#recommendBar").hidden = false;
+  $("#plan").setAttribute("aria-pressed", "true");
+  refresh();
+  resize();
+  requestAnimationFrame(() => {
+    if (recommended.length) document.getElementById(recommended[0].id).scrollIntoView({ block: "center", behavior: scrollMotion() });
   });
-
-
-
-  document.addEventListener('click', () => clearSelection());
-
+};
+$("#endRecommendations").onclick = endRecommendations;
+$("#assume").onchange = refresh;
+document.querySelectorAll("[data-close]").forEach((b) => (b.onclick = () => b.closest("dialog").close()));
+new ResizeObserver(() => {
+  document.documentElement.style.setProperty("--dock-h", dock.hidden || !isCompact() ? "0px" : dock.offsetHeight + "px");
+  resize();
+}).observe(dock);
+$("#detailClose").onclick = closeDetail;
+document.addEventListener("pointerdown", (e) => {
+  if (dock.hidden || !isCompact()) return;
+  if (e.target.closest("#detail, .card, dialog, header, .toolbar, .bulkbar, .recommend-bar, .map-head")) return;
+  // On the map, a press may start a drag or pinch: keep the course selected.
+  // A plain tap on empty map space still closes it (see the viewport click handler).
+  if (!document.body.classList.contains("list") && e.target.closest("#viewport")) return;
+  closeDetail();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !dock.hidden && !document.querySelector("dialog[open]")) closeDetail();
+});
+$("#help").onclick = () => $("#helpDialog").showModal();
+$("#search").oninput = () => {
+  if (recommendMode) endRecommendations();
+  else refresh();
+};
+$("#filter").onchange = () => {
+  if (recommendMode) endRecommendations();
+  else refresh();
+};
+function setView(list, remember) {
+  resetGestures();
+  flushCamera();
+  geometryDirty = true;
+  mapHeight = 0;
+  if (remember)
+    try {
+      localStorage.setItem("ee_view", list ? "list" : "map");
+    } catch {}
+  document.body.classList.toggle("list", list);
+  $("#viewMap").setAttribute("aria-pressed", !list);
+  $("#viewList").setAttribute("aria-pressed", list);
 }
-
-function clearSelection() {
-
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('dimmed', 'selected'));
-
-  document.querySelectorAll('path').forEach(p => p.classList.remove('faded', 'active-path'));
-
+$("#viewMap").onclick = () => {
+  if (!document.body.classList.contains("list")) return;
+  if (recommendMode) endRecommendations();
+  setView(false, true);
+  autoFit = true;
+  refresh();
+  resize();
+};
+$("#viewList").onclick = () => {
+  if (document.body.classList.contains("list")) return;
+  if (recommendMode) endRecommendations();
+  setView(true, true);
+  refresh();
+  resize();
+};
+// One gesture owner for mouse/touch; preserve native wheel scrolling and list behavior.
+const vp = $("#viewport"), pointers = new Map();
+let pinch = null, drag = null, gestureMoved = false, suppressGestureClick = false;
+function resetGestures() {
+  for (const [id, point] of pointers) {
+    if (point.target.hasPointerCapture(id)) point.target.releasePointerCapture(id);
+  }
+  pointers.clear();
+  pinch = drag = null;
+  gestureMoved = suppressGestureClick = false;
 }
-
-
-
-window.onload = () => {
-
-  resetView();
-
-  drawConnections();
-
-  initInteractions();
-
-  loadProgress(); // استعادة الإنجاز عند التشغيل
-
+function beginGesture() {
+  const points = [...pointers.values()], position = cameraPosition();
+  if (points.length >= 2) {
+    const [a, b] = points, rect = vp.getBoundingClientRect();
+    const x = (a.x + b.x) / 2 - rect.left, y = (a.y + b.y) / 2 - rect.top;
+    pinch = { distance: Math.hypot(a.x - b.x, a.y - b.y), scale,
+      worldX: (position.left + x) / scale, worldY: (position.top + y) / scale, rect };
+    gestureMoved = true;
+  } else if (points.length) {
+    drag = { ...points[0], left: position.left, top: position.top };
+    pinch = null;
+  }
+}
+vp.addEventListener("pointerdown", e => {
+  if (document.body.classList.contains("list") || e.button !== 0) return;
+  if (!pointers.size) {
+    clearTimeout(revealTimer);
+    flushCamera();
+    vp.scrollTo({ left: vp.scrollLeft, top: vp.scrollTop, behavior: "instant" });
+    gestureMoved = suppressGestureClick = false;
+  }
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, target: e.target });
+  // Capture on the pressed element: a tap must still click its course button.
+  e.target.setPointerCapture(e.pointerId);
+  beginGesture();
+});
+vp.addEventListener("pointermove", e => {
+  const previous = pointers.get(e.pointerId);
+  if (!previous) return;
+  pointers.set(e.pointerId, { ...previous, x: e.clientX, y: e.clientY });
+  if (pointers.size >= 2 && pinch?.distance > 0) {
+    const [a, b] = [...pointers.values()];
+    scale = Math.max(minScale(), Math.min(MAX_SCALE, pinch.scale * Math.hypot(a.x - b.x, a.y - b.y) / pinch.distance));
+    autoFit = false;
+    queueCamera(pinch.worldX * scale - ((a.x + b.x) / 2 - pinch.rect.left),
+      pinch.worldY * scale - ((a.y + b.y) / 2 - pinch.rect.top));
+  } else if (drag) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.hypot(dx, dy) > 6) gestureMoved = true;
+    if (!gestureMoved) return;
+    const left = drag.left - dx, top = drag.top - dy;
+    const maxTop = Math.max(0, mapHeight * scale - vp.clientHeight);
+    // Retain page scrolling when a touch drag reaches the map's vertical edge.
+    if (e.pointerType !== "mouse") {
+      const remainder = top - Math.max(0, Math.min(maxTop, top));
+      const previousRemainder = drag.remainder || 0;
+      if (Math.abs(remainder - previousRemainder) > .5) window.scrollBy(0, remainder - previousRemainder);
+      drag.remainder = remainder;
+    }
+    queueCamera(left, top);
+  }
+});
+function stopPointer(e) {
+  if (!pointers.delete(e.pointerId)) return;
+  flushCamera();
+  if (gestureMoved) suppressGestureClick = true;
+  if (pointers.size) beginGesture();
+  else pinch = drag = null;
+}
+for (const event of ["pointerup", "pointercancel", "lostpointercapture"]) vp.addEventListener(event, stopPointer);
+window.addEventListener("blur", resetGestures);
+vp.addEventListener("click", e => {
+  if (suppressGestureClick && e.detail !== 0) {
+    suppressGestureClick = false;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    return;
+  }
+  // A real tap (no drag/pinch) on empty map space closes the course bar on phones and tablets.
+  if (!dock.hidden && isCompact() && !document.body.classList.contains("list") && !e.target.closest(".card")) closeDetail();
+}, true);
+vp.addEventListener("wheel", e => {
+  if (document.body.classList.contains("list") || !(e.ctrlKey || e.metaKey)) return;
+  e.preventDefault();
+  const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? vp.clientHeight : 1);
+  setZoom(scale * Math.exp(-Math.max(-100, Math.min(100, delta)) * .002), e.clientX, e.clientY);
+}, { passive: false });
+$("#zoomIn").onclick = () => setZoom(scale * 1.2);
+$("#zoomOut").onclick = () => setZoom(scale / 1.2);
+$("#zoomFit").onclick = () => {
+  autoFit = true;
+  scale = fitScale();
+  queueCamera(0, 0);
 };
 
-window.onresize = drawConnections;
-
+$("#export").onclick = () => {
+  const blob = new Blob([JSON.stringify({ version: 2, plan: "ect-28", state }, null, 2)], { type: "application/json" }),
+    url = URL.createObjectURL(blob),
+    a = document.createElement("a");
+  a.href = url;
+  a.download = "ECT_Progress.json";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  notify(t("n_export"));
+};
+$("#import").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  try {
+    if (f.size > 1000000) throw Error();
+    const data = JSON.parse(await f.text());
+    let next;
+    if (Array.isArray(data)) {
+      if (!data.every((id) => valid.has(id))) throw Error();
+      next = Object.fromEntries(data.map((id) => [id, "completed"]));
+    } else {
+      if (data.version !== 2 || data.plan !== "ect-28") throw Error();
+      next = sanitize(data.state);
+    }
+    if (confirm(t("confirm"))) {
+      state = next;
+      save();
+      refresh();
+      notify(t("n_import"));
+    }
+  } catch {
+    notify(t("n_bad"));
+  }
+  e.target.value = "";
+};
+$("#themeBtn").onclick = () => {
+  theme = theme === "light" ? "dark" : "light";
+  try {
+    ["ee_theme_v3", "ee_theme", "ee_library_theme"].forEach((k) => localStorage.setItem(k, theme));
+  } catch {}
+  const swap = () => {
+    applyTheme();
+    refresh();
+  };
+  // Smooth colour change: crossfade where supported, otherwise a short CSS fade.
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) swap();
+  else if (document.startViewTransition) document.startViewTransition(swap);
+  else {
+    const h = document.documentElement;
+    h.classList.add("theme-fade");
+    swap();
+    setTimeout(() => h.classList.remove("theme-fade"), 450);
+  }
+};
+$("#langBtn").onclick = () => {
+  lang = lang === "ar" ? "en" : "ar";
+  try {
+    ["ee_lang", "ee_language", "ee_library_lang"].forEach((k) => localStorage.setItem(k, lang));
+  } catch {}
+  applyLang();
+  if (selected) showCourse(selected);
+  else refresh();
+};
+applyLang();
+{
+  let v = null;
+  try {
+    v = localStorage.getItem("ee_view");
+  } catch {}
+  setView(v === "list");
+}
+new ResizeObserver(() => {
+  const height = $("#map").offsetHeight;
+  if (height !== mapHeight) {
+    mapHeight = height;
+    geometryDirty = true;
+    resize();
+  }
+}).observe($("#map"));
+new ResizeObserver(resize).observe(vp);
+window.addEventListener("resize", resize);
+refresh();
+resize();
 </script>
-
 </body>
-
 </html>
