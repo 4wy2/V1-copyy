@@ -6,7 +6,7 @@
 <script>(function(){try{var g=function(k){for(var i=0;i<k.length;i++){var v=localStorage.getItem(k[i]);if(v)return v}return null},th=g(['ee_library_theme','ee_theme','ee_theme_v3']),lg=g(['ee_library_lang','ee_language','ee_lang']),d=document.documentElement;d.dataset.theme=th==='light'?'light':'dark';if(lg==='en'){d.lang='en';d.dir='ltr'}}catch(e){}})()</script>
 <style>
 /* ===== Original design (unchanged tokens and components) ===== */
-:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",var(--mono);color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
+:root{--sans:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark;--bg:#0b0e13;--panel:#151a22;--card:#1b222c;--line:#2c3643;--text:#e8edf3;--muted:#9ba7b6;--accent:#70b9df;--sub:#243747;--green:#77c4a3;--shadow:#0003;--warn:#e0b45c;--bad:#e58a7d}
 :root[data-theme="light"]{color-scheme:light;--bg:#e9e8e5;--panel:#f3f2ef;--card:#faf9f7;--line:#d5d2cb;--text:#292e34;--muted:#69727d;--accent:#2a6e6c;--sub:#dceae6;--green:#367c55;--shadow:#0001;--warn:#94641c;--bad:#a8473a}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14.5px/1.8 var(--sans);-webkit-tap-highlight-color:transparent}button,input{font:inherit}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}.top{border-bottom:1px solid var(--line);background:var(--panel)}.topin{display:flex;align-items:center;gap:16px;min-height:72px}.mark{width:38px;height:38px;display:grid;place-items:center;background:var(--sub);border:1px solid var(--line);border-radius:10px;color:var(--accent);font-weight:900}.brand{display:flex;gap:12px;align-items:center}.brand strong{font-size:15px;display:block}.brand small{color:var(--muted)}.topright{margin-inline-start:auto;display:flex;gap:8px}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:9px;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn:hover{border-color:var(--accent)}.btn.primary{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:750}:root[data-theme="light"] .btn.primary{color:white}.hero{padding:52px 0 34px}.eyebrow{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.03em}.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.3;font-weight:700;margin:8px 0 13px}.hero p{color:var(--muted);max-width:660px;margin:0;font-size:15px}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:24px 0 14px}.search{position:relative;flex:1;min-width:220px}.search input{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 17px;color:var(--text);width:100%;outline-offset:2px;-webkit-appearance:none;appearance:none}.search input::placeholder{color:var(--muted)}.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:14px 0 25px;color:var(--muted);font-size:13px}.crumbs button{background:none;border:0;color:var(--accent);cursor:pointer;padding:4px}.crumbs button:last-child{color:var(--text);font-weight:700}.crumbs .slash{opacity:.5}.sectionline{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px}.sectionline h2{font-size:19px;margin:0}.count{font-size:12px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.folder{display:flex;text-align:start;gap:13px;align-items:center;min-height:96px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s}.folder:hover{border-color:var(--accent);transform:translateY(-1px)}.folder .ico{background:var(--sub);border-radius:9px;width:42px;height:42px;flex:none;display:grid;place-items:center;color:var(--accent);font-size:22px}.folder .copy{flex:1;min-width:0}.folder strong{display:block;white-space:normal;line-height:1.45;font-size:14px}.folder small{display:block;color:var(--muted);margin-top:4px}.arr{color:var(--muted)}.empty{padding:38px 20px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}.viewer{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.viewerbar{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.viewerbar strong{font-size:14px}.viewerbar p{color:var(--muted);margin:2px 0 0;font-size:12px}.view-actions{display:flex;gap:8px;flex-wrap:wrap}.frame-wrap{position:relative;background:white}.frame-wrap iframe{width:100%;height:min(660px,70vh);min-height:400px;display:block;border:0;background:#fff}.warning{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:14px 17px;border-radius:10px;margin-top:14px;font-size:13px}.warning strong{color:var(--text)}.details{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin:15px 0 55px;color:var(--muted);font-size:12px}.details b{color:var(--green)}footer{border-top:1px solid var(--line);padding:19px 0;color:var(--muted);font-size:12px}.hidden{display:none!important}.badge{font-size:11px;padding:3px 8px;border-radius:5px;background:var(--sub);color:var(--accent)}
 @media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{width:min(100% - 24px,1160px)}.hero{padding:34px 0 22px}.cards{grid-template-columns:1fr}.folder{min-height:80px}.viewerbar{align-items:flex-start}.topin{min-height:64px}.brand small{font-size:10px}.topright .btn{padding:8px 11px}.frame-wrap iframe{min-height:480px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.folder{transition:none}.folder:hover{transform:none}}
@@ -101,7 +101,8 @@
 .file{padding:13px 16px}
 .file .acts .btn.dl{min-width:42px}
 .recent{margin-top:30px}
-.howto-wrap{margin:30px 0 40px}
+.more-wrap{display:flex;justify-content:center;margin-top:14px}
+.howto-line{margin:34px 0 40px;text-align:center;color:var(--muted);font-size:12.5px}
 /* ===== v4 polish ===== */
 .top{position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);background:color-mix(in srgb,var(--panel) 88%,transparent)}
 .brand strong{font-weight:700;font-size:14.5px}
@@ -138,9 +139,11 @@
 .warning{font-size:13px;line-height:1.9}
 @media(max-width:600px){
   .hero{grid-template-columns:1fr;padding:30px 0 18px;gap:18px}
-  .hero-stats{width:100%;grid-template-columns:repeat(3,1fr)}
-  .hero-stats div{padding:10px 8px;min-width:0}
-  .hero-stats b{font-size:23px}
+  .hero-stats{width:100%;grid-template-columns:repeat(3,1fr);border-radius:11px}
+  .hero-stats div{padding:6px 4px;min-width:0;display:flex;align-items:baseline;justify-content:center;gap:5px}
+  .hero-stats b{font-size:16px}
+  .hero-stats span{font-size:11.5px}
+
 }
 .share{display:flex;align-items:center;gap:18px;margin-top:22px;padding:20px 22px;border:1px dashed color-mix(in srgb,var(--accent) 55%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--accent) 5%,var(--panel))}
 .share .plus{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:12px;background:var(--sub);color:var(--accent);font:700 28px/1 system-ui,sans-serif}
@@ -190,6 +193,18 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .topright{gap:6px}.topright .btn{white-space:nowrap;padding:8px 10px}.topright .lbl{display:none}
 }
 @media(prefers-reduced-motion:reduce){.skel{animation:none}}
+
+/* phones: one clear primary action per file, download secondary */
+@media(max-width:600px){
+  .files .file{flex-wrap:nowrap;align-items:center;gap:11px;padding:12px}
+  .files .file .acts{width:auto;padding:0;flex-direction:column;gap:5px}
+  .files .file .acts .btn{flex:none;min-height:34px;padding:3px 12px;font-size:13px}
+  .files .file .acts .btn:first-child{background:var(--accent);color:#0b1520;border-color:transparent;font-weight:600}
+  :root[data-theme="light"] .files .file .acts .btn:first-child{color:#fff}
+  .files .file .acts .btn.dl{min-height:30px;padding:2px 10px;font-size:12px;color:var(--muted)}
+  .files .file .fico{width:38px;height:38px}
+}
+@media(max-width:360px){.topin{gap:8px}.brand{gap:8px}.mark{width:34px;height:34px}.brand small{display:none}.brand strong{white-space:nowrap;font-size:13.5px}.topright{gap:5px}.topright .btn{padding:6px 8px;min-height:38px}}
 </style>
 </head>
 <body>
@@ -197,7 +212,7 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 <main class="wrap"><section class="hero"><div class="hero-copy"><span class="eyebrow">YIC ACADEMIC LIBRARY</span><h1 data-t="h1">المكتبة الأكاديمية</h1><p data-t="lead">مصادر المقررات مرتبة حسب التخصص والمادة. تصفّحها، عاينها، وحمّلها من مكان واحد.</p></div><div class="hero-stats" id="heroStats"></div></section>
 <div id="modebar" class="modebar" role="status"></div>
 <section data-t-aria="browse_aria" aria-label="تصفح المكتبة"><div class="toolbar"><label class="search"><input id="search" autocomplete="off" type="search" data-t-ph="search_ph" placeholder="ابحث برمز المقرر أو اسمه أو اسم الملف..." data-t-aria="search_aria" aria-label="بحث في المكتبة"></label></div><div class="navrow" id="navrow"><button type="button" class="btn sm back" id="goBack" data-t-aria="back" aria-label="رجوع"><span aria-hidden="true">→</span></button><nav class="crumbs" id="crumbs" data-t-aria="crumbs_aria" aria-label="مسار المجلدات"></nav></div><div class="sectionline"><h2 id="sectionTitle" dir="auto">التخصصات</h2><span class="count" id="count"></span></div><p id="resultsNote" class="results-note hidden"></p><div id="cards" class="cards"></div><div id="share"></div><div id="files" class="files hidden"></div><div id="state" class="hidden"></div><div id="shareBottom"></div></section>
-<div class="howto-wrap"><div class="warning" id="howto"></div></div>
+<p class="howto-line" id="howto"></p>
 </main><footer><div class="wrap"><span data-t="footer">بوابة اللجنة العلمية · نادي الهندسة الكهربائية</span><span class="dev sig" dir="rtl" lang="ar">الرصاصي</span></div></footer>
 
 <dialog id="preview" class="preview" aria-labelledby="pvTitle"><section class="viewer"><div class="viewerbar"><div><strong id="pvTitle"></strong><p id="pvMeta"></p></div><div class="view-actions"><a id="pvDownload" class="btn sm" target="_blank" rel="noopener noreferrer" data-t="download">تنزيل ↓</a><button id="pvClose" class="btn sm primary" type="button" data-t="close">إغلاق ✕</button></div></div><div class="frame-wrap" id="pvBody"></div></section></dialog>
@@ -301,8 +316,8 @@ const T = {
     pv_demo_note:'معاينة تجريبية — ليست ملفًا حقيقيًا.',
     pv_slow:'إذا ما ظهرت المعاينة خلال ثوانٍ، حمّل الملف وافتحه على جهازك.',
     pv_noprev_t:'المعاينة غير متاحة لهذا النوع في الوضع التجريبي',pv_noprev_p:'في الوضع المباشر تُعرض ملفات PDF والصور ومستندات Office عبر معاينة Google.',
-    howto:'<strong>طريقة الاستخدام:</strong> اختر التخصص ثم المقرر ونوع المصدر، وافتح الملف للمعاينة هنا أو حمّله. تقدر تبحث برمز المقرر أو اسم الملف. الملفات تُنشر بعد مراجعتها من اللجنة العلمية.',
-    recent_h:'أحدث الملفات',
+    howto:'جميع المصادر تُنشر بعد مراجعتها من اللجنة العلمية.',
+    recent_h:'أحدث الملفات',show_more:'عرض المزيد',
     share_t:'عندك ملف يفيد زملاءك؟',share_p:'ملخص، شرح مرتب، حل واجب أو أسئلة مراجعة… شاركه وساعد غيرك يذاكر أسهل. نراجعه ثم ننشره في المكتبة.',share_tc:(c)=>`عندك مصدر لـ ${c}؟`,share_pc:'شاركه وساعد زميلك. نراجعه ثم ننشره هنا.',share_btn:'شارك مصدرًا',sort_name:'الاسم',sort_new:'الأحدث',sort_aria:'ترتيب الملفات',
     syncing:'جارٍ التحقق من التحديثات…',saved_copy:'<b>نسخة محفوظة</b> · تعذّر الاتصال الآن، والمعروض آخر نسخة حُفظت على جهازك',
     footer:'بوابة اللجنة العلمية · نادي الهندسة الكهربائية',
@@ -332,8 +347,8 @@ const T = {
     pv_demo_note:'Demo preview generated in the page — not a real file.',
     pv_slow:'If the preview doesn’t appear in a few seconds, download the file and open it on your device.',
     pv_noprev_t:'Preview isn’t available for this type in demo mode',pv_noprev_p:'In live mode PDFs, images and Office files are shown through Google’s viewer.',
-    howto:'<strong>How to use it:</strong> pick your department, then the course and resource type, and open a file to preview it here or download it. You can search by course code or file name. Files are published after the Scientific Committee reviews them.',
-    recent_h:'Recently added',
+    howto:'All resources are published after review by the Scientific Committee.',
+    recent_h:'Recently added',show_more:'Show more',
     share_t:'Have a file that could help others?',share_p:'A summary, clear notes, a solved assignment or review questions… share it and help a classmate study. We review it, then publish it in the library.',share_tc:(c)=>`Have a resource for ${c}?`,share_pc:'Share it and help a classmate. We review it, then publish it here.',share_btn:'Share a resource',sort_name:'Name',sort_new:'Newest',sort_aria:'Sort files',
     syncing:'Checking for updates…',saved_copy:'<b>Saved copy</b> · can’t connect right now; showing the last copy saved on this device',
     footer:'Scientific Committee Portal · Electrical Engineering Club',
@@ -346,7 +361,7 @@ let lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
 const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
 const store = { byId:new Map(), kids:new Map(), status:'loading', error:null, generated:null, demo:false, rootErrors:new Map(), syncing:false, offlineCopy:false, checked:null };
 let sortMode = (() => { try { return localStorage.getItem('ee_library_sort') === 'new' ? 'new' : 'name'; } catch (e) { return 'name'; } })();
-let currentId = 'root', previewTimer = null, previewUrl = null;
+let currentId = 'root', previewTimer = null, previewUrl = null, searchLimit = {folders:60, files:100};
 
 /* ===== Helpers ===== */
 const norm = (s) => String(s || '').toLowerCase()
@@ -458,7 +473,8 @@ function getPublicIndexJsonp(url){
   });
 }
 function readLocal(){
-  try { const o = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null'); return o && o.ok === true && Array.isArray(o.nodes) && o.api === CONFIG.API_URL ? o : null; } catch (e) { return null; }
+  try { const o = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null'); const fresh = o && Date.now() - Date.parse(o.generated) < 30 * 864e5;
+    return o && fresh && o.ok === true && Array.isArray(o.nodes) && o.api === CONFIG.API_URL ? o : null; } catch (e) { return null; }
 }
 function saveLocal(index){
   try { localStorage.setItem(LOCAL_KEY, JSON.stringify(Object.assign({}, index, {api:CONFIG.API_URL}))); } catch (e) { /* storage full or blocked: fine */ }
@@ -602,9 +618,9 @@ function renderModebar(){
 }
 function render(){
   renderModebar();
-  $('howto').innerHTML = t('howto'); // fixed string
+  $('howto').textContent = t('howto');
   const cards = $('cards'), files = $('files'), state = $('state'), note = $('resultsNote');
-  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
+  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('moreWrap')?.remove(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
   cards.classList.remove('hidden', 'depts'); files.classList.add('hidden'); files.classList.remove('recent'); state.classList.add('hidden'); note.classList.add('hidden');
   const q = $('search').value.trim();
 
@@ -644,8 +660,10 @@ function render(){
     $('sectionTitle').textContent = t('search_h');
     $('count').textContent = t('folders', fol.length + deps.length) + ' · ' + t('filesN', fil.length);
     deps.forEach((r) => cards.append(folderCard(r.id, r[lang], r.sub, null, r.sub.split('·')[0].trim())));
-    fol.slice(0, 60).forEach((n) => cards.append(folderCard(n.id, n.name, pathTo(n.parent).slice(1).map(titleOf).join(' › '))));
-    if (fil.length) { files.classList.remove('hidden'); fil.slice(0, 200).forEach((n) => files.append(fileRow(n, true))); }
+    fol.slice(0, searchLimit.folders).forEach((n) => cards.append(folderCard(n.id, n.name, pathTo(n.parent).slice(1).map(titleOf).join(' › '))));
+    if (fil.length) { files.classList.remove('hidden'); fil.slice(0, searchLimit.files).forEach((n) => files.append(fileRow(n, true))); }
+    if (fol.length > searchLimit.folders || fil.length > searchLimit.files)
+      files.after(el('div', {class:'more-wrap', id:'moreWrap'}, el('button', {type:'button', class:'btn', onclick:() => { searchLimit.folders += 60; searchLimit.files += 100; render(); }}, t('show_more'))));
     if (!fol.length && !fil.length && !deps.length) showState('', '⌕', t('nores_t'), t('nores_p'));
     return;
   }
@@ -755,7 +773,7 @@ function setTheme(v, quiet){
 $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 $('lang').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; try { ['ee_library_lang','ee_language','ee_lang'].forEach((k) => localStorage.setItem(k, lang)); } catch (e) {} applyLang(); render(); };
 $('goBack').onclick = () => { if ($('search').value) { $('search').value = ''; render(); return; } const tr = pathTo(currentId); if (currentId !== 'root' && tr.length > 1) go(tr[tr.length - 2]); else location.href = 'index.html'; };
-let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(render, 120); });
+let searchTimer; $('search').addEventListener('input', () => { clearTimeout(searchTimer); searchLimit = {folders:60, files:100}; searchTimer = setTimeout(render, 120); });
 document.addEventListener('keydown', (e) => { if (e.key === '/' && document.activeElement !== $('search') && !$('preview').open) { e.preventDefault(); $('search').focus(); } });
 
 applyLang();
