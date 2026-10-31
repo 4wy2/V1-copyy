@@ -335,6 +335,13 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .file .meta>span{white-space:nowrap}
   .file .meta .path{flex-basis:100%;overflow:hidden;text-overflow:ellipsis}
 }
+
+/* Optional Google Drive descriptions: readable without changing the original file layout. */
+.drive-description{display:block;color:var(--muted);font-size:12.5px;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere;margin-top:5px}
+.folder-desc{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12px}
+.file-desc{font-size:12px;max-width:760px}
+.folder-description{color:var(--muted);font-size:13.5px;line-height:1.8;white-space:pre-line;overflow-wrap:anywhere;padding:11px 14px;margin:0 0 14px;border-inline-start:3px solid var(--accent);background:var(--panel);border-radius:8px}
+@media(max-width:600px){.drive-description{font-size:12px}.folder-description{font-size:12.5px;padding:9px 12px}}
 </style>
 </head>
 <body>
@@ -549,7 +556,7 @@ function ingest(index){
   const accepted = new Map();
   for (const raw of index.nodes) {
     // v2 rows: [id, parent, name, isFolder, size, 'YYYY-MM-DD', googleMime?]; v1: objects
-    const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', public:true} : raw;
+    const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', description:raw[7] || '', public:true} : raw;
     if (!n || typeof n.id !== 'string' || typeof n.parent !== 'string' || (n.kind !== 'file' && n.kind !== 'folder')) continue;
     if (isBlocked(n.name)) continue;
     accepted.set(n.id, n);
@@ -692,7 +699,7 @@ function folderCard(id, name, sub, extra, badge){
   const ico = icon ? el('span', {class:'ico icon', 'aria-hidden':'true'}, icon) : el('span', {class:'ico' + (sp.badge ? '' : ' empty'), 'aria-hidden':'true', text:sp.badge || '▱'});
   return el('button', {type:'button', class:'folder', onclick:openFolder(id)},
     ico,
-    el('span', {class:'copy'}, el('strong', {text:sp.title, dir:'auto'}), el('small', {text:sub, dir:'auto'}), extra || null),
+    el('span', {class:'copy'}, el('strong', {text:sp.title, dir:'auto'}), el('small', {text:sub, dir:'auto'}), store.byId.get(id)?.description ? el('span', {class:'drive-description folder-desc', dir:'auto', text:store.byId.get(id).description}) : null, extra || null),
     el('span', {class:'arr', 'aria-hidden':'true', text:'‹'}));
 }
 const ICONS = {
@@ -754,7 +761,7 @@ function fileRow(n, withPath){
       el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})));
   return el('div', {class:'file'},
     el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
-    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta),
+    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta, n.description ? el('span', {class:'drive-description file-desc', dir:'auto', text:n.description}) : null),
     acts);
 }
 function stateBox(kind, icon, title, text, actions){
@@ -782,7 +789,7 @@ function render(){
   renderModebar();
   $('howto').textContent = t('howto');
   const cards = $('cards'), files = $('files'), state = $('state');
-  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('moreWrap')?.remove(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
+  cards.replaceChildren(); files.replaceChildren(); state.replaceChildren(); $('folderDescription')?.remove(); $('moreWrap')?.remove(); $('share').replaceChildren(); $('shareBottom').replaceChildren();
   cards.classList.remove('hidden', 'depts'); files.classList.add('hidden'); files.classList.remove('recent'); state.classList.add('hidden');
   const q = $('search').value.trim();
 
@@ -860,6 +867,8 @@ function render(){
   const kids = store.kids.get(currentId) || [];
   const fol = kids.filter((n) => n.kind === 'folder'), fil = kids.filter((n) => n.kind === 'file');
   $('sectionTitle').textContent = titleOf(currentId);
+  const folderNote = store.byId.get(currentId)?.description;
+  if (folderNote) cards.before(el('div', {id:'folderDescription', class:'folder-description', dir:'auto', text:folderNote}));
   $('count').textContent = [fol.length ? t('folders', fol.length) : '', fil.length ? t('filesN', fil.length) : ''].filter(Boolean).join(' · ');
   fol.forEach((n) => { const sub = (store.kids.get(n.id) || []); const nf = sub.filter((x) => x.kind === 'folder').length, nfi = sub.length - nf;
     cards.append(folderCard(n.id, n.name, nf ? t('folders', nf) + (nfi ? ' · ' + t('filesN', nfi) : '') : nfi ? t('filesN', nfi) : t('open_folder'))); });
