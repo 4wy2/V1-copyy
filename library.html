@@ -548,6 +548,29 @@ function splitName(name){
   return { badge: '', title: s };
 }
 
+/* Google Drive can return pasted rich-text markup in descriptions.
+   Normalize common editor tags but keep the result strictly as text. */
+function cleanDriveDescription(value){
+  let s = String(value || '');
+  // Decode common encoded markup/entities, without using innerHTML.
+  for (let i = 0; i < 2; i++) {
+    const decoded = s.replace(/&(?:lt|gt|amp|quot|apos|nbsp|#39|#x27|#60|#62);/gi, m => ({
+      '&lt;':'<', '&gt;':'>', '&amp;':'&', '&quot;':'"', '&apos;':"'",
+      '&nbsp;':' ', '&#39;':"'", '&#x27;':"'", '&#60;':'<', '&#62;':'>'
+    })[m.toLowerCase()] ?? m);
+    if (decoded === s) break;
+    s = decoded;
+  }
+  s = s.replace(/<\s*br\s*\/?\s*>/gi, '\n')
+       .replace(/<\s*\/\s*(?:p|div|li|h[1-6])\s*>/gi, '\n')
+       .replace(/<\s*(?:p|div|ul|ol|li|span|b|strong|i|em|u|h[1-6])(?:\s+[^<>]*?)?\s*\/?\s*>/gi, '')
+       .replace(/\r\n?/g, '\n')
+       .replace(/\u00a0/g, ' ')
+       .replace(/[\t ]+\n/g, '\n')
+       .replace(/\n{3,}/g, '\n\n');
+  return s.trim();
+}
+
 /* ===== Data loading ===== */
 function ingest(index){
   if (!index || index.ok !== true || !Array.isArray(index.nodes)) throw Object.assign(new Error('bad'), {code:'bad'});
@@ -556,7 +579,7 @@ function ingest(index){
   const accepted = new Map();
   for (const raw of index.nodes) {
     // v2 rows: [id, parent, name, isFolder, size, 'YYYY-MM-DD', googleMime?]; v1: objects
-    const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', description:raw[7] || '', public:true} : raw;
+    const n = Array.isArray(raw) ? {id:raw[0], parent:raw[1], name:raw[2], kind:raw[3] === 1 ? 'folder' : 'file', size:raw[4] || 0, modified:raw[5] || '', mime:raw[6] || '', description:cleanDriveDescription(raw[7]), public:true} : {...raw, description:cleanDriveDescription(raw.description)};
     if (!n || typeof n.id !== 'string' || typeof n.parent !== 'string' || (n.kind !== 'file' && n.kind !== 'folder')) continue;
     if (isBlocked(n.name)) continue;
     accepted.set(n.id, n);
