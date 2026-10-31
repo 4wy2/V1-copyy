@@ -342,6 +342,26 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 .file-desc{font-size:12px;max-width:760px}
 .folder-description{color:var(--muted);font-size:13.5px;line-height:1.8;white-space:pre-line;overflow-wrap:anywhere;padding:11px 14px;margin:0 0 14px;border-inline-start:3px solid var(--accent);background:var(--panel);border-radius:8px}
 @media(max-width:600px){.drive-description{font-size:12px}.folder-description{font-size:12.5px;padding:9px 12px}}
+
+/* File rows refinement: compact layout, clear notes, consistent actions. */
+.files .file{align-items:center;gap:12px;padding:11px 16px}
+.files .file .copy{min-width:0}
+.files .file .name{font-size:13.5px;line-height:1.5;font-weight:650}
+.files .file .meta{margin-top:3px;gap:3px 10px;font-size:11.5px;line-height:1.55}
+.files .file .acts{align-items:center;gap:7px;margin-inline-start:10px}
+.files .file .acts .btn{min-height:36px;min-width:66px;padding:5px 11px;white-space:nowrap}
+.files .file .acts .btn.dl{min-width:88px}
+.files .file .file-desc{display:flex;align-items:flex-start;gap:6px;color:var(--muted);font-size:12px;line-height:1.6;margin-top:5px;max-width:780px;white-space:pre-line}
+.files .file .file-desc::before{content:'ⓘ';font-family:system-ui,sans-serif;color:var(--accent);flex:none;font-size:13px;line-height:1.55}
+@media(max-width:600px){
+  .files .file{gap:10px;padding:11px 12px;align-items:center}
+  .files .file .name{font-size:13px;line-height:1.45}
+  .files .file .meta{font-size:11px;gap:2px 8px}
+  .files .file .acts{margin-inline-start:0}
+  .files .file .acts .btn.dl{min-width:40px}
+  .files .file .file-desc{font-size:11.5px;line-height:1.5;margin-top:4px}
+  .files .file .file-desc::before{font-size:12px}
+}
 </style>
 </head>
 <body>
