@@ -627,7 +627,11 @@ function reportUrl(n){
     : 'https://drive.google.com/file/d/' + id + '/view';
   const qs = new URLSearchParams();
   qs.set('usp', 'pp_url');
-  qs.set(CONFIG.REPORT_NAME_ENTRY, n.name);
+  // Include the entire Drive folder hierarchy in the existing name field.
+  // No change to the Google Form is needed: the link stays in its own field.
+  const folderPath = pathTo(n.parent).slice(1).map(titleOf).filter(Boolean).join(' / ');
+  const reportName = folderPath ? n.name + ' | المسار: ' + folderPath : n.name;
+  qs.set(CONFIG.REPORT_NAME_ENTRY, reportName);
   qs.set(CONFIG.REPORT_LINK_ENTRY, fileUrl);
   return CONFIG.REPORT_FORM_URL + '?' + qs.toString();
 }
