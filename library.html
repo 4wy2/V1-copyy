@@ -405,6 +405,13 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .files .file .meta{gap:2px 8px}
 }
 @media(max-width:360px){.files .file{grid-template-columns:32px minmax(0,1fr) 40px;gap:8px}}
+
+/* Phase 1 — richer discovery without a new UI or Drive changes. */
+.files .file .name{overflow-wrap:anywhere;word-break:normal;line-height:1.5;text-wrap:pretty}
+.folder-description{max-width:100%;text-align:start;unicode-bidi:plaintext;white-space:pre-wrap;overflow-wrap:anywhere}
+.folder .folder-desc{white-space:normal;overflow-wrap:anywhere}
+@media(min-width:601px){.files .file .name{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}}
+@media(max-width:600px){.files .file .name{-webkit-line-clamp:3}.folder-description{padding:12px 14px;line-height:1.75}}
 </style>
 </head>
 <body>
@@ -850,6 +857,10 @@ function fileDescription(description){
   }
   return note;
 }
+function readableFileName(name){
+  // Presentation only: never rename the source in Google Drive.
+  return String(name || '').replace(/_/g, ' ').replace(/\s{2,}/g, ' ').trim();
+}
 function fileRow(n, withPath){
   const x = ext(n), meta = el('span', {class:'meta'});
   if (withPath) { const p = pathTo(n.parent).slice(1).map(titleOf).join(' › '); meta.append(el('span', {class:'path', text:p, dir:'auto'})); }
@@ -864,7 +875,7 @@ function fileRow(n, withPath){
       el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})));
   return el('div', {class:'file'},
     el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
-    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta, n.description ? fileDescription(n.description) : null),
+    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', title:n.name, onclick:() => openPreview(n)}, readableFileName(n.name)), meta, n.description ? fileDescription(n.description) : null),
     acts);
 }
 function stateBox(kind, icon, title, text, actions){
@@ -925,9 +936,9 @@ function render(){
   // Search across everything published
   if (q) {
     const nq = norm(q);
-    const hit = (n) => norm(n.name).includes(nq) || (n.kind === 'file' && norm(pathTo(n.parent).map(titleOf).join(' ')).includes(nq));
+    const hit = (n) => norm(n.name).includes(nq) || norm(n.description || '').includes(nq) || (n.kind === 'file' && norm(pathTo(n.parent).map(titleOf).join(' ')).includes(nq));
     const all = [...store.byId.values()];
-    const fol = all.filter((n) => n.kind === 'folder' && norm(n.name).includes(nq));
+    const fol = all.filter((n) => n.kind === 'folder' && hit(n));
     const fil = all.filter((n) => n.kind === 'file' && hit(n));
     const deps = CONFIG.ROOTS.filter((r) => norm(r.ar + r.en + r.sub).includes(nq));
     $('sectionTitle').textContent = t('search_h');
