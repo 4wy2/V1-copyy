@@ -369,12 +369,34 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 }
 [dir="rtl"] .files .file .drive-description.file-desc{text-align:right}
 [dir="ltr"] .files .file .drive-description.file-desc{text-align:left}
-/* Give Drive descriptions a recognizable topic label, not just a muted metadata line. */
-.files .file .drive-description.file-desc{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 8px;margin-top:6px;white-space:normal}
-.files .file .file-desc-label{display:inline-flex;align-items:center;flex:none;font-size:11px;font-weight:700;line-height:1.5;color:var(--accent)}
-.files .file .file-desc-label::after{content:":"}
-.files .file .file-desc-value{min-width:0;color:var(--text);opacity:.84;font-size:12.5px;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere;unicode-bidi:plaintext}
-@media(max-width:600px){.files .file .file-desc-label{font-size:10.5px}.files .file .file-desc-value{font-size:11.5px}}
+/* Compact contextual Drive notes: no repeated label, supports Arabic / English. */
+.files .file .drive-description.file-desc{
+  display:flex;align-items:flex-start;gap:7px;
+  width:100%;max-width:none;margin:5px 0 0;padding:0;
+  line-height:1.6;color:var(--text);white-space:normal;
+}
+.files .file .file-desc-icon{
+  flex:none;display:inline-grid;place-items:center;
+  width:15px;height:15px;margin-top:2px;
+  color:var(--accent);font:700 14px/1 var(--sans);
+}
+.files .file .file-desc-value{
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  min-width:0;overflow:hidden;color:var(--text);opacity:.82;
+  font-size:12.5px;line-height:1.65;white-space:pre-line;
+  overflow-wrap:anywhere;unicode-bidi:plaintext;
+}
+.files .file .file-desc-value.expanded{display:block;overflow:visible}
+.files .file .file-desc-more{
+  padding:0;border:0;background:transparent;color:var(--accent);
+  font:600 11.5px/1.6 var(--sans);cursor:pointer;flex:none;align-self:flex-start;
+}
+.files .file .file-desc-more:hover{text-decoration:underline}
+@media(max-width:600px){
+  .files .file .file-desc-value{font-size:11.5px}
+  .files .file .file-desc-icon{font-size:13px}
+  .files .file .file-desc-more{font-size:11px}
+}
 @media(max-width:600px){
   .files .file{grid-template-columns:36px minmax(0,1fr) 40px;gap:10px;padding:11px 12px}
   .files .file .acts{gap:0}
@@ -811,6 +833,23 @@ function renderHeroStats(){
   const item = (num, label) => el('div', {}, el('b', {text:String(num)}), el('span', {text:label}));
   box.append(item(CONFIG.ROOTS.length, t('st_depts')), item(courses, t('st_courses')), item(files, t('st_files')));
 }
+function fileDescription(description){
+  const value = el('span', {class:'file-desc-value', dir:'auto', text:description});
+  const note = el('span', {class:'drive-description file-desc'},
+    el('span', {class:'file-desc-icon', 'aria-hidden':'true', text:'ⓘ'}), value);
+  // Keep short notes compact; long notes can be expanded without clipping content.
+  if (description.length > 110 || description.split('\n').length > 2) {
+    const more = el('button', {type:'button', class:'file-desc-more',
+      'aria-expanded':'false', text:lang === 'ar' ? 'المزيد' : 'More'});
+    more.addEventListener('click', function(){
+      const expanded = value.classList.toggle('expanded');
+      more.textContent = lang === 'ar' ? (expanded ? 'أقل' : 'المزيد') : (expanded ? 'Less' : 'More');
+      more.setAttribute('aria-expanded', String(expanded));
+    });
+    note.append(more);
+  }
+  return note;
+}
 function fileRow(n, withPath){
   const x = ext(n), meta = el('span', {class:'meta'});
   if (withPath) { const p = pathTo(n.parent).slice(1).map(titleOf).join(' › '); meta.append(el('span', {class:'path', text:p, dir:'auto'})); }
@@ -825,7 +864,7 @@ function fileRow(n, withPath){
       el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})));
   return el('div', {class:'file'},
     el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
-    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta, n.description ? el('span', {class:'drive-description file-desc'}, el('span', {class:'file-desc-label', text:lang === 'ar' ? 'ملاحظة' : 'Note'}), el('span', {class:'file-desc-value', dir:'auto', text:n.description})) : null),
+    el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', onclick:() => openPreview(n)}, n.name), meta, n.description ? fileDescription(n.description) : null),
     acts);
 }
 function stateBox(kind, icon, title, text, actions){
