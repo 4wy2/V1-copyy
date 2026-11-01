@@ -424,68 +424,74 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
   .files .file .acts .report-file .report-label{display:none}
 }
 @media(max-width:360px){.files .file{grid-template-columns:32px minmax(0,1fr) 84px}}
-/* Mobile layout refinement: compact directory, no oversized cards or stacked actions. */
+
+/* Mobile refinement v2 — consistent dimensions, original compact hierarchy preserved */
 @media (max-width:600px){
   .wrap{width:calc(100% - 28px)}
-  .topin{min-height:56px}
-  .hero{padding:18px 0 9px}
-  .hero h1{font-size:23px}
-  .toolbar{margin-top:12px}
-  .search input{min-height:46px;border-radius:10px}
-  /* Keep the highlighted Electrical Engineering department first and full width;
-     all other departments become calm, equally sized horizontal rows. */
-  .cards.depts{display:grid;grid-template-columns:1fr;gap:8px}
-  .dept,.dept.featured{grid-column:1;flex-direction:row;align-items:center;gap:12px;
-    padding:12px 14px;min-height:66px;border-radius:11px;transform:none}
-  .dept.featured{min-height:78px;padding:14px 15px;
-    border-color:color-mix(in srgb,var(--accent) 50%,var(--line));
-    background:color-mix(in srgb,var(--accent) 6%,var(--panel))}
-  .dept .code{min-width:43px;width:43px;height:43px;font-size:12px;border-radius:9px}
-  .dept.featured .code{min-width:49px;width:49px;height:49px;font-size:14px}
-  .dept .copy{min-width:0;gap:1px}
-  .dept strong{font-size:14px;line-height:1.5}
+  .topin{min-height:58px;gap:8px}
+  .topright{flex:none;gap:5px}
+  .topright .btn{min-height:40px;padding:5px 10px}
+  .brand{flex:1;min-width:0}
+  .brand>span:last-child{min-width:0}
+  .brand strong{overflow:hidden;text-overflow:ellipsis}
+  .hero{padding:19px 0 8px}
+  .hero h1{font-size:22px;line-height:1.4}
+  .hero p{font-size:13px}
+  .hero-stats{flex-wrap:wrap;row-gap:4px;column-gap:14px}
+  .toolbar{gap:8px;margin:10px 0 3px}
+  .search{min-width:0;width:100%}
+  .search input{min-height:46px;padding-block:10px;border-radius:11px}
+  .sectionline{gap:8px;margin-bottom:11px}
+  .sectionline h2{font-size:16px;line-height:1.45}
+  .cards{gap:8px}
+  .cards.depts{gap:9px}
+  .dept{min-width:0;padding:13px 12px;gap:8px;border-radius:11px}
+  .dept .copy{width:100%;min-width:0}
+  .dept strong{font-size:13.5px;line-height:1.5;overflow-wrap:anywhere}
+  .dept .code{height:38px;min-width:40px}
+  .dept .stats{font-size:11.5px}
+  .dept.featured{padding:14px;gap:12px;border-radius:12px}
+  .dept.featured .copy{width:auto}
+  .dept.featured .code{width:50px;height:50px;min-width:50px}
   .dept.featured strong{font-size:16px}
-  .dept small{display:block;font-size:11.5px;line-height:1.4}
-  .dept .stats,.dept.featured .stats{font-size:11.5px}
-  .dept .arr{display:block;margin-inline-start:auto;opacity:.65}
-  /* Courses and subfolders use horizontal rows, not tall tiles. */
-  .cards:not(.depts){gap:8px}
-  .folder{min-height:62px;padding:11px 12px;gap:11px;border-radius:10px}
-  .folder .ico,.folder .ico.icon{min-width:39px;height:39px;border-radius:9px}
-  .folder strong{font-size:13.5px;line-height:1.5}
-  .folder small{font-size:11.5px;margin-top:1px}
-  .sectionline{margin-bottom:10px}
-  /* A single grouped list with separators. File name, meta and note stay together. */
+  .folder{padding:12px 13px;gap:11px;border-radius:11px;min-width:0}
+  .folder .ico,.folder .ico.icon{width:40px;min-width:40px;height:40px}
+  .folder strong{line-height:1.5;font-size:13.5px;overflow-wrap:anywhere}
+  .folder small{font-size:11.5px;line-height:1.5}
+  .navrow:not(.root) .back{margin-top:8px;width:40px;height:40px}
+  .navrow:not(.root) ~ .sectionline{margin-top:8px;min-height:40px}
+  .navrow:not(.root) ~ .sectionline h2{font-size:17px;line-height:1.45}
+  .navrow:not(.root) .crumbs{margin:4px 0 10px;max-width:100%}
   .files{border-radius:11px;margin-top:10px}
-  .files .file{display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-rows:auto auto;
-    align-items:start;column-gap:10px;row-gap:5px;padding:12px;min-width:0}
-  .files .file .fico{grid-column:1;grid-row:1;min-width:0;width:34px;height:36px;border-radius:8px;font-size:9px}
-  .files .file .copy{grid-column:2;grid-row:1;gap:2px;min-width:0}
-  .files .file .name{font-size:13.5px;line-height:1.5;-webkit-line-clamp:3}
-  .files .file .meta{font-size:11.5px;gap:2px 9px}
-  .files .file .drive-description.file-desc{margin-top:3px}
-  .files .file .file-desc-value{font-size:11.5px}
-  /* All file actions on ONE line, below the metadata, no vertical pile. */
-  .files .file .acts{grid-column:2;grid-row:2;display:flex;flex-wrap:nowrap;
-    justify-content:flex-start;align-items:center;gap:6px;width:max-content;max-width:100%;z-index:2}
-  .files .file .acts .btn:not(.dl){display:inline-flex}
-  .files .file .acts .btn{min-height:32px;height:32px;padding:2px 11px;border-radius:8px;font-size:11.5px;line-height:1.25;white-space:nowrap}
-  .files .file .acts .btn:first-child{background:var(--sub);color:var(--accent);
-    border-color:var(--line);font-weight:650}
-  :root[data-theme="light"] .files .file .acts .btn:first-child{color:var(--accent)}
-  .files .file .acts .btn.dl,.files .file .acts .btn.report-file{width:34px;min-width:34px;height:32px;min-height:32px;padding:0;justify-content:center}
-  .files .file .acts .report-file .report-label{display:none}
-  .files .file .acts .btn.dl .lbl{display:none}
-  .files .file .acts .btn.dl .dlico{display:inline}
-  .file button.name::after{content:none}
-  .files .file .acts .btn::after{inset:-4px -3px}
+  .files h3{padding:10px 12px;gap:6px;flex-wrap:wrap}
+  .files .file{grid-template-columns:34px minmax(0,1fr) 84px;gap:9px;padding:12px 11px;min-width:0;align-items:center}
+  .files .file .fico{width:34px;height:34px;border-radius:8px;font-size:9px}
+  .files .file .copy{gap:3px;min-width:0}
+  .files .file .name{font-size:13.2px;line-height:1.5;-webkit-line-clamp:2;overflow-wrap:anywhere}
+  .files .file .meta{font-size:11px;gap:2px 7px;line-height:1.5}
+  .files .file .drive-description.file-desc{gap:5px;margin-top:2px;line-height:1.5}
+  .files .file .file-desc-value{font-size:11.5px;line-height:1.55}
+  .files .file .file-desc-icon{width:14px;height:14px;margin-top:1px}
+  .files .file .acts{gap:4px;width:84px;justify-content:flex-end}
+  .files .file .acts .btn.dl,.files .file .acts .btn.report-file{width:40px;min-width:40px;height:40px;min-height:40px;padding:0;border-radius:9px}
+  .share{padding:13px;gap:10px}
+  .share .copy{min-width:0}
+  .share p{font-size:12px}
+  .folder-description{font-size:12px;padding:10px 12px;margin-bottom:12px}
 }
-@media(max-width:360px){
-  .files .file{grid-template-columns:30px minmax(0,1fr);gap:5px 8px;padding:11px 10px}
-  .files .file .fico{width:30px;height:34px;font-size:8px}
-  .files .file .acts .btn{padding-inline:9px}
+@media (max-width:360px){
+  .wrap{width:calc(100% - 22px)}
+  .topright .btn{padding:4px 8px;font-size:12px}
+  .brand strong{font-size:12.5px}
+  .cards.depts{gap:7px}
+  .dept{padding:11px 10px}
+  .files .file{grid-template-columns:30px minmax(0,1fr) 76px;gap:7px;padding:11px 9px}
+  .files .file .fico{width:30px;height:32px;font-size:8px}
+  .files .file .acts{width:76px;gap:4px}
+  .files .file .acts .btn.dl,.files .file .acts .btn.report-file{width:36px;min-width:36px;height:40px;min-height:40px}
+  .files .file .name{font-size:12.7px}
+  .files .file .meta{font-size:10.5px}
 }
-
 </style>
 </head>
 <body>
