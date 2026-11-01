@@ -412,6 +412,18 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 .folder .folder-desc{white-space:normal;overflow-wrap:anywhere}
 @media(min-width:601px){.files .file .name{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}}
 @media(max-width:600px){.files .file .name{-webkit-line-clamp:3}.folder-description{padding:12px 14px;line-height:1.75}}
+
+/* Report button — same restrained style as existing file actions. */
+.files .file .acts .report-file{gap:6px;color:var(--muted);white-space:nowrap}
+.files .file .acts .report-file:hover{color:var(--accent);border-color:var(--accent)}
+.files .file .acts .report-file span:first-child{font-size:16px;line-height:1}
+@media(max-width:600px){
+  .files .file{grid-template-columns:36px minmax(0,1fr) 84px}
+  .files .file .acts{gap:4px}
+  .files .file .acts .btn.report-file{display:inline-flex;width:40px;min-width:40px;min-height:40px;padding:0;justify-content:center}
+  .files .file .acts .report-file .report-label{display:none}
+}
+@media(max-width:360px){.files .file{grid-template-columns:32px minmax(0,1fr) 84px}}
 </style>
 </head>
 <body>
@@ -443,6 +455,9 @@ dialog.preview .frame-wrap iframe{height:100%;min-height:0;background:#fff}
 const CONFIG = {
   MODE: 'live',
   API_URL: 'https://script.google.com/macros/s/AKfycbz6Y6lzqPUKFgkYrwhSp2ydwLPmAEvKQ4z55Vdeuf3SjU3M0hNOiPPgwf7u5_ABqr1F/exec',
+  REPORT_FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSfenj7KfcsXaV31zQ41fxm0zdhUQlSriScYuutjVNE3-TD8OQ/viewform',
+  REPORT_NAME_ENTRY: 'entry.1792869227',
+  REPORT_LINK_ENTRY: 'entry.135046062',
   SHARE_FORM_URL: 'https://forms.gle/igT6oxmwWqvjxxPD9',   // "share a resource" form
   REQUEST_TIMEOUT_MS: 25000,
   ROOTS: [
@@ -602,6 +617,21 @@ function downloadUrl(n){
   return driveDownloadUrl(n.id);
 }
 const isGoogleType = (n) => /^g(doc|slides|sheet)$/.test(ext(n));
+// Open the report form with the actual source file details pre-filled.
+// The values are URL-encoded and do not alter the files or the public library index.
+function reportUrl(n){
+  const id = encodeURIComponent(n.id);
+  const fileUrl = ext(n) === 'gdoc' ? 'https://docs.google.com/document/d/' + id + '/edit'
+    : ext(n) === 'gsheet' ? 'https://docs.google.com/spreadsheets/d/' + id + '/edit'
+    : ext(n) === 'gslides' ? 'https://docs.google.com/presentation/d/' + id + '/edit'
+    : 'https://drive.google.com/file/d/' + id + '/view';
+  const qs = new URLSearchParams();
+  qs.set('usp', 'pp_url');
+  qs.set(CONFIG.REPORT_NAME_ENTRY, n.name);
+  qs.set(CONFIG.REPORT_LINK_ENTRY, fileUrl);
+  return CONFIG.REPORT_FORM_URL + '?' + qs.toString();
+}
+
 const fileCountCache = new Map();
 function fileCount(id){
   if (fileCountCache.has(id)) return fileCountCache.get(id);
@@ -872,7 +902,9 @@ function fileRow(n, withPath){
   const acts = el('span', {class:'acts'},
     el('button', {type:'button', class:'btn sm', onclick:() => openPreview(n)}, t('preview')),
     n.demo ? null : el('a', {class:'btn sm dl', href:downloadUrl(n), target:'_blank', rel:'noopener noreferrer', 'aria-label':(isGoogleType(n) ? t('dl_pdf') : t('download')) + ' ' + n.name},
-      el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})));
+      el('span', {class:'lbl', text:isGoogleType(n) ? t('dl_pdf') : t('download')}), el('span', {class:'dlico', 'aria-hidden':'true', text:'↓'})),
+    n.demo ? null : el('a', {class:'btn sm report-file', href:reportUrl(n), target:'_blank', rel:'noopener noreferrer', title:lang === 'ar' ? 'الإبلاغ عن مشكلة في الملف' : 'Report a file issue', 'aria-label':(lang === 'ar' ? 'الإبلاغ عن مشكلة في ' : 'Report an issue with ') + n.name},
+      el('span', {'aria-hidden':'true', text:'⚑'}), el('span', {class:'report-label', text:lang === 'ar' ? 'إبلاغ' : 'Report'})));
   return el('div', {class:'file'},
     el('span', {class:'fico ' + kindClass(x), 'aria-hidden':'true', text:x.slice(0, 4)}),
     el('span', {class:'copy'}, el('button', {type:'button', class:'name', dir:'auto', title:n.name, onclick:() => openPreview(n)}, readableFileName(n.name)), meta, n.description ? fileDescription(n.description) : null),
